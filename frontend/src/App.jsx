@@ -1,6 +1,7 @@
 import Home from "./pages/Home";
 import AboutPage from "./pages/AboutPage";
 import JuniorCollegePage from "./pages/JuniorCollegePage";
+import SchoolPage from "./pages/SchoolPage";
 import StreamsPage from "./pages/StreamsPage";
 import GalleryPage from "./pages/GalleryPage";
 import ResultsPage from "./pages/ResultsPage";
@@ -78,12 +79,7 @@ export default function App() {
             />
           }
         />
-        <Route
-          path="/streams/school"
-          element={
-            <SectionPage title="School" description="Foundational schooling pathways." />
-          }
-        />
+        <Route path="/streams/school" element={<SchoolPage />} />
         <Route
           path="/streams/test-prep"
           element={
