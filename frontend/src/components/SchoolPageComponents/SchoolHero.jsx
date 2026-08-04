@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const images = [
@@ -38,12 +38,30 @@ const highlights = [
 ];
 
 export default function SchoolHero() {
-  const scrollRef = useRef(null);
+  const [current, setCurrent] = useState(0);
+  const timerRef = useRef(null);
 
-  function scrollBy(dir) {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: dir * 320, behavior: "smooth" });
-    }
+  function goTo(idx) {
+    setCurrent((idx + images.length) % images.length);
+  }
+
+  function resetTimer() {
+    clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 3000);
+  }
+
+  useEffect(() => {
+    timerRef.current = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 3000);
+    return () => clearInterval(timerRef.current);
+  }, []);
+
+  function handleNav(dir) {
+    goTo(current + dir);
+    resetTimer();
   }
 
   return (
@@ -113,55 +131,57 @@ export default function SchoolHero() {
             </div>
           </div>
 
-          {/* RIGHT — horizontal image scroller */}
-          <div className="relative">
-            {/* scroll buttons */}
-            <button
-              onClick={() => scrollBy(-1)}
-              aria-label="Scroll left"
-              className="absolute -left-4 top-1/2 z-10 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md ring-1 ring-neutral-100 transition hover:bg-violet-600 hover:text-white dark:bg-neutral-900 dark:ring-neutral-800 dark:hover:bg-violet-600"
-            >
-              <ChevronLeft size={18} />
-            </button>
-            <button
-              onClick={() => scrollBy(1)}
-              aria-label="Scroll right"
-              className="absolute -right-4 top-1/2 z-10 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md ring-1 ring-neutral-100 transition hover:bg-violet-600 hover:text-white dark:bg-neutral-900 dark:ring-neutral-800 dark:hover:bg-violet-600"
-            >
-              <ChevronRight size={18} />
-            </button>
-
-            {/* scrollable strip */}
-            <div
-              ref={scrollRef}
-              className="flex gap-4 overflow-x-auto scroll-smooth rounded-3xl pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-            >
-              {images.map((img) => (
+          {/* RIGHT — single-image auto carousel, full height of left */}
+          <div className="flex flex-col self-stretch">
+            <div className="relative flex-1 overflow-hidden rounded-3xl shadow-md">
+              {/* slides */}
+              {images.map((img, i) => (
                 <div
                   key={img.caption}
-                  className="shrink-0 w-[280px] overflow-hidden rounded-2xl shadow-sm ring-1 ring-neutral-100 dark:ring-neutral-800"
+                  className={`absolute inset-0 transition-opacity duration-700 ${
+                    i === current ? "opacity-100 z-10" : "opacity-0 z-0"
+                  }`}
                 >
                   <img
                     src={img.src}
                     alt={img.caption}
-                    className="h-44 w-full object-cover transition-transform duration-500 hover:scale-105"
+                    className="h-full w-full object-cover"
                   />
-                  <div className="bg-neutral-50 px-4 py-3 dark:bg-neutral-900">
-                    <p className="text-xs font-bold text-neutral-700 dark:text-neutral-300">
-                      {img.caption}
-                    </p>
+                  {/* caption overlay */}
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent px-6 pb-5 pt-12">
+                    <p className="text-sm font-bold text-white">{img.caption}</p>
                   </div>
                 </div>
               ))}
+
+              {/* prev / next buttons */}
+              <button
+                onClick={() => handleNav(-1)}
+                aria-label="Previous image"
+                className="absolute left-3 top-1/2 z-20 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-white/80 shadow backdrop-blur-sm transition hover:bg-violet-600 hover:text-white dark:bg-neutral-900/80"
+              >
+                <ChevronLeft size={16} />
+              </button>
+              <button
+                onClick={() => handleNav(1)}
+                aria-label="Next image"
+                className="absolute right-3 top-1/2 z-20 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-white/80 shadow backdrop-blur-sm transition hover:bg-violet-600 hover:text-white dark:bg-neutral-900/80"
+              >
+                <ChevronRight size={16} />
+              </button>
             </div>
 
-            {/* scroll indicator dots */}
+            {/* dot indicators */}
             <div className="mt-4 flex justify-center gap-1.5">
               {images.map((_, i) => (
-                <span
+                <button
                   key={i}
-                  className={`h-1.5 rounded-full bg-violet-300 transition-all dark:bg-violet-700 ${
-                    i === 0 ? "w-5 bg-violet-600 dark:bg-violet-500" : "w-2"
+                  onClick={() => { goTo(i); resetTimer(); }}
+                  aria-label={`Go to slide ${i + 1}`}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    i === current
+                      ? "w-6 bg-violet-600 dark:bg-violet-500"
+                      : "w-2 bg-violet-200 dark:bg-violet-800"
                   }`}
                 />
               ))}
