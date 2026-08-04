@@ -1,5 +1,6 @@
 import Home from "./pages/Home";
 import AboutPage from "./pages/AboutPage";
+import JuniorCollegePage from "./pages/JuniorCollegePage";
 import StreamsPage from "./pages/StreamsPage";
 import GalleryPage from "./pages/GalleryPage";
 import ResultsPage from "./pages/ResultsPage";
@@ -58,15 +59,7 @@ export default function App() {
 
         {/* Streams */}
         <Route path="/streams" element={<StreamsPage />} />
-        <Route
-          path="/streams/junior-college"
-          element={
-            <SectionPage
-              title="Junior College"
-              description="Intermediate programs and integrated coaching tracks."
-            />
-          }
-        />
+        <Route path="/streams/junior-college" element={<JuniorCollegePage />} />
         <Route
           path="/streams/junior-college/mpc-iit-coaching"
           element={
