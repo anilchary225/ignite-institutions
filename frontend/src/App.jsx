@@ -3,6 +3,7 @@ import AboutPage from "./pages/AboutPage";
 import JuniorCollegePage from "./pages/JuniorCollegePage";
 import SchoolPage from "./pages/SchoolPage";
 import TestPrepPage from "./pages/TestPrepPage";
+import MPCIITPage from "./pages/MPCIITPage";
 import StreamsPage from "./pages/StreamsPage";
 import GalleryPage from "./pages/GalleryPage";
 import ResultsPage from "./pages/ResultsPage";
@@ -64,12 +65,7 @@ export default function App() {
         <Route path="/streams/junior-college" element={<JuniorCollegePage />} />
         <Route
           path="/streams/junior-college/mpc-iit-coaching"
-          element={
-            <SectionPage
-              title="MPC IIT Coaching"
-              description="Maths, Physics, Chemistry with IIT-JEE preparation."
-            />
-          }
+          element={<MPCIITPage />}
         />
         <Route
           path="/streams/junior-college/bipc-neet-coaching"
