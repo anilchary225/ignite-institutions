@@ -6,6 +6,7 @@ import TestPrepPage from "./pages/TestPrepPage";
 import MPCIITPage from "./pages/MPCIITPage";
 import BIPCNEETPage from "./pages/BIPCNEETPage";
 import IITJEELongTermPage from "./pages/IITJEELongTermPage";
+import IITJEEShortTermPage from "./pages/IITJEEShortTermPage";
 import StreamsPage from "./pages/StreamsPage";
 import GalleryPage from "./pages/GalleryPage";
 import ResultsPage from "./pages/ResultsPage";
@@ -81,12 +82,7 @@ export default function App() {
         />
         <Route
           path="/streams/test-prep/iit-jee-short-term"
-          element={
-            <SectionPage
-              title="IIT JEE Short Term"
-              description="Short-term intensive preparation track for IIT-JEE."
-            />
-          }
+          element={<IITJEEShortTermPage />}
         />
         <Route
           path="/streams/test-prep/neet-long-term"
