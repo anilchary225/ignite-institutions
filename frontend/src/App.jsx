@@ -5,6 +5,7 @@ import SchoolPage from "./pages/SchoolPage";
 import TestPrepPage from "./pages/TestPrepPage";
 import MPCIITPage from "./pages/MPCIITPage";
 import BIPCNEETPage from "./pages/BIPCNEETPage";
+import IITJEELongTermPage from "./pages/IITJEELongTermPage";
 import StreamsPage from "./pages/StreamsPage";
 import GalleryPage from "./pages/GalleryPage";
 import ResultsPage from "./pages/ResultsPage";
@@ -76,12 +77,7 @@ export default function App() {
         <Route path="/streams/test-prep" element={<TestPrepPage />} />
         <Route
           path="/streams/test-prep/iit-jee-long-term"
-          element={
-            <SectionPage
-              title="IIT JEE Long Term"
-              description="Multi-year preparation for IIT-JEE Main and Advanced."
-            />
-          }
+          element={<IITJEELongTermPage />}
         />
         <Route
           path="/streams/test-prep/iit-jee-short-term"
