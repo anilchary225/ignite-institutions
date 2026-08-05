@@ -7,6 +7,7 @@ import MPCIITPage from "./pages/MPCIITPage";
 import BIPCNEETPage from "./pages/BIPCNEETPage";
 import IITJEELongTermPage from "./pages/IITJEELongTermPage";
 import IITJEEShortTermPage from "./pages/IITJEEShortTermPage";
+import NEETLongTermPage from "./pages/NEETLongTermPage";
 import StreamsPage from "./pages/StreamsPage";
 import GalleryPage from "./pages/GalleryPage";
 import ResultsPage from "./pages/ResultsPage";
@@ -86,12 +87,7 @@ export default function App() {
         />
         <Route
           path="/streams/test-prep/neet-long-term"
-          element={
-            <SectionPage
-              title="NEET Long Term"
-              description="Multi-year preparation for NEET."
-            />
-          }
+          element={<NEETLongTermPage />}
         />
         <Route
           path="/streams/test-prep/neet-short-term"
