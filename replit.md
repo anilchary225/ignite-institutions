@@ -1,45 +1,28 @@
-# Ignite Junior College – Website
+# Ignite Academy Website
 
-A multi-page marketing/informational website for Ignite Junior College.
+A multi-page marketing/info website for **Ignite Academy** (Junior College & School), built with React + Vite + Tailwind CSS v4 + GSAP.
 
 ## Stack
-
-- **Frontend:** React 19 + Vite + Tailwind CSS v4 + GSAP animations + React Router v7
-- **Backend:** None (frontend-only)
+- **Frontend:** React 19, Vite 8, Tailwind CSS v4, React Router v7, GSAP 3, Lucide React
+- **Backend:** None (pure frontend SPA)
 
 ## Pages
+- Home, About Us, Streams (Junior College, School, Test Prep), Gallery, Results, Contact Us
 
-| Route | Page |
-|---|---|
-| `/` | Home |
-| `/about` | About |
-| `/about/personality-development` | Personality Development |
-| `/about/daya-at-ignite` | A Day at Ignite |
-| `/about/campus-hostel-facilities` | Campus & Hostel |
-| `/about/testimonials` | Testimonials |
-| `/streams` | Academic Streams |
-| `/gallery` | Gallery |
-| `/results` | Results |
-| `/contact` | Contact |
-
-## Running locally
-
+## How to run
 ```bash
-cd frontend
-npm run dev
+cd frontend && npm run dev
 ```
+Runs on port 5000. The workflow `Start application` handles this automatically.
 
-The dev server starts at `http://localhost:5173`.
-
-## Building for production
-
-```bash
-cd frontend
-npm run build
+## Project structure
 ```
-
-Output goes to `frontend/dist/`.
+frontend/
+  src/
+    pages/        # Top-level page components
+    components/   # Shared + page-specific components
+    router/       # Custom BrowserRouter wrapper
+  public/         # Static assets (card art, favicons)
+```
 
 ## User preferences
-
-_None recorded yet._
