@@ -17,33 +17,33 @@ export default function Campuses() {
   const tabs = Object.keys(campusData);
 
   return (
-    <section className="bg-white py-20 px-6">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 text-center">
-          Our Campuses
-        </h2>
-        <p className="mt-2 text-slate-500 text-center">
-          Explore Ignite branches across Hyderabad
-        </p>
+    <section className="py-14 px-4 sm:px-8 sm:py-16 transition-colors">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-8">
+          <span className="inline-block text-xs font-bold tracking-[0.25em] text-green-700 uppercase mb-2">
+            Our Locations
+          </span>
+          <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-white sm:text-3xl">
+            Our Campuses
+          </h2>
+          <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
+            Explore Ignite branches across Hyderabad
+          </p>
+        </div>
 
         {/* Tabs */}
-        <div className="mt-10 flex justify-center gap-10 border-b border-slate-200">
+        <div className="flex justify-center gap-2 mb-8">
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`relative pb-4 text-base font-semibold transition-colors duration-300 ${
+              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
                 activeTab === tab
-                  ? "text-orange-600"
-                  : "text-slate-400 hover:text-slate-700"
+                  ? "bg-green-700 text-white shadow-sm shadow-green-700/30"
+                  : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-green-50 dark:hover:bg-green-700/10 hover:text-green-700"
               }`}
             >
               {tab}
-              <span
-                className={`absolute left-0 -bottom-[1px] h-[3px] w-full rounded-full bg-orange-600 transition-transform duration-300 ease-out origin-left ${
-                  activeTab === tab ? "scale-x-100" : "scale-x-0"
-                }`}
-              />
             </button>
           ))}
         </div>
@@ -51,7 +51,7 @@ export default function Campuses() {
         {/* Image grid */}
         <div
           key={activeTab}
-          className={`mt-12 grid gap-6 animate-[fadeIn_0.4s_ease-out] ${
+          className={`grid gap-5 ${
             activeTab === "Schools"
               ? "grid-cols-1"
               : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
@@ -60,25 +60,23 @@ export default function Campuses() {
           {campusData[activeTab].map((campus, i) => (
             <div
               key={i}
-              className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-2xl transition-shadow duration-300"
+              className="group relative overflow-hidden rounded-2xl shadow-sm border border-neutral-200 dark:border-neutral-700 hover:shadow-lg transition-shadow duration-300"
             >
               <img
                 src={campus.image}
                 alt={campus.name}
-                className={`w-full object-cover transition-transform duration-500 ease-out group-hover:scale-110 ${
-                  activeTab === "Schools" ? "h-96" : "h-64"
+                className={`w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 ${
+                  activeTab === "Schools" ? "h-72 sm:h-96" : "h-52 sm:h-64"
                 }`}
               />
 
               {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-              {/* Text at bottom */}
-              <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out">
-                <p className="text-white font-semibold text-sm">
-                  {campus.name}
-                </p>
-                <div className="mt-1 flex items-center gap-1 text-white/80 text-xs">
+              {/* Text */}
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <p className="text-white font-semibold text-sm">{campus.name}</p>
+                <div className="mt-1 flex items-center gap-1.5 text-white/80 text-xs">
                   <MapPin size={12} />
                   <span>{campus.location}</span>
                 </div>
@@ -87,13 +85,6 @@ export default function Campuses() {
           ))}
         </div>
       </div>
-
-      <style>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(8px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
     </section>
   );
 }

@@ -14,49 +14,52 @@ import Form from "../components/HomeComponents/Form";
 const Home = () => {
   return (
     <div className="min-h-screen bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white">
-      {/* Hero Cards — white background */}
-      <main className="mx-auto flex max-w-[1440px] flex-col gap-10 px-4 py-10 sm:px-8 sm:py-14">
-        <HomeCards />
-      </main>
+
+      {/* Hero Cards — white */}
+      <section className="bg-white dark:bg-neutral-950 px-4 py-10 sm:px-8 sm:py-12">
+        <div className="mx-auto max-w-7xl">
+          <HomeCards />
+        </div>
+      </section>
 
       {/* Stats — green brand gradient */}
       <Stats />
 
-      {/* Apply — light orange tint */}
+      {/* Apply — orange-50 */}
       <HomeApply />
 
-      {/* Cards with content — light blue tint */}
-      <div className="bg-blue-50 dark:bg-neutral-900">
-        <main className="mx-auto flex max-w-[1440px] flex-col gap-10 px-4 py-10 sm:px-8 sm:py-14">
+      {/* Programs cards — blue-50 */}
+      <section className="bg-blue-50 dark:bg-neutral-900 px-4 py-12 sm:px-8 sm:py-14 transition-colors">
+        <div className="mx-auto max-w-7xl">
           <CardsWithContent />
-        </main>
-      </div>
+        </div>
+      </section>
 
-      {/* Cards Hover — white */}
+      {/* Campus Life hover cards — white */}
       <CardsHover />
 
-      {/* Campuses — light green tint */}
-      <div className="bg-green-50 dark:bg-neutral-950">
+      {/* Campuses tabbed — green-50 */}
+      <section className="bg-green-50 dark:bg-neutral-900 transition-colors">
         <Campuses />
-      </div>
+      </section>
 
       {/* Achievements — white */}
       <Achievements />
 
-      {/* Events — light red/rose tint */}
-      <div className="bg-red-50 dark:bg-neutral-900">
+      {/* Events — red-50 */}
+      <section className="bg-red-50 dark:bg-neutral-900 transition-colors">
         <Events />
-      </div>
+      </section>
 
-      {/* Video — dark section */}
+      {/* Video — dark */}
       <VideoPlayer />
 
-      {/* Testimonials — light blue tint */}
-      <div className="bg-blue-50 dark:bg-neutral-950">
+      {/* Testimonials — blue-50 */}
+      <section className="bg-blue-50 dark:bg-neutral-950 transition-colors">
         <Testimonials />
-      </div>
+      </section>
 
-      {/* Contact Form */}
+      {/* Contact Form — white with border-top separating it from footer */}
       <Form />
     </div>
   );

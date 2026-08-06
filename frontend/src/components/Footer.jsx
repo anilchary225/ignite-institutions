@@ -1,9 +1,7 @@
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail, Heart } from "lucide-react";
 import { RouteLink } from "../router/BrowserRouter";
+import { useTheme } from "../context/ThemeContext";
 
-// lucide-react dropped brand/logo icons in newer versions, so these four are
-// small inline SVGs instead of library imports — keeps the footer independent
-// of whatever icon set is installed.
 function FacebookIcon(props) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -39,19 +37,18 @@ function YoutubeIcon(props) {
 }
 
 const campusLifeLinks = [
-    { label: "Personality Development", href: "/about/personality-development" },
-    { label: "Day At IGNITE", href: "/about/daya-at-ignite" },
-    { label: "Campus Hostel Facility", href: "/about/campus-hostel-facilities" },
-    { label: "Testimonials", href: "/about/testimonials" },
-  
+  { label: "Personality Development", href: "/about/personality-development" },
+  { label: "Day At IGNITE", href: "/about/daya-at-ignite" },
+  { label: "Campus Hostel Facility", href: "/about/campus-hostel-facilities" },
+  { label: "Testimonials", href: "/about/testimonials" },
 ];
 
 const courseLinks = [
-  { label: "NEET LONGTERM", href: "/streams/test-prep/neet-long-term" },
-  { label: "JEEMAINS/ ADVANCED LONGTERM", href: "/streams/test-prep/iit-jee-long-term" },
-  { label: "INTERMEDIATE +NEET (BIPC)", href: "/streams/junior-college/bipc-neet-coaching" },
-  { label: "INTERMEDIATE(MPC) + JEEMAINS / ADVANCED", href: "/streams/junior-college/mpc-iit-coaching" },
-  { label: "FOUNDATION", href: "/streams/test-prep/foundation" },
+  { label: "NEET Long Term", href: "/streams/test-prep/neet-long-term" },
+  { label: "JEE Mains / Advanced Long Term", href: "/streams/test-prep/iit-jee-long-term" },
+  { label: "Intermediate + NEET (BiPC)", href: "/streams/junior-college/bipc-neet-coaching" },
+  { label: "Intermediate (MPC) + JEE", href: "/streams/junior-college/mpc-iit-coaching" },
+  { label: "Foundation", href: "/streams/test-prep/foundation" },
 ];
 
 const quickViewLinks = [
@@ -61,26 +58,25 @@ const quickViewLinks = [
   { label: "Gallery", href: "/gallery" },
   { label: "Results", href: "/results" },
   { label: "Contact", href: "/contact" },
-  
 ];
 
 const socialLinks = [
-  { icon: FacebookIcon, label: "Facebook", href: "https://facebook.com" },
-  { icon: InstagramIcon, label: "Instagram", href: "https://instagram.com" },
-  { icon: LinkedinIcon, label: "LinkedIn", href: "https://linkedin.com" },
-  { icon: YoutubeIcon, label: "YouTube", href: "https://youtube.com" },
+  { icon: FacebookIcon, label: "Facebook", href: "https://facebook.com", color: "hover:bg-blue-600 hover:border-blue-600" },
+  { icon: InstagramIcon, label: "Instagram", href: "https://instagram.com", color: "hover:bg-pink-600 hover:border-pink-600" },
+  { icon: LinkedinIcon, label: "LinkedIn", href: "https://linkedin.com", color: "hover:bg-blue-500 hover:border-blue-500" },
+  { icon: YoutubeIcon, label: "YouTube", href: "https://youtube.com", color: "hover:bg-red-600 hover:border-red-600" },
 ];
 
-function FooterColumn({ heading, links }) {
+function FooterColumn({ heading, links, accentColor = "text-orange-400" }) {
   return (
     <div>
-      <h3 className="text-lg font-bold text-white">{heading}</h3>
-      <ul className="mt-5 space-y-4">
+      <h3 className={`text-sm font-bold uppercase tracking-widest ${accentColor} mb-5`}>{heading}</h3>
+      <ul className="space-y-3">
         {links.map((link) => (
           <li key={link.label}>
             <RouteLink
               to={link.href}
-              className="text-sm text-neutral-300 transition hover:text-orange-500"
+              className="text-sm text-neutral-400 transition-colors hover:text-white"
             >
               {link.label}
             </RouteLink>
@@ -92,73 +88,78 @@ function FooterColumn({ heading, links }) {
 }
 
 export default function Footer() {
+  const { darkMode } = useTheme();
+
   return (
-    <footer className="relative overflow-hidden bg-neutral-950">
-      {/* Glossy sheen: soft diagonal highlight sweeping across the dark surface */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.06] via-transparent to-transparent"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-24 left-1/3 h-72 w-[60%] -translate-x-1/2 rotate-6 rounded-full bg-white/5 blur-3xl"
-      />
+    <footer className="bg-neutral-950 border-t border-white/5">
+      {/* Top accent bar */}
+      <div className="h-1 w-full bg-gradient-to-r from-orange-500 via-green-600 to-blue-500" />
 
-      <div className="relative mx-auto grid max-w-7xl gap-12 px-6 py-16 sm:px-12 lg:grid-cols-[1.4fr_1fr_1fr_0.8fr]">
-        {/* Brand + contact */}
-        <div>
-          <div className="flex items-center gap-3">
-            <span className="grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-orange-500 to-green-600 text-xl font-black text-white">
-              I
-            </span>
-            <span className="flex flex-col leading-tight">
-              <span className="text-2xl font-extrabold tracking-wide text-white">
-                IGNITE
-              </span>
-              <span className="text-xs font-medium tracking-widest text-orange-500">
-                LEAD BY EXPERTS
-              </span>
-            </span>
+      <div className="mx-auto max-w-7xl px-6 pt-14 pb-10 sm:px-8">
+        <div className="grid gap-10 lg:grid-cols-[1.6fr_1fr_1fr_0.8fr]">
+
+          {/* Brand + contact */}
+          <div>
+            {/* Logo */}
+            <RouteLink to="/" className="inline-block">
+              <img
+                src="/logo-dark.png"
+                alt="Ignite Junior College & Schools"
+                className="h-16 w-auto object-contain"
+              />
+            </RouteLink>
+
+            <p className="mt-4 text-sm text-neutral-400 leading-relaxed max-w-xs">
+              Empowering students with excellence in IIT-JEE, NEET & EAPCET coaching since 2005. Lead by Experts.
+            </p>
+
+            {/* Contact info */}
+            <div className="mt-6 space-y-3">
+              <div className="flex items-start gap-3">
+                <MapPin className="mt-0.5 shrink-0 text-orange-500" size={16} />
+                <p className="text-xs text-neutral-400 leading-snug">Plot No – 14, Sri Sai Nagar, Hyderabad – 500085, OPP. Metro Pillar No – A708</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <Phone className="shrink-0 text-green-500" size={16} />
+                <p className="text-xs text-neutral-400">+91 70365 11 111 &nbsp;·&nbsp; +91 97000 4 1234</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <Mail className="shrink-0 text-blue-500" size={16} />
+                <p className="text-xs text-neutral-400">Info@ignite.academy</p>
+              </div>
+            </div>
+
+            {/* Social */}
+            <div className="mt-6 flex gap-2.5">
+              {socialLinks.map(({ icon: Icon, label, href, color }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={label}
+                  className={`grid h-9 w-9 place-items-center rounded-xl border border-white/10 text-neutral-400 transition-all ${color} hover:text-white`}
+                >
+                  <Icon className="h-4 w-4" />
+                </a>
+              ))}
+            </div>
           </div>
 
-          <div className="mt-8 space-y-5 text-sm text-neutral-300">
-            <div className="flex items-start gap-3">
-              <MapPin className="mt-0.5 shrink-0 text-orange-500" size={20} />
-              <p>Plot No – 14, Sri Sai Nagar, Hyderabad – 500085, OPP. Metro Pillar No – A708</p>
-            </div>
-            <div className="flex items-center gap-3">
-              <Phone className="shrink-0 text-orange-500" size={20} />
-              <p>+91 70365 11 111, +91 97000 4 1234</p>
-            </div>
-            <div className="flex items-center gap-3">
-              <Mail className="shrink-0 text-orange-500" size={20} />
-              <p>Info@ignite.academy</p>
-            </div>
-          </div>
-
-          <div className="mt-6 flex gap-3">
-            {socialLinks.map(({ icon: Icon, label, href }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={label}
-                className="grid h-10 w-10 place-items-center rounded-full border border-orange-500 text-orange-500 transition hover:bg-orange-500 hover:text-white"
-              >
-                <Icon className="h-[18px] w-[18px]" />
-              </a>
-            ))}
-          </div>
+          <FooterColumn heading="Campus Life" links={campusLifeLinks} accentColor="text-orange-400" />
+          <FooterColumn heading="Courses" links={courseLinks} accentColor="text-green-500" />
+          <FooterColumn heading="Quick Links" links={quickViewLinks} accentColor="text-blue-400" />
         </div>
 
-        <FooterColumn heading="Our Campus Life" links={campusLifeLinks} />
-        <FooterColumn heading="Course Offered" links={courseLinks} />
-        <FooterColumn heading="Quick View" links={quickViewLinks} />
-      </div>
-
-      <div className="relative border-t border-white/10 px-6 py-5 text-center text-xs text-neutral-500 sm:px-12">
-        © {new Date().getFullYear()} IGNITE Junior College. All rights reserved.
+        {/* Divider */}
+        <div className="mt-12 border-t border-white/5 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-xs text-neutral-600">
+            © {new Date().getFullYear()} IGNITE Junior College & Schools. All rights reserved.
+          </p>
+          <p className="flex items-center gap-1 text-xs text-neutral-600">
+            Built with <Heart size={11} className="text-red-500 fill-red-500" /> for students
+          </p>
+        </div>
       </div>
     </footer>
   );

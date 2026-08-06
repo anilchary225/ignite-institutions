@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Calendar, MapPin } from "lucide-react";
 
-// Inline SVG placeholder for event photos — no network request needed.
 const placeholderEventPhoto = (bg, label) => {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="500" height="380">
     <rect width="500" height="380" fill="${bg}"/>
@@ -16,6 +15,8 @@ const eventsData = [
     title: "Annual Day Celebrations",
     date: "15 Dec 2025",
     location: "Main Auditorium, Ignite Campus",
+    tag: "Cultural",
+    tagColor: "bg-red-100 dark:bg-red-500/10 text-red-700 dark:text-red-400",
     description:
       "A vibrant evening of performances, felicitations, and cultural showcases celebrating the achievements of our students over the year.",
     images: [
@@ -29,6 +30,8 @@ const eventsData = [
     title: "Inter-College Sports Meet",
     date: "3 Jan 2026",
     location: "Ignite Sports Complex",
+    tag: "Sports",
+    tagColor: "bg-green-100 dark:bg-green-700/10 text-green-700 dark:text-green-400",
     description:
       "Students competed across athletics, cricket, and volleyball in a day full of energy, teamwork, and school spirit.",
     images: [
@@ -42,6 +45,8 @@ const eventsData = [
     title: "Investiture Ceremony",
     date: "20 Jun 2026",
     location: "Ignite Junior College",
+    tag: "Leadership",
+    tagColor: "bg-blue-100 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400",
     description:
       "Newly elected student council members were sworn in, marking the start of a year of leadership and responsibility.",
     images: [
@@ -53,11 +58,6 @@ const eventsData = [
   },
 ];
 
-/**
- * PhotoStack — a reusable stacked-card photo widget.
- * Cards sit fanned out behind one another; every few seconds the back-most
- * card animates smoothly up to the front, looping continuously.
- */
 function PhotoStack({ images, autoShuffleMs = 2200 }) {
   const [order, setOrder] = useState(images.map((_, i) => i));
   const [paused, setPaused] = useState(false);
@@ -95,7 +95,7 @@ function PhotoStack({ images, autoShuffleMs = 2200 }) {
             src={src}
             alt={`Event photo ${imgIndex + 1}`}
             style={{ transform: style.transform, zIndex: style.zIndex, opacity: style.opacity }}
-            className="absolute inset-0 w-full h-full object-cover rounded-2xl shadow-xl border-4 border-white transition-all duration-700 ease-in-out"
+            className="absolute inset-0 w-full h-full object-cover rounded-2xl shadow-xl border-4 border-white dark:border-neutral-800 transition-all duration-700 ease-in-out"
           />
         );
       })}
@@ -106,27 +106,30 @@ function PhotoStack({ images, autoShuffleMs = 2200 }) {
 function EventCard({ event, reverse }) {
   return (
     <div
-      className={`grid md:grid-cols-2 gap-10 md:gap-16 items-center ${
-        reverse ? "md:[direction:rtl]" : ""
+      className={`grid gap-8 md:gap-14 items-center ${
+        reverse ? "md:grid-cols-[1fr_1fr]" : "md:grid-cols-[1fr_1fr]"
       }`}
     >
-      <div className={reverse ? "md:[direction:ltr]" : ""}>
+      <div className={reverse ? "md:order-2" : ""}>
         <PhotoStack images={event.images} />
       </div>
 
-      <div className={reverse ? "md:[direction:ltr]" : ""}>
-        <div className="flex items-center gap-2 text-sm font-semibold text-emerald-600">
-          <Calendar size={16} />
+      <div className={reverse ? "md:order-1" : ""}>
+        <span className={`inline-block text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full ${event.tagColor} mb-3`}>
+          {event.tag}
+        </span>
+        <div className="flex items-center gap-2 text-xs font-semibold text-orange-500 mb-2">
+          <Calendar size={13} />
           <span>{event.date}</span>
         </div>
-        <h3 className="mt-3 text-2xl md:text-3xl font-extrabold text-slate-900">
+        <h3 className="text-xl font-extrabold text-neutral-900 dark:text-white leading-snug">
           {event.title}
         </h3>
-        <div className="mt-2 flex items-center gap-2 text-sm text-slate-500">
-          <MapPin size={14} />
+        <div className="mt-2 flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400">
+          <MapPin size={12} />
           <span>{event.location}</span>
         </div>
-        <p className="mt-4 text-slate-600 leading-relaxed">{event.description}</p>
+        <p className="mt-3 text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">{event.description}</p>
       </div>
     </div>
   );
@@ -134,21 +137,21 @@ function EventCard({ event, reverse }) {
 
 export default function Events() {
   return (
-    <section className="bg-white py-20 px-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center max-w-2xl mx-auto">
-          <span className="text-xs font-bold tracking-[0.3em] text-emerald-600 uppercase">
+    <section className="py-14 px-4 sm:px-8 sm:py-16 transition-colors">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center max-w-2xl mx-auto mb-10">
+          <span className="inline-block text-xs font-bold tracking-[0.25em] text-red-500 uppercase mb-2">
             Events
           </span>
-          <h2 className="mt-3 text-3xl md:text-4xl font-extrabold text-slate-900">
-            Life at Ignite
+          <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-white sm:text-3xl">
+            Life at IGNITE
           </h2>
-          <p className="mt-3 text-slate-500">
+          <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
             A glimpse into the moments, milestones, and memories made across campus.
           </p>
         </div>
 
-        <div className="mt-16 space-y-24">
+        <div className="space-y-16">
           {eventsData.map((event, i) => (
             <EventCard key={i} event={event} reverse={i % 2 === 1} />
           ))}

@@ -1,60 +1,71 @@
 import React from "react";
+import { CheckCircle2, ArrowRight } from "lucide-react";
 
-/**
- * HomeApply — admissions section for Ignite Junior College.
- * Simple two-column layout: content on the left, image on the right (placeholder).
- */
+const highlights = [
+  "Admissions open for MPC and BiPC programs.",
+  "Experienced faculty with proven results in IIT-JEE, NEET & EAPCET.",
+  "Modern classrooms, labs, and student-friendly campus.",
+  "Focus on academics, personal growth, and career success.",
+];
+
+const tags = [
+  { label: "IIT-JEE", color: "bg-orange-100 text-orange-700 dark:bg-orange-500/10 dark:text-orange-400" },
+  { label: "NEET", color: "bg-green-100 text-green-700 dark:bg-green-700/10 dark:text-green-400" },
+  { label: "EAPCET", color: "bg-blue-100 text-blue-700 dark:bg-blue-500/10 dark:text-blue-400" },
+  { label: "Foundation", color: "bg-red-100 text-red-700 dark:bg-red-500/10 dark:text-red-400" },
+];
+
 export default function HomeApply() {
-  const highlights = [
-    "Admissions open for MPC and BiPC programs.",
-    "Experienced faculty with proven results in IIT-JEE, NEET & EAPCET.",
-    "Modern classrooms, labs, and student-friendly campus.",
-    "Focus on academics, personal growth, and career success.",
-  ];
-
   return (
-    <section className="bg-white px-6 py-20 transition-colors dark:bg-neutral-950">
-      <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
+    <section className="bg-orange-50 dark:bg-neutral-900 px-4 py-14 sm:px-8 sm:py-16 transition-colors">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 md:grid-cols-2">
 
         {/* Text content */}
         <div>
-          <span className="inline-block text-xs font-bold tracking-[0.2em] text-orange-500 uppercase mb-3">
-            Admissions 2026-28
+          <span className="inline-block text-xs font-bold tracking-[0.25em] text-orange-500 uppercase mb-3">
+            Admissions 2026–28
           </span>
-          <h2 className="text-4xl font-extrabold leading-tight text-slate-900 dark:text-white md:text-5xl">
+          <h2 className="text-2xl font-extrabold leading-tight text-neutral-900 dark:text-white sm:text-3xl">
             Apply for Admission
           </h2>
-          <p className="mt-2 text-lg font-semibold text-slate-500 dark:text-slate-300">
-            For the current academic year..
+          <p className="mt-1 text-base font-medium text-neutral-500 dark:text-neutral-400">
+            For the current academic year
           </p>
 
-          <p className="mt-5 leading-relaxed text-slate-600 dark:text-slate-300">
+          <p className="mt-4 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
             We give our students not only the education but also the experiences
-            that set them up for success in their career.
+            that set them up for lifelong success in their career.
           </p>
 
-          <ul className="mt-6 space-y-3">
+          <ul className="mt-5 space-y-3">
             {highlights.map((item, i) => (
               <li key={i} className="flex items-start gap-3">
-                <span className="flex items-center justify-center w-5 h-5 rounded-full bg-orange-500 text-white text-xs mt-0.5 shrink-0">
-                  ✓
-                </span>
-                <span className="text-slate-700 dark:text-slate-300">{item}</span>
+                <CheckCircle2 size={17} className="shrink-0 mt-0.5 text-orange-500" />
+                <span className="text-sm text-neutral-700 dark:text-neutral-300">{item}</span>
               </li>
             ))}
           </ul>
 
-          <button className="mt-8 border-2 border-orange-500 text-orange-600 font-semibold px-8 py-3 rounded-md hover:bg-orange-500 hover:text-white transition-colors">
+          <div className="mt-6 flex flex-wrap gap-2">
+            {tags.map((t) => (
+              <span key={t.label} className={`px-3 py-1 rounded-full text-xs font-bold ${t.color}`}>
+                {t.label}
+              </span>
+            ))}
+          </div>
+
+          <button className="mt-7 inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-2.5 rounded-xl text-sm shadow-sm shadow-orange-500/30 transition-colors">
             Apply Now
+            <ArrowRight size={15} />
           </button>
         </div>
 
-        {/* Placeholder image */}
-        <div className="overflow-hidden rounded-xl shadow-lg">
+        {/* Image — hidden on mobile to avoid layout break */}
+        <div className="hidden md:block overflow-hidden rounded-2xl shadow-md border-4 border-orange-200 dark:border-orange-500/20">
           <img
-            src="https://placehold.co/600x450/e2e8f0/64748b?text=College+Photo"
+            src="https://placehold.co/600x450/fff7ed/ea580c?text=College+Photo"
             alt="Ignite Junior College"
-            className="w-full h-full object-cover"
+            className="w-full h-72 object-cover"
           />
         </div>
       </div>
