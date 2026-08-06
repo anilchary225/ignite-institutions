@@ -344,31 +344,47 @@ function SelectionStats() {
 function ProfileCard({ profile, color }) {
   const c = colorMap[color];
   return (
-    <div className="flex flex-col overflow-hidden rounded-2xl bg-white shadow-md ring-2 ring-amber-400 transition hover:-translate-y-1 hover:shadow-xl dark:bg-neutral-900 dark:ring-amber-500/70">
-      {/* Portrait photo */}
-      <div className="relative w-full overflow-hidden bg-neutral-200 dark:bg-neutral-800" style={{ aspectRatio: "3/4" }}>
+    <div className="flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-neutral-150 transition hover:-translate-y-1 hover:shadow-lg dark:bg-neutral-900 dark:ring-neutral-700">
+      {/* Full-width portrait photo */}
+      <div className="relative w-full overflow-hidden bg-neutral-100 dark:bg-neutral-800" style={{ aspectRatio: "3/4" }}>
         <img
           src={profile.photo}
           alt={profile.name}
           loading="lazy"
           className="h-full w-full object-cover object-top"
         />
-        {/* Rank badge overlay */}
-        <span className={`absolute left-2 top-2 rounded-md px-2 py-0.5 text-[10px] font-black shadow ${c.badge}`}>
-          {profile.rank}
+      </div>
+
+      {/* Name + category */}
+      <div className="flex flex-col items-center gap-1.5 px-3 pt-3 pb-2 text-center">
+        <p className="w-full truncate text-sm font-extrabold leading-snug text-neutral-950 dark:text-white">
+          {profile.name}
+        </p>
+        <span className={`rounded-full px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider ${c.badge}`}>
+          {profile.category}
         </span>
       </div>
 
-      {/* Info */}
-      <div className="flex flex-col gap-0.5 bg-white px-2.5 py-2 dark:bg-neutral-900">
-        <p className="truncate text-xs font-extrabold leading-snug text-neutral-950 dark:text-white">
-          {profile.name}
-        </p>
-        <p className={`text-[10px] font-bold ${c.text}`}>{profile.score}</p>
+      {/* Data rows */}
+      <div className="mx-3 mb-3 divide-y divide-neutral-100 rounded-xl border border-neutral-100 dark:divide-neutral-800 dark:border-neutral-800">
+        <div className="flex items-center justify-between px-3 py-1.5">
+          <span className="text-[9px] font-bold uppercase tracking-widest text-neutral-400">Hall Ticket</span>
+          <span className="text-[10px] font-extrabold text-neutral-600 dark:text-neutral-300">{profile.hallTicket}</span>
+        </div>
+        <div className="flex items-center justify-between px-3 py-1.5">
+          <span className="text-[9px] font-bold uppercase tracking-widest text-neutral-400">Score</span>
+          <span className={`text-[10px] font-extrabold ${c.text}`}>{profile.score}</span>
+        </div>
+        <div className="flex items-center justify-between px-3 py-1.5">
+          <span className="text-[9px] font-bold uppercase tracking-widest text-neutral-400">Rank</span>
+          <span className="text-[10px] font-extrabold text-neutral-700 dark:text-neutral-300">{profile.rank}</span>
+        </div>
         {profile.percentile && (
-          <p className="text-[10px] text-neutral-500">{profile.percentile} %ile</p>
+          <div className="flex items-center justify-between px-3 py-1.5">
+            <span className="text-[9px] font-bold uppercase tracking-widest text-neutral-400">Percentile</span>
+            <span className="text-[10px] font-extrabold text-neutral-700 dark:text-neutral-300">{profile.percentile}</span>
+          </div>
         )}
-        <p className="truncate text-[10px] text-neutral-400">{profile.hallTicket}</p>
       </div>
     </div>
   );
