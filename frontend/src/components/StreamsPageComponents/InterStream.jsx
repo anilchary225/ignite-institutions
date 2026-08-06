@@ -10,7 +10,7 @@ const courses = [
       "Rigorous dual-preparation curriculum combining Intermediate board excellence with IIT JEE Main & Advanced coaching. Taught by IIT/NIT alumni faculty.",
     highlights: ["IIT JEE Main", "IIT JEE Advanced", "Board Excellence"],
     icon: FlaskConical,
-    accent: "violet",
+    accent: "orange",
     details: [
       { icon: Clock, text: "2-Year Program (Class 11 & 12)" },
       { icon: Users, text: "Small batch sizes (≤ 30 students)" },
@@ -27,7 +27,7 @@ const courses = [
       "Integrated NEET preparation alongside Intermediate board. Deep conceptual focus on Biology, Physics & Chemistry with regular mock NTs.",
     highlights: ["NEET UG", "AIIMS", "Board Excellence"],
     icon: BookOpen,
-    accent: "indigo",
+    accent: "blue",
     details: [
       { icon: Clock, text: "2-Year Program (Class 11 & 12)" },
       { icon: Users, text: "Small batch sizes (≤ 30 students)" },
@@ -38,19 +38,19 @@ const courses = [
 ];
 
 const accentMap = {
-  violet: {
-    badge: "bg-violet-100 text-violet-700 dark:bg-violet-950/50 dark:text-violet-300",
-    iconBg: "bg-violet-600",
-    border: "border-violet-100 dark:border-violet-900",
-    highlight: "bg-violet-50 text-violet-700 dark:bg-violet-950/40 dark:text-violet-300",
-    dot: "bg-violet-500",
+  orange: {
+    badge: "bg-orange-100 text-orange-700 dark:bg-orange-950/40 dark:text-orange-300",
+    iconBg: "bg-orange-500",
+    border: "border-orange-100 dark:border-orange-900",
+    highlight: "bg-orange-50 text-orange-700 dark:bg-orange-950/30 dark:text-orange-300",
+    cta: "bg-orange-500 hover:bg-orange-600",
   },
-  indigo: {
-    badge: "bg-indigo-100 text-indigo-700 dark:bg-indigo-950/50 dark:text-indigo-300",
-    iconBg: "bg-indigo-600",
-    border: "border-indigo-100 dark:border-indigo-900",
-    highlight: "bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300",
-    dot: "bg-indigo-500",
+  blue: {
+    badge: "bg-blue-100 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300",
+    iconBg: "bg-blue-500",
+    border: "border-blue-100 dark:border-blue-900",
+    highlight: "bg-blue-50 text-blue-700 dark:bg-blue-950/30 dark:text-blue-300",
+    cta: "bg-blue-500 hover:bg-blue-600",
   },
 };
 
@@ -62,12 +62,10 @@ function CourseCard({ course }) {
     <div
       className={`relative flex flex-col rounded-3xl border bg-white p-8 shadow-sm transition hover:shadow-md dark:bg-neutral-900 dark:hover:shadow-neutral-800 ${a.border}`}
     >
-      {/* top badge */}
       <span className={`self-start rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide ${a.badge}`}>
         {course.badge}
       </span>
 
-      {/* icon + title */}
       <div className="mt-6 flex items-start gap-4">
         <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${a.iconBg}`}>
           <Icon size={22} className="text-white" />
@@ -86,7 +84,6 @@ function CourseCard({ course }) {
         {course.description}
       </p>
 
-      {/* highlight pills */}
       <div className="mt-5 flex flex-wrap gap-2">
         {course.highlights.map((h) => (
           <span key={h} className={`rounded-full px-3 py-1 text-xs font-semibold ${a.highlight}`}>
@@ -95,7 +92,6 @@ function CourseCard({ course }) {
         ))}
       </div>
 
-      {/* detail rows */}
       <ul className="mt-6 space-y-2.5 border-t pt-6 dark:border-neutral-800">
         {course.details.map(({ icon: DIcon, text }) => (
           <li key={text} className="flex items-center gap-3 text-sm text-neutral-600 dark:text-neutral-400">
@@ -105,10 +101,9 @@ function CourseCard({ course }) {
         ))}
       </ul>
 
-      {/* CTA */}
       <a
         href="#"
-        className={`mt-8 inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-bold text-white transition ${course.accent === "violet" ? "bg-violet-600 hover:bg-violet-700" : "bg-indigo-600 hover:bg-indigo-700"}`}
+        className={`mt-8 inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-bold text-white transition ${a.cta}`}
       >
         Enquire about {course.title}
       </a>
@@ -119,11 +114,10 @@ function CourseCard({ course }) {
 export default function InterStream() {
   return (
     <section id="inter" className="bg-white px-6 py-20 dark:bg-neutral-950">
-      <div className="mx-auto max-w-5xl">
-        {/* section header */}
+      <div className="mx-auto max-w-7xl">
         <div className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
-          <span className="rounded-full bg-violet-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-violet-700 dark:bg-violet-950/50 dark:text-violet-300">
+          <span className="rounded-full bg-orange-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-orange-700 dark:bg-orange-950/40 dark:text-orange-300">
             Junior College — Inter
           </span>
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
