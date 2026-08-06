@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowRight,
   Award,
@@ -370,52 +370,23 @@ function ProfileCard({ profile, color }) {
 }
 
 function ResultGroupSection({ group }) {
-  const trackRef = useRef(null);
   const c = colorMap[group.color];
-
-  function scroll(dir) {
-    trackRef.current?.scrollBy({ left: dir * 280, behavior: "smooth" });
-  }
 
   return (
     <div className="mt-14 first:mt-0">
       {/* Header */}
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex items-center gap-3">
-          <span className={`h-5 w-1.5 rounded-full ${c.bar}`} />
-          <h3 className="text-base font-extrabold text-neutral-950 sm:text-lg dark:text-white leading-snug">
-            {group.title}
-          </h3>
-        </div>
-        <div className="flex shrink-0 items-center gap-2">
-          <span className={`rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-widest ${c.badge}`}>
-            {group.examType}
-          </span>
-          <button
-            type="button"
-            onClick={() => scroll(-1)}
-            aria-label="Scroll left"
-            className="grid h-8 w-8 place-items-center rounded-full border border-neutral-200 text-neutral-500 transition hover:border-neutral-400 hover:text-neutral-800 dark:border-neutral-700 dark:text-neutral-400"
-          >
-            <ChevronLeft size={15} />
-          </button>
-          <button
-            type="button"
-            onClick={() => scroll(1)}
-            aria-label="Scroll right"
-            className="grid h-8 w-8 place-items-center rounded-full border border-neutral-200 text-neutral-500 transition hover:border-neutral-400 hover:text-neutral-800 dark:border-neutral-700 dark:text-neutral-400"
-          >
-            <ChevronRight size={15} />
-          </button>
-        </div>
+      <div className="flex flex-wrap items-center gap-3">
+        <span className={`h-5 w-1.5 shrink-0 rounded-full ${c.bar}`} />
+        <h3 className="text-base font-extrabold text-neutral-950 sm:text-lg dark:text-white leading-snug">
+          {group.title}
+        </h3>
+        <span className={`ml-auto rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-widest ${c.badge}`}>
+          {group.examType}
+        </span>
       </div>
 
-      {/* Scroll track */}
-      <div
-        ref={trackRef}
-        className="mt-5 flex gap-4 overflow-x-auto pb-3"
-        style={{ scrollbarWidth: "none" }}
-      >
+      {/* Grid — 2 cols mobile → 3 sm → 4 md → 5 lg */}
+      <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         {group.profiles.map((p) => (
           <ProfileCard key={p.id} profile={p} color={group.color} />
         ))}
