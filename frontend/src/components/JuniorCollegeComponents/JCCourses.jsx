@@ -167,7 +167,7 @@ export default function JCCourses() {
     <section id="courses" className="bg-white px-6 pb-20 dark:bg-neutral-950">
       {/* admissions open strip */}
       <div className="w-full bg-gradient-to-r from-violet-600 via-indigo-600 to-violet-700 py-4">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6">
           <div className="flex items-center gap-3">
             <span className="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-amber-400" />
             <p className="text-sm font-black uppercase tracking-[0.18em] text-white">
@@ -183,7 +183,7 @@ export default function JCCourses() {
         </div>
       </div>
 
-      <div className="mx-auto mt-16 max-w-6xl">
+      <div className="mx-auto mt-16 max-w-7xl">
         <div className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
           <span className="rounded-full bg-neutral-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400">

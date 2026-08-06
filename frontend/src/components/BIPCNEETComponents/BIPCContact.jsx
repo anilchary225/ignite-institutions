@@ -9,7 +9,7 @@ export default function BIPCContact() {
 
   return (
     <section id="contact" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <div className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
           <span className="rounded-full bg-emerald-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300">Enrol Now</span>

@@ -110,7 +110,7 @@ function Cell({ value, color }) {
 export default function TPComparison() {
   return (
     <section id="compare" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         {/* header */}
         <div className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />

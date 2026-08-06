@@ -117,7 +117,7 @@ function TrackCard({ track }) {
 export default function JCAbout() {
   return (
     <section id="about" className="bg-white px-6 py-20 dark:bg-neutral-950">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         {/* header */}
         <div className="max-w-2xl">
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-violet-600 dark:text-violet-400">

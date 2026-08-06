@@ -141,7 +141,7 @@ function GalleryHero() {
   return (
     <section className="px-4 pb-10 pt-5 sm:px-6 sm:pt-8">
       <div
-        className="group relative mx-auto h-[620px] max-w-[1440px] overflow-hidden rounded-[2rem] bg-neutral-900 shadow-[0_24px_80px_rgba(42,25,86,0.2)] sm:h-[680px]"
+        className="group relative mx-auto h-[620px] max-w-7xl overflow-hidden rounded-[2rem] bg-neutral-900 shadow-[0_24px_80px_rgba(42,25,86,0.2)] sm:h-[680px]"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
@@ -305,7 +305,7 @@ function ProgramCard({ program }) {
 function RecentPrograms() {
   return (
     <section className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
           <div>
             <div className="flex items-center gap-3">
@@ -344,7 +344,7 @@ function RecentPrograms() {
 function GalleryNote() {
   return (
     <section className="bg-white px-6 py-20 dark:bg-neutral-950">
-      <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-8 rounded-3xl bg-violet-50 p-8 sm:flex-row sm:items-center sm:p-10 dark:bg-violet-950/20">
+      <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 rounded-3xl bg-violet-50 p-8 sm:flex-row sm:items-center sm:p-10 dark:bg-violet-950/20">
         <div>
           <p className="text-xs font-black uppercase tracking-[0.2em] text-violet-700 dark:text-violet-400">
             Keep exploring

@@ -134,7 +134,7 @@ const parentActivities = [
 export default function SchoolPrimary() {
   return (
     <section id="primary" className="bg-white px-6 py-20 dark:bg-neutral-950">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
 
         {/* ── Classes 1-5 section label ── */}
         <div className="flex items-center gap-3">

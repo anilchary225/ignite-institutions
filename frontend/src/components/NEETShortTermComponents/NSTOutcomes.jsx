@@ -19,7 +19,7 @@ const colorMap = {
 export default function NSTOutcomes() {
   return (
     <section className="bg-white px-6 py-20 dark:bg-neutral-950">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
 
         <div className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />

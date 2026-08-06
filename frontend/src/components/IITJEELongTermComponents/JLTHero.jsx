@@ -15,7 +15,7 @@ const colorMap = {
 export default function JLTHero() {
   return (
     <section className="overflow-hidden bg-white px-6 pt-16 pb-0 dark:bg-neutral-950">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <div className="grid items-center gap-14 lg:grid-cols-2">
 
           {/* ── LEFT CONTENT ── */}

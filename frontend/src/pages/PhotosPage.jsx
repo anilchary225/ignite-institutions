@@ -237,7 +237,7 @@ const allPhotos = photoSections.flatMap((section) =>
 function PhotosIntro() {
   return (
     <section className="bg-white px-6 pb-10 pt-12 dark:bg-neutral-950 sm:pt-20">
-      <div className="mx-auto grid max-w-6xl items-end gap-10 lg:grid-cols-[1fr_0.85fr]">
+      <div className="mx-auto grid max-w-7xl items-end gap-10 lg:grid-cols-[1fr_0.85fr]">
         <div>
           <RouteLink
             to="/gallery"
@@ -287,7 +287,7 @@ function PhotosIntro() {
 function PhotoNav({ activeCategory, setActiveCategory }) {
   return (
     <section className="sticky top-4 z-30 px-4 py-5 sm:px-6">
-      <div className="mx-auto flex max-w-6xl items-center gap-2 overflow-x-auto rounded-2xl border border-neutral-200 bg-white/90 p-2 shadow-[0_12px_40px_rgba(15,23,42,0.1)] backdrop-blur-xl dark:border-neutral-800 dark:bg-neutral-950/90">
+      <div className="mx-auto flex max-w-7xl items-center gap-2 overflow-x-auto rounded-2xl border border-neutral-200 bg-white/90 p-2 shadow-[0_12px_40px_rgba(15,23,42,0.1)] backdrop-blur-xl dark:border-neutral-800 dark:bg-neutral-950/90">
         {categories.map((category) => (
           <button
             key={category.id}
@@ -493,13 +493,13 @@ export default function PhotosPage() {
     <div className="min-h-screen bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white">
       <PhotosIntro />
       <PhotoNav activeCategory={activeCategory} setActiveCategory={selectCategory} />
-      <main className="mx-auto max-w-6xl px-6 pb-20">
+      <main className="mx-auto max-w-7xl px-6 pb-20">
         {visibleSections.map((section) => (
           <PhotoSection key={section.id} section={section} onSelect={setSelectedPhoto} />
         ))}
       </main>
       <section className="border-t border-neutral-200 bg-neutral-50 px-6 py-16 dark:border-neutral-800 dark:bg-neutral-900/50">
-        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
           <div>
             <p className="text-xs font-black uppercase tracking-[0.2em] text-violet-700 dark:text-violet-400">
               Keep exploring

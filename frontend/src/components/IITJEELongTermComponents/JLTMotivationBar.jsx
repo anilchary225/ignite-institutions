@@ -18,7 +18,7 @@ export default function JLTMotivationBar() {
     <section className="overflow-hidden bg-gradient-to-r from-indigo-700 via-indigo-600 to-violet-700 py-14">
 
       {/* main CTA row */}
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-6 text-center md:flex-row md:justify-between md:text-left">
+      <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-6 text-center md:flex-row md:justify-between md:text-left">
         <div className="flex items-center gap-4">
           <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/20">
             <Flame size={26} className="text-white" />

@@ -299,7 +299,7 @@ function ResultBanner() {
 function SelectionStats() {
   return (
     <section className="bg-white px-6 py-20 dark:bg-neutral-950">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <div className="flex flex-col items-center gap-4 text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-violet-50 px-4 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-violet-700 dark:bg-violet-950/40 dark:text-violet-400">
             <Zap size={12} />
@@ -425,7 +425,7 @@ function AllResults() {
 
   return (
     <section className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <div className="flex items-center gap-3">
@@ -483,7 +483,7 @@ function MotivationStrip() {
 
   return (
     <section className="bg-white px-6 py-24 dark:bg-neutral-950">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         {/* Rotating motivational quote */}
         <div className="flex flex-col items-center gap-5 text-center">
           <div className="flex gap-1">

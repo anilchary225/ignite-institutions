@@ -22,7 +22,7 @@ export default function SchoolAdmissions() {
 
   return (
     <section id="admissions" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-7xl">
 
         {/* closed notice banner */}
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-800 to-neutral-950 px-8 py-10 text-center dark:from-neutral-900 dark:to-neutral-950">

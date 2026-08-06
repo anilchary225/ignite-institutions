@@ -3,7 +3,7 @@ import { ArrowRight, BookOpen, FlaskConical, Atom } from "lucide-react";
 export default function MPCHero() {
   return (
     <section className="overflow-hidden bg-white px-6 pt-16 pb-0 dark:bg-neutral-950">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <div className="grid items-center gap-12 lg:grid-cols-2">
 
           {/* LEFT — content */}

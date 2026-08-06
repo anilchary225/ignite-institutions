@@ -381,7 +381,7 @@ function EventHero() {
   return (
     <section className="px-4 pb-10 pt-5 sm:px-6 sm:pt-8">
       <div
-        className="mx-auto max-w-[1440px] overflow-hidden rounded-[2rem] bg-neutral-950 shadow-[0_24px_80px_rgba(42,25,86,0.25)]"
+        className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-neutral-950 shadow-[0_24px_80px_rgba(42,25,86,0.25)]"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
@@ -473,7 +473,7 @@ function EventHero() {
 function EventTypes() {
   return (
     <section className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <div className="flex items-center gap-3">
@@ -544,7 +544,7 @@ function EventGallery() {
 
       <section className="bg-neutral-950 py-20">
         <div className="px-6 lg:px-10">
-          <div className="mx-auto flex max-w-[1440px] items-end justify-between gap-6">
+          <div className="mx-auto flex max-w-7xl items-end justify-between gap-6">
             <div>
               <div className="flex items-center gap-3">
                 <span className="h-px w-10 bg-violet-500" />
@@ -582,7 +582,7 @@ function EventGallery() {
           {/* Track */}
           <div
             ref={trackRef}
-            className="mx-auto mt-8 flex max-w-[1440px] gap-4 overflow-x-auto pb-4"
+            className="mx-auto mt-8 flex max-w-7xl gap-4 overflow-x-auto pb-4"
             style={{ scrollbarWidth: "none" }}
           >
             {galleryImages.map((img) => (
@@ -614,7 +614,7 @@ function EventGallery() {
             ))}
           </div>
 
-          <p className="mx-auto mt-2 max-w-[1440px] text-center text-xs text-neutral-700 sm:hidden">← Swipe to explore →</p>
+          <p className="mx-auto mt-2 max-w-7xl text-center text-xs text-neutral-700 sm:hidden">← Swipe to explore →</p>
         </div>
       </section>
     </>
@@ -626,7 +626,7 @@ function EventGallery() {
 function StatsStrip() {
   return (
     <section className="bg-gradient-to-r from-violet-700 via-violet-600 to-indigo-600 px-6 py-14">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <div className="mb-10 text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-white">
             <Zap size={13} fill="white" />
@@ -708,7 +708,7 @@ function Reactions() {
 
   return (
     <section className="bg-white px-6 py-20 dark:bg-neutral-950">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         {/* Header */}
         <div className="flex flex-col items-center gap-5 text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-violet-50 px-4 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-violet-700 dark:bg-violet-950/40 dark:text-violet-400">
@@ -801,7 +801,7 @@ function AboutIgnite() {
 
   return (
     <section className="bg-neutral-50 px-6 py-24 dark:bg-neutral-900/40">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <div className="flex flex-col items-center gap-5 text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-violet-50 px-4 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-violet-700 dark:bg-violet-950/40 dark:text-violet-400">
             <Sparkles size={13} />

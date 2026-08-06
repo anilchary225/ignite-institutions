@@ -121,7 +121,7 @@ function ProgramCard({ program }) {
 export default function SchoolStream() {
   return (
     <section id="school" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/50">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-7xl">
         {/* section header */}
         <div className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />

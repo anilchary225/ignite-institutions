@@ -66,7 +66,7 @@ export default function SchoolHero() {
 
   return (
     <section className="bg-white px-6 py-20 dark:bg-neutral-950">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <div className="grid items-center gap-12 lg:grid-cols-2">
 
           {/* LEFT — about school */}

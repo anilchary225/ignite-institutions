@@ -3,7 +3,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 export default function MPCCareerBar() {
   return (
     <section className="overflow-hidden bg-gradient-to-r from-violet-700 via-violet-600 to-indigo-700 px-6 py-14">
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 text-center md:flex-row md:justify-between md:text-left">
+      <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 text-center md:flex-row md:justify-between md:text-left">
         <div className="flex items-center gap-4">
           <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/20">
             <Sparkles size={26} className="text-white" />

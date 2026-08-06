@@ -63,7 +63,7 @@ export default function MPCStats() {
 
   return (
     <section ref={ref} className="bg-neutral-950 px-6 py-14">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <p className="mb-8 text-center text-xs font-bold uppercase tracking-[0.25em] text-neutral-500">
           Ignite by the numbers
         </p>

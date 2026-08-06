@@ -148,7 +148,7 @@ const colorStyles = {
 function FoundationHero() {
   return (
     <section className="bg-white px-6 py-20 dark:bg-neutral-950">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full bg-violet-100 px-4 py-2 dark:bg-violet-950/40">
@@ -263,7 +263,7 @@ function FoundationHero() {
 function LearningApproach() {
   return (
     <section className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <div className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
           <span className="rounded-full bg-violet-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-violet-700 dark:bg-violet-950/50 dark:text-violet-300">
@@ -336,7 +336,7 @@ function LearningApproach() {
 function WhyChooseIgnite() {
   return (
     <section className="bg-white px-6 py-20 dark:bg-neutral-950">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <div className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
           <span className="rounded-full bg-amber-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-amber-700 dark:bg-amber-950/40 dark:text-amber-400">
@@ -441,7 +441,7 @@ function FoundationEnquiry() {
 
   return (
     <section className="bg-white px-6 py-20 dark:bg-neutral-950">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-7xl">
         <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-900 to-violet-950 px-8 py-12 text-center">
           <p className="text-xs font-black uppercase tracking-widest text-violet-300">
             Enroll Today

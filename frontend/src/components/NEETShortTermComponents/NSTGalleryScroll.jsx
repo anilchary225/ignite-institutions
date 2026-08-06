@@ -18,7 +18,7 @@ export default function NSTGalleryScroll() {
 
   return (
     <section className="bg-white px-6 py-20 dark:bg-neutral-950">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
 
         <div className="flex items-end justify-between">
           <div>

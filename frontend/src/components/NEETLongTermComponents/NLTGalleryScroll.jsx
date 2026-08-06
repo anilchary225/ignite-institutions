@@ -18,7 +18,7 @@ export default function NLTGalleryScroll() {
 
   return (
     <section className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
 
         <div className="flex items-end justify-between">
           <div>
