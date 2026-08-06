@@ -10,6 +10,8 @@ import IITJEEShortTermPage from "./pages/IITJEEShortTermPage";
 import NEETLongTermPage from "./pages/NEETLongTermPage";
 import NEETShortTermPage from "./pages/NEETShortTermPage";
 import FoundationPage from "./pages/FoundationPage";
+import PhotosPage from "./pages/PhotosPage";
+import VideosPage from "./pages/VideosPage";
 import StreamsPage from "./pages/StreamsPage";
 import GalleryPage from "./pages/GalleryPage";
 import ResultsPage from "./pages/ResultsPage";
@@ -104,16 +106,9 @@ export default function App() {
         <Route path="/gallery" element={<GalleryPage />} />
         <Route
           path="/gallery/photos"
-          element={
-            <SectionPage title="Photos" description="Campus photos and event galleries." />
-          }
+          element={<PhotosPage />}
         />
-        <Route
-          path="/gallery/videos"
-          element={
-            <SectionPage title="Videos" description="Campus videos and highlights." />
-          }
-        />
+        <Route path="/gallery/videos" element={<VideosPage />} />
         <Route
           path="/gallery/events"
           element={
