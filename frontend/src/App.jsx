@@ -9,6 +9,7 @@ import IITJEELongTermPage from "./pages/IITJEELongTermPage";
 import IITJEEShortTermPage from "./pages/IITJEEShortTermPage";
 import NEETLongTermPage from "./pages/NEETLongTermPage";
 import NEETShortTermPage from "./pages/NEETShortTermPage";
+import FoundationPage from "./pages/FoundationPage";
 import StreamsPage from "./pages/StreamsPage";
 import GalleryPage from "./pages/GalleryPage";
 import ResultsPage from "./pages/ResultsPage";
@@ -96,12 +97,7 @@ export default function App() {
         />
         <Route
           path="/streams/test-prep/foundation"
-          element={
-            <SectionPage
-              title="Foundation"
-              description="Early foundation course for future competitive prep."
-            />
-          }
+          element={<FoundationPage />}
         />
 
         {/* Gallery */}
