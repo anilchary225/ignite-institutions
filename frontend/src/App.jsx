@@ -12,6 +12,7 @@ import NEETShortTermPage from "./pages/NEETShortTermPage";
 import FoundationPage from "./pages/FoundationPage";
 import PhotosPage from "./pages/PhotosPage";
 import VideosPage from "./pages/VideosPage";
+import EventsPage from "./pages/EventsPage";
 import StreamsPage from "./pages/StreamsPage";
 import GalleryPage from "./pages/GalleryPage";
 import ResultsPage from "./pages/ResultsPage";
@@ -109,12 +110,7 @@ export default function App() {
           element={<PhotosPage />}
         />
         <Route path="/gallery/videos" element={<VideosPage />} />
-        <Route
-          path="/gallery/events"
-          element={
-            <SectionPage title="Events" description="Events and student activities." />
-          }
-        />
+        <Route path="/gallery/events" element={<EventsPage />} />
         <Route
           path="/gallery/testimonials"
           element={
