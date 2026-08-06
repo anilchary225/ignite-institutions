@@ -346,7 +346,7 @@ function ProfileCard({ profile, color }) {
   return (
     <div className="flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-neutral-150 transition hover:-translate-y-1 hover:shadow-lg dark:bg-neutral-900 dark:ring-neutral-700">
       {/* Full-width portrait photo */}
-      <div className="relative w-full overflow-hidden bg-neutral-100 dark:bg-neutral-800" style={{ aspectRatio: "3/4" }}>
+      <div className="relative w-full overflow-hidden bg-neutral-100 dark:bg-neutral-800" style={{ aspectRatio: "1/1" }}>
         <img
           src={profile.photo}
           alt={profile.name}
