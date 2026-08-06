@@ -50,148 +50,165 @@ const overallStats = [
   { exam: "BITSAT",        count: "60+",  icon: Star,     color: "amber",  year: "2025" },
 ];
 
-/* ── helper: generate N placeholder profiles for a given exam type ── */
-const avatarColors = [
-  "bg-violet-500", "bg-sky-500", "bg-rose-500",
-  "bg-amber-500",  "bg-emerald-500", "bg-indigo-500",
+/* ── portrait photo pool (placeholder — replace with real student photos) ── */
+const photoPool = [
+  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=240&h=300&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=240&h=300&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=240&h=300&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=240&h=300&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=240&h=300&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=240&h=300&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=240&h=300&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1463453091185-61582044d556?w=240&h=300&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=240&h=300&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=240&h=300&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=240&h=300&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=240&h=300&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=240&h=300&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=240&h=300&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1557862921-37829c790f19?w=240&h=300&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=240&h=300&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=240&h=300&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=240&h=300&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=240&h=300&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1552058544-f2b08422138a?w=240&h=300&fit=crop&crop=faces",
 ];
 
+/* ── helper: generate 10 placeholder profiles ── */
 function makeProfiles(names, exam, yearTag) {
   return names.map((name, i) => ({
-    id: `${exam}-${i}`,
+    id: `${exam}-${yearTag}-${i}`,
     name,
     hallTicket: `IG${yearTag}${String(10001 + i * 137).padStart(5, "0")}`,
-    score: exam === "NEET"   ? `${720 - i * 12} / 720`
-         : exam === "JEE"    ? `${99.9 - i * 0.3} %ile`
-         : exam === "INTER"  ? `${97 - i}%`
+    score: exam === "NEET"   ? `${720 - i * 8} / 720`
+         : exam === "JEE"    ? `${(99.9 - i * 0.25).toFixed(2)} %ile`
+         : exam === "INTER"  ? `${98 - i}%`
          : exam === "EAPCET" ? `Rank ${i + 1}`
-         :                     `${99.8 - i * 0.25} %ile`,
-    rank: exam === "NEET"   ? `AIR ${i + 1 + i * 3}`
-        : exam === "JEE"    ? `AIR ${i * 50 + 1}`
+         :                     `${(99.8 - i * 0.2).toFixed(2)} %ile`,
+    rank: exam === "NEET"   ? `AIR ${i * 4 + 1}`
+        : exam === "JEE"    ? `AIR ${i * 45 + 1}`
         : exam === "INTER"  ? `State ${i + 1}`
-        : exam === "EAPCET" ? `${i * 10 + 1}`
-        :                     `AIR ${i * 20 + 1}`,
-    percentile: exam === "NEET"   ? `${(99.99 - i * 0.05).toFixed(2)}`
-              : exam === "JEE"    ? `${(99.9  - i * 0.3 ).toFixed(2)}`
-              : exam === "INTER"  ? "—"
-              : exam === "EAPCET" ? `${(98 - i * 0.4).toFixed(2)}`
-              :                     `${(99.8 - i * 0.25).toFixed(2)}`,
-    category: ["General", "OBC", "General", "EWS", "SC"][i % 5],
-    avatar: avatarColors[i % avatarColors.length],
-    initials: name.split(" ").map((w) => w[0]).slice(0, 2).join(""),
+        : exam === "EAPCET" ? `${i * 8 + 1}`
+        :                     `AIR ${i * 18 + 1}`,
+    percentile: exam === "INTER" ? null
+              : exam === "NEET"  ? `${(99.99 - i * 0.04).toFixed(2)}`
+              : `${(99.9 - i * 0.2).toFixed(2)}`,
+    category: ["General","OBC","General","EWS","SC","General","OBC","General","ST","General"][i % 10],
+    photo: photoPool[(i + yearTag.charCodeAt(0)) % photoPool.length],
+    college: "Ignite Junior College",
   }));
 }
 
 const resultGroups = [
   {
-    id: "neet-2026",        color: "rose",   examType: "NEET",
+    id: "neet-2026", color: "rose", examType: "NEET",
     title: "IGNITE JUNIOR COLLEGE — NEET 2026 RESULT",
-    profiles: makeProfiles(["Ananya Reddy","Kiran Sharma","Divya Nair","Rohit Patel","Shreya Singh"], "NEET", "26"),
+    profiles: makeProfiles(["Ananya Reddy","Kiran Sharma","Divya Nair","Rohit Patel","Shreya Singh","Meghana Rao","Tarun Verma","Sruthi Iyer","Akash Naidu","Preethi Devi"], "NEET", "26"),
   },
   {
-    id: "neet-2024-25",     color: "rose",   examType: "NEET",
+    id: "neet-2024-25", color: "rose", examType: "NEET",
     title: "IGNITE JUNIOR COLLEGE — NEET 2024-25 RESULT",
-    profiles: makeProfiles(["Priya Rao","Aditya Kumar","Meena Pillai","Sai Krishna","Lakshmi Devi"], "NEET", "25"),
+    profiles: makeProfiles(["Priya Rao","Aditya Kumar","Meena Pillai","Sai Krishna","Lakshmi Devi","Ravi Shankar","Sowmya Nair","Naresh Babu","Bindu Reddy","Chetan Rao"], "NEET", "25"),
   },
   {
-    id: "ipe-2025-mpc",     color: "amber",  examType: "INTER",
+    id: "ipe-2025-mpc", color: "amber", examType: "INTER",
     title: "IGNITE JUNIOR COLLEGE — IPE 2025 RESULTS (MPC)",
-    profiles: makeProfiles(["Arjun Mehta","Sneha Varma","Nikhil Teja","Pooja Iyer","Vivek Choudhary"], "INTER", "25M"),
+    profiles: makeProfiles(["Arjun Mehta","Sneha Varma","Nikhil Teja","Pooja Iyer","Vivek Choudhary","Kavitha Reddy","Manoj Sharma","Swati Nair","Rajan Pillai","Divya Sree"], "INTER", "25M"),
   },
   {
-    id: "ipe-2025-bipc",    color: "emerald",examType: "INTER",
+    id: "ipe-2025-bipc", color: "emerald", examType: "INTER",
     title: "IGNITE JUNIOR COLLEGE — IPE 2025 RESULTS (BIPC)",
-    profiles: makeProfiles(["Kavya Shetty","Rahul Nair","Deepika Rao","Harish Babu","Amrutha Reddy"], "INTER", "25B"),
+    profiles: makeProfiles(["Kavya Shetty","Rahul Nair","Deepika Rao","Harish Babu","Amrutha Reddy","Sreekanth Rao","Pallavi Devi","Venu Gopal","Nithya Nair","Satish Kumar"], "INTER", "25B"),
   },
   {
-    id: "jee-adv-2025",     color: "violet", examType: "JEE",
+    id: "jee-adv-2025", color: "violet", examType: "JEE",
     title: "IGNITE JUNIOR COLLEGE — JEE ADVANCED RESULTS 2025",
-    profiles: makeProfiles(["Rishi Kapoor","Tanvi Shah","Karthik Menon","Aarav Gupta","Ishaan Joshi"], "JEE", "25A"),
+    profiles: makeProfiles(["Rishi Kapoor","Tanvi Shah","Karthik Menon","Aarav Gupta","Ishaan Joshi","Rohan Verma","Priya Nair","Suresh Rao","Keerthi Devi","Sanjay Kumar"], "JEE", "25A"),
   },
   {
-    id: "eapcet-2025",      color: "sky",    examType: "EAPCET",
+    id: "eapcet-2025", color: "sky", examType: "EAPCET",
     title: "IGNITE JUNIOR COLLEGE — EAPCET RESULTS 2025",
-    profiles: makeProfiles(["Durga Prasad","Sravani Reddy","Mohan Rao","Bhavana Naidu","Suresh Varma"], "EAPCET", "25E"),
+    profiles: makeProfiles(["Durga Prasad","Sravani Reddy","Mohan Rao","Bhavana Naidu","Suresh Varma","Akhil Teja","Madhuri Pillai","Venkat Sai","Radha Krishna","Sunitha Rao"], "EAPCET", "25E"),
   },
   {
-    id: "jee-2025",         color: "indigo", examType: "JEE",
+    id: "jee-2025", color: "indigo", examType: "JEE",
     title: "IGNITE JUNIOR COLLEGE — JEE RESULTS 2025",
-    profiles: makeProfiles(["Dev Sharma","Riya Patel","Aakash Rao","Nandini Verma","Siddharth Kumar"], "JEE", "25J"),
+    profiles: makeProfiles(["Dev Sharma","Riya Patel","Aakash Rao","Nandini Verma","Siddharth Kumar","Pavani Reddy","Krishna Teja","Swapna Nair","Arun Babu","Leela Devi"], "JEE", "25J"),
   },
   {
-    id: "jee-adv-2024",     color: "violet", examType: "JEE",
+    id: "jee-adv-2024", color: "violet", examType: "JEE",
     title: "IGNITE JUNIOR COLLEGE — JEE ADVANCED RESULTS 2024",
-    profiles: makeProfiles(["Pranav Iyer","Kritika Nair","Varun Pillai","Aditi Gupta","Yash Mehta"], "JEE", "24A"),
+    profiles: makeProfiles(["Pranav Iyer","Kritika Nair","Varun Pillai","Aditi Gupta","Yash Mehta","Sravan Kumar","Hema Latha","Nagarjuna Rao","Meghna Sharma","Pavan Teja"], "JEE", "24A"),
   },
   {
-    id: "neet-2024-top",    color: "rose",   examType: "NEET",
+    id: "neet-2024-top", color: "rose", examType: "NEET",
     title: "IGNITE JUNIOR COLLEGE — NEET RESULTS 2024 TOP RESULTS",
-    profiles: makeProfiles(["Haritha Reddy","Sai Teja","Mounika Sharma","Naveen Kumar","Swathi Rao"], "NEET", "24T"),
+    profiles: makeProfiles(["Haritha Reddy","Sai Teja","Mounika Sharma","Naveen Kumar","Swathi Rao","Bharath Naidu","Sindhu Pillai","Ramesh Varma","Jyothi Devi","Anil Rao"], "NEET", "24T"),
   },
   {
-    id: "iit-2024",         color: "violet", examType: "JEE",
+    id: "iit-2024", color: "violet", examType: "JEE",
     title: "IGNITE JUNIOR COLLEGE — IIT RESULTS 2024",
-    profiles: makeProfiles(["Abhinav Raj","Pooja Singh","Kiran Babu","Shruti Verma","Manish Naik"], "JEE", "24I"),
+    profiles: makeProfiles(["Abhinav Raj","Pooja Singh","Kiran Babu","Shruti Verma","Manish Naik","Tejaswi Rao","Anitha Nair","Vijay Krishna","Rekha Pillai","Sunil Sharma"], "JEE", "24I"),
   },
   {
-    id: "inter-2024",       color: "amber",  examType: "INTER",
+    id: "inter-2024", color: "amber", examType: "INTER",
     title: "IGNITE JUNIOR COLLEGE — INTER RESULTS 2024",
-    profiles: makeProfiles(["Venkat Rao","Jyothi Reddy","Anil Kumar","Swapna Devi","Ramesh Babu"], "INTER", "24R"),
+    profiles: makeProfiles(["Venkat Rao","Jyothi Reddy","Anil Kumar","Swapna Devi","Ramesh Babu","Priya Varma","Chetan Nair","Madhavi Latha","Srikanth Pillai","Kavitha Rao"], "INTER", "24R"),
   },
   {
-    id: "sr-inter-2024",    color: "amber",  examType: "INTER",
+    id: "sr-inter-2024", color: "amber", examType: "INTER",
     title: "SR. INTER RESULTS 2024",
-    profiles: makeProfiles(["Chandra Sekhar","Padma Latha","Sunil Varma","Rekha Nair","Vijay Krishna"], "INTER", "24S"),
+    profiles: makeProfiles(["Chandra Sekhar","Padma Latha","Sunil Varma","Rekha Nair","Vijay Krishna","Anusha Reddy","Srinath Babu","Pallavi Sharma","Ganesh Rao","Uma Devi"], "INTER", "24S"),
   },
   {
-    id: "jr-inter-2024",    color: "amber",  examType: "INTER",
+    id: "jr-inter-2024", color: "amber", examType: "INTER",
     title: "JR. INTER RESULTS 2024",
-    profiles: makeProfiles(["Tejaswi Raju","Bhargavi Sharma","Akash Teja","Lavanya Reddy","Praneet Rao"], "INTER", "24J"),
+    profiles: makeProfiles(["Tejaswi Raju","Bhargavi Sharma","Akash Teja","Lavanya Reddy","Praneet Rao","Durga Rao","Sravya Nair","Mohan Babu","Keerthi Pillai","Naresh Kumar"], "INTER", "24J"),
   },
   {
-    id: "iit-2021",         color: "indigo", examType: "JEE",
+    id: "iit-2021", color: "indigo", examType: "JEE",
     title: "IGNITE JUNIOR COLLEGE — IIT RESULTS 2021",
-    profiles: makeProfiles(["Santhosh Kumar","Nirmala Devi","Prasad Rao","Kavitha Menon","Ajay Sharma"], "JEE", "21I"),
+    profiles: makeProfiles(["Santhosh Kumar","Nirmala Devi","Prasad Rao","Kavitha Menon","Ajay Sharma","Ravi Teja","Sunitha Varma","Mahesh Naidu","Preethi Reddy","Vikas Pillai"], "JEE", "21I"),
   },
   {
-    id: "inter-bipc-2021",  color: "emerald",examType: "INTER",
+    id: "inter-bipc-2021", color: "emerald", examType: "INTER",
     title: "IGNITE JUNIOR COLLEGE — INTER BiPC RESULTS 2021 (State Ranks)",
-    profiles: makeProfiles(["Anuradha Pillai","Suresh Naidu","Madhavi Latha","Ravi Shankar","Sumitra Reddy"], "INTER", "21B"),
+    profiles: makeProfiles(["Anuradha Pillai","Suresh Naidu","Madhavi Latha","Ravi Shankar","Sumitra Reddy","Bhavana Rao","Srinivas Varma","Deepa Nair","Kiran Babu","Swetha Sharma"], "INTER", "21B"),
   },
   {
-    id: "inter-mpc-2021",   color: "emerald",examType: "INTER",
+    id: "inter-mpc-2021", color: "emerald", examType: "INTER",
     title: "IGNITE JUNIOR COLLEGE — INTER MPC RESULTS 2021 (State Ranks)",
-    profiles: makeProfiles(["Rajesh Verma","Sunitha Rao","Murali Krishna","Preethi Nair","Ganesh Babu"], "INTER", "21M"),
+    profiles: makeProfiles(["Rajesh Verma","Sunitha Rao","Murali Krishna","Preethi Nair","Ganesh Babu","Navya Reddy","Hari Prasad","Vaishnavi Devi","Sai Ram Rao","Meena Varma"], "INTER", "21M"),
   },
   {
-    id: "neet-2021",        color: "rose",   examType: "NEET",
+    id: "neet-2021", color: "rose", examType: "NEET",
     title: "IGNITE IIT & MEDICAL ACADEMY — NEET 2021 (LT, ST & SR. INTER)",
-    profiles: makeProfiles(["Amulya Reddy","Nithin Kumar","Divyashree Rao","Srikanth Pillai","Tejaswini Sharma"], "NEET", "21N"),
+    profiles: makeProfiles(["Amulya Reddy","Nithin Kumar","Divyashree Rao","Srikanth Pillai","Tejaswini Sharma","Lokesh Naidu","Sailaja Devi","Chaitanya Babu","Rohini Nair","Praveen Rao"], "NEET", "21N"),
   },
   {
-    id: "neet-2020",        color: "rose",   examType: "NEET",
+    id: "neet-2020", color: "rose", examType: "NEET",
     title: "IGNITE IIT & MEDICAL ACADEMY — 2020 NEET TOPPERS",
-    profiles: makeProfiles(["Keerthi Nair","Mahesh Varma","Pavithra Iyer","Balaji Reddy","Sindhu Rao"], "NEET", "20N"),
+    profiles: makeProfiles(["Keerthi Nair","Mahesh Varma","Pavithra Iyer","Balaji Reddy","Sindhu Rao","Nagaraju Pillai","Sushma Devi","Prabhakar Babu","Lavanya Nair","Sudheer Kumar"], "NEET", "20N"),
   },
   {
-    id: "iit-mains-2020",   color: "indigo", examType: "JEE",
+    id: "iit-mains-2020", color: "indigo", examType: "JEE",
     title: "IGNITE IIT & MEDICAL ACADEMY — 2020 IIT MAINS",
-    profiles: makeProfiles(["Harsha Vardhan","Swati Gupta","Manoj Kumar","Durga Rao","Ravi Teja"], "JEE", "20J"),
+    profiles: makeProfiles(["Harsha Vardhan","Swati Gupta","Manoj Kumar","Durga Rao","Ravi Teja","Anupama Reddy","Sridhar Pillai","Bhanu Priya","Girish Rao","Kavya Sharma"], "JEE", "20J"),
   },
   {
-    id: "neet-2018-19",     color: "rose",   examType: "NEET",
+    id: "neet-2018-19", color: "rose", examType: "NEET",
     title: "IGNITE IIT & MEDICAL ACADEMY — NEET 2018-2019 RESULT",
-    profiles: makeProfiles(["Bhanu Prasad","Aruna Devi","Chaitanya Rao","Hema Latha","Srinivas Kumar"], "NEET", "19N"),
+    profiles: makeProfiles(["Bhanu Prasad","Aruna Devi","Chaitanya Rao","Hema Latha","Srinivas Kumar","Vandana Reddy","Abhishek Nair","Jhansi Rani","Venkatesh Babu","Padma Varma"], "NEET", "19N"),
   },
   {
-    id: "jee-jan-2020",     color: "violet", examType: "JEE",
+    id: "jee-jan-2020", color: "violet", examType: "JEE",
     title: "IGNITE IIT & MEDICAL ACADEMY — 2019-20 BATCH · JEE-MAIN JANUARY 2020 TOP 10",
-    profiles: makeProfiles(["Vamshi Krishna","Lakshmi Narayana","Naga Sai","Padmavathi","Sudheer Reddy"], "JEE", "20J1"),
+    profiles: makeProfiles(["Vamshi Krishna","Lakshmi Narayana","Naga Sai","Padmavathi","Sudheer Reddy","Teja Varma","Sirisha Nair","Kranthi Kumar","Bhavana Pillai","Uday Rao"], "JEE", "20J1"),
   },
   {
-    id: "iit-mains-2018-19",color: "violet", examType: "JEE",
+    id: "iit-mains-2018-19", color: "violet", examType: "JEE",
     title: "IGNITE IIT & MEDICAL ACADEMY — IIT MAINS RESULT 2018-19",
-    profiles: makeProfiles(["Satya Narayana","Jhansi Lakshmi","Bhaskar Rao","Uma Devi","Trinadh Kumar"], "JEE", "19J"),
+    profiles: makeProfiles(["Satya Narayana","Jhansi Lakshmi","Bhaskar Rao","Uma Devi","Trinadh Kumar","Sowjanya Reddy","Ramakrishna Nair","Swapna Rao","Subhash Pillai","Anitha Varma"], "JEE", "19J"),
   },
 ];
 
@@ -327,43 +344,31 @@ function SelectionStats() {
 function ProfileCard({ profile, color }) {
   const c = colorMap[color];
   return (
-    <div className="shrink-0 w-52 sm:w-60 rounded-3xl bg-white ring-1 ring-neutral-100 shadow-sm overflow-hidden transition hover:-translate-y-1 hover:shadow-xl dark:bg-neutral-900 dark:ring-neutral-800">
-      {/* Top color bar */}
-      <div className={`h-1.5 w-full ${c.bar}`} />
-
-      {/* Avatar */}
-      <div className="flex flex-col items-center gap-3 px-5 pt-6 pb-4">
-        <div className={`grid h-16 w-16 place-items-center rounded-full text-xl font-black text-white shadow-lg ${profile.avatar}`}>
-          {profile.initials}
-        </div>
-        <div className="text-center">
-          <p className="text-sm font-extrabold text-neutral-950 leading-snug dark:text-white">{profile.name}</p>
-          <span className={`mt-1.5 inline-block rounded-full px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider ${c.badge}`}>
-            {profile.category}
-          </span>
-        </div>
+    <div className="flex flex-col overflow-hidden rounded-2xl bg-white shadow-md ring-2 ring-amber-400 transition hover:-translate-y-1 hover:shadow-xl dark:bg-neutral-900 dark:ring-amber-500/70">
+      {/* Portrait photo */}
+      <div className="relative w-full overflow-hidden bg-neutral-200 dark:bg-neutral-800" style={{ aspectRatio: "3/4" }}>
+        <img
+          src={profile.photo}
+          alt={profile.name}
+          loading="lazy"
+          className="h-full w-full object-cover object-top"
+        />
+        {/* Rank badge overlay */}
+        <span className={`absolute left-2 top-2 rounded-md px-2 py-0.5 text-[10px] font-black shadow ${c.badge}`}>
+          {profile.rank}
+        </span>
       </div>
 
-      {/* Details */}
-      <div className="mx-4 mb-5 divide-y divide-neutral-100 rounded-2xl border border-neutral-100 dark:divide-neutral-800 dark:border-neutral-800">
-        <div className="flex items-center justify-between px-3.5 py-2.5">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-neutral-400">Hall Ticket</span>
-          <span className="text-[11px] font-extrabold text-neutral-700 dark:text-neutral-300">{profile.hallTicket}</span>
-        </div>
-        <div className="flex items-center justify-between px-3.5 py-2.5">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-neutral-400">Score</span>
-          <span className={`text-[11px] font-extrabold ${c.text}`}>{profile.score}</span>
-        </div>
-        <div className="flex items-center justify-between px-3.5 py-2.5">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-neutral-400">Rank</span>
-          <span className="text-[11px] font-extrabold text-neutral-700 dark:text-neutral-300">{profile.rank}</span>
-        </div>
-        {profile.percentile !== "—" && (
-          <div className="flex items-center justify-between px-3.5 py-2.5">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-neutral-400">Percentile</span>
-            <span className="text-[11px] font-extrabold text-neutral-700 dark:text-neutral-300">{profile.percentile}</span>
-          </div>
+      {/* Info */}
+      <div className="flex flex-col gap-0.5 bg-white px-2.5 py-2 dark:bg-neutral-900">
+        <p className="truncate text-xs font-extrabold leading-snug text-neutral-950 dark:text-white">
+          {profile.name}
+        </p>
+        <p className={`text-[10px] font-bold ${c.text}`}>{profile.score}</p>
+        {profile.percentile && (
+          <p className="text-[10px] text-neutral-500">{profile.percentile} %ile</p>
         )}
+        <p className="truncate text-[10px] text-neutral-400">{profile.hallTicket}</p>
       </div>
     </div>
   );
@@ -385,8 +390,8 @@ function ResultGroupSection({ group }) {
         </span>
       </div>
 
-      {/* Grid — 2 cols mobile → 3 sm → 4 md → 5 lg */}
-      <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      {/* Grid — 3 cols mobile → 4 sm → 5 md → 6 lg → 7 xl */}
+      <div className="mt-5 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8">
         {group.profiles.map((p) => (
           <ProfileCard key={p.id} profile={p} color={group.color} />
         ))}
