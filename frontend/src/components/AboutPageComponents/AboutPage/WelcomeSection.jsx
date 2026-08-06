@@ -7,23 +7,33 @@ export default function WelcomeSection({
     ],
   }) {
     return (
-      <section className="bg-white px-6 py-16 dark:bg-neutral-950 sm:px-12">
+      <section className="px-4 py-14 sm:px-8 sm:py-16">
         <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-2 md:items-center">
-          <img
-            src={image}
-            alt="Students at IGNITE Junior College"
-            className="w-full rounded-2xl object-cover shadow-lg"
-          />
-  
+          <div className="overflow-hidden rounded-2xl shadow-md">
+            <img
+              src={image}
+              alt="Students at IGNITE Junior College"
+              className="w-full h-64 sm:h-80 object-cover"
+            />
+          </div>
+
           <div>
-            <h2 className="text-3xl font-extrabold text-emerald-600 sm:text-4xl">
+            <span className="inline-block text-xs font-bold tracking-[0.25em] text-orange-500 uppercase mb-3">
+              About Us
+            </span>
+            <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-white sm:text-3xl leading-tight">
               {heading}
             </h2>
-            <div className="mt-5 space-y-4 text-neutral-700 dark:text-neutral-300">
+            <div className="mt-4 space-y-4 text-neutral-600 dark:text-neutral-300 text-sm leading-relaxed">
               {paragraphs.map((paragraph, index) => (
-                <p key={index} className="leading-relaxed">
-                  {paragraph}
-                </p>
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
+            <div className="mt-6 flex flex-wrap gap-3">
+              {["8+ Years", "IIT-JEE", "NEET", "EAPCET"].map((tag) => (
+                <span key={tag} className="px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-500/10 text-orange-700 dark:text-orange-400 text-xs font-semibold">
+                  {tag}
+                </span>
               ))}
             </div>
           </div>

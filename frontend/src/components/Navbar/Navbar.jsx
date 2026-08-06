@@ -10,7 +10,7 @@ const navItems = [
     href: "/about",
     children: [
       { label: "Personality Development", href: "/about/personality-development" },
-      { label: "Daya at Ignite", href: "/about/daya-at-ignite" },
+      { label: "Day at Ignite", href: "/about/daya-at-ignite" },
       { label: "Campus Hostel Facilities", href: "/about/campus-hostel-facilities" },
       { label: "Testimonials", href: "/about/testimonials" },
     ],
@@ -77,10 +77,10 @@ function DesktopMenuItem({ item, pathname, dismissed, setDismissed }) {
       <RouteLink
         to={item.href}
         onClick={() => setDismissed(item.href)}
-        className={`inline-flex items-center rounded-full px-4 py-3 text-sm font-semibold transition ${
+        className={`inline-flex items-center rounded-full px-4 py-2.5 text-sm font-semibold transition ${
           active
-            ? "bg-violet-600 text-white dark:bg-violet-500"
-            : "text-neutral-700 hover:bg-amber-400 hover:text-white dark:text-neutral-200"
+            ? "bg-orange-500 text-white"
+            : "text-neutral-700 hover:bg-orange-500 hover:text-white dark:text-neutral-200 dark:hover:bg-orange-500"
         }`}
       >
         {item.label}
@@ -88,7 +88,7 @@ function DesktopMenuItem({ item, pathname, dismissed, setDismissed }) {
 
       {item.children && !isDismissed ? (
         <div className="invisible absolute left-1/2 top-full z-50 min-w-72 -translate-x-1/2 translate-y-0 pt-3 opacity-0 transition duration-200 group-hover:visible group-hover:opacity-100">
-          <div className="rounded-b-3xl bg-white p-2 dark:bg-neutral-900">
+          <div className="rounded-b-3xl bg-white p-2 shadow-xl dark:bg-neutral-900">
             {item.children.map((child) => (
               <div key={child.label} className="relative group/sub">
                 {(() => {
@@ -97,10 +97,10 @@ function DesktopMenuItem({ item, pathname, dismissed, setDismissed }) {
                 <RouteLink
                   to={child.href}
                   onClick={() => setDismissed(item.href)}
-                  className={`flex items-center justify-between rounded-full px-4 py-3 text-sm font-medium transition ${
+                  className={`flex items-center justify-between rounded-full px-4 py-2.5 text-sm font-medium transition ${
                     childActive
-                      ? "bg-violet-600 text-white dark:bg-violet-500"
-                      : "text-neutral-700 hover:bg-amber-400 hover:text-white dark:text-neutral-200"
+                      ? "bg-orange-500 text-white"
+                      : "text-neutral-700 hover:bg-orange-500 hover:text-white dark:text-neutral-200"
                   }`}
                 >
                   {child.label}
@@ -111,7 +111,7 @@ function DesktopMenuItem({ item, pathname, dismissed, setDismissed }) {
 
                 {child.children ? (
                   <div className="invisible absolute left-[calc(100%+12px)] top-0 z-50 min-w-62.5 opacity-0 transition duration-200 group-hover/sub:visible group-hover/sub:opacity-100">
-                    <div className="rounded-b-[20px] bg-white p-2 dark:bg-neutral-900">
+                    <div className="rounded-b-[20px] bg-white p-2 shadow-xl dark:bg-neutral-900">
                       <div className="space-y-1">
                         {child.children.map((subItem) => (
                           <div key={subItem.label}>
@@ -121,10 +121,10 @@ function DesktopMenuItem({ item, pathname, dismissed, setDismissed }) {
                             <RouteLink
                               to={subItem.href}
                               onClick={() => setDismissed(item.href)}
-                              className={`block rounded-full px-4 py-3 text-sm font-medium transition ${
+                              className={`block rounded-full px-4 py-2.5 text-sm font-medium transition ${
                                 subActive
-                                  ? "bg-violet-600 text-white dark:bg-violet-500"
-                                  : "text-neutral-700 hover:bg-amber-400 hover:text-white dark:text-neutral-200"
+                                  ? "bg-orange-500 text-white"
+                                  : "text-neutral-700 hover:bg-orange-500 hover:text-white dark:text-neutral-200"
                               }`}
                             >
                               {subItem.label}
@@ -152,10 +152,10 @@ function MobileMenuItem({ item, pathname, level = 0 }) {
     <li>
       <RouteLink
         to={item.href}
-        className={`block rounded-2xl px-4 py-3 text-sm font-medium transition ${
+        className={`block rounded-2xl px-4 py-2.5 text-sm font-medium transition ${
           active
-            ? "bg-violet-600 text-white dark:bg-violet-500"
-            : "text-neutral-700 hover:bg-amber-400 hover:text-white dark:text-neutral-200"
+            ? "bg-orange-500 text-white"
+            : "text-neutral-700 hover:bg-orange-500 hover:text-white dark:text-neutral-200"
         } ${
           level === 1 ? "pl-6" : level >= 2 ? "pl-8" : ""
         }`}
@@ -176,33 +176,29 @@ function MobileMenuItem({ item, pathname, level = 0 }) {
 export default function Navbar() {
   const { darkMode, toggleDarkMode } = useTheme();
   const [open, setOpen] = useState(false);
-  const [dismissed, setDismissed] = useState(null);
   const { pathname } = useLocation();
 
   return (
-    <header className="sticky top-4 z-50 px-4">
-      <div className="mx-auto flex max-w-310 items-center justify-between gap-4 rounded-[999px] border border-neutral-200 bg-white/90 px-5 py-3 shadow-[0_18px_50px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:border-white/10 dark:bg-neutral-950/90">
-        <RouteLink to="/" className="flex shrink-0 items-center gap-3" onClick={() => setOpen(false)}>
-          <span className="grid h-11 w-11 place-items-center rounded-full bg-linear-to-br from-violet-600 to-violet-400 text-lg font-black text-white">
-            I
-          </span>
-          <span className="hidden flex-col leading-tight sm:flex">
-            <span className="text-base font-extrabold text-neutral-950 dark:text-white">Ignite</span>
-            <span className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
-              Junior College & School
-            </span>
-          </span>
+    <header className="sticky top-3 z-50 px-4">
+      <div className="mx-auto flex max-w-310 items-center justify-between gap-4 rounded-[999px] border border-neutral-200 bg-white/95 px-4 py-2 shadow-[0_18px_50px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:border-white/10 dark:bg-neutral-950/95">
+        {/* Logo */}
+        <RouteLink to="/" className="flex shrink-0 items-center" onClick={() => setOpen(false)}>
+          <img
+            src={darkMode ? "/logo-dark.png" : "/logo-light.png"}
+            alt="Ignite Junior College & Schools"
+            className="h-12 w-auto object-contain"
+          />
         </RouteLink>
 
         <nav className="hidden flex-1 justify-center xl:flex" aria-label="Primary">
-          <ul className="flex items-center gap-1">
+          <ul className="flex items-center gap-0.5">
             {navItems.map((item) => (
               <DesktopMenuItem
                 key={item.label}
                 item={item}
                 pathname={pathname}
-                dismissed={dismissed}
-                setDismissed={setDismissed}
+                dismissed={null}
+                setDismissed={() => {}}
               />
             ))}
           </ul>
@@ -213,9 +209,9 @@ export default function Navbar() {
             type="button"
             onClick={toggleDarkMode}
             aria-label="Toggle dark mode"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-violet-600/10 text-violet-700 transition hover:bg-amber-400 hover:text-white dark:text-violet-300"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-orange-50 text-orange-600 transition hover:bg-orange-500 hover:text-white dark:bg-orange-500/10 dark:text-orange-400 dark:hover:bg-orange-500 dark:hover:text-white"
           >
-            {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+            {darkMode ? <Sun size={16} /> : <Moon size={16} />}
           </button>
 
           <button
@@ -223,9 +219,9 @@ export default function Navbar() {
             onClick={() => setOpen((value) => !value)}
             aria-label="Toggle menu"
             aria-expanded={open}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-violet-600/10 text-violet-700 transition hover:bg-amber-400 hover:text-white xl:hidden dark:text-violet-300"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-orange-50 text-orange-600 transition hover:bg-orange-500 hover:text-white xl:hidden dark:bg-orange-500/10 dark:text-orange-400"
           >
-            {open ? <X size={20} /> : <Menu size={20} />}
+            {open ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </div>

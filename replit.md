@@ -25,4 +25,11 @@ frontend/
   public/         # Static assets (card art, favicons)
 ```
 
+## Brand & Design System
+- **Brand colors:** Orange (ember/`orange-500`) · Blue (`blue-500`) · Green (`green-700`) · Red (`red-500`) · Black · White
+- **Logo:** `public/logo-light.png` (light mode) · `public/logo-dark.png` (dark mode)
+- **Nav active state:** `bg-orange-500` (replaces previous violet)
+- **Section backgrounds:** Alternate between white, `orange-50`, `blue-50`, `green-50`, `red-50` per page to distinguish sections
+- **Contact form:** Two-column layout — left: contact info panel + admissions CTA; right: form fields
+
 ## User preferences

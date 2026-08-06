@@ -1,36 +1,29 @@
 import React, { useState } from "react";
-import { Phone, Mail, MessageSquare, Send, User } from "lucide-react";
+import { Phone, Mail, MessageSquare, Send, User, MapPin, Clock } from "lucide-react";
 
 const mpcOptions = ["IIT-JEE", "BITSAT", "EAPCET"];
 const bipcOptions = ["NEET", "EAPCET"];
 
-function FloatingInput({ label, name, value, onChange, type = "text", required = false, icon: Icon, placeholderText }) {
+function InputField({ label, name, value, onChange, type = "text", required = false, icon: Icon }) {
   return (
-    <div className="relative">
-      {Icon && (
-        <Icon
-          size={18}
-          className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 peer-focus:text-emerald-500"
-        />
-      )}
-      <input
-        type={type}
-        name={name}
-        id={name}
-        value={value}
-        onChange={onChange}
-        required={required}
-        placeholder={placeholderText || " "}
-        className={`peer w-full ${Icon ? "pl-11" : "pl-4"} pr-4 pt-5 pb-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all shadow-sm`}
-      />
-      <label
-        htmlFor={name}
-        className={`absolute ${Icon ? "left-11" : "left-4"} top-4.5 text-slate-500 dark:text-slate-400 text-sm transition-all duration-200 pointer-events-none
-          peer-focus:top-1.5 peer-focus:text-[11px] peer-focus:text-emerald-600 dark:peer-focus:text-emerald-400
-          peer-not-placeholder-shown:top-1.5 peer-not-placeholder-shown:text-[11px]`}
-      >
-        {label} {required && <span className="text-rose-500">*</span>}
+    <div className="flex flex-col gap-1.5">
+      <label htmlFor={name} className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+        {label} {required && <span className="text-red-500">*</span>}
       </label>
+      <div className="relative">
+        {Icon && (
+          <Icon size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400" />
+        )}
+        <input
+          type={type}
+          name={name}
+          id={name}
+          value={value}
+          onChange={onChange}
+          required={required}
+          className={`w-full ${Icon ? "pl-10" : "pl-4"} pr-4 py-2.5 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white text-sm placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all`}
+        />
+      </div>
     </div>
   );
 }
@@ -40,16 +33,43 @@ function Chip({ label, active, onClick }) {
     <button
       type="button"
       onClick={onClick}
-      className={`px-4 py-2 rounded-full text-sm font-medium border transition-all duration-200 ${
+      className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 ${
         active
-          ? "bg-emerald-500 border-emerald-500 text-white shadow-md shadow-emerald-500/30"
-          : "bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-emerald-400 hover:text-emerald-600 dark:hover:text-emerald-400"
+          ? "bg-orange-500 border-orange-500 text-white shadow-sm shadow-orange-500/30"
+          : "bg-white dark:bg-neutral-800 border-neutral-300 dark:border-neutral-600 text-neutral-600 dark:text-neutral-300 hover:border-orange-400 hover:text-orange-600 dark:hover:text-orange-400"
       }`}
     >
       {label}
     </button>
   );
 }
+
+const contactInfo = [
+  {
+    icon: Phone,
+    label: "Call Us",
+    value: "+91 98765 43210",
+    color: "bg-green-700",
+  },
+  {
+    icon: Mail,
+    label: "Email",
+    value: "admissions@ignitejc.com",
+    color: "bg-blue-500",
+  },
+  {
+    icon: MapPin,
+    label: "Campus",
+    value: "Hyderabad, Telangana",
+    color: "bg-orange-500",
+  },
+  {
+    icon: Clock,
+    label: "Office Hours",
+    value: "Mon – Sat, 9am – 6pm",
+    color: "bg-red-500",
+  },
+];
 
 export default function Form() {
   const [formData, setFormData] = useState({
@@ -60,6 +80,7 @@ export default function Form() {
     interests: [],
     message: "",
   });
+  const [submitted, setSubmitted] = useState(false);
 
   const toggleInterest = (value) => {
     setFormData((prev) => ({
@@ -75,138 +96,142 @@ export default function Form() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setSubmitted(true);
     console.log(formData);
   };
 
   return (
-    <section className="relative bg-linear-to-br from-sky-50 via-white to-blue-200 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 py-24 px-6 overflow-hidden transition-colors duration-300">
-      {/* Ambient gradient blobs */}
-      <div className="absolute -top-32 -left-32 w-96 h-96 bg-blue-300/30 dark:bg-emerald-500/20 rounded-full blur-3xl" />
-      <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-orange-200/40 dark:bg-orange-500/20 rounded-full blur-3xl" />
+    <section className="bg-neutral-50 dark:bg-neutral-900 py-16 px-4 sm:px-6 transition-colors duration-300">
+      <div className="max-w-6xl mx-auto">
 
-      <div className="relative max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <span className="text-xs font-bold tracking-[0.3em] text-emerald-600 dark:text-emerald-400 uppercase">
+        {/* Header */}
+        <div className="text-center mb-10">
+          <span className="inline-block text-xs font-bold tracking-[0.25em] text-orange-500 uppercase mb-2">
             Get In Touch
           </span>
-          <h2 className="mt-3 text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">
-            Let's Connect
+          <h2 className="text-3xl sm:text-4xl font-black text-neutral-900 dark:text-white">
+            Contact Us
           </h2>
-          <p className="mt-4 text-slate-600 dark:text-slate-400 max-w-lg mx-auto">
-            We'd love to hear from you. Fill out the form below and our team
-            will get back to you shortly.
+          <p className="mt-3 text-neutral-600 dark:text-neutral-400 max-w-md mx-auto text-sm">
+            Have questions about admissions or programs? We're here to help.
           </p>
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="backdrop-blur-xl bg-white/70 dark:bg-white/5 border border-white/60 dark:border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl space-y-8"
-        >
-          <div className="grid sm:grid-cols-2 gap-5">
-            <FloatingInput
-              label="First Name"
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleChange}
-              icon={User}
-            //   placeholderText="e.g. Sanjana"
-            />
-            <FloatingInput
-              label="Last Name"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleChange}
-              icon={User}
-            //   placeholderText="e.g. Reddy"
-            />
-          </div>
+        <div className="grid lg:grid-cols-[1fr_2fr] gap-6">
 
-          <div className="grid sm:grid-cols-2 gap-5">
-            <FloatingInput
-              label="Email"
-              name="email"
-              type="email"
-              required
-              value={formData.email}
-              onChange={handleChange}
-              icon={Mail}
-            //   placeholderText="you@example.com"
-            />
-            <FloatingInput
-              label="Phone Number"
-              name="phone"
-              type="tel"
-              value={formData.phone}
-              onChange={handleChange}
-              icon={Phone}
-            //   placeholderText="+91 98765 43210"
-            />
-          </div>
+          {/* Contact Info Panel */}
+          <div className="flex flex-col gap-4">
+            <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 shadow-sm">
+              <h3 className="text-base font-bold text-neutral-900 dark:text-white mb-5">Contact Information</h3>
+              <div className="flex flex-col gap-4">
+                {contactInfo.map(({ icon: Icon, label, value, color }) => (
+                  <div key={label} className="flex items-center gap-3">
+                    <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${color} text-white`}>
+                      <Icon size={16} />
+                    </span>
+                    <div>
+                      <p className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide">{label}</p>
+                      <p className="text-sm font-medium text-neutral-800 dark:text-neutral-200">{value}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-          <div>
-            <p className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">
-              MPC — Intermediate
-            </p>
-            <div className="flex flex-wrap gap-3">
-              {mpcOptions.map((opt) => (
-                <Chip
-                  key={opt}
-                  label={opt}
-                  active={formData.interests.includes(opt)}
-                  onClick={() => toggleInterest(opt)}
-                />
-              ))}
+            <div className="rounded-2xl bg-orange-500 p-6 text-white">
+              <h4 className="font-bold text-base mb-2">Admissions 2026–28</h4>
+              <p className="text-sm text-white/90 leading-relaxed">
+                MPC (IIT-JEE) and BiPC (NEET) seats are filling fast. Submit your enquiry today and our team will call you within 24 hours.
+              </p>
+              <div className="mt-4 flex gap-2 flex-wrap">
+                {["MPC", "BiPC", "Foundation"].map((tag) => (
+                  <span key={tag} className="px-3 py-1 rounded-full bg-white/20 text-xs font-semibold">{tag}</span>
+                ))}
+              </div>
             </div>
           </div>
 
-          <div>
-            <p className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">
-              BiPC — Intermediate
-            </p>
-            <div className="flex flex-wrap gap-3">
-              {bipcOptions.map((opt) => (
-                <Chip
-                  key={`bipc-${opt}`}
-                  label={opt}
-                  active={formData.interests.includes(`BiPC-${opt}`)}
-                  onClick={() => toggleInterest(`BiPC-${opt}`)}
-                />
-              ))}
-            </div>
-          </div>
+          {/* Form */}
+          <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 sm:p-8 shadow-sm">
+            {submitted ? (
+              <div className="flex flex-col items-center justify-center h-full gap-4 py-12 text-center">
+                <div className="w-14 h-14 rounded-full bg-green-100 dark:bg-green-700/20 flex items-center justify-center">
+                  <span className="text-2xl">✓</span>
+                </div>
+                <h3 className="text-xl font-bold text-neutral-900 dark:text-white">Message Sent!</h3>
+                <p className="text-sm text-neutral-600 dark:text-neutral-400 max-w-xs">
+                  Thank you for reaching out. Our admissions team will contact you within 24 hours.
+                </p>
+                <button
+                  onClick={() => setSubmitted(false)}
+                  className="mt-2 text-sm text-orange-500 font-semibold hover:underline"
+                >
+                  Send another message
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <InputField label="First Name" name="firstName" value={formData.firstName} onChange={handleChange} icon={User} />
+                  <InputField label="Last Name" name="lastName" value={formData.lastName} onChange={handleChange} icon={User} />
+                </div>
 
-          <div className="relative">
-            <MessageSquare
-              size={18}
-              className="absolute left-4 top-2 text-slate-400 dark:text-slate-500"
-            />
-            <textarea
-              name="message"
-              rows={4}
-            //   placeholder="Tell us a bit about what you're looking for..."
-              value={formData.message}
-              onChange={handleChange}
-              id="message"
-              className="peer w-full pl-11 pr-4 pt-5 pb-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent resize-none transition-all shadow-sm"
-            />
-            <label
-              htmlFor="message"
-              className="absolute left-11 top-2 text-slate-500 dark:text-slate-400 text-sm transition-all duration-200 pointer-events-none
-                peer-focus:top-1.5 peer-focus:text-[11px] peer-focus:text-emerald-600 dark:peer-focus:text-emerald-400
-                peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-[11px]"
-            >
-              Message
-            </label>
-          </div>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <InputField label="Email" name="email" type="email" required value={formData.email} onChange={handleChange} icon={Mail} />
+                  <InputField label="Phone Number" name="phone" type="tel" value={formData.phone} onChange={handleChange} icon={Phone} />
+                </div>
 
-          <button
-            type="submit"
-            className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-linear-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 transition-all duration-300 text-white font-semibold px-8 py-3.5 rounded-xl shadow-lg shadow-emerald-600/30"
-          >
-            <span>Submit</span>
-            <Send size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
-          </button>
-        </form>
+                <div>
+                  <p className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-2">
+                    MPC — Intermediate
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {mpcOptions.map((opt) => (
+                      <Chip key={opt} label={opt} active={formData.interests.includes(opt)} onClick={() => toggleInterest(opt)} />
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-2">
+                    BiPC — Intermediate
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {bipcOptions.map((opt) => (
+                      <Chip key={`bipc-${opt}`} label={opt} active={formData.interests.includes(`BiPC-${opt}`)} onClick={() => toggleInterest(`BiPC-${opt}`)} />
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-1.5">
+                  <label htmlFor="message" className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+                    Message
+                  </label>
+                  <div className="relative">
+                    <MessageSquare size={16} className="absolute left-3.5 top-3 text-neutral-400" />
+                    <textarea
+                      name="message"
+                      id="message"
+                      rows={4}
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Tell us what you're looking for..."
+                      className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white text-sm placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 resize-none transition-all"
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 transition-colors text-white font-semibold px-6 py-2.5 rounded-lg text-sm shadow-sm shadow-orange-500/30"
+                >
+                  <span>Send Message</span>
+                  <Send size={14} />
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
       </div>
     </section>
   );

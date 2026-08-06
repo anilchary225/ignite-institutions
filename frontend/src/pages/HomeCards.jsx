@@ -20,16 +20,16 @@ const cards = [
     eyebrow: "Perspective",
     title: "Career Planning",
     description:
-      "IGNITE Junior College empowers students with expert career planning, guiding them toward IIT-JEE, NEET & more. Well-maintained residential facilities with academic supervision and digital classrooms help students stay focused and comfortable throughout their journey.",
+      "IGNITE Junior College empowers students with expert career planning, guiding them toward IIT-JEE, NEET & more. Well-maintained residential facilities with academic supervision and digital classrooms help students stay focused throughout their journey.",
     image: "/card-art/card-3.svg",
   },
 ];
 
 export default function HomeCards() {
   return (
-    <section className="flex gap-8 overflow-x-auto pb-2">
+    <section className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {cards.map((card) => (
-        <div key={card.title} className="min-w-90 flex-1">
+        <div key={card.title} className="w-full">
           <Card {...card} />
         </div>
       ))}

@@ -12,70 +12,87 @@ export default function VisionMission({
       heading: "Our Mission",
       items: [
         {
-          title: "1. Academic Excellence",
+          title: "Academic Excellence",
           description:
-            "Through targeted programs designed for both board and competitive exam preparation—especially JEE (Main & Advanced) and NEET—we coach students to face challenges with confidence, creating not just subject matter experts but top achievers.",
+            "Through targeted programs designed for both board and competitive exam preparation—especially JEE (Main & Advanced) and NEET—we coach students to face challenges with confidence.",
         },
         {
-          title: "2. Holistic Development",
+          title: "Holistic Development",
           description:
-            "We believe in nurturing well-rounded individuals. Alongside rigorous academics, we encourage participation in sports, arts, music, and other co-curricular activities. Our campus life supports personal growth, self-expression, and leadership.",
+            "We believe in nurturing well-rounded individuals. Alongside rigorous academics, we encourage participation in sports, arts, music, and other co-curricular activities.",
         },
       ],
     },
   }) {
     return (
-      <>
-        <section className="bg-white px-6 py-16 dark:bg-neutral-950 sm:px-12">
+      <div className="px-4 sm:px-8">
+        {/* Vision */}
+        <section className="py-14 sm:py-16">
           <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-2 md:items-center">
             <div>
-              <h2 className="text-3xl font-extrabold text-emerald-600 sm:text-4xl">
+              <span className="inline-block text-xs font-bold tracking-[0.25em] text-orange-500 uppercase mb-3">
+                Looking Forward
+              </span>
+              <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-white sm:text-3xl">
                 {vision.heading}
               </h2>
-              <div className="mt-4 space-y-4 text-neutral-700 dark:text-neutral-300">
+              <div className="mt-2 h-0.5 w-10 bg-orange-500 rounded" />
+              <div className="mt-4 space-y-3 text-neutral-600 dark:text-neutral-300 text-sm leading-relaxed">
                 {vision.paragraphs.map((paragraph, index) => (
-                  <p key={index} className="leading-relaxed">
-                    {paragraph}
-                  </p>
+                  <p key={index}>{paragraph}</p>
                 ))}
               </div>
             </div>
-  
-            <img
-              src={visionImage}
-              alt="Our vision illustration"
-              className="w-full rounded-2xl bg-orange-500 object-contain p-6"
-            />
+
+            <div className="overflow-hidden rounded-2xl bg-orange-100 dark:bg-orange-500/10 p-6 flex items-center justify-center min-h-48">
+              <img
+                src={visionImage}
+                alt="Our vision illustration"
+                className="w-full max-h-52 object-contain"
+              />
+            </div>
           </div>
         </section>
-  
-        <section className="bg-white px-6 pb-16 dark:bg-neutral-950 sm:px-12">
+
+        {/* Mission */}
+        <section className="py-14 sm:py-16 border-t border-neutral-100 dark:border-neutral-800">
           <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-2 md:items-center">
-            <img
-              src={missionImage}
-              alt="Our mission illustration"
-              className="w-full rounded-2xl bg-orange-500 object-contain p-6"
-            />
-  
-            <div>
-              <h2 className="text-3xl font-extrabold text-neutral-950 dark:text-white sm:text-4xl">
+            <div className="overflow-hidden rounded-2xl bg-blue-100 dark:bg-blue-500/10 p-6 flex items-center justify-center min-h-48 order-2 md:order-1">
+              <img
+                src={missionImage}
+                alt="Our mission illustration"
+                className="w-full max-h-52 object-contain"
+              />
+            </div>
+
+            <div className="order-1 md:order-2">
+              <span className="inline-block text-xs font-bold tracking-[0.25em] text-blue-500 uppercase mb-3">
+                Our Purpose
+              </span>
+              <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-white sm:text-3xl">
                 {mission.heading}
               </h2>
-              <div className="mt-4 space-y-6">
-                {mission.items.map((item) => (
-                  <div key={item.title}>
-                    <h3 className="text-lg font-bold text-neutral-950 dark:text-white">
-                      {item.title}
-                    </h3>
-                    <p className="mt-1 text-neutral-700 dark:text-neutral-300">
-                      {item.description}
-                    </p>
+              <div className="mt-2 h-0.5 w-10 bg-blue-500 rounded" />
+              <div className="mt-5 space-y-5">
+                {mission.items.map((item, i) => (
+                  <div key={item.title} className="flex gap-4">
+                    <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-white text-xs font-bold mt-0.5 ${i === 0 ? "bg-blue-500" : "bg-green-700"}`}>
+                      {i + 1}
+                    </span>
+                    <div>
+                      <h3 className="text-base font-bold text-neutral-900 dark:text-white">
+                        {item.title}
+                      </h3>
+                      <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
           </div>
         </section>
-      </>
+      </div>
     );
   }

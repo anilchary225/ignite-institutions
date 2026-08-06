@@ -3,50 +3,67 @@ import { GraduationCap, Building2 } from "lucide-react";
 const defaultFeatures = [
   {
     icon: GraduationCap,
+    color: "bg-orange-500",
+    textColor: "text-orange-600",
     heading: "Beyond Academics",
     description:
-      "We believe success is not one-dimensional. Alongside academics, our students actively participate in sports, arts, and cultural activities — building leadership, teamwork, and confidence. Our supportive administrative and residential staff ensure that students feel at home, even away from home.",
+      "We believe success is not one-dimensional. Alongside academics, our students actively participate in sports, arts, and cultural activities — building leadership, teamwork, and confidence. Our supportive residential staff ensure students feel at home, even away from home.",
     image: "/images/about/beyond-academics.jpg",
   },
   {
     icon: Building2,
+    color: "bg-green-700",
+    textColor: "text-green-700",
     heading: "State-of-the-Art Campus",
     description:
-      "From modern classrooms to dedicated hostels, IGNITE provides an environment designed for focus, comfort, and growth. With structured micro and macro schedules, our students benefit from discipline as well as flexibility.",
+      "From modern classrooms to dedicated hostels, IGNITE provides an environment designed for focus, comfort, and growth. With structured micro and macro schedules, students benefit from discipline as well as flexibility.",
     image: "/images/about/smart-classroom.jpg",
   },
 ];
 
 export default function CampusFeatures({ features = defaultFeatures }) {
   return (
-    <section className="bg-indigo-50 px-6 py-16 dark:bg-neutral-900 sm:px-12">
-      <div className="mx-auto max-w-6xl space-y-6">
-        {features.map(({ icon: Icon, heading, description, image }) => (
-          <div
-            key={heading}
-            className="grid gap-6 rounded-2xl md:grid-cols-2 md:items-center"
-          >
-            <div className="flex gap-4">
-              <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-orange-500 text-white">
-                <Icon size={26} />
-              </span>
-              <div>
-                <h3 className="text-xl font-bold text-orange-600">
-                  {heading}
-                </h3>
-                <p className="mt-2 text-neutral-700 dark:text-neutral-300">
+    <section className="px-4 py-14 sm:px-8 sm:py-16">
+      <div className="mx-auto max-w-6xl">
+        <div className="text-center mb-10">
+          <span className="inline-block text-xs font-bold tracking-[0.25em] text-green-700 uppercase mb-2">
+            Campus Life
+          </span>
+          <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-white sm:text-3xl">
+            Life at IGNITE
+          </h2>
+        </div>
+
+        <div className="flex flex-col gap-6">
+          {features.map(({ icon: Icon, color, textColor, heading, description, image }, idx) => (
+            <div
+              key={heading}
+              className={`grid gap-6 rounded-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 overflow-hidden shadow-sm md:grid-cols-2 md:items-stretch ${idx % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""}`}
+            >
+              <div className="flex flex-col justify-center gap-4 p-6 sm:p-8">
+                <div className="flex items-center gap-3">
+                  <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl ${color} text-white`}>
+                    <Icon size={20} />
+                  </span>
+                  <h3 className={`text-lg font-bold ${textColor} dark:text-white`}>
+                    {heading}
+                  </h3>
+                </div>
+                <p className="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
                   {description}
                 </p>
               </div>
-            </div>
 
-            <img
-              src={image}
-              alt={heading}
-              className="w-full rounded-xl object-cover shadow-md"
-            />
-          </div>
-        ))}
+              <div className="overflow-hidden min-h-48 md:min-h-0">
+                <img
+                  src={image}
+                  alt={heading}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
