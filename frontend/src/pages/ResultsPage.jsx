@@ -406,8 +406,8 @@ function ResultGroupSection({ group }) {
         </span>
       </div>
 
-      {/* Grid — 2 cols mobile → 3 sm → 4 md → 5 lg → 6 xl */}
-      <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+      {/* Grid — 2 cols mobile → 3 sm → 4 md → 5 lg+ */}
+      <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5">
         {group.profiles.map((p) => (
           <ProfileCard key={p.id} profile={p} color={group.color} />
         ))}
