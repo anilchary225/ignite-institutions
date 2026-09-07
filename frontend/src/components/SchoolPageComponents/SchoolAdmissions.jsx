@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Bell, BellRing, CheckCircle2, Clock, Mail } from "lucide-react";
+import { submitEnquiry } from "../../lib/enquiryApi";
 
 export default function SchoolAdmissions() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     parentName: "",
     childName: "",
@@ -17,35 +19,39 @@ export default function SchoolAdmissions() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
+    submitEnquiry({ category: "school-admissions", source: "school-admissions", payload: form })
+      .then(() => setSubmitted(true))
+      .catch(() => {})
+      .finally(() => setSubmitting(false));
   }
 
   return (
-    <section id="admissions" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
+    <section data-aos="fade-in" id="admissions" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
       <div className="mx-auto max-w-7xl">
 
         {/* closed notice banner */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-800 to-neutral-950 px-8 py-10 text-center dark:from-neutral-900 dark:to-neutral-950">
+        <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-neutral-800 to-neutral-950 px-8 py-10 text-center dark:from-neutral-900 dark:to-neutral-950">
           {/* subtle pattern */}
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(124,58,237,0.15),transparent_60%),radial-gradient(circle_at_80%_50%,rgba(79,70,229,0.1),transparent_60%)]" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-linear(circle_at_20%_50%,rgba(124,58,237,0.15),transparent_60%),radial-linear(circle_at_80%_50%,rgba(79,70,229,0.1),transparent_60%)]" />
 
           <div className="relative">
-            <div className="flex justify-center">
+            <div data-aos="zoom-in" className="flex justify-center">
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-amber-400/10 ring-2 ring-amber-400/30">
                 <Clock size={32} className="text-amber-400" />
               </div>
             </div>
 
-            <h2 className="mt-5 text-3xl font-extrabold text-white sm:text-4xl">
-              Admissions Are Currently{" "}
-              <span className="text-amber-400">Closed</span>
+            <h2 data-aos="fade-up" className="mt-5 text-3xl font-extrabold text-white sm:text-4xl">
+              Admissions Are Now{" "}
+              <span className="text-amber-400">Opened</span>
             </h2>
-            <p className="mx-auto mt-3 max-w-lg text-base leading-7 text-neutral-400">
-              We're getting our classrooms, teachers, and activities ready for
-              the next academic year. Admissions for{" "}
-              <strong className="text-white">2025–26</strong> will open
-              shortly — register below and you'll be the{" "}
-              <strong className="text-white">first to know</strong>.
+            <p data-aos="fade-up" className="mx-auto mt-3 max-w-lg text-base leading-7 text-neutral-400">
+              Admissions for the{" "}
+              <strong className="text-white">2026–27 academic year</strong>{' '}
+                are now open.
+                Secure your seat today and begin your journey toward academic excellence
+                with us.
             </p>
 
             {/* what you get by registering */}
@@ -57,6 +63,7 @@ export default function SchoolAdmissions() {
                 "Counsellor call to answer questions",
               ].map((b) => (
                 <div
+                  data-aos="fade-up"
                   key={b}
                   className="flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold text-white"
                 >
@@ -69,19 +76,19 @@ export default function SchoolAdmissions() {
         </div>
 
         {/* notify me form */}
-        <div className="mt-10 overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-neutral-100 dark:bg-neutral-900 dark:ring-neutral-800">
-          <div className="grid lg:grid-cols-[1fr_1.4fr]">
+        <div data-aos="fade-up" className="mt-10 overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-neutral-100 dark:bg-neutral-900 dark:ring-neutral-800">
+          <div data-aos="fade-up" className="grid lg:grid-cols-[1fr_1.4fr]">
             {/* left info */}
-            <div className="bg-violet-600 px-8 py-10">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20">
+            <div className="bg-blue-600 px-8 py-10">
+              <div data-aos="zoom-in" className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20">
                 <Bell size={22} className="text-white" />
               </div>
-              <h3 className="mt-5 text-2xl font-extrabold text-white">
+              <h3 data-aos="fade-up" className="mt-5 text-2xl font-extrabold text-white">
                 Notify me when admissions open
               </h3>
-              <p className="mt-3 text-sm leading-7 text-violet-200">
+              <p data-aos="fade-up" className="mt-3 text-sm leading-7 text-blue-200">
                 Leave your details and our team will contact you as soon as the
-                admission process begins. No spam — ever.
+                admission process begins. No spam - ever.
               </p>
 
               <div className="mt-8 space-y-3">
@@ -91,16 +98,16 @@ export default function SchoolAdmissions() {
                   "One free counselling call included",
                   "Campus visit scheduled at your convenience",
                 ].map((p) => (
-                  <div key={p} className="flex items-start gap-2.5 text-sm text-violet-100">
-                    <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-violet-300" />
+                  <div data-aos="fade-up" key={p} className="flex items-start gap-2.5 text-sm text-blue-100">
+                    <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-blue-300" />
                     {p}
                   </div>
                 ))}
               </div>
 
-              <div className="mt-10 flex items-center gap-3 rounded-2xl bg-white/10 px-4 py-3">
-                <Mail size={16} className="shrink-0 text-violet-300" />
-                <p className="text-xs text-violet-200">
+              <div data-aos="fade-up" className="mt-10 flex items-center gap-3 rounded-2xl bg-white/10 px-4 py-3">
+                <Mail size={16} className="shrink-0 text-blue-300" />
+                <p className="text-xs text-blue-200">
                   admissions@igniteschool.edu.in
                 </p>
               </div>
@@ -122,7 +129,7 @@ export default function SchoolAdmissions() {
                   </p>
                   <button
                     onClick={() => { setSubmitted(false); setForm({ parentName: "", childName: "", class: "", phone: "", email: "" }); }}
-                    className="mt-2 rounded-xl bg-violet-600 px-6 py-2.5 text-sm font-bold text-white hover:bg-violet-700"
+                    className="mt-2 rounded-xl bg-blue-600 px-6 py-2.5 text-sm font-bold text-white hover:bg-blue-700"
                   >
                     Register Another Child
                   </button>
@@ -145,7 +152,7 @@ export default function SchoolAdmissions() {
                         onChange={handleChange}
                         required
                         placeholder="Your full name"
-                        className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-950 outline-none transition placeholder:text-neutral-400 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                        className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-950 outline-none transition placeholder:text-neutral-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
                       />
                     </div>
                     <div>
@@ -159,7 +166,7 @@ export default function SchoolAdmissions() {
                         onChange={handleChange}
                         required
                         placeholder="Child's full name"
-                        className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-950 outline-none transition placeholder:text-neutral-400 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                        className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-950 outline-none transition placeholder:text-neutral-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
                       />
                     </div>
                   </div>
@@ -173,14 +180,11 @@ export default function SchoolAdmissions() {
                       value={form.class}
                       onChange={handleChange}
                       required
-                      className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-950 outline-none transition focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                      className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-950 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
                     >
                       <option value="">Select class</option>
-                      <option>Nursery</option>
-                      <option>LKG</option>
-                      <option>UKG</option>
-                      {Array.from({ length: 10 }, (_, i) => (
-                        <option key={i + 1}>Class {i + 1}</option>
+                      {Array.from({ length: 5 }, (_, i) => (
+                        <option key={i + 6}>Class {i + 6}</option>
                       ))}
                     </select>
                   </div>
@@ -197,7 +201,7 @@ export default function SchoolAdmissions() {
                         onChange={handleChange}
                         required
                         placeholder="+91 XXXXX XXXXX"
-                        className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-950 outline-none transition placeholder:text-neutral-400 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                        className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-950 outline-none transition placeholder:text-neutral-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
                       />
                     </div>
                     <div>
@@ -211,20 +215,26 @@ export default function SchoolAdmissions() {
                         onChange={handleChange}
                         required
                         placeholder="parent@email.com"
-                        className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-950 outline-none transition placeholder:text-neutral-400 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                        className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-950 outline-none transition placeholder:text-neutral-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
                       />
                     </div>
                   </div>
 
                   <button
+                    data-aos="zoom-in"
                     type="submit"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-violet-600 px-6 py-3.5 text-sm font-black text-white transition hover:bg-violet-700 active:scale-[0.98]"
+                    disabled={submitting}
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-black text-white transition hover:bg-blue-700 active:scale-[0.98]"
                   >
-                    <Bell size={15} />
-                    Notify Me When Admissions Open
+                    {submitting ? "Submitting..." : (
+                      <>
+                        <Bell size={15} />
+                        Notify Me When Admissions Open
+                      </>
+                    )}
                   </button>
 
-                  <p className="text-center text-xs text-neutral-400 dark:text-neutral-600">
+                  <p data-aos="fade-in" className="text-center text-xs text-neutral-400 dark:text-neutral-600">
                     We'll contact you within 48 hours of registering. No spam.
                   </p>
                 </form>

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import ScrollRevealText from "./ScrollRevealText";
 
 const stats = [
   { value: 20, suffix: "+", label: "Years of Excellence" },
@@ -29,16 +30,25 @@ function useCountUp(target, active, duration = 1500) {
   return count;
 }
 
-function StatItem({ value, suffix, label, active }) {
+function StatItem({ value, suffix, label, active, index, isLast }) {
   const count = useCountUp(value, active);
+
   return (
-    <div className="relative text-center rounded-2xl px-6 py-7 bg-white/10 backdrop-blur-md border border-white/20 shadow-lg overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/25 via-white/5 to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
-      <p className="relative text-4xl sm:text-5xl font-black text-white tabular-nums drop-shadow-sm">
-        {count.toLocaleString()}{suffix}
+    <div
+      className={`relative flex flex-col items-center px-6 py-6 text-center transition-all duration-700 ease-out sm:py-2 ${
+        !isLast ? "border-b border-neutral-200 dark:border-neutral-800 sm:border-b-0 sm:border-r" : ""
+      }`}
+      style={{
+        transitionDelay: `${index * 120}ms`,
+        opacity: active ? 1 : 0,
+        filter: active ? "blur(0px)" : "blur(6px)",
+        transform: active ? "translateY(0px)" : "translateY(14px)",
+      }}>
+      <p className="text-4xl font-semibold tabular-nums text-neutral-900 dark:text-white sm:text-5xl">
+        {count.toLocaleString()}
+        <span className="text-blue-600 dark:text-blue-400">{suffix}</span>
       </p>
-      <p className="relative mt-2 text-xs sm:text-sm font-semibold text-white/90 uppercase tracking-wide">
+      <p className="mt-2 text-xs font-medium uppercase tracking-wide text-neutral-500 dark:text-neutral-400 sm:text-sm">
         {label}
       </p>
     </div>
@@ -51,7 +61,12 @@ export default function Stats() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setInView(true); observer.disconnect(); } },
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
       { threshold: 0.3 }
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
@@ -61,19 +76,27 @@ export default function Stats() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-14 px-4 sm:px-8 overflow-hidden bg-gradient-to-br from-green-700 via-green-600 to-green-800"
+      className="border-y border-neutral-200 bg-white px-4 py-14 dark:border-neutral-800 dark:bg-neutral-950 sm:px-8"
     >
-      <div className="pointer-events-none absolute -top-20 -left-20 w-80 h-80 rounded-full bg-white/20 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-28 -right-12 w-80 h-80 rounded-full bg-green-300/20 blur-3xl" />
-
-      <div className="relative max-w-7xl mx-auto">
-        <div className="text-center mb-8">
-          <span className="inline-block text-xs font-bold tracking-[0.25em] text-white/70 uppercase mb-2">Our Impact</span>
-          <h2 className="text-2xl font-extrabold text-white sm:text-3xl">IGNITE by the Numbers</h2>
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-10 text-center">
+          <span className="mb-2 inline-block text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
+            Our Impact
+          </span>
+          <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white sm:text-3xl">
+            <ScrollRevealText as="span" text="IGNITE by the Numbers" className="inline-block" />
+          </h2>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
+
+        <div className="grid grid-cols-1 sm:grid-cols-4">
           {stats.map((stat, i) => (
-            <StatItem key={i} {...stat} active={inView} />
+            <StatItem
+              key={i}
+              {...stat}
+              active={inView}
+              index={i}
+              isLast={i === stats.length - 1}
+            />
           ))}
         </div>
       </div>

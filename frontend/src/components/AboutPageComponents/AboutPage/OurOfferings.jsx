@@ -29,13 +29,13 @@ import {
       <section className="px-4 py-14 sm:px-8 sm:py-16">
         <div className="mx-auto max-w-6xl">
           <div className="text-center mb-8">
-            <span className="inline-block text-xs font-bold tracking-[0.25em] text-orange-500 uppercase mb-2">
+            <span data-aos="fade-up" className="inline-block text-xs font-bold tracking-[0.25em] text-orange-500 uppercase mb-2">
               Programs
             </span>
-            <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-white sm:text-3xl">
+            <h2 data-aos="fade-up" className="text-2xl font-extrabold text-neutral-900 dark:text-white sm:text-3xl">
               {heading}
             </h2>
-            <p className="mx-auto mt-3 max-w-2xl text-neutral-600 dark:text-neutral-400 text-sm">
+            <p data-aos="fade-up" className="mx-auto mt-3 max-w-2xl text-neutral-600 dark:text-neutral-400 text-sm">
               {description}
             </p>
           </div>
@@ -43,8 +43,9 @@ import {
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
             {offerings.map(({ icon: Icon, label, color, bg }, index) => (
               <div
+                data-aos="fade-up"
                 key={index}
-                className={`rounded-xl border border-neutral-200 dark:border-neutral-700 ${bg} p-4 text-center shadow-sm transition hover:-translate-y-0.5 hover:shadow-md`}
+                className={`rounded-xl border border-neutral-200 dark:border-neutral-700 ${bg} p-4 text-center transition hover:-translate-y-0.5 hover:shadow-md`}
               >
                 <Icon className={`mx-auto ${color}`} size={26} />
                 <p className={`mt-3 text-xs font-bold ${color} leading-snug`}>{label}</p>

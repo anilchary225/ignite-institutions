@@ -1,14 +1,14 @@
 import { useEffect, useRef } from "react";
 
 const banners = [
-  { bg: "bg-violet-600",   emoji: "🎯", title: "IIT JEE 2025 Batch Forming", sub: "Long Term & Crash batches — seats limited" },
+  { bg: "bg-blue-600",   emoji: "🎯", title: "IIT JEE 2025 Batch Forming", sub: "Long Term & Crash batches - seats limited" },
   { bg: "bg-indigo-600",   emoji: "🧬", title: "NEET 2025 Admissions Open",  sub: "2-Year & Short Term crash available" },
   { bg: "bg-orange-500",   emoji: "🏆", title: "EAPCET Integrated Batch",    sub: "Start alongside your Intermediate" },
-  { bg: "bg-sky-500",      emoji: "⚡", title: "BITSAT Crash — 3 Months",    sub: "Score 360+ with our focused prep" },
-  { bg: "bg-emerald-600",  emoji: "📈", title: "AIR Under 1000 — JEE Advanced", sub: "Join our advanced ranker batch" },
+  { bg: "bg-sky-500",      emoji: "⚡", title: "BITSAT Crash - 3 Months",    sub: "Score 360+ with our focused prep" },
+  { bg: "bg-emerald-600",  emoji: "📈", title: "AIR Under 1000 - JEE Advanced", sub: "Join our advanced ranker batch" },
   { bg: "bg-rose-600",     emoji: "🩺", title: "720/720 NEET Target Batch",  sub: "Full marks strategy with Ignite" },
-  { bg: "bg-amber-500",    emoji: "🌟", title: "Scholarship Test — Register Now", sub: "Up to 100% fee waiver for toppers" },
-  { bg: "bg-violet-700",   emoji: "🏠", title: "Residential Facility Available", sub: "Hostel + coaching at all branches" },
+  { bg: "bg-amber-500",    emoji: "🌟", title: "Scholarship Test - Register Now", sub: "Up to 100% fee waiver for toppers" },
+  { bg: "bg-blue-700",   emoji: "🏠", title: "Residential Facility Available", sub: "Hostel + coaching at all branches" },
 ];
 
 // duplicate for seamless loop
@@ -49,11 +49,11 @@ export default function TPBanners() {
   return (
     <section className="overflow-hidden bg-neutral-950 py-10 dark:bg-neutral-900">
       {/* heading */}
-      <p className="mb-6 text-center text-xs font-bold uppercase tracking-[0.25em] text-neutral-500">
+      <p data-aos="fade-in" className="mb-6 text-center text-xs font-bold uppercase tracking-[0.25em] text-neutral-500">
         Latest Updates & Programmes
       </p>
 
-      <div className="overflow-hidden">
+      <div data-aos="fade-in" className="overflow-hidden">
         <div ref={trackRef} className="flex gap-4 will-change-transform" style={{ width: "max-content" }}>
           {allBanners.map((b, i) => (
             <div

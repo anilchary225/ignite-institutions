@@ -4,7 +4,7 @@ const programs = [
   {
     id: "jee-long",
     icon: CalendarDays,
-    color: "violet",
+    color: "green",
     badge: "IIT JEE",
     type: "Long Term",
     duration: "2 Years (Class 11 & 12)",
@@ -64,13 +64,13 @@ const programs = [
     type: "Crash Add-on",
     duration: "3 Months (Final stage of JEE prep)",
     tagline: "BITS or bust.",
-    desc: "BITSAT-specific preparation built on top of the JEE curriculum. Covers English Proficiency, Logical Reasoning, and BITSAT speed tests — the three differentiators between BITS admission and a near miss.",
+    desc: "BITSAT-specific preparation built on top of the JEE curriculum. Covers English Proficiency, Logical Reasoning, and BITSAT speed tests - the three differentiators between BITS admission and a near miss.",
     includes: ["English Proficiency modules", "Logical Reasoning practice", "BITSAT online mock tests (10+)", "Speed & accuracy improvement", "BITS campus-wise cutoff strategy"],
   },
 ];
 
 const colorMap = {
-  violet: { iconBg: "bg-violet-600", badge: "bg-violet-100 text-violet-700 dark:bg-violet-950/50 dark:text-violet-300", border: "border-violet-100 dark:border-violet-900/50", check: "text-violet-500", cta: "bg-violet-600 hover:bg-violet-700" },
+  green: { iconBg: "bg-green-600", badge: "bg-green-100 text-green-700 dark:bg-green-950/50 dark:text-green-300", border: "border-green-100 dark:border-green-900/50", check: "text-green-500", cta: "bg-green-600 hover:bg-green-700" },
   rose:   { iconBg: "bg-rose-600",   badge: "bg-rose-100 text-rose-700 dark:bg-rose-950/50 dark:text-rose-300",     border: "border-rose-100 dark:border-rose-900/50",   check: "text-rose-500",   cta: "bg-rose-600 hover:bg-rose-700" },
   indigo: { iconBg: "bg-indigo-600", badge: "bg-indigo-100 text-indigo-700 dark:bg-indigo-950/50 dark:text-indigo-300", border: "border-indigo-100 dark:border-indigo-900/50", check: "text-indigo-500", cta: "bg-indigo-600 hover:bg-indigo-700" },
   emerald:{ iconBg: "bg-emerald-600",badge: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300",border:"border-emerald-100 dark:border-emerald-900/50",check:"text-emerald-500",cta:"bg-emerald-600 hover:bg-emerald-700"},
@@ -82,7 +82,7 @@ function ProgramCard({ prog }) {
   const c = colorMap[prog.color];
   const Icon = prog.icon;
   return (
-    <div className={`flex flex-col rounded-3xl border bg-white shadow-sm transition hover:shadow-md dark:bg-neutral-900 ${c.border}`}>
+    <div data-aos="fade-up" className={`flex flex-col rounded-3xl border bg-white shadow-sm transition hover:shadow-md dark:bg-neutral-900 ${c.border}`}>
       <div className="p-7 flex-1">
         <div className="flex items-center gap-3">
           <div className={`flex h-11 w-11 items-center justify-center rounded-2xl ${c.iconBg}`}>
@@ -128,14 +128,14 @@ function ProgramCard({ prog }) {
 
 export default function TPHero() {
   return (
-    <section id="programs" className="bg-white px-6 py-20 dark:bg-neutral-950">
+    <section data-aos="fade-up" id="programs" className="bg-white px-6 py-20 dark:bg-neutral-950">
       <div className="mx-auto max-w-7xl">
-        <p className="text-sm font-bold uppercase tracking-[0.2em] text-violet-600 dark:text-violet-400">
+        <p className="text-sm font-bold uppercase tracking-[0.2em] text-green-600 dark:text-green-400">
           Ignite Test Prep
         </p>
         <h1 className="mt-3 max-w-3xl text-4xl font-extrabold leading-tight text-neutral-950 sm:text-5xl dark:text-white">
           Every exam. Every timeline.{" "}
-          <span className="text-violet-600 dark:text-violet-400">One destination.</span>
+          <span className="text-green-600 dark:text-green-400">One destination.</span>
         </h1>
         <p className="mt-4 max-w-2xl text-base leading-7 text-neutral-600 dark:text-neutral-400">
           Whether you're starting from Class 11 or cramming for one final attempt,
@@ -145,19 +145,19 @@ export default function TPHero() {
         {/* stat strip */}
         <div className="mt-8 flex flex-wrap gap-6">
           {[
-            { v: "500+", l: "IIT & NEET Selections" },
-            { v: "20+", l: "Years of Coaching" },
-            { v: "6", l: "Programmes Available" },
-            { v: "8+", l: "Branches" },
-          ].map(({ v, l }) => (
-            <div key={l} className="rounded-2xl bg-violet-50 px-5 py-4 dark:bg-violet-950/20">
-              <p className="text-2xl font-black text-violet-700 dark:text-violet-400">{v}</p>
+            { v: "500+", l: "IIT & NEET Selections",datadelay: 150 },
+            { v: "20+", l: "Years of Coaching", datadelay: 300 },
+            { v: "6", l: "Programmes Available", datadelay: 450 },
+            { v: "8+", l: "Branches", datadelay: 600 },
+          ].map(({ v, l,datadelay }) => (
+            <div data-aos="fade-up" data-aos-delay={datadelay} key={l} className="rounded-2xl bg-green-50 px-5 py-4 dark:bg-green-950/20">
+              <p className="text-2xl font-black text-green-700 dark:text-green-400">{v}</p>
               <p className="text-xs font-semibold text-neutral-500 dark:text-neutral-400">{l}</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div data-aos = "fade-up" data-aos-delay="650" className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {programs.map((p) => <ProgramCard key={p.id} prog={p} />)}
         </div>
       </div>

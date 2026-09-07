@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Send, CheckCircle, AlertCircle, User, Mail, Phone, GraduationCap, MapPin, BookOpen } from "lucide-react";
+import { submitEnquiry } from "../../lib/enquiryApi";
 
 const INITIAL = { name: "", email: "", phone: "", currentClass: "", school: "", city: "", stream: "", message: "" };
 
@@ -86,9 +87,12 @@ export default function JLTApplicationForm() {
     const errs = validate();
     if (Object.keys(errs).length) { setErrors(errs); return; }
     setStatus("submitting");
-    // Simulate submission — replace with real API call
-    await new Promise(r => setTimeout(r, 1500));
-    setStatus("success");
+    try {
+      await submitEnquiry({ category: "iit-jee-long-term", source: "iit-jee-long-term-form", payload: form });
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    }
   };
 
   if (status === "success") {
@@ -127,7 +131,7 @@ export default function JLTApplicationForm() {
 
         <div className="mt-6 grid gap-12 lg:grid-cols-2">
 
-          {/* left — info */}
+          {/* left - info */}
           <div>
             <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
               Start Your IIT Journey Today
@@ -140,7 +144,7 @@ export default function JLTApplicationForm() {
             <ul className="mt-8 space-y-4">
               {[
                 { icon: GraduationCap, label: "Eligibility", value: "Students currently in Class 10 or completing Class 10" },
-                { icon: BookOpen,      label: "Batch starts",  value: "April & June batches — limited seats" },
+                { icon: BookOpen,      label: "Batch starts",  value: "April & June batches - limited seats" },
                 { icon: MapPin,        label: "Location",      value: "Ignite Academy, Hyderabad · Hostel available" },
                 { icon: Phone,         label: "Helpline",      value: "+91 98765 43210 (Mon–Sat, 9am–6pm)" },
               ].map(({ icon: Icon, label, value }) => (
@@ -165,7 +169,7 @@ export default function JLTApplicationForm() {
             </div>
           </div>
 
-          {/* right — form */}
+          {/* right - form */}
           <div>
             <form onSubmit={handleSubmit} noValidate className="rounded-3xl bg-neutral-50 p-8 dark:bg-neutral-900">
               <h3 className="text-lg font-extrabold text-neutral-950 dark:text-white">Application Form</h3>

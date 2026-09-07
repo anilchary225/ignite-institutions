@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Send, CheckCircle, AlertCircle, User, Mail, Phone, GraduationCap, MapPin, BookOpen, Calendar } from "lucide-react";
+import { submitEnquiry } from "../../lib/enquiryApi";
 
 const INITIAL = { name: "", email: "", phone: "", currentClass: "", school: "", city: "", stream: "", attemptYear: "", message: "" };
 
@@ -80,8 +81,12 @@ export default function JSTApplicationForm() {
     const errs = validate();
     if (Object.keys(errs).length) { setErrors(errs); return; }
     setStatus("submitting");
-    await new Promise(r => setTimeout(r, 1500));
-    setStatus("success");
+    try {
+      await submitEnquiry({ category: "iit-jee-short-term", source: "iit-jee-short-term-form", payload: form });
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    }
   };
 
   if (status === "success") {
@@ -174,7 +179,7 @@ export default function JSTApplicationForm() {
           <div>
             <form onSubmit={handleSubmit} noValidate className="rounded-3xl bg-white p-8 shadow-sm ring-1 ring-neutral-100 dark:bg-neutral-900 dark:ring-neutral-800">
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-500">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-amber-500 to-orange-500">
                   <Send size={16} className="text-white" />
                 </div>
                 <div>
@@ -191,7 +196,7 @@ export default function JSTApplicationForm() {
                 <Field label="Phone" name="phone" type="tel" required icon={Phone} placeholder="10-digit mobile" value={form.phone} onChange={handleChange} error={errors.phone} />
                 <SelectField
                   label="Current Status" name="currentClass" required icon={GraduationCap}
-                  options={["Currently in Class 12 (2025 JEE)", "Dropper — 1st attempt", "Dropper — 2nd attempt", "Class 11 completed"]}
+                  options={["Currently in Class 12 (2025 JEE)", "Dropper - 1st attempt", "Dropper - 2nd attempt", "Class 11 completed"]}
                   value={form.currentClass} onChange={handleChange} error={errors.currentClass}
                 />
                 <SelectField
@@ -222,7 +227,7 @@ export default function JSTApplicationForm() {
               <button
                 type="submit"
                 disabled={status === "submitting"}
-                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 py-3.5 text-sm font-black text-white shadow-lg shadow-amber-100 transition hover:from-amber-600 hover:to-orange-600 disabled:opacity-60 dark:shadow-amber-900/20"
+                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-amber-500 to-orange-500 py-3.5 text-sm font-black text-white shadow-lg shadow-amber-100 transition hover:from-amber-600 hover:to-orange-600 disabled:opacity-60 dark:shadow-amber-900/20"
               >
                 {status === "submitting" ? (
                   <><span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" /> Submitting…</>

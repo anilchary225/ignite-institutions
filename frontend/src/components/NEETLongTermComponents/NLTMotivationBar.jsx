@@ -2,20 +2,20 @@ import { HeartPulse } from "lucide-react";
 
 const phrases = [
   "🩺 Your AIIMS seat is decided 2 years before NEET",
-  "🌿 Biology mastery is built one concept at a time — start now",
+  "🌿 Biology mastery is built one concept at a time - start now",
   "🔬 The student who understands, not memorises, wins NEET",
   "🏥 Every doctor started where you are standing today",
-  "📖 NCERT is your Bible — know it beyond the last word",
+  "📖 NCERT is your Bible - know it beyond the last word",
   "🧬 Hard work today, white coat tomorrow",
   "🌟 Consistency across 720 marks is what separates toppers",
-  "💚 Ignite your passion — AIIMS is waiting for you",
+  "💚 Ignite your passion - AIIMS is waiting for you",
 ];
 
 export default function NLTMotivationBar() {
   const doubled = [...phrases, ...phrases, ...phrases];
 
   return (
-    <section className="overflow-hidden bg-gradient-to-r from-emerald-700 via-green-600 to-teal-700 py-14">
+    <section className="overflow-hidden bg-linear-to-r from-emerald-700 via-green-600 to-teal-700 py-14">
 
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-6 text-center md:flex-row md:justify-between md:text-left">
         <div className="flex items-center gap-4">

@@ -2,20 +2,20 @@ import { Flame } from "lucide-react";
 
 const phrases = [
   "🎯 Your IIT rank is decided 2 years before the exam",
-  "🔥 Consistency beats intensity — every single time",
+  "🔥 Consistency beats intensity - every single time",
   "📚 The student who starts early, finishes first",
   "🌟 Average students don't go to IIT. Disciplined ones do",
   "🏆 Your future self is watching what you do today",
   "⚡ Hard problems now. Easy decisions later",
   "🧠 Think deeper. Score higher. Dream bigger",
-  "🚀 Ignite your potential — the IITs are waiting",
+  "🚀 Ignite your potential - the IITs are waiting",
 ];
 
 export default function JLTMotivationBar() {
   const doubled = [...phrases, ...phrases, ...phrases];
 
   return (
-    <section className="overflow-hidden bg-gradient-to-r from-indigo-700 via-indigo-600 to-violet-700 py-14">
+    <section className="overflow-hidden bg-linear-to-r from-indigo-700 via-indigo-600 to-blue-700 py-14">
 
       {/* main CTA row */}
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-6 text-center md:flex-row md:justify-between md:text-left">

@@ -60,8 +60,8 @@ function CourseCard({ course }) {
 
   return (
     <div
-      className={`relative flex flex-col rounded-3xl border bg-white p-8 shadow-sm transition hover:shadow-md dark:bg-neutral-900 dark:hover:shadow-neutral-800 ${a.border}`}
-    >
+      data-aos="fade-up"
+      className={`relative flex flex-col rounded-3xl border bg-white p-8 shadow-sm transition hover:shadow-md dark:bg-neutral-900 dark:hover:shadow-neutral-800 ${a.border}`}>
       <span className={`self-start rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide ${a.badge}`}>
         {course.badge}
       </span>
@@ -102,7 +102,7 @@ function CourseCard({ course }) {
       </ul>
 
       <a
-        href="#"
+        href="/contact"
         className={`mt-8 inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-bold text-white transition ${a.cta}`}
       >
         Enquire about {course.title}
@@ -113,23 +113,23 @@ function CourseCard({ course }) {
 
 export default function InterStream() {
   return (
-    <section id="inter" className="bg-white px-6 py-20 dark:bg-neutral-950">
+    <section data-aos="fade-in" id="inter" className="bg-white px-6 py-20 dark:bg-neutral-950">
       <div className="mx-auto max-w-7xl">
         <div className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
-          <span className="rounded-full bg-orange-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-orange-700 dark:bg-orange-950/40 dark:text-orange-300">
-            Junior College — Inter
+          <span data-aos="fade-up" className="rounded-full bg-orange-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-orange-700 dark:bg-orange-950/40 dark:text-orange-300">
+            Junior College - Inter
           </span>
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
         </div>
 
         <div className="mt-8 max-w-2xl">
-          <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+          <h2 data-aos="fade-up" className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             Intermediate + IIT JEE / NEET
           </h2>
-          <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
+          <p data-aos="fade-up" className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Classes 11 & 12 with fully integrated entrance exam coaching. Board
-            marks and rank — both, together.
+            marks and rank - both, together.
           </p>
         </div>
 

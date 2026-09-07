@@ -2,14 +2,14 @@ import { ArrowRight, Sparkles } from "lucide-react";
 
 export default function MPCCareerBar() {
   return (
-    <section className="overflow-hidden bg-gradient-to-r from-violet-700 via-violet-600 to-indigo-700 px-6 py-14">
+    <section className="overflow-hidden bg-linear-to-r from-blue-700 via-blue-600 to-indigo-700 px-6 py-14">
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 text-center md:flex-row md:justify-between md:text-left">
         <div className="flex items-center gap-4">
           <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/20">
             <Sparkles size={26} className="text-white" />
           </div>
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-violet-200">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-200">
               Your journey starts here
             </p>
             <h2 className="mt-1 text-3xl font-extrabold text-white sm:text-4xl">
@@ -21,7 +21,7 @@ export default function MPCCareerBar() {
         <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
           <a
             href="#contact"
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-4 text-sm font-black text-violet-700 shadow-lg transition hover:bg-amber-400 hover:text-white"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-4 text-sm font-black text-blue-700 shadow-lg transition hover:bg-amber-400 hover:text-white"
           >
             Apply Now <ArrowRight size={16} />
           </a>

@@ -3,7 +3,7 @@ import { Users, BookOpen, FileText, ClipboardList, Sparkles } from "lucide-react
 const points = [
   {
     icon: Users,
-    color: "violet",
+    color: "blue",
     title: "Expert Faculty & Personalized Mentorship",
     desc: "Learn from seasoned educators who bring clarity and encouragement to every classroom. With small group sizes, each student benefits from individualized guidance and support.",
   },
@@ -11,13 +11,13 @@ const points = [
     icon: BookOpen,
     color: "indigo",
     title: "Integrated Curriculum for Boards & JEE",
-    desc: "As one of the best intermediate colleges in Hyderabad for MPC, we've structured our syllabus to cover both board requirements and JEE exam patterns seamlessly — saving time and stress while maximising performance.",
+    desc: "As one of the best intermediate colleges in Hyderabad for MPC, we've structured our syllabus to cover both board requirements and JEE exam patterns seamlessly - saving time and stress while maximising performance.",
   },
   {
     icon: FileText,
     color: "sky",
     title: "Strategically Designed Study Material",
-    desc: "Our study resources are customised to meet the needs of MPC students targeting IIT coaching — focused, insightful, and exam-aligned.",
+    desc: "Our study resources are customised to meet the needs of MPC students targeting IIT coaching - focused, insightful, and exam-aligned.",
   },
   {
     icon: ClipboardList,
@@ -29,12 +29,12 @@ const points = [
     icon: Sparkles,
     color: "rose",
     title: "Holistic Development & Campus Life",
-    desc: "Beyond academics, Ignite nurtures leadership, communication, and self-confidence — making us one of the best junior colleges in Hyderabad for MPC IIT preparation. Our state-of-the-art campus supports a balanced, enriching learning experience.",
+    desc: "Beyond academics, Ignite nurtures leadership, communication, and self-confidence - making us one of the best junior colleges in Hyderabad for MPC IIT preparation. Our state-of-the-art campus supports a balanced, enriching learning experience.",
   },
 ];
 
 const colorMap = {
-  violet:  { iconBg: "bg-violet-100 dark:bg-violet-950/40", icon: "text-violet-600 dark:text-violet-400", num: "text-violet-200 dark:text-violet-900", border: "border-violet-100 dark:border-violet-900/40" },
+  blue:  { iconBg: "bg-blue-100 dark:bg-blue-950/40", icon: "text-blue-600 dark:text-blue-400", num: "text-blue-200 dark:text-blue-900", border: "border-blue-100 dark:border-blue-900/40" },
   indigo:  { iconBg: "bg-indigo-100 dark:bg-indigo-950/40", icon: "text-indigo-600 dark:text-indigo-400", num: "text-indigo-200 dark:text-indigo-900", border: "border-indigo-100 dark:border-indigo-900/40" },
   sky:     { iconBg: "bg-sky-100 dark:bg-sky-950/40",       icon: "text-sky-600 dark:text-sky-400",       num: "text-sky-200 dark:text-sky-900",       border: "border-sky-100 dark:border-sky-900/40" },
   emerald: { iconBg: "bg-emerald-100 dark:bg-emerald-950/40",icon:"text-emerald-600 dark:text-emerald-400",num:"text-emerald-200 dark:text-emerald-900",border:"border-emerald-100 dark:border-emerald-900/40"},
@@ -47,7 +47,7 @@ export default function MPCStandOut() {
       <div className="mx-auto max-w-7xl">
         <div className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
-          <span className="rounded-full bg-violet-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-violet-700 dark:bg-violet-950/50 dark:text-violet-300">
+          <span className="rounded-full bg-blue-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">
             Why We're Different
           </span>
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
@@ -55,14 +55,14 @@ export default function MPCStandOut() {
 
         <div className="mt-8 max-w-2xl">
           <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
-            What Makes Our Program <span className="text-violet-600 dark:text-violet-400">Stand Out</span>
+            What Makes Our Program <span className="text-blue-600 dark:text-blue-400">Stand Out</span>
           </h2>
           <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Five pillars that set Ignite MPC apart from every other coaching programme in Hyderabad.
           </p>
         </div>
 
-        {/* first two — wide cards */}
+        {/* first two - wide cards */}
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           {points.slice(0, 2).map((p, i) => {
             const c = colorMap[p.color];
@@ -82,7 +82,7 @@ export default function MPCStandOut() {
           })}
         </div>
 
-        {/* last three — 3-col */}
+        {/* last three - 3-col */}
         <div className="mt-5 grid gap-5 md:grid-cols-3">
           {points.slice(2).map((p, i) => {
             const c = colorMap[p.color];

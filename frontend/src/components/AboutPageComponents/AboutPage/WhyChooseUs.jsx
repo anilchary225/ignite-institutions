@@ -46,10 +46,10 @@ export default function WhyChooseUs({
     <section className="px-4 py-14 sm:px-8 sm:py-16">
       <div className="mx-auto max-w-6xl">
         <div className="text-center mb-10">
-          <span className="inline-block text-xs font-bold tracking-[0.25em] text-orange-500 uppercase mb-2">
+          <span data-aos="zoom-in" className="inline-block text-xs font-bold tracking-[0.25em] text-orange-500 uppercase mb-2">
             Our Strengths
           </span>
-          <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-white sm:text-3xl">
+          <h2 data-aos="zoom-in" className="text-2xl font-extrabold text-neutral-900 dark:text-white sm:text-3xl">
             {heading}
           </h2>
         </div>

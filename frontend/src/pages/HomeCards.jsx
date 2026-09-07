@@ -2,26 +2,30 @@ import Card from "../components/HomeComponents/Card";
 
 const cards = [
   {
-    eyebrow: "Perspective",
-    title: "Integrated Coaching",
+    eyebrow: "Academic Excellence",
+    title: "Integrated Coaching Advantage",
     description:
-      "Ignite offers seamless integration of the Intermediate curriculum with competitive exam coaching (IIT-JEE, NEET, EAPCET), ensuring focused preparation without academic overload.",
-    image: "/card-art/card-1.svg",
+      "Ignite combines Intermediate education with expert IIT-JEE, NEET, and EAPCET coaching under one structured program. Students get focused preparation, expert guidance, and a balanced academic journey.",
+    image: "/assets/images/events/HomeCardsImages/homecard1.webp",
+    dark:true
   },
+
   {
-    eyebrow: "Research Report",
-    title: "Structured Learning, Global Readiness",
+    eyebrow: "Student Success",
+    title: "Structured Learning Ecosystem",
     description:
-      "With scheduled study hours, doubt-clearing sessions, and wellness support, students experience balanced learning without pressure or burnout—while preparing to compete confidently on a global stage.",
+      "A disciplined learning environment with planned study schedules, regular assessments, doubt-solving sessions, and personalised mentoring helps students achieve excellence without unnecessary pressure.",
     dark: true,
-    image: "/card-art/card-2.svg",
+    image: "/assets/images/events/HomeCardsImages/homecard2.webp",
   },
+
   {
-    eyebrow: "Perspective",
-    title: "Career Planning",
+    eyebrow: "Future Ready",
+    title: "Career-Focused Guidance",
     description:
-      "IGNITE Junior College empowers students with expert career planning, guiding them toward IIT-JEE, NEET & more. Well-maintained residential facilities with academic supervision and digital classrooms help students stay focused throughout their journey.",
-    image: "/card-art/card-3.svg",
+      "Ignite empowers students with expert career counselling, competitive exam strategies, digital classrooms, and supportive residential facilities to build confidence for their future goals.",
+    image: "/assets/images/events/HomeCardsImages/homecard3.webp",
+    dark:true
   },
 ];
 
@@ -29,7 +33,7 @@ export default function HomeCards() {
   return (
     <section className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {cards.map((card) => (
-        <div key={card.title} className="w-full">
+        <div data-aos="fade-up" key={card.title} className="w-full">
           <Card {...card} />
         </div>
       ))}

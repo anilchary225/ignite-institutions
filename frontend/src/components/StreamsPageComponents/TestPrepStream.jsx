@@ -1,11 +1,12 @@
 import { Zap, CalendarDays, Target, CheckCircle2 } from "lucide-react";
+import { RouteLink } from "../../router/BrowserRouter";
 
 const exams = [
   {
     id: "jee",
     name: "IIT JEE",
     subname: "Main & Advanced",
-    color: "violet",
+    color: "blue",
     batches: [
       {
         type: "Long Term",
@@ -78,12 +79,12 @@ const exams = [
 ];
 
 const colorMap = {
-  violet: {
-    nameBg: "bg-violet-600",
-    badge: "bg-violet-100 text-violet-700 dark:bg-violet-950/50 dark:text-violet-300",
-    border: "border-violet-100 dark:border-violet-900/50",
-    card: "bg-violet-50/50 dark:bg-violet-950/10",
-    pill: "bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300",
+  blue: {
+    nameBg: "bg-blue-600",
+    badge: "bg-blue-100 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300",
+    border: "border-blue-100 dark:border-blue-900/50",
+    card: "bg-blue-50/50 dark:bg-blue-950/10",
+    pill: "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300",
   },
   emerald: {
     nameBg: "bg-emerald-600",
@@ -136,7 +137,7 @@ function BatchCard({ batch, color }) {
 function ExamBlock({ exam }) {
   const c = colorMap[exam.color];
   return (
-    <div className="flex flex-col rounded-3xl border bg-white p-8 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+    <div data-aos="fade-up" className="flex flex-col rounded-3xl border bg-white p-8 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
       {/* exam name */}
       <div className="flex items-start justify-between gap-4">
         <div>
@@ -158,7 +159,7 @@ function ExamBlock({ exam }) {
       </div>
 
       <a
-        href="#"
+        href="/contact"
         className={`mt-6 inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-bold text-white transition ${c.nameBg} hover:opacity-90`}
       >
         Enquire about {exam.name}
@@ -169,10 +170,10 @@ function ExamBlock({ exam }) {
 
 export default function TestPrepStream() {
   return (
-    <section id="testprep" className="bg-white px-6 py-20 dark:bg-neutral-950">
+    <section data-aos="fade-in" id="testprep" className="bg-white px-6 py-20 dark:bg-neutral-950">
       <div className="mx-auto max-w-7xl">
         {/* section header */}
-        <div className="flex items-center gap-3">
+        <div data-aos="zoom-in" className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
           <span className="rounded-full bg-emerald-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300">
             Test Preparation
@@ -181,41 +182,42 @@ export default function TestPrepStream() {
         </div>
 
         <div className="mt-8 max-w-2xl">
-          <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+          <h2 data-aos="fade-up" className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             Crack the exam. Own the rank.
           </h2>
-          <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
-            Dedicated coaching for India's most competitive entrance exams —
+          <p data-aos="fade-up" className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
+            Dedicated coaching for India's most competitive entrance exams -
             available as long-term, short-term, or integrated programmes to
             suit every student's timeline.
           </p>
         </div>
 
         {/* 2-col grid for JEE & NEET (larger), then 2-col for BITSAT & EAPCET */}
-        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+        <div data-aos="fade-in" className="mt-10 grid gap-6 sm:grid-cols-2">
           {exams.map((exam) => (
             <ExamBlock key={exam.id} exam={exam} />
           ))}
         </div>
 
         {/* bottom CTA banner */}
-        <div className="mt-12 rounded-3xl bg-gradient-to-br from-violet-600 to-indigo-700 p-8 text-center shadow-lg">
-          <p className="text-xs font-bold uppercase tracking-widest text-violet-200">
+        <div data-aos="fade-in" className="mt-12 rounded-3xl bg-linear-to-br from-blue-600 to-indigo-700 p-8 text-center shadow-lg">
+          <p data-aos="fade-up" className="text-xs font-bold uppercase tracking-widest text-blue-200">
             Not sure which batch fits?
           </p>
-          <h3 className="mt-3 text-2xl font-extrabold text-white">
+          <h3 data-aos="fade-up" className="mt-3 text-2xl font-extrabold text-white">
             Talk to our counsellors
           </h3>
-          <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-violet-200">
+          <p data-aos="fade-up" className="mx-auto mt-2 max-w-md text-sm leading-6 text-blue-200">
             Our academic counsellors will assess your current level and
-            recommend the right programme — free, no obligation.
+            recommend the right programme - free, no obligation.
           </p>
-          <a
-            href="#"
-            className="mt-6 inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 text-sm font-bold text-violet-700 transition hover:bg-violet-50"
+          <RouteLink
+            data-aos="zoom-in"
+            to="/contact"
+            className="mt-6 inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 text-sm font-bold text-blue-700 transition hover:bg-blue-50"
           >
             Book a Free Counselling Session
-          </a>
+          </RouteLink>
         </div>
       </div>
     </section>

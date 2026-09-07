@@ -7,251 +7,75 @@ import {
   ChevronLeft,
   ChevronRight,
   GraduationCap,
+  Heart,
   Images,
+  Leaf,
   MapPin,
   Sparkles,
   Users,
   X,
 } from "lucide-react";
 import { RouteLink } from "../router/BrowserRouter";
+import { EVENT_PHOTO_SECTIONS } from "../data/eventGalleryData";
 
-const categories = [
-  { id: "all", label: "All stories" },
-  { id: "events", label: "Events" },
-  { id: "programs", label: "Programs" },
-  { id: "students", label: "Student experience" },
-  { id: "faculty", label: "Faculty experience" },
-  { id: "campus", label: "Campus life" },
-];
+const categories = [{ id: "all", label: "All albums" }, ...EVENT_PHOTO_SECTIONS.map((section) => ({ id: section.id, label: section.label }))];
 
-const photoSections = [
-  {
-    id: "events",
-    label: "Events & celebrations",
-    title: "The moments we come together",
-    description:
-      "From annual days to cultural fests, our events give every student a stage, a team, and a memory to take home.",
-    experience:
-      "Students discover confidence in the spotlight while faculty members get to celebrate the people they guide every day.",
-    icon: Sparkles,
-    accent: "violet",
-    photos: [
-      {
-        title: "A stage for every story",
-        caption: "Annual cultural fest",
-        image:
-          "https://images.unsplash.com/photo-1503095396549-807759245b35?auto=format&fit=crop&w=1200&q=85",
-        size: "large",
-      },
-      {
-        title: "Learning beyond the timetable",
-        caption: "Student showcase",
-        image:
-          "https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=900&q=85",
-        size: "small",
-      },
-      {
-        title: "Cheering each other on",
-        caption: "Ignite annual day",
-        image:
-          "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=900&q=85",
-        size: "small",
-      },
-    ],
-  },
-  {
-    id: "programs",
-    label: "Programs & workshops",
-    title: "Curiosity in action",
-    description:
-      "Our programs turn ideas into hands-on experiences: experiments, competitions, guest sessions, and projects with purpose.",
-    experience:
-      "Students leave with new questions and practical skills. Faculty create the safe, encouraging spaces where those questions can grow.",
-    icon: GraduationCap,
-    accent: "amber",
-    photos: [
-      {
-        title: "Ideas become projects",
-        caption: "Innovation showcase",
-        image:
-          "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=85",
-        size: "small",
-      },
-      {
-        title: "Learning from inspiring voices",
-        caption: "Guest lecture series",
-        image:
-          "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=85",
-        size: "large",
-      },
-      {
-        title: "A room full of possibility",
-        caption: "Leadership workshop",
-        image:
-          "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=900&q=85",
-        size: "small",
-      },
-    ],
-  },
-  {
-    id: "students",
-    label: "Student experience",
-    title: "Growing together, every day",
-    description:
-      "The best school memories are often made between lessons: in clubs, on the field, during a shared laugh, or while solving a hard problem together.",
-    experience:
-      "Students build friendships, independence, and a sense of belonging. Every experience helps them become more thoughtful, capable people.",
-    icon: Users,
-    accent: "sky",
-    photos: [
-      {
-        title: "Friendships that last",
-        caption: "Student community",
-        image:
-          "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1200&q=85",
-        size: "large",
-      },
-      {
-        title: "A team effort",
-        caption: "Collaborative learning",
-        image:
-          "https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=900&q=85",
-        size: "small",
-      },
-      {
-        title: "Finding their rhythm",
-        caption: "Clubs and activities",
-        image:
-          "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=85",
-        size: "small",
-      },
-    ],
-  },
-  {
-    id: "faculty",
-    label: "Faculty experience",
-    title: "The people behind the progress",
-    description:
-      "Great teaching is built on attention, patience, and the joy of seeing a student make a breakthrough.",
-    experience:
-      "Our faculty learn alongside students, mentor with intention, and make space for every learner to ask, explore, and try again.",
-    icon: Camera,
-    accent: "emerald",
-    photos: [
-      {
-        title: "Mentors who make a difference",
-        caption: "Faculty collaboration",
-        image:
-          "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&q=85",
-        size: "small",
-      },
-      {
-        title: "Guidance at every step",
-        caption: "Mentor session",
-        image:
-          "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=85",
-        size: "large",
-      },
-      {
-        title: "Teaching is a team sport",
-        caption: "Faculty development",
-        image:
-          "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=85",
-        size: "small",
-      },
-    ],
-  },
-  {
-    id: "campus",
-    label: "Campus life",
-    title: "A place that feels like yours",
-    description:
-      "Bright classrooms, shared spaces, and little corners to pause in — our campus is designed for both focus and discovery.",
-    experience:
-      "Students find their own routines and favourite places. Faculty shape an environment that feels welcoming, purposeful, and full of possibility.",
-    icon: MapPin,
-    accent: "rose",
-    photos: [
-      {
-        title: "Where ideas take shape",
-        caption: "Learning spaces",
-        image:
-          "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=85",
-        size: "large",
-      },
-      {
-        title: "Room to think and play",
-        caption: "Campus grounds",
-        image:
-          "https://images.unsplash.com/photo-1576495199011-eb94736d05d6?auto=format&fit=crop&w=900&q=85",
-        size: "small",
-      },
-      {
-        title: "The everyday in-between",
-        caption: "Campus moments",
-        image:
-          "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85",
-        size: "small",
-      },
-    ],
-  },
-];
-
-const accentStyles = {
-  violet: {
-    badge: "bg-violet-100 text-violet-700 dark:bg-violet-950/40 dark:text-violet-300",
-    icon: "bg-violet-600",
-    line: "bg-violet-500",
-    glow: "from-violet-500/20",
-  },
-  amber: {
-    badge: "bg-amber-100 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300",
-    icon: "bg-amber-500",
-    line: "bg-amber-500",
-    glow: "from-amber-500/20",
-  },
-  sky: {
-    badge: "bg-sky-100 text-sky-700 dark:bg-sky-950/40 dark:text-sky-300",
-    icon: "bg-sky-500",
-    line: "bg-sky-500",
-    glow: "from-sky-500/20",
-  },
-  emerald: {
-    badge: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300",
-    icon: "bg-emerald-600",
-    line: "bg-emerald-500",
-    glow: "from-emerald-500/20",
-  },
-  rose: {
-    badge: "bg-rose-100 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300",
-    icon: "bg-rose-500",
-    line: "bg-rose-500",
-    glow: "from-rose-500/20",
-  },
-};
+const photoSections = EVENT_PHOTO_SECTIONS;
 
 const allPhotos = photoSections.flatMap((section) =>
   section.photos.map((photo) => ({ ...photo, sectionLabel: section.label, accent: section.accent })),
 );
+
+const accentStyles = {
+  green: {
+    icon: "bg-green-600",
+    badge: "bg-green-100 text-green-700 dark:bg-green-950/50 dark:text-green-300",
+    glow: "from-green-500/15",
+    line: "bg-green-500",
+  },
+  emerald: {
+    icon: "bg-emerald-600",
+    badge: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300",
+    glow: "from-emerald-500/15",
+    line: "bg-emerald-500",
+  },
+  rose: {
+    icon: "bg-rose-600",
+    badge: "bg-rose-100 text-rose-700 dark:bg-rose-950/50 dark:text-rose-300",
+    glow: "from-rose-500/15",
+    line: "bg-rose-500",
+  },
+  amber: {
+    icon: "bg-amber-600",
+    badge: "bg-amber-100 text-amber-700 dark:bg-amber-950/50 dark:text-amber-300",
+    glow: "from-amber-500/15",
+    line: "bg-amber-500",
+  },
+  blue: {
+    icon: "bg-blue-600",
+    badge: "bg-blue-100 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300",
+    glow: "from-blue-500/15",
+    line: "bg-blue-500",
+  },
+  indigo: {
+    icon: "bg-indigo-600",
+    badge: "bg-indigo-100 text-indigo-700 dark:bg-indigo-950/50 dark:text-indigo-300",
+    glow: "from-indigo-500/15",
+    line: "bg-indigo-500",
+  },
+};
 
 function PhotosIntro() {
   return (
     <section className="bg-white px-6 pb-10 pt-12 dark:bg-neutral-950 sm:pt-20">
       <div className="mx-auto grid max-w-7xl items-end gap-10 lg:grid-cols-[1fr_0.85fr]">
         <div>
-          <RouteLink
-            to="/gallery"
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-neutral-500 transition hover:text-violet-700 dark:hover:text-violet-400"
-          >
-            <ArrowLeft size={14} />
-            Back to gallery
-          </RouteLink>
-          <p className="mt-10 text-xs font-black uppercase tracking-[0.24em] text-violet-700 dark:text-violet-400">
+          <p className="mt-10 text-xs font-black uppercase tracking-[0.24em] text-green-700 dark:text-green-400">
             Ignite photo journal
           </p>
           <h1 className="mt-4 max-w-3xl text-5xl font-extrabold leading-[0.98] tracking-tight text-neutral-950 sm:text-6xl lg:text-7xl dark:text-white">
             Every picture has a{" "}
-            <span className="text-violet-600 dark:text-violet-400">story.</span>
+            <span className="text-green-600 dark:text-green-400">story.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Take a closer look at the people, places, and experiences that make
@@ -261,11 +85,11 @@ function PhotosIntro() {
         </div>
 
         <div className="relative overflow-hidden rounded-[2rem] bg-neutral-900 p-7 text-white sm:p-9">
-          <div className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-violet-500/40 blur-3xl" />
+          <div className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-green-500/40 blur-3xl" />
           <div className="relative">
             <div className="flex items-center gap-3">
               <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white/10">
-                <Images size={20} className="text-violet-200" />
+                <Images size={20} className="text-green-200" />
               </span>
               <span className="text-xs font-black uppercase tracking-[0.18em] text-white/60">
                 The year in frames
@@ -274,7 +98,7 @@ function PhotosIntro() {
             <p className="mt-8 text-4xl font-extrabold">15+</p>
             <p className="mt-1 text-sm text-white/65">moments from campus life</p>
             <div className="mt-8 flex items-center gap-3 border-t border-white/15 pt-5">
-              <CalendarDays size={16} className="text-violet-200" />
+              <CalendarDays size={16} className="text-green-200" />
               <span className="text-sm text-white/75">Updated throughout the year</span>
             </div>
           </div>
@@ -307,11 +131,10 @@ function PhotoNav({ activeCategory, setActiveCategory }) {
   );
 }
 
-function FeaturedPhoto({ photo, onSelect }) {
+function FeaturedPhoto({ photo, href }) {
   return (
-    <button
-      type="button"
-      onClick={() => onSelect(photo)}
+    <RouteLink
+      to={href}
       className="group relative block h-full min-h-[300px] w-full overflow-hidden rounded-[1.75rem] bg-neutral-200 text-left dark:bg-neutral-800"
     >
       <img
@@ -320,7 +143,7 @@ function FeaturedPhoto({ photo, onSelect }) {
         loading="lazy"
         className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
       />
-      <span className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+      <span className="absolute inset-0 bg-linear-to-t from-black/75 via-black/10 to-transparent" />
       <span className="absolute bottom-0 left-0 right-0 p-6 text-white">
         <span className="text-xs font-bold uppercase tracking-[0.16em] text-white/70">
           {photo.caption}
@@ -330,15 +153,14 @@ function FeaturedPhoto({ photo, onSelect }) {
           Open photo <ArrowRight size={14} />
         </span>
       </span>
-    </button>
+    </RouteLink>
   );
 }
 
-function SmallPhoto({ photo, onSelect }) {
+function SmallPhoto({ photo, href }) {
   return (
-    <button
-      type="button"
-      onClick={() => onSelect(photo)}
+    <RouteLink
+      to={href}
       className="group relative block min-h-[210px] overflow-hidden rounded-[1.5rem] bg-neutral-200 text-left dark:bg-neutral-800"
     >
       <img
@@ -347,21 +169,22 @@ function SmallPhoto({ photo, onSelect }) {
         loading="lazy"
         className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
       />
-      <span className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+      <span className="absolute inset-0 bg-linear-to-t from-black/70 to-transparent" />
       <span className="absolute bottom-0 left-0 right-0 p-5 text-white">
         <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/70">
           {photo.caption}
         </span>
         <span className="mt-1 block text-base font-extrabold">{photo.title}</span>
       </span>
-    </button>
+    </RouteLink>
   );
 }
 
-function PhotoSection({ section, onSelect }) {
-  const Icon = section.icon;
-  const styles = accentStyles[section.accent];
-  const [featured, ...supporting] = section.photos;
+function PhotoSection({ section }) {
+  const Icon = section.icon ?? Camera;
+  const styles = accentStyles[section.accent] ?? accentStyles.green;
+  const visiblePhotos = section.photos.slice(0, 3);
+  const [featured, ...supporting] = visiblePhotos;
 
   return (
     <section id={section.id} className="scroll-mt-28 border-t border-neutral-200 py-16 dark:border-neutral-800 sm:py-20">
@@ -382,7 +205,7 @@ function PhotoSection({ section, onSelect }) {
             {section.description}
           </p>
 
-          <div className={`relative mt-8 overflow-hidden rounded-2xl bg-gradient-to-br ${styles.glow} to-neutral-50 p-5 dark:to-neutral-900`}>
+          <div className={`relative mt-8 overflow-hidden rounded-2xl bg-linear-to-br ${styles.glow} to-neutral-50 p-5 dark:to-neutral-900`}>
             <div className={`absolute left-0 top-0 h-full w-1 ${styles.line}`} />
             <p className="pl-3 text-xs font-black uppercase tracking-[0.16em] text-neutral-500">
               The Ignite experience
@@ -395,11 +218,20 @@ function PhotoSection({ section, onSelect }) {
 
         <div className="grid min-h-[520px] gap-4 sm:grid-cols-2">
           <div className="sm:row-span-2">
-            <FeaturedPhoto photo={featured} onSelect={onSelect} />
+            <FeaturedPhoto photo={featured} href={`/gallery/photos/${section.id}`} />
           </div>
           {supporting.map((photo) => (
-            <SmallPhoto key={photo.title} photo={photo} onSelect={onSelect} />
+            <SmallPhoto key={photo.title} photo={photo} href={`/gallery/photos/${section.id}`} />
           ))}
+          <div className="sm:col-span-2">
+            <RouteLink
+              to={`/gallery/photos/${section.id}`}
+              className="inline-flex items-center gap-2 rounded-full bg-neutral-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-green-600 dark:bg-white dark:text-neutral-950 dark:hover:bg-green-200"
+            >
+              Show more
+              <ArrowRight size={16} />
+            </RouteLink>
+          </div>
         </div>
       </div>
     </section>
@@ -495,13 +327,13 @@ export default function PhotosPage() {
       <PhotoNav activeCategory={activeCategory} setActiveCategory={selectCategory} />
       <main className="mx-auto max-w-7xl px-6 pb-20">
         {visibleSections.map((section) => (
-          <PhotoSection key={section.id} section={section} onSelect={setSelectedPhoto} />
+          <PhotoSection key={section.id} section={section} />
         ))}
       </main>
       <section className="border-t border-neutral-200 bg-neutral-50 px-6 py-16 dark:border-neutral-800 dark:bg-neutral-900/50">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-violet-700 dark:text-violet-400">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-green-700 dark:text-green-400">
               Keep exploring
             </p>
             <h2 className="mt-3 text-2xl font-extrabold text-neutral-950 dark:text-white">
@@ -510,21 +342,21 @@ export default function PhotosPage() {
           </div>
           <RouteLink
             to="/gallery/events"
-            className="inline-flex items-center gap-2 rounded-full bg-neutral-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-violet-600 dark:bg-white dark:text-neutral-950 dark:hover:bg-violet-200"
+            className="inline-flex items-center gap-2 rounded-full bg-neutral-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-green-600 dark:bg-white dark:text-neutral-950 dark:hover:bg-green-200"
           >
             Explore events
             <ArrowRight size={16} />
           </RouteLink>
         </div>
       </section>
-      {selectedPhoto ? (
+      {/* {selectedPhoto ? (
         <Lightbox
           photo={selectedPhoto}
           onClose={() => setSelectedPhoto(null)}
           onNext={showNext}
           onPrevious={showPrevious}
         />
-      ) : null}
+      ) : null} */}
     </div>
   );
 }

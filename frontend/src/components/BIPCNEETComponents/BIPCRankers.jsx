@@ -1,12 +1,16 @@
 import { Trophy, Hash, BadgeCheck, Stethoscope } from "lucide-react";
+import { RESULTS_DATA } from "../../data_results/results_data";
 
-const rankers = [
-  { name: "Kavya Reddy",    score: "720/720", rank: "AIR 24",  hall: "2510001111", college: "AIIMS New Delhi",        avatar: "https://placehold.co/200x200/059669/ffffff?text=KR", color: "emerald" },
-  { name: "Meera Nair",     score: "715/720", rank: "AIR 67",  hall: "2510002222", college: "JIPMER Puducherry",      avatar: "https://placehold.co/200x200/4f46e5/ffffff?text=MN", color: "indigo" },
-  { name: "Divya Sharma",   score: "710/720", rank: "AIR 112", hall: "2510003333", college: "AIIMS Hyderabad",        avatar: "https://placehold.co/200x200/0d9488/ffffff?text=DS", color: "teal" },
-  { name: "Sai Kiran",      score: "706/720", rank: "AIR 189", hall: "2510004444", college: "Osmania Medical College",avatar: "https://placehold.co/200x200/0284c7/ffffff?text=SK", color: "sky" },
-  { name: "Ananya Pillai",  score: "702/720", rank: "AIR 241", hall: "2510005555", college: "Gandhi Medical College", avatar: "https://placehold.co/200x200/7c3aed/ffffff?text=AP", color: "violet" },
-];
+const rankerColors = ["emerald", "indigo", "teal", "sky", "violet"];
+const rankers = RESULTS_DATA[2026].NEET.slice(0, 5).map((student, index) => ({
+  name: student.name,
+  score: student.marks,
+  rank: "NEET 2026",
+  hall: student.applicationNo || student.applicationNumber || "Verified result",
+  college: "Ignite BiPC",
+  avatar: student.image,
+  color: rankerColors[index],
+}));
 
 const colorMap = {
   emerald: { ring: "ring-emerald-400", grad: "from-emerald-600 to-teal-700",   pill: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300", num: "bg-emerald-600" },
@@ -25,14 +29,14 @@ function RankerCard({ r, pos }) {
           {pos}
         </div>
       )}
-      <div className={`relative mt-2 h-24 w-24 overflow-hidden rounded-full ring-4 ${c.ring}`}>
-        <img src={r.avatar} alt={r.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+      <div className={`relative mt-2 h-42 w-32 overflow-hidden rounded-2xl ring-4 ${c.ring}`}>
+        {r.avatar ? <img src={r.avatar} alt={r.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" /> : <span className={`grid h-full w-full place-items-center bg-linear-to-br text-4xl font-black text-white ${c.grad}`}>{r.name.split(/\s+/).map((part) => part[0]).slice(0, 2).join("")}</span>}
       </div>
       <h3 className="mt-4 text-base font-extrabold text-neutral-950 dark:text-white">{r.name}</h3>
-      <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400 mt-0.5">NEET UG 2024</p>
-      <div className={`mt-4 w-full rounded-2xl bg-gradient-to-br px-4 py-4 ${c.grad}`}>
-        <p className="text-xl font-black text-white">{r.score}</p>
-        <p className="text-xs text-white/70 mt-0.5">{r.rank}</p>
+      <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400 mt-0.5">NEET UG 2026</p>
+      <div className={`mt-4 w-full rounded-2xl bg-linear-to-br px-4 py-4 `}>
+        <p className="text-xl font-black text-black dark:text-white">{r.score}</p>
+        <p className="text-xs text-black/70 dar:text-white/70 mt-0.5">{r.rank}</p>
       </div>
       <span className={`mt-3 rounded-full px-3 py-1 text-xs font-bold leading-tight ${c.pill}`}>{r.college}</span>
       <div className="mt-3 flex items-center gap-1.5 text-neutral-400">
@@ -50,7 +54,7 @@ export default function BIPCRankers() {
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
           <div className="flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-1.5 dark:bg-emerald-950/40">
             <Trophy size={14} className="text-emerald-600" />
-            <span className="text-xs font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400">Top NEET Rankers 2024</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400">Top NEET Rankers 2026</span>
           </div>
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
         </div>

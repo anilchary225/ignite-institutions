@@ -38,7 +38,7 @@ function YoutubeIcon(props) {
 
 const campusLifeLinks = [
   { label: "Personality Development", href: "/about/personality-development" },
-  { label: "Day At IGNITE", href: "/about/daya-at-ignite" },
+  { label: "Extra Curricular Activities", href: "/about/daya-at-ignite" },
   { label: "Campus Hostel Facility", href: "/about/campus-hostel-facilities" },
   { label: "Testimonials", href: "/about/testimonials" },
 ];
@@ -51,6 +51,11 @@ const courseLinks = [
   { label: "Foundation", href: "/streams/test-prep/foundation" },
 ];
 
+const legalLinks = [
+  { label: "Terms and Conditions", href: "/terms-and-conditions" },
+  { label: "Privacy Policy", href: "/privacy-policy" },
+];
+
 const quickViewLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
@@ -61,22 +66,22 @@ const quickViewLinks = [
 ];
 
 const socialLinks = [
-  { icon: FacebookIcon, label: "Facebook", href: "https://facebook.com", color: "hover:bg-blue-600 hover:border-blue-600" },
-  { icon: InstagramIcon, label: "Instagram", href: "https://instagram.com", color: "hover:bg-pink-600 hover:border-pink-600" },
-  { icon: LinkedinIcon, label: "LinkedIn", href: "https://linkedin.com", color: "hover:bg-blue-500 hover:border-blue-500" },
-  { icon: YoutubeIcon, label: "YouTube", href: "https://youtube.com", color: "hover:bg-red-600 hover:border-red-600" },
+  { icon: FacebookIcon, label: "Facebook", href: "https://www.facebook.com/ignitejuniorcollege", color: "hover:bg-blue-600 hover:border-blue-600" },
+  { icon: InstagramIcon, label: "Instagram", href: "https://www.instagram.com/ignite_junior_college_/", color: "hover:bg-pink-600 hover:border-pink-600" },
+  { icon: LinkedinIcon, label: "LinkedIn", href: "https://www.linkedin.com/company/ignite-corporate01/?viewAsMember=true", color: "hover:bg-blue-500 hover:border-blue-500" },
+  { icon: YoutubeIcon, label: "YouTube", href: "https://www.youtube.com/c/IGNITEJUNIORCOLLEGE", color: "hover:bg-red-600 hover:border-red-600" },
 ];
 
 function FooterColumn({ heading, links, accentColor = "text-orange-400" }) {
   return (
     <div>
-      <h3 className={`text-sm font-bold uppercase tracking-widest ${accentColor} mb-5`}>{heading}</h3>
+      <h3 className={`text-xs font-bold uppercase tracking-widest ${accentColor} mb-5`}>{heading}</h3>
       <ul className="space-y-3">
         {links.map((link) => (
           <li key={link.label}>
             <RouteLink
               to={link.href}
-              className="text-sm text-neutral-400 transition-colors hover:text-white"
+              className="text-xs text-neutral-400 transition-colors hover:text-white"
             >
               {link.label}
             </RouteLink>
@@ -93,41 +98,25 @@ export default function Footer() {
   return (
     <footer className="bg-neutral-950 border-t border-white/5">
       {/* Top accent bar */}
-      <div className="h-1 w-full bg-gradient-to-r from-orange-500 via-green-600 to-blue-500" />
+      <div className="h-1 w-full bg-linear-to-r from-orange-500 via-green-600 to-blue-500" />
 
       <div className="mx-auto max-w-7xl px-6 pt-14 pb-10 sm:px-8">
-        <div className="grid gap-10 lg:grid-cols-[1.6fr_1fr_1fr_0.8fr]">
+        <div className="grid gap-10 lg:grid-cols-[1.35fr_1fr_1fr_1fr_1fr_1fr] lg:items-start">
 
-          {/* Brand + contact */}
-          <div>
+          {/* Brand */}
+          <div className="lg:justify-self-start lg:text-left">
             {/* Logo */}
-            <RouteLink to="/" className="inline-block">
+            <RouteLink to="/" className="inline-flex">
               <img
-                src="/logo-dark.png"
+                src="/favicon_io (1)/android-chrome-512x512.png"
                 alt="Ignite Junior College & Schools"
                 className="h-16 w-auto object-contain"
               />
             </RouteLink>
 
-            <p className="mt-4 text-sm text-neutral-400 leading-relaxed max-w-xs">
+            <p className="mt-4 text-xs text-neutral-400 leading-relaxed max-w-xs">
               Empowering students with excellence in IIT-JEE, NEET & EAPCET coaching since 2005. Lead by Experts.
             </p>
-
-            {/* Contact info */}
-            <div className="mt-6 space-y-3">
-              <div className="flex items-start gap-3">
-                <MapPin className="mt-0.5 shrink-0 text-orange-500" size={16} />
-                <p className="text-xs text-neutral-400 leading-snug">Plot No – 14, Sri Sai Nagar, Hyderabad – 500085, OPP. Metro Pillar No – A708</p>
-              </div>
-              <div className="flex items-center gap-3">
-                <Phone className="shrink-0 text-green-500" size={16} />
-                <p className="text-xs text-neutral-400">+91 70365 11 111 &nbsp;·&nbsp; +91 97000 4 1234</p>
-              </div>
-              <div className="flex items-center gap-3">
-                <Mail className="shrink-0 text-blue-500" size={16} />
-                <p className="text-xs text-neutral-400">Info@ignite.academy</p>
-              </div>
-            </div>
 
             {/* Social */}
             <div className="mt-6 flex gap-2.5">
@@ -146,18 +135,42 @@ export default function Footer() {
             </div>
           </div>
 
+          {/* Contact */}
+          <div className="lg:order-2 lg:text-left">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-5">Contact</h3>
+            <div className="space-y-3">
+              <div className="flex items-start gap-3">
+                <MapPin className="mt-0.5 shrink-0 text-orange-500" size={16} />
+                <a href="" className="text-[11px] text-neutral-400 leading-snug">Pillar No : A-708, NH -9, Plot No : 14, Sri Sai Nagar Colony, opp. Metro Station Jntu College, beside JNTU, Kukatpally, Hyderabad, Telangana 500085</a>
+              </div>
+              <div className="flex items-center gap-3">
+                <Phone className="shrink-0 text-green-500" size={16} />
+                <p className="text-[11px] text-neutral-400">+91 70365 11111 <br/> +91 97000 41234</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <Mail className="shrink-0 text-blue-500" size={16} />
+                <p className="text-[11px] text-neutral-400">Info@ignite.academy</p>
+              </div>
+            </div>
+          </div>
+
           <FooterColumn heading="Campus Life" links={campusLifeLinks} accentColor="text-orange-400" />
           <FooterColumn heading="Courses" links={courseLinks} accentColor="text-green-500" />
           <FooterColumn heading="Quick Links" links={quickViewLinks} accentColor="text-blue-400" />
+          <FooterColumn heading="Legal" links={legalLinks} accentColor="text-orange-400" />
         </div>
 
         {/* Divider */}
         <div className="mt-12 border-t border-white/5 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-neutral-600">
+          <p className="text-[11px] text-neutral-600">
             © {new Date().getFullYear()} IGNITE Junior College & Schools. All rights reserved.
           </p>
-          <p className="flex items-center gap-1 text-xs text-neutral-600">
-            Built with <Heart size={11} className="text-red-500 fill-red-500" /> for students
+          <p className="flex items-center gap-2">
+  
+             <span className="font-semibold text-xs text-neutral-600">Built by<span> </span>
+              <span className=" h-5 w-5 items-center justify-center rounded-md bg-black italic text-white text-[10px] font-bold">
+                AS KREATIV
+            </span></span>
           </p>
         </div>
       </div>

@@ -1,3 +1,5 @@
+import { RouteLink } from "../../router/BrowserRouter";
+
 export default function StreamsHero() {
   return (
     <section className="relative overflow-hidden bg-white px-6 pb-0 pt-20 dark:bg-neutral-950">
@@ -6,17 +8,17 @@ export default function StreamsHero() {
       <div className="pointer-events-none absolute right-0 top-0 h-64 w-64 rounded-full bg-blue-50 blur-2xl dark:bg-blue-950/20" />
 
       <div className="relative mx-auto max-w-7xl">
-        <p className="text-sm font-bold uppercase tracking-[0.2em] text-orange-500 dark:text-orange-400">
-          Ignite — Programs & Streams
+        <p data-aos="fade-up" className="text-sm font-bold uppercase tracking-[0.2em] text-orange-500 dark:text-orange-400">
+          Ignite - Programs & Streams
         </p>
-        <h1 className="mt-4 max-w-3xl text-4xl font-extrabold leading-tight text-neutral-950 sm:text-5xl dark:text-white">
+        <h1 data-aos="fade-up" className="mt-4 max-w-3xl text-4xl font-extrabold leading-tight text-neutral-950 sm:text-5xl dark:text-white">
           Every learner has a path.{" "}
           <span className="text-orange-500 dark:text-orange-400">
             We build the right one.
           </span>
         </h1>
-        <p className="mt-5 max-w-2xl text-base leading-7 text-neutral-600 dark:text-neutral-400">
-          From nursery to competitive exam success — Ignite offers structured
+        <p data-aos="fade-up" className="mt-5 max-w-2xl text-base leading-7 text-neutral-600 dark:text-neutral-400">
+          From nursery to competitive exam success - Ignite offers structured
           academic journeys for school students, junior college aspirants, and
           serious entrance exam candidates.
         </p>
@@ -24,13 +26,14 @@ export default function StreamsHero() {
         {/* stream tabs / quick links */}
         <div className="mt-10 flex flex-wrap gap-3">
           {[
-            { label: "Junior College (Inter)", href: "#inter", color: "orange" },
-            { label: "School (Nursery–10)", href: "#school", color: "blue" },
-            { label: "Test Prep", href: "#testprep", color: "green" },
+            { label: "Junior College (Inter)", href: "streams/junior-college", color: "orange" },
+            { label: "School (Nursery–10)", href: "/streams/school", color: "blue" },
+            { label: "Test Prep", href: "/streams/test-prep", color: "green" },
           ].map(({ label, href, color }) => (
-            <a
+            <RouteLink
+              data-aos="fade-up"
               key={href}
-              href={href}
+              to={href}
               className={`rounded-full border px-5 py-2 text-sm font-semibold transition
                 ${
                   color === "orange"
@@ -41,7 +44,7 @@ export default function StreamsHero() {
                 }`}
             >
               {label}
-            </a>
+            </RouteLink>
           ))}
         </div>
 

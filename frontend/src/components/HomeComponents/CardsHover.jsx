@@ -1,22 +1,14 @@
 import React, { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { RouteLink } from "../../router/BrowserRouter";
+import ScrollRevealText from "./ScrollRevealText";
 
 const cards = [
   {
     eyebrow: "Life at Ignite",
-    title: "Hostel Accommodation",
-    date: "Comfortable stay for outstation students",
-    image: "https://placehold.co/600x400/f97316/ffffff?text=Hostel",
-    href: "/about/campus-hostel-facilities",
-    accent: "text-orange-500",
-    tagBg: "bg-orange-100 dark:bg-orange-500/10 text-orange-700 dark:text-orange-400",
-  },
-  {
-    eyebrow: "Life at Ignite",
     title: "Campus Facilities",
     date: "Modern labs, classrooms & smart boards",
-    image: "https://placehold.co/600x400/16a34a/ffffff?text=Campus",
+    image: "/assets/images/events/Classrooms/DSC02172.webp",
     href: "/about",
     accent: "text-green-700",
     tagBg: "bg-green-100 dark:bg-green-700/10 text-green-700 dark:text-green-400",
@@ -25,7 +17,7 @@ const cards = [
     eyebrow: "Life at Ignite",
     title: "Extra Curricular Activities",
     date: "Sports, fitness & recreational clubs",
-    image: "https://placehold.co/600x400/2563eb/ffffff?text=Activities",
+    image: "/assets/images/events/sports/sports4.webp",
     href: "/about/daya-at-ignite",
     accent: "text-blue-500",
     tagBg: "bg-blue-100 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400",
@@ -34,10 +26,19 @@ const cards = [
     eyebrow: "Life at Ignite",
     title: "Personality Development",
     date: "Workshops & seminars for holistic growth",
-    image: "https://placehold.co/600x400/dc2626/ffffff?text=Personality",
+    image: "/assets/images/events/Yoga/yoga13.webp",
     href: "/about/personality-development",
     accent: "text-red-500",
     tagBg: "bg-red-100 dark:bg-red-500/10 text-red-700 dark:text-red-400",
+  },
+  {
+    eyebrow: "Life at Ignite",
+    title: "Hostel Accommodation",
+    date: "Comfortable stay for outstation students",
+    image: "/assets/images/events/DINNING/MESS  (3).webp",
+    href: "/about/campus-hostel-facilities",
+    accent: "text-orange-500",
+    tagBg: "bg-orange-100 dark:bg-orange-500/10 text-orange-700 dark:text-orange-400",
   },
 ];
 
@@ -47,38 +48,45 @@ function Card({ card }) {
   return (
     <RouteLink
       to={card.href}
+      data-motion-card
       className="group block cursor-pointer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className="relative overflow-hidden rounded-xl border border-neutral-100 dark:border-neutral-700 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
-        <img
-          src={card.image}
-          alt={card.title}
-          className={`w-full h-44 sm:h-52 object-cover transition-transform duration-500 ease-out ${
-            hovered ? "scale-105" : "scale-100"
-          }`}
-        />
-        {/* Gradient overlay on hover */}
-        <div className={`absolute inset-0 bg-gradient-to-t from-black/40 to-transparent transition-opacity duration-300 ${hovered ? "opacity-100" : "opacity-0"}`} />
-      </div>
+      <div  className="relative isolate overflow-hidden rounded-[2rem] border border-white/20 bg-white/35 shadow-[0_18px_50px_rgba(15,23,42,0.14)] backdrop-blur-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(15,23,42,0.18)] dark:border-white/10 dark:bg-white/5">
+        <div className="absolute inset-0 bg-linear-to-br from-white/40 via-white/10 to-transparent dark:from-white/10 dark:via-white/5 dark:to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent opacity-70" />
 
-      <div className="mt-3 px-1">
-        <span className={`inline-block text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${card.tagBg} mb-2`}>
-          {card.eyebrow}
-        </span>
+        <div className="relative h-52 sm:h-56 overflow-hidden">
+          <img
+            src={card.image}
+            alt={card.title}
+            className={`h-full w-full object-cover transition-transform duration-700 ease-out ${
+              hovered ? "scale-110" : "scale-100"
+            }`}
+          />
+          <div className={`absolute inset-0 bg-linear-to-t from-neutral-950/70 via-neutral-950/20 to-transparent transition-opacity duration-300 ${hovered ? "opacity-100" : "opacity-70"}`} />
+        </div>
 
-        <h3 className={`text-sm font-bold leading-snug transition-colors duration-200 ${hovered ? card.accent : "text-neutral-900 dark:text-white"}`}>
-          {card.title}
-        </h3>
+        <div className="relative -mt-8 px-4 pb-5">
+          <div className="rounded-[1.5rem] border border-white/25 bg-white/70 p-4 shadow-[0_12px_40px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:border-white/10 dark:bg-neutral-950/40">
+            <span className={`inline-block rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-widest ${card.tagBg} mb-3`}>
+              {card.eyebrow}
+            </span>
 
-        <div className="mt-2 flex items-center justify-between">
-          <p className="text-xs text-neutral-500 dark:text-neutral-400">
-            {card.date}
-          </p>
-          <span className={`inline-flex items-center gap-1 text-xs font-bold ${card.accent} transition-all duration-300 ${hovered ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2"}`}>
-            Explore <ArrowRight size={12} />
-          </span>
+            <h3 className={`text-sm font-bold leading-snug transition-colors duration-200 ${hovered ? card.accent : "text-neutral-900 dark:text-white"}`}>
+              {card.title}
+            </h3>
+
+            <div className="mt-3 flex items-center justify-between gap-3">
+              <p className="text-xs text-neutral-600 dark:text-neutral-300">
+                {card.date}
+              </p>
+              <span className={`inline-flex items-center gap-1 text-xs font-bold ${card.accent} transition-all duration-300 ${hovered ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2"}`}>
+                Explore <ArrowRight size={12} />
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </RouteLink>
@@ -90,14 +98,14 @@ export default function CardsHover() {
     <section className="bg-white dark:bg-neutral-950 py-14 px-4 sm:px-8 transition-colors">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
-          <span className="inline-block text-xs font-bold tracking-[0.25em] text-orange-500 uppercase mb-2">
-            Campus Life
+          <span data-aos="fade-up" className="inline-block text-xs font-bold tracking-[0.25em] text-orange-500 uppercase mb-2">
+            <ScrollRevealText text="Campus Life" className="inline-block" />
           </span>
-          <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-white sm:text-3xl">
-            Life at IGNITE
+          <h2 data-aos="fade-up" className="text-2xl font-extrabold text-neutral-900 dark:text-white sm:text-3xl">
+            <ScrollRevealText as="span" text="Life at IGNITE" className="inline-block" />
           </h2>
         </div>
-        <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
+        <div data-aos="fade-up" className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {cards.map((card, i) => (
             <Card key={i} card={card} />
           ))}

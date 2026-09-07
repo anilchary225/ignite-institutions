@@ -16,7 +16,7 @@ const phases = [
     duration: "Months 4–7",
     color: "orange",
     desc: "Deep dive into Class 12 syllabus and high-weightage JEE chapters. Problem-solving speed and pattern recognition.",
-    points: ["Class 12 full coverage with JEE-level problem banks", "Previous year paper analysis — 10 years of JEE", "Speed drills: 100 problems in 60 minutes"],
+    points: ["Class 12 full coverage with JEE-level problem banks", "Previous year paper analysis - 10 years of JEE", "Speed drills: 100 problems in 60 minutes"],
   },
   {
     phase: "Phase 3",
@@ -31,7 +31,7 @@ const phases = [
     title: "Final 60-Day Blitz",
     duration: "Months 11–12",
     color: "rose",
-    desc: "High-velocity last stretch — formula revision, quickfire problem sets, and complete mental conditioning for exam day.",
+    desc: "High-velocity last stretch - formula revision, quickfire problem sets, and complete mental conditioning for exam day.",
     points: ["Rapid-fire formula and concept revision cards", "10 full mocks in final 2 weeks", "Exam-day strategy and mental conditioning"],
   },
 ];
@@ -44,9 +44,9 @@ const colorMap = {
 };
 
 const subjects = [
-  { icon: Atom,         label: "Physics",     desc: "Mechanics, Waves, Optics, Electrostatics, Modern Physics — JEE-first approach" },
+  { icon: Atom,         label: "Physics",     desc: "Mechanics, Waves, Optics, Electrostatics, Modern Physics - JEE-first approach" },
   { icon: FlaskConical, label: "Chemistry",   desc: "Organic reactions, Physical chem numericals, Inorganic NCERT mastery" },
-  { icon: BookOpen,     label: "Mathematics", desc: "Calculus, Vectors, Coordinate Geometry, Permutations — exam-tempo practice" },
+  { icon: BookOpen,     label: "Mathematics", desc: "Calculus, Vectors, Coordinate Geometry, Permutations - exam-tempo practice" },
 ];
 
 export default function JSTCourseOverview() {
@@ -91,13 +91,13 @@ export default function JSTCourseOverview() {
         </div>
 
         {/* wide banner */}
-        <div className="mt-8 overflow-hidden rounded-3xl bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 p-8">
+        <div className="mt-8 overflow-hidden rounded-3xl bg-linear-to-r from-amber-500 via-orange-500 to-red-500 p-8">
           <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-100">Programme Structure</p>
               <h3 className="mt-1 text-2xl font-extrabold text-white sm:text-3xl">12-Month Intensive · Class 12 & Droppers</h3>
               <p className="mt-2 text-sm text-amber-100 leading-6 max-w-lg">
-                Structured in 4 laser-focused phases — from foundation sprint to full-mock blitz — with no wasted time.
+                Structured in 4 laser-focused phases - from foundation sprint to full-mock blitz - with no wasted time.
                 Built specifically for students who need results in one year.
               </p>
             </div>

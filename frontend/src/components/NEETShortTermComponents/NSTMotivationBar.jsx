@@ -1,11 +1,11 @@
 import { Stethoscope, ArrowRight } from "lucide-react";
 
 const phrases = [
-  "🩺 12 months is enough — if every day is focused on 720 marks",
+  "🩺 12 months is enough - if every day is focused on 720 marks",
   "🔬 NEET rewards those who own NCERT, not those who skim it",
   "🏥 Every AIIMS doctor started as a determined Class 12 student",
   "💊 Daily mocks build the exam stamina that coaching alone cannot",
-  "🧬 Biology mastery is built line by line — start now",
+  "🧬 Biology mastery is built line by line - start now",
   "🌊 Droppers who work smart come back stronger every time",
   "🎯 Your NEET percentile is a direct reflection of your daily habits",
   "💚 One year of discipline. A lifetime of healing others.",
@@ -15,7 +15,7 @@ export default function NSTMotivationBar() {
   const tripled = [...phrases, ...phrases, ...phrases];
 
   return (
-    <section className="overflow-hidden bg-gradient-to-r from-teal-600 via-cyan-500 to-teal-600 py-14">
+    <section className="overflow-hidden bg-linear-to-r from-green-600 via-green-500 to-green-600 py-14">
 
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-6 text-center md:flex-row md:justify-between md:text-left">
         <div className="flex items-center gap-4">
@@ -23,7 +23,7 @@ export default function NSTMotivationBar() {
             <Stethoscope size={26} className="text-white" />
           </div>
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-teal-100">Built for Urgency</p>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-green-100">Built for Urgency</p>
             <h2 className="mt-1 text-3xl font-extrabold text-white sm:text-4xl">
               One Year. Maximum NEET Impact.
             </h2>
@@ -33,7 +33,7 @@ export default function NSTMotivationBar() {
         <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
           <a
             href="#apply"
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-4 text-sm font-black text-teal-700 shadow-lg transition hover:bg-neutral-950 hover:text-white"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-4 text-sm font-black text-green-700 shadow-lg transition hover:bg-neutral-950 hover:text-white"
           >
             Apply Now <ArrowRight size={16} />
           </a>

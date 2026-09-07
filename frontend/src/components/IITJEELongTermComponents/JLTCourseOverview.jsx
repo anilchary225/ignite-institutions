@@ -1,7 +1,7 @@
 import { BookOpen, FlaskConical, Atom, Brain, Target, BarChart3, Layers, Clock4 } from "lucide-react";
 
 const subjects = [
-  { icon: Atom,         label: "Physics",     desc: "Mechanics to Modern Physics — every concept exam-ready", color: "violet" },
+  { icon: Atom,         label: "Physics",     desc: "Mechanics to Modern Physics - every concept exam-ready", color: "blue" },
   { icon: FlaskConical, label: "Chemistry",   desc: "Physical, Organic & Inorganic treated equally deeply",  color: "indigo" },
   { icon: BookOpen,     label: "Mathematics", desc: "Calculus, Algebra, Coordinate & beyond",                color: "sky"    },
 ];
@@ -11,12 +11,12 @@ const highlights = [
   { icon: Target,   title: "JEE Pattern Problem Banks",   desc: "10,000+ curated problems graded by difficulty and JEE frequency." },
   { icon: BarChart3,title: "Progress Analytics",          desc: "Monthly report cards tracking chapter-wise performance trends." },
   { icon: Layers,   title: "Board + JEE Dual Mastery",    desc: "Syllabus synced so students never sacrifice one for the other." },
-  { icon: Clock4,   title: "Scheduled Revision Cycles",   desc: "Structured revision built into the annual calendar — not an afterthought." },
+  { icon: Clock4,   title: "Scheduled Revision Cycles",   desc: "Structured revision built into the annual calendar - not an afterthought." },
   { icon: Atom,     title: "IIT/NIT Alumni Mentors",      desc: "Every faculty member is a product of the very exam they teach." },
 ];
 
 const colorMap = {
-  violet: { bg: "bg-violet-50 dark:bg-violet-950/20", icon: "bg-violet-100 text-violet-600 dark:bg-violet-950/40 dark:text-violet-400", border: "border-violet-200 dark:border-violet-800" },
+  blue: { bg: "bg-blue-50 dark:bg-blue-950/20", icon: "bg-blue-100 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400", border: "border-blue-200 dark:border-blue-800" },
   indigo: { bg: "bg-indigo-50 dark:bg-indigo-950/20", icon: "bg-indigo-100 text-indigo-600 dark:bg-indigo-950/40 dark:text-indigo-400", border: "border-indigo-200 dark:border-indigo-800" },
   sky:    { bg: "bg-sky-50 dark:bg-sky-950/20",       icon: "bg-sky-100 text-sky-600 dark:bg-sky-950/40 dark:text-sky-400",             border: "border-sky-200 dark:border-sky-800" },
 };
@@ -40,7 +40,7 @@ export default function JLTCourseOverview() {
             What the Programme Delivers
           </h2>
           <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
-            A rigorous, structured 2-year curriculum covering three core subjects — balanced
+            A rigorous, structured 2-year curriculum covering three core subjects - balanced
             for board excellence and JEE mastery simultaneously.
           </p>
         </div>
@@ -62,7 +62,7 @@ export default function JLTCourseOverview() {
         </div>
 
         {/* horizontal programme banner */}
-        <div className="mt-10 overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-700 via-indigo-600 to-violet-700 p-8">
+        <div className="mt-10 overflow-hidden rounded-3xl bg-linear-to-r from-indigo-700 via-indigo-600 to-blue-700 p-8">
           <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-200">Programme Structure</p>

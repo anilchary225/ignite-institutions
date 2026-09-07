@@ -44,7 +44,10 @@ export function BrowserRouter({ children }) {
   );
 
   useEffect(() => {
-    const onPopState = () => setPathname(normalizePath(window.location.pathname));
+    const onPopState = () => {
+      setPathname(normalizePath(window.location.pathname));
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    };
     window.addEventListener("popstate", onPopState);
     return () => window.removeEventListener("popstate", onPopState);
   }, []);
@@ -58,6 +61,7 @@ export function BrowserRouter({ children }) {
         window.history.pushState({}, "", normalized);
       }
       setPathname(normalized);
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
       window.dispatchEvent(new PopStateEvent("popstate"));
     };
 

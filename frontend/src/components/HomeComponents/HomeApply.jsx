@@ -1,5 +1,7 @@
 import React from "react";
 import { CheckCircle2, ArrowRight } from "lucide-react";
+import { RouteLink } from "../../router/BrowserRouter";
+import ScrollRevealText from "./ScrollRevealText";
 
 const highlights = [
   "Admissions open for MPC and BiPC programs.",
@@ -9,38 +11,37 @@ const highlights = [
 ];
 
 const tags = [
-  { label: "IIT-JEE", color: "bg-orange-100 text-orange-700 dark:bg-orange-500/10 dark:text-orange-400" },
-  { label: "NEET", color: "bg-green-100 text-green-700 dark:bg-green-700/10 dark:text-green-400" },
-  { label: "EAPCET", color: "bg-blue-100 text-blue-700 dark:bg-blue-500/10 dark:text-blue-400" },
-  { label: "Foundation", color: "bg-red-100 text-red-700 dark:bg-red-500/10 dark:text-red-400" },
+  { label: "IIT-JEE", color: "bg-orange-50 text-orange-700 dark:bg-orange-500/10 dark:text-orange-400" },
+  { label: "NEET", color: "bg-green-50 text-green-700 dark:bg-green-700/10 dark:text-green-400" },
+  { label: "EAPCET", color: "bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-400" },
+  { label: "Foundation", color: "bg-red-50 text-red-700 dark:bg-red-500/10 dark:text-red-400" },
 ];
 
 export default function HomeApply() {
   return (
-    <section className="bg-orange-50 dark:bg-neutral-900 px-4 py-14 sm:px-8 sm:py-16 transition-colors">
+    <section className="bg-neutral-50 px-4 py-14 transition-colors dark:bg-neutral-900 sm:px-8 sm:py-16">
       <div className="mx-auto grid max-w-7xl items-center gap-10 md:grid-cols-2">
-
         {/* Text content */}
         <div>
-          <span className="inline-block text-xs font-bold tracking-[0.25em] text-orange-500 uppercase mb-3">
-            Admissions 2026–28
+          <span data-aos="fade-up" className="mb-3 inline-block text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
+            <ScrollRevealText text="Admissions 2026–28" className="inline-block" />
           </span>
-          <h2 className="text-2xl font-extrabold leading-tight text-neutral-900 dark:text-white sm:text-3xl">
-            Apply for Admission
+          <h2 data-aos="fade-up" className="text-2xl font-semibold leading-tight text-neutral-900 dark:text-white sm:text-3xl">
+            <ScrollRevealText as="span" text="Apply for Admission" className="inline-block" />
           </h2>
-          <p className="mt-1 text-base font-medium text-neutral-500 dark:text-neutral-400">
+          <p data-aos="fade-up" className="mt-1 text-base font-medium text-neutral-500 dark:text-neutral-400">
             For the current academic year
           </p>
 
-          <p className="mt-4 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
+          <p data-aos="fade-up" className="mt-4 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
             We give our students not only the education but also the experiences
             that set them up for lifelong success in their career.
           </p>
 
           <ul className="mt-5 space-y-3">
             {highlights.map((item, i) => (
-              <li key={i} className="flex items-start gap-3">
-                <CheckCircle2 size={17} className="shrink-0 mt-0.5 text-orange-500" />
+              <li data-aos="fade-up" key={i} className="flex items-start gap-3">
+                <CheckCircle2 size={17} className="mt-0.5 shrink-0 text-blue-600 dark:text-blue-400" />
                 <span className="text-sm text-neutral-700 dark:text-neutral-300">{item}</span>
               </li>
             ))}
@@ -48,24 +49,28 @@ export default function HomeApply() {
 
           <div className="mt-6 flex flex-wrap gap-2">
             {tags.map((t) => (
-              <span key={t.label} className={`px-3 py-1 rounded-full text-xs font-bold ${t.color}`}>
+              <span data-aos="fade-up" key={t.label} className={`rounded-full px-3 py-1 text-xs font-medium ${t.color}`}>
                 {t.label}
               </span>
             ))}
           </div>
 
-          <button className="mt-7 inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-2.5 rounded-xl text-sm shadow-sm shadow-orange-500/30 transition-colors">
+          <RouteLink
+          data-aos="fade-up"
+            to="/contact"
+            className="mt-7 inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+          >
             Apply Now
             <ArrowRight size={15} />
-          </button>
+          </RouteLink>
         </div>
 
-        {/* Image — hidden on mobile to avoid layout break */}
-        <div className="hidden md:block overflow-hidden rounded-2xl shadow-md border-4 border-orange-200 dark:border-orange-500/20">
+        {/* Image - hidden on mobile to avoid layout break */}
+        <div data-aos="fade-up" className="hidden overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800 md:block">
           <img
-            src="https://placehold.co/600x450/fff7ed/ea580c?text=College+Photo"
+            src="/assets/images/home_admission.webp"
             alt="Ignite Junior College"
-            className="w-full h-72 object-cover"
+            className="h-72 w-full object-cover"
           />
         </div>
       </div>

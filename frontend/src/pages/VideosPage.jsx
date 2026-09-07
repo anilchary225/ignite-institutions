@@ -27,46 +27,43 @@ import { RouteLink } from "../router/BrowserRouter";
 const featuredVideos = [
   {
     id: "v1",
-    thumb:
-      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=85",
+    thumb: "/assets/videos/CELEBRATIONS VID.webm",
     eyebrow: "Annual Day · 2025",
-    title: "Ignite Annual Day — A Night of Stars",
+    title: "Celebrations - Annual Day Highlights",
     description:
-      "Over 2 000 students, parents, and staff gathered to celebrate academic excellence, performing arts, and the year's finest achievements on one grand stage.",
+      "A grand Annual Day showcase featuring student performances, stage moments, awards, and celebrations across the campus.",
     duration: "18 min",
     date: "March 20, 2025",
     views: "12.4K",
     tag: "Annual Day",
-    tagColor: "violet",
+    tagColor: "orange",
     youtubeId: null,
   },
   {
     id: "v2",
-    thumb:
-      "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=85",
-    eyebrow: "Cultural Fest · 2025",
-    title: "Utsav 2025 — Culture, Dance & Music",
+    thumb: "/assets/videos/COMMUNITY REACH PROGRAMS BY IGNITE.webm",
+    eyebrow: "Community Reach Programs · 2025",
+    title: "Community Reach Programs by Ignite",
     description:
-      "Three stages, 60+ acts, and one unforgettable evening. Ignite Utsav brought alive classical, folk, and contemporary performances entirely student-organised.",
+      "A look at Ignite’s outreach initiatives, student involvement, and community-focused programs that extend learning beyond the classroom.",
     duration: "24 min",
     date: "February 14, 2025",
     views: "9.1K",
-    tag: "Cultural",
+    tag: "Community",
     tagColor: "amber",
     youtubeId: null,
   },
   {
     id: "v3",
-    thumb:
-      "https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=1200&q=85",
-    eyebrow: "Science Expo · 2025",
-    title: "Ignite Science Fair — Curious Minds at Work",
+    thumb: "/assets/videos/FACILITIES VID.webm",
+    eyebrow: "Facilities · 2025",
+    title: "Facilities Video - Campus Infrastructure Tour",
     description:
-      "Hundreds of experiments, models, and innovations built by Ignite learners from Class 6 to JC 2. This annual expo celebrates curiosity as the core of education.",
+      "A guided tour of Ignite’s campus facilities, highlighting classrooms, labs, activity spaces, and student-friendly infrastructure.",
     duration: "15 min",
     date: "January 28, 2025",
     views: "7.8K",
-    tag: "Science",
+    tag: "Facilities",
     tagColor: "sky",
     youtubeId: null,
   },
@@ -75,80 +72,72 @@ const featuredVideos = [
 const scrollVideos = [
   {
     id: "s1",
-    thumb:
-      "https://images.unsplash.com/photo-1503095396549-807759245b35?auto=format&fit=crop&w=600&q=80",
-    title: "Sports Day 2025",
-    duration: "12 min",
-    views: "5.2K",
-    date: "Jan 15, 2025",
+    thumb: "/assets/videos/CELEBRATIONS VID.webm",
+    title: "Celebrations",
+    duration: "18 min",
+    views: "12.4K",
+    date: "Mar 20, 2025",
   },
   {
     id: "s2",
-    thumb:
-      "https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=600&q=80",
-    title: "IIT-JEE Topper Interviews",
-    duration: "9 min",
-    views: "21K",
-    date: "Apr 28, 2025",
+    thumb: "/assets/videos/COMMUNITY REACH PROGRAMS BY IGNITE.webm",
+    title: "Community Reach Programs by Ignite",
+    duration: "24 min",
+    views: "9.1K",
+    date: "Feb 14, 2025",
   },
   {
     id: "s3",
-    thumb:
-      "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=600&q=80",
-    title: "NEET Results Celebration",
-    duration: "7 min",
-    views: "18K",
-    date: "Jun 10, 2025",
+    thumb: "/assets/videos/FACILITIES VID.webm",
+    title: "Facilities",
+    duration: "15 min",
+    views: "7.8K",
+    date: "Jan 28, 2025",
   },
   {
     id: "s4",
-    thumb:
-      "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=600&q=80",
-    title: "Parent Orientation Day",
+    thumb: "/assets/videos/EVENTS @ IGNITE.webm",
+    title: "Events at Ignite",
     duration: "20 min",
-    views: "3.4K",
-    date: "May 5, 2025",
+    views: "5.2K",
+    date: "2025",
   },
   {
     id: "s5",
-    thumb:
-      "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=600&q=80",
-    title: "Classroom Walkthrough Tour",
-    duration: "6 min",
-    views: "4.7K",
-    date: "Dec 10, 2024",
+    thumb: "/assets/videos/FORMATION DAY VID.webm",
+    title: "Formation Day",
+    duration: "20 min",
+    views: "3.4K",
+    date: "2025",
   },
   {
     id: "s6",
-    thumb:
-      "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=600&q=80",
-    title: "Motivation Talk by Alumni",
+    thumb: "/assets/videos/JULY EVENTS VIDEO.webm",
+    title: "July Events",
     duration: "30 min",
     views: "14K",
-    date: "Mar 8, 2025",
+    date: "2025",
   },
   {
     id: "s7",
-    thumb:
-      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80",
-    title: "Group Study Methodology",
+    thumb: "/assets/videos/madam's sports video.webm",
+    title: "Madam's Sports",
     duration: "11 min",
     views: "6.3K",
-    date: "Feb 20, 2025",
+    date: "2025",
   },
   {
     id: "s8",
-    thumb:
-      "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=600&q=80",
-    title: "Foundation Batch Launch",
+    thumb: "/assets/videos/swatchrunvideo.webm",
+    title: "Swachh Run",
     duration: "8 min",
     views: "2.9K",
-    date: "Jun 1, 2025",
+    date: "2025",
   },
 ];
 
 const statsData = [
-  { value: "500+", label: "Events Hosted", icon: CalendarDays, color: "violet" },
+  { value: "500+", label: "Events Hosted", icon: CalendarDays, color: "orange" },
   { value: "12 000+", label: "Students Reached", icon: Users, color: "sky" },
   { value: "200+", label: "Expert Speakers", icon: Mic2, color: "amber" },
   { value: "98%", label: "Satisfaction Rate", icon: Heart, color: "rose" },
@@ -157,117 +146,119 @@ const statsData = [
 ];
 
 const categoryVideos = {
-  Academic: [
+  Celebrations: [
     {
-      id: "a1",
-      thumb: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=700&q=80",
-      title: "IIT-JEE Long-Term Batch Overview",
-      duration: "22 min",
-      views: "31K",
-      date: "Jul 1, 2025",
+      id: "celebrations-1",
+      thumb: "/assets/videos/CELEBRATIONS VID.webm",
     },
+  ],
+  Community: [
     {
-      id: "a2",
-      thumb: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=700&q=80",
-      title: "NEET Preparation Strategy",
-      duration: "18 min",
-      views: "26K",
-      date: "Jun 15, 2025",
+      id: "community-1",
+      thumb: "/assets/videos/COMMUNITY REACH PROGRAMS BY IGNITE.webm",
     },
+  ],
+  Facilities: [
     {
-      id: "a3",
-      thumb: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=700&q=80",
-      title: "Board Exam Mastery Tips",
-      duration: "14 min",
-      views: "19K",
-      date: "May 22, 2025",
+      id: "facilities-1",
+      thumb: "/assets/videos/FACILITIES VID.webm",
     },
   ],
   Events: [
     {
-      id: "e1",
-      thumb: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=700&q=80",
-      title: "Annual Day Highlights 2025",
-      duration: "18 min",
-      views: "12K",
-      date: "Mar 20, 2025",
-    },
-    {
-      id: "e2",
-      thumb: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=700&q=80",
-      title: "Utsav Cultural Night",
-      duration: "24 min",
-      views: "9K",
-      date: "Feb 14, 2025",
-    },
-    {
-      id: "e3",
-      thumb: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=700&q=80",
-      title: "Sports Day Action Reel",
-      duration: "10 min",
-      views: "5K",
-      date: "Jan 15, 2025",
+      id: "events-1",
+      thumb: "/assets/videos/EVENTS @ IGNITE.webm",
     },
   ],
-  "Student Life": [
+  Formation: [
     {
-      id: "sl1",
-      thumb: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=700&q=80",
-      title: "A Day at Ignite Campus",
-      duration: "6 min",
-      views: "4.7K",
-      date: "Apr 10, 2025",
-    },
-    {
-      id: "sl2",
-      thumb: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=700&q=80",
-      title: "Hostel & Mess Experience",
-      duration: "8 min",
-      views: "3.2K",
-      date: "Mar 30, 2025",
-    },
-    {
-      id: "sl3",
-      thumb: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=700&q=80",
-      title: "Library & Study Halls Tour",
-      duration: "5 min",
-      views: "2.8K",
-      date: "Feb 28, 2025",
+      id: "formation-1",
+      thumb: "/assets/videos/FORMATION DAY VID.webm",
     },
   ],
-  Results: [
+  July: [
     {
-      id: "r1",
-      thumb: "https://images.unsplash.com/photo-1503095396549-807759245b35?auto=format&fit=crop&w=700&q=80",
-      title: "IIT JEE 2025 — Topper Stories",
-      duration: "30 min",
-      views: "45K",
-      date: "Jun 5, 2025",
+      id: "july-1",
+      thumb: "/assets/videos/JULY EVENTS VIDEO.webm",
+    },
+  ],
+  Sports: [
+    {
+      id: "sports-1",
+      thumb: "/assets/videos/madam's sports video.webm",
+    },
+  ],
+  "Swachh Run": [
+    {
+      id: "swachh-run-1",
+      thumb: "/assets/videos/swatchrunvideo.webm",
+    },
+  ],
+  Mango: [
+    {
+      id: "mango-1",
+      thumb: "/assets/videos/DVR sirMangoDistribution.webm",
+    },
+  ],
+  "Plantation Run": [
+    {
+      id: "plantation-1",
+      thumb: "/assets/videos/palntationrun1.webm",
     },
     {
-      id: "r2",
-      thumb: "https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=700&q=80",
-      title: "NEET 2025 — Ranked Students Speak",
-      duration: "28 min",
-      views: "38K",
-      date: "Jun 12, 2025",
+      id: "plantation-2",
+      thumb: "/assets/videos/palntationrun2.webm",
     },
     {
-      id: "r3",
-      thumb: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=700&q=80",
-      title: "Board 100% Results — Celebration",
-      duration: "15 min",
-      views: "22K",
-      date: "May 30, 2025",
+      id: "plantation-3",
+      thumb: "/assets/videos/palntationrun3.webm",
+    },
+    {
+      id: "plantation-4",
+      thumb: "/assets/videos/palntationrun4.webm",
+    },
+    {
+      id: "plantation-5",
+      thumb: "/assets/videos/palntationrun5.webm",
+    },
+    {
+      id: "plantation-6",
+      thumb: "/assets/videos/platationrun6.webm",
+    },
+    {
+      id: "plantation-7",
+      thumb: "/assets/videos/plantation7.webm",
+    },
+    {
+      id: "plantation-8",
+      thumb: "/assets/videos/palntationrun8.webm",
+    },
+    {
+      id: "plantation-9",
+      thumb: "/assets/videos/palntationrun9.webm",
+    },
+  ],
+  "Miyapur Run": [
+    {
+      id: "miyapur-1",
+      thumb: "/assets/videos/miyapur_run1.webm",
+    },
+    {
+      id: "miyapur-2",
+      thumb: "/assets/videos/miyapur_run2.webm",
+    },
+    {
+      id: "miyapur-3",
+      thumb: "/assets/videos/miyapur_run3.webm",
     },
   ],
 };
 
 const colorMap = {
-  violet: {
-    icon: "bg-violet-100 text-violet-600 dark:bg-violet-950/50 dark:text-violet-300",
-    tab: "bg-violet-600 text-white shadow-violet-500/25 shadow-lg",
-    ring: "ring-violet-500",
+  orange: {
+    icon: "bg-orange-100 text-orange-600 dark:bg-orange-950/50 dark:text-orange-300",
+    tab: "bg-orange-600 text-white shadow-orange-500/25 shadow-lg",
+    ring: "ring-orange-500",
   },
   sky: {
     icon: "bg-sky-100 text-sky-600 dark:bg-sky-950/50 dark:text-sky-300",
@@ -297,7 +288,7 @@ const colorMap = {
 };
 
 const tagColorMap = {
-  violet: "bg-violet-600 text-white",
+  orange: "bg-orange-600 text-white",
   amber: "bg-amber-500 text-white",
   sky: "bg-sky-500 text-white",
 };
@@ -308,6 +299,60 @@ const categoryIcons = {
   "Student Life": Users,
   Results: Award,
 };
+
+/* Hover-to-preview video (muted, plays only on hover/focus) */
+function HoverVideo({ src, className = "", onClick, poster }) {
+  const videoRef = useRef(null);
+
+  function play() {
+    videoRef.current?.play().catch(() => {});
+  }
+
+  function pause() {
+    if (videoRef.current) videoRef.current.pause();
+  }
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      poster={poster}
+      className={className}
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      onMouseEnter={play}
+      onMouseLeave={pause}
+      onFocus={play}
+      onBlur={pause}
+      onClick={onClick}
+    />
+  );
+}
+
+/* Autoplay-on-load video (muted, loops immediately, used for Hero background) */
+function AutoPlayVideo({ src, className = "", onClick }) {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    videoRef.current?.play().catch(() => {});
+  }, [src]);
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      className={className}
+      muted
+      loop
+      autoPlay
+      playsInline
+      preload="auto"
+      onClick={onClick}
+    />
+  );
+}
 
 /* ─────────────────────────── MODAL ─────────────────────────── */
 
@@ -327,8 +372,7 @@ function VideoModal({ video, onClose }) {
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
-      onClick={onClose}
-    >
+      onClick={onClose}>
       <div
         className="relative w-full max-w-3xl rounded-2xl overflow-hidden bg-neutral-950 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
@@ -342,20 +386,18 @@ function VideoModal({ video, onClose }) {
           <X size={16} />
         </button>
         <div className="relative aspect-video w-full bg-neutral-900">
-          <img
+          <video
+            key={video.id}
             src={video.thumb}
-            alt={video.title}
-            className="h-full w-full object-cover opacity-40"
+            className="h-full w-full object-cover"
+            autoPlay
+            controls
+            playsInline
+            preload="auto"
           />
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-white">
-            <div className="grid h-16 w-16 place-items-center rounded-full bg-violet-600 shadow-lg shadow-violet-900/50">
-              <Play size={24} className="translate-x-0.5" fill="white" />
-            </div>
-            <p className="text-sm font-semibold opacity-70">Video playback preview</p>
-          </div>
         </div>
         <div className="p-5">
-          <p className="text-xs font-black uppercase tracking-widest text-violet-400">
+          <p className="text-xs font-black uppercase tracking-widest text-orange-400">
             {video.eyebrow ?? video.date}
           </p>
           <h3 className="mt-2 text-lg font-extrabold text-white">{video.title}</h3>
@@ -373,7 +415,7 @@ function VideoModal({ video, onClose }) {
   );
 }
 
-/* ─────────────────── SECTION 1 — HERO CAPTION ─────────────────── */
+/* ─────────────────── SECTION 1 - HERO CAPTION ─────────────────── */
 
 function VideoHero() {
   const [active, setActive] = useState(0);
@@ -389,12 +431,16 @@ function VideoHero() {
     return () => window.clearInterval(t);
   }, [isPaused]);
 
+  useEffect(() => {
+    if (modal) {
+      setIsPaused(true);
+    }
+  }, [modal]);
+
   const video = featuredVideos[active];
 
   return (
     <>
-      {modal && <VideoModal video={modal} onClose={() => setModal(null)} />}
-
       <section className="px-4 pb-10 pt-5 sm:px-6 sm:pt-8">
         <div
           className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-neutral-950 shadow-[0_24px_80px_rgba(42,25,86,0.25)]"
@@ -404,13 +450,19 @@ function VideoHero() {
           {/* Slide strip */}
           <div className="flex transition-none">
             <div className="relative min-w-full">
-              {/* Background image */}
-              <div
-                className="relative h-[620px] w-full transition-all duration-1000 sm:h-[680px]"
-                style={{ backgroundImage: `url(${video.thumb})`, backgroundSize: "cover", backgroundPosition: "center" }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/95 via-neutral-950/65 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/60 to-transparent" />
+              {/* Background video - autoplays */}
+              <div className="relative h-[620px] w-full overflow-hidden transition-all duration-1000 sm:h-[680px]">
+                <AutoPlayVideo
+                  key={video.id}
+                  src={video.thumb}
+                  className="absolute inset-0 h-full w-full object-cover"
+                  onClick={() => {
+                    setIsPaused(true);
+                    setModal(video);
+                  }}
+                />
+                <div className="absolute inset-0 bg-linear-to-r from-neutral-950/95 via-neutral-950/65 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-neutral-950/60 to-transparent" />
 
                 {/* Content */}
                 <div className="absolute inset-0 flex flex-col justify-end p-7 sm:p-12 lg:p-16">
@@ -425,28 +477,31 @@ function VideoHero() {
                           {video.eyebrow}
                         </span>
                       </div>
-                      <h1 className="mt-5 text-4xl font-extrabold leading-[1.05] text-white sm:text-5xl lg:text-6xl">
+                      <h1 className="mt-5 text-xl font-extrabold leading-[1.05] text-white sm:text-2xl lg:text-4xl">
                         {video.title}
                       </h1>
                       <p className="mt-4 max-w-xl text-sm leading-7 text-white/75 sm:text-base">
                         {video.description}
                       </p>
                       <div className="mt-5 flex flex-wrap gap-4 text-xs font-semibold text-white/60">
-                        <span className="flex items-center gap-1.5"><Clock3 size={13} />{video.duration}</span>
-                        <span className="flex items-center gap-1.5"><Eye size={13} />{video.views} views</span>
+                        {/* <span className="flex items-center gap-1.5"><Clock3 size={13} />{video.duration}</span>
+                        <span className="flex items-center gap-1.5"><Eye size={13} />{video.views} views</span> */}
                         <span className="flex items-center gap-1.5"><CalendarDays size={13} />{video.date}</span>
                       </div>
                       <button
                         type="button"
-                        onClick={() => setModal(video)}
-                        className="mt-7 inline-flex items-center gap-3 rounded-full bg-violet-600 px-6 py-3.5 text-sm font-black text-white shadow-lg shadow-violet-900/40 transition hover:bg-violet-500 hover:gap-4"
+                        onClick={() => {
+                          setIsPaused(true);
+                          setModal(video);
+                        }}
+                        className="mt-7 inline-flex items-center gap-3 rounded-full bg-orange-600 px-6 py-3.5 text-sm font-black text-white shadow-lg shadow-orange-900/40 transition hover:bg-orange-500 hover:gap-4"
                       >
                         <Play size={15} fill="white" />
                         Watch Now
                       </button>
                     </div>
 
-                    {/* Right — thumbnail strip */}
+                    {/* Right - thumbnail strip (hover-preview) */}
                     <div className="hidden shrink-0 flex-col gap-3 lg:flex">
                       {featuredVideos.map((v, i) => (
                         <button
@@ -460,7 +515,10 @@ function VideoHero() {
                           }`}
                         >
                           <div className="relative h-14 w-20 shrink-0 overflow-hidden rounded-lg">
-                            <img src={v.thumb} alt={v.title} className="h-full w-full object-cover" />
+                            <HoverVideo
+                              src={v.thumb}
+                              className="h-full w-full object-cover"
+                            />
                             <div className="absolute inset-0 flex items-center justify-center bg-black/30">
                               <Play size={12} fill="white" className="text-white" />
                             </div>
@@ -492,30 +550,30 @@ function VideoHero() {
           </div>
         </div>
       </section>
+
+      {modal && <VideoModal video={modal} onClose={() => setModal(null)} />}
     </>
   );
 }
 
-/* ─────────────────── SECTION 2 — HORIZONTAL SCROLL ─────────────────── */
+/* ─────────────────── SECTION 2 - HORIZONTAL SCROLL ─────────────────── */
 
-function ScrollVideoCard({ video, onClick }) {
+function ScrollVideoCard({ video, onPlay }) {
   return (
     <button
       type="button"
-      onClick={() => onClick(video)}
-      className="group relative shrink-0 w-64 sm:w-72 overflow-hidden rounded-2xl bg-neutral-900 shadow-md ring-1 ring-neutral-800 transition hover:-translate-y-1 hover:shadow-xl focus:outline-none"
+      onClick={() => onPlay(video)}
+      className="group relative block shrink-0 w-64 sm:w-72 overflow-hidden rounded-2xl bg-neutral-900 shadow-md ring-1 ring-neutral-800 transition hover:-translate-y-1 hover:shadow-xl focus:outline-none text-left"
     >
       <div className="relative aspect-video overflow-hidden">
-        <img
+        <HoverVideo
           src={video.thumb}
-          alt={video.title}
-          loading="lazy"
           className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
         {/* Play button */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="grid h-12 w-12 place-items-center rounded-full bg-white/20 backdrop-blur-md ring-2 ring-white/30 transition duration-300 group-hover:scale-110 group-hover:bg-violet-600 group-hover:ring-violet-500">
+          <div className="grid h-12 w-12 place-items-center rounded-full bg-white/20 backdrop-blur-md ring-2 ring-white/30 transition duration-300 group-hover:scale-110 group-hover:bg-orange-600 group-hover:ring-orange-500">
             <Play size={16} fill="white" className="translate-x-0.5 text-white" />
           </div>
         </div>
@@ -526,10 +584,10 @@ function ScrollVideoCard({ video, onClick }) {
       </div>
       <div className="p-4 text-left">
         <p className="truncate text-sm font-extrabold text-white">{video.title}</p>
-        <div className="mt-1.5 flex gap-3 text-[11px] font-semibold text-neutral-500">
+        {/* <div className="mt-1.5 flex gap-3 text-[11px] font-semibold text-neutral-500">
           <span className="flex items-center gap-1"><Eye size={10} />{video.views}</span>
           <span className="flex items-center gap-1"><CalendarDays size={10} />{video.date}</span>
-        </div>
+        </div> */}
       </div>
     </button>
   );
@@ -547,16 +605,14 @@ function HorizontalScrollVideos() {
 
   return (
     <>
-      {modal && <VideoModal video={modal} onClose={() => setModal(null)} />}
-
       <section className="bg-neutral-950 py-20">
         <div className="px-6 lg:px-10">
           {/* Header */}
           <div className="mx-auto flex max-w-7xl items-end justify-between gap-6">
             <div>
               <div className="flex items-center gap-3">
-                <span className="h-px w-10 bg-violet-500" />
-                <span className="text-xs font-black uppercase tracking-[0.2em] text-violet-400">
+                <span className="h-px w-10 bg-orange-500" />
+                <span className="text-xs font-black uppercase tracking-[0.2em] text-orange-400">
                   Highlights Reel
                 </span>
               </div>
@@ -564,7 +620,7 @@ function HorizontalScrollVideos() {
                 Popular campus videos
               </h2>
               <p className="mt-2 max-w-lg text-sm leading-6 text-neutral-400">
-                Scroll through our most-watched moments — from classroom sessions to grand event stages.
+                Scroll through our most-watched moments - from classroom sessions to grand event stages.
               </p>
             </div>
             <div className="hidden shrink-0 items-center gap-2 sm:flex">
@@ -572,7 +628,7 @@ function HorizontalScrollVideos() {
                 type="button"
                 onClick={() => scroll(-1)}
                 aria-label="Scroll left"
-                className="grid h-11 w-11 place-items-center rounded-full border border-neutral-700 text-neutral-400 transition hover:border-violet-500 hover:bg-violet-600 hover:text-white"
+                className="grid h-11 w-11 place-items-center rounded-full border border-neutral-700 text-neutral-400 transition hover:border-orange-500 hover:bg-orange-600 hover:text-white"
               >
                 <ChevronLeft size={19} />
               </button>
@@ -580,7 +636,7 @@ function HorizontalScrollVideos() {
                 type="button"
                 onClick={() => scroll(1)}
                 aria-label="Scroll right"
-                className="grid h-11 w-11 place-items-center rounded-full border border-neutral-700 text-neutral-400 transition hover:border-violet-500 hover:bg-violet-600 hover:text-white"
+                className="grid h-11 w-11 place-items-center rounded-full border border-neutral-700 text-neutral-400 transition hover:border-orange-500 hover:bg-orange-600 hover:text-white"
               >
                 <ChevronRight size={19} />
               </button>
@@ -594,7 +650,7 @@ function HorizontalScrollVideos() {
             style={{ scrollbarWidth: "none" }}
           >
             {scrollVideos.map((v) => (
-              <ScrollVideoCard key={v.id} video={v} onClick={setModal} />
+              <ScrollVideoCard key={v.id} video={v} onPlay={setModal} />
             ))}
           </div>
 
@@ -604,15 +660,17 @@ function HorizontalScrollVideos() {
           </p>
         </div>
       </section>
+
+      {modal && <VideoModal video={modal} onClose={() => setModal(null)} />}
     </>
   );
 }
 
-/* ─────────────────── SECTION 3 — STATS STRIP ─────────────────── */
+/* ─────────────────── SECTION 3 - STATS STRIP ─────────────────── */
 
 function StatsStrip() {
   return (
-    <section className="bg-gradient-to-r from-violet-700 via-violet-600 to-indigo-600 px-6 py-14">
+    <section className="bg-linear-to-r from-orange-700 via-orange-600 to-indigo-600 px-6 py-14">
       <div className="mx-auto max-w-7xl">
         <div className="mb-10 text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-white">
@@ -646,25 +704,23 @@ function StatsStrip() {
   );
 }
 
-/* ─────────────────── SECTION 4 — CATEGORY VIDEOS ─────────────────── */
+/* ─────────────────── SECTION 4 - CATEGORY VIDEOS ─────────────────── */
 
-function CategoryVideoCard({ video, onClick }) {
+function CategoryVideoCard({ video, onPlay }) {
   return (
     <button
       type="button"
-      onClick={() => onClick(video)}
-      className="group text-left overflow-hidden rounded-2xl bg-white ring-1 ring-neutral-100 shadow-sm transition hover:-translate-y-1 hover:shadow-lg focus:outline-none dark:bg-neutral-900 dark:ring-neutral-800"
+      onClick={() => onPlay(video)}
+      className="group block text-left w-full overflow-hidden rounded-2xl bg-white ring-1 ring-neutral-100 shadow-sm transition hover:-translate-y-1 hover:shadow-lg focus:outline-none dark:bg-neutral-900 dark:ring-neutral-800"
     >
       <div className="relative aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-800">
-        <img
+        <HoverVideo
           src={video.thumb}
-          alt={video.title}
-          loading="lazy"
           className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/15 to-transparent" />
         <div className="absolute inset-0 flex items-center justify-center opacity-0 transition group-hover:opacity-100">
-          <div className="grid h-12 w-12 place-items-center rounded-full bg-violet-600 shadow-lg shadow-violet-900/50">
+          <div className="grid h-12 w-12 place-items-center rounded-full bg-orange-600 shadow-lg shadow-orange-900/50">
             <Play size={16} fill="white" className="translate-x-0.5 text-white" />
           </div>
         </div>
@@ -672,7 +728,7 @@ function CategoryVideoCard({ video, onClick }) {
           {video.duration}
         </span>
       </div>
-      <div className="p-4">
+      {/* <div className="p-4">
         <p className="text-sm font-extrabold leading-snug text-neutral-950 line-clamp-2 dark:text-white">
           {video.title}
         </p>
@@ -680,29 +736,34 @@ function CategoryVideoCard({ video, onClick }) {
           <span className="flex items-center gap-1"><Eye size={10} />{video.views} views</span>
           <span className="flex items-center gap-1"><CalendarDays size={10} />{video.date}</span>
         </div>
-      </div>
+      </div> */}
     </button>
   );
 }
 
 function CategoryVideos() {
   const categories = Object.keys(categoryVideos);
-  const [active, setActive] = useState(categories[0]);
+  const [active, setActive] = useState(categories[0] ?? "");
   const [modal, setModal] = useState(null);
+  const activeVideos = categoryVideos[active] ?? [];
   const Icon = categoryIcons[active] ?? BookOpen;
+
+  useEffect(() => {
+    if (categories.length && !categoryVideos[active]) {
+      setActive(categories[0]);
+    }
+  }, [active, categories]);
 
   return (
     <>
-      {modal && <VideoModal video={modal} onClose={() => setModal(null)} />}
-
       <section className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
         <div className="mx-auto max-w-7xl">
           {/* Header */}
           <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
             <div>
               <div className="flex items-center gap-3">
-                <span className="h-px w-10 bg-violet-500" />
-                <span className="text-xs font-black uppercase tracking-[0.2em] text-violet-700 dark:text-violet-400">
+                <span className="h-px w-10 bg-orange-500" />
+                <span className="text-xs font-black uppercase tracking-[0.2em] text-orange-700 dark:text-orange-400">
                   Browse by Category
                 </span>
               </div>
@@ -710,7 +771,7 @@ function CategoryVideos() {
                 Find videos that matter to you
               </h2>
               <p className="mt-2 max-w-xl text-sm leading-6 text-neutral-600 dark:text-neutral-400">
-                Academic sessions, event highlights, student life diaries, and result celebrations — all in one place.
+                Academic sessions, event highlights, student life diaries, and result celebrations - all in one place.
               </p>
             </div>
           </div>
@@ -727,8 +788,8 @@ function CategoryVideos() {
                   onClick={() => setActive(cat)}
                   className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold transition ${
                     isActive
-                      ? "bg-violet-600 text-white shadow-lg shadow-violet-500/25"
-                      : "bg-white text-neutral-600 ring-1 ring-neutral-200 hover:ring-violet-300 hover:text-violet-700 dark:bg-neutral-800 dark:text-neutral-300 dark:ring-neutral-700"
+                      ? "bg-orange-600 text-white shadow-lg shadow-orange-500/25"
+                      : "bg-white text-neutral-600 ring-1 ring-neutral-200 hover:ring-orange-300 hover:text-orange-700 dark:bg-neutral-800 dark:text-neutral-300 dark:ring-neutral-700"
                   }`}
                 >
                   <CatIcon size={14} />
@@ -740,15 +801,15 @@ function CategoryVideos() {
 
           {/* Grid */}
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {categoryVideos[active].map((v) => (
-              <CategoryVideoCard key={v.id} video={v} onClick={setModal} />
+            {activeVideos.map((v) => (
+              <CategoryVideoCard key={v.id} video={v} onPlay={setModal} />
             ))}
           </div>
 
           <div className="mt-8 text-center">
             <RouteLink
               to="/gallery"
-              className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-6 py-3 text-sm font-bold text-neutral-700 transition hover:border-violet-500 hover:text-violet-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300"
+              className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-6 py-3 text-sm font-bold text-neutral-700 transition hover:border-orange-500 hover:text-orange-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300"
             >
               Back to Gallery
               <ArrowRight size={14} />
@@ -756,19 +817,21 @@ function CategoryVideos() {
           </div>
         </div>
       </section>
+
+      {modal && <VideoModal video={modal} onClose={() => setModal(null)} />}
     </>
   );
 }
 
-/* ─────────────────── SECTION 5 — ABOUT IGNITE ─────────────────── */
+/* ─────────────────── SECTION 5 - ABOUT IGNITE ─────────────────── */
 
 function AboutIgnite() {
   const pillars = [
     {
       icon: Flame,
       title: "Igniting Potential",
-      text: "We believe every student carries extraordinary ability. Our role is to create the right spark — through world-class teachers, structured programs, and a culture of excellence.",
-      color: "violet",
+      text: "We believe every student carries extraordinary ability. Our role is to create the right spark - through world-class teachers, structured programs, and a culture of excellence.",
+      color: "orange",
     },
     {
       icon: GraduationCap,
@@ -795,7 +858,7 @@ function AboutIgnite() {
       <div className="mx-auto max-w-7xl">
         {/* Top band */}
         <div className="flex flex-col items-center gap-6 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full bg-violet-50 px-4 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-violet-700 dark:bg-violet-950/40 dark:text-violet-400">
+          <span className="inline-flex items-center gap-2 rounded-full bg-orange-50 px-4 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-orange-700 dark:bg-orange-950/40 dark:text-orange-400">
             <Sparkles size={13} />
             About Ignite
           </span>
@@ -818,7 +881,7 @@ function AboutIgnite() {
             return (
               <div
                 key={p.title}
-                className="flex flex-col gap-4 rounded-3xl border border-neutral-100 bg-neutral-50 p-6 dark:border-neutral-800 dark:bg-neutral-900"
+                className="flex flex-col gap-4 rounded-3xl border border-neutral-100 hover:shadow-2xl hover:border-orange-600 bg-neutral-50 p-6 dark:border-neutral-800 dark:bg-neutral-900"
               >
                 <span className={`grid h-11 w-11 place-items-center rounded-2xl ${c.icon}`}>
                   <Icon size={20} />
@@ -833,24 +896,31 @@ function AboutIgnite() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="mt-14 flex flex-col items-center justify-between gap-8 rounded-3xl bg-gradient-to-br from-violet-600 to-indigo-700 p-8 text-center sm:flex-row sm:rounded-full sm:px-10 sm:text-left">
+        <div className="mt-14 flex flex-col items-center justify-between gap-8 rounded-3xl border-2 border-orange-600 p-8 text-center sm:flex-row sm:rounded-full sm:px-10 sm:text-left">
           <div>
-            <p className="text-xs font-black uppercase tracking-widest text-violet-200">
+            <p className="text-xs font-black uppercase tracking-widest text-orange-600">
               Come visit us
             </p>
-            <h3 className="mt-2 text-xl font-extrabold text-white">
-              See Ignite firsthand — schedule a campus tour.
+            <h3 className="mt-2 text-xl font-extrabold text-black dark:text-white">
+              See Ignite firsthand - schedule a campus tour.
             </h3>
           </div>
           <div className="flex shrink-0 flex-wrap justify-center gap-3">
             <RouteLink
+              to="/gallery/all-videos"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-black text-orange-700 border-2 border-orange-600 transition hover:bg-orange-600 hover:text-white dark:bg-orange-600 dark:text-white dark:hover:bg-orange-700"
+            >
+              View All
+              <ArrowRight size={14} />
+            </RouteLink>
+            <RouteLink
               to="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-black text-violet-700 transition hover:bg-violet-50"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-black text-orange-700 border-2 border-orange-600 hover:text-white transition hover:bg-orange-600 dark:bg-orange-600 dark:text-white dark:hover:bg-orange-700"
             >
               Contact Us
               <ArrowRight size={14} />
             </RouteLink>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-5 py-3 text-sm font-bold text-white ring-1 ring-white/20">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-5 py-3 text-sm font-bold text-black dark:text-white ring-1 ring-white/20">
               <MapPin size={13} />
               Hyderabad
             </span>
@@ -871,7 +941,7 @@ function Sparkles(props) {
 
 export default function VideosPage() {
   return (
-    <div className="min-h-screen bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white">
+    <div className="min-h-screen pt-16 bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white">
       <VideoHero />
       <HorizontalScrollVideos />
       <StatsStrip />

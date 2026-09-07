@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
 const faqs = [
-  { q: "What is the duration of the BiPC NEET programme at Ignite?", a: "The programme runs for 2 years covering Class 11 and Class 12 (Intermediate). It integrates Intermediate board preparation with full NEET UG coaching — Biology, Physics, and Chemistry — in a single structured plan." },
+  { q: "What is the duration of the BiPC NEET programme at Ignite?", a: "The programme runs for 2 years covering Class 11 and Class 12 (Intermediate). It integrates Intermediate board preparation with full NEET UG coaching - Biology, Physics, and Chemistry - in a single structured plan." },
   { q: "Is board preparation included alongside NEET coaching?", a: "Yes, both run together. Our integrated curriculum ensures students score well in Intermediate board exams while building the NCERT-depth needed for NEET. No trade-off between the two." },
   { q: "How does Ignite approach Biology for NEET?", a: "Biology is treated as the primary subject for NEET since it carries the most marks. We use NCERT-first methodology with diagram practice, continuous daily drilling, and topic-wise MCQ sessions to ensure deep retention." },
   { q: "What is the batch size at Ignite BiPC?", a: "We keep batches to a maximum of 30 students. This allows personalised attention, regular individual feedback, and a closer teacher-student relationship than large coaching centres." },
@@ -45,7 +45,7 @@ export default function BIPCFaq() {
         <div className="mt-10 space-y-3">
           {faqs.map((faq, i) => <Item key={i} faq={faq} open={open === i} onToggle={() => setOpen(open === i ? -1 : i)} />)}
         </div>
-        <div className="mt-10 rounded-3xl bg-gradient-to-br from-emerald-600 to-indigo-700 p-7 text-center">
+        <div className="mt-10 rounded-3xl bg-green-700 p-7 text-center">
           <p className="text-sm font-bold text-emerald-200">Still have questions?</p>
           <h3 className="mt-2 text-xl font-extrabold text-white">Talk to our BiPC counsellors</h3>
           <p className="mt-2 text-sm text-emerald-100">Available Mon–Sat, 9 AM–6 PM.</p>

@@ -11,7 +11,7 @@ export default function BIPCStats() {
   return (
     <section className="bg-white px-6 py-12 dark:bg-neutral-950">
       <div className="mx-auto max-w-7xl">
-        <div className="rounded-3xl bg-gradient-to-br from-emerald-600 via-teal-600 to-indigo-700 p-1 shadow-xl">
+        <div className="rounded-3xl bg-linear-to-br from-emerald-600 via-teal-600 to-indigo-700 p-1 shadow-xl">
           <div className="rounded-[22px] bg-white dark:bg-neutral-950">
             <div className="grid grid-cols-2 divide-neutral-100 sm:grid-cols-3 lg:grid-cols-6 dark:divide-neutral-800">
               {stats.map((s, i) => (

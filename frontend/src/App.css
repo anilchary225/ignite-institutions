@@ -1,0 +1,15 @@
+.ignite-floating-control {
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+html[data-hero-experience="true"]:not([data-hero-complete="true"]) .ignite-floating-control {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ignite-floating-control {
+    transition: none;
+  }
+}

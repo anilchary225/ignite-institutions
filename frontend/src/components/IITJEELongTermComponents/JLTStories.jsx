@@ -5,29 +5,29 @@ const stories = [
     name: "Aarav Mehta",
     rank: "AIR 23",
     exam: "IIT JEE Advanced 2024",
-    college: "IIT Bombay — Computer Science",
+    college: "IIT Bombay - Computer Science",
     batch: "2022–24",
     avatar: "https://placehold.co/240x240/4f46e5/ffffff?text=AM",
     quote:
-      "Ignite taught me that JEE is not about memorising — it's about thinking. The faculty here don't just solve problems for you; they teach you to build models in your head. By Year 2 I was actually enjoying Physics.",
+      "Ignite taught me that JEE is not about memorising - it's about thinking. The faculty here don't just solve problems for you; they teach you to build models in your head. By Year 2 I was actually enjoying Physics.",
     color: "indigo",
   },
   {
     name: "Diya Reddy",
     rank: "AIR 71",
     exam: "IIT JEE Advanced 2024",
-    college: "IIT Delhi — Mathematics & Computing",
+    college: "IIT Delhi - Mathematics & Computing",
     batch: "2022–24",
     avatar: "https://placehold.co/240x240/7c3aed/ffffff?text=DR",
     quote:
       "I was a nervous student when I joined. Two years later, I walked into the exam hall feeling like I'd already written it a hundred times. The mock test discipline at Ignite is unmatched anywhere in Hyderabad.",
-    color: "violet",
+    color: "blue",
   },
   {
     name: "Rohan Nair",
     rank: "AIR 104",
     exam: "IIT JEE Advanced 2024",
-    college: "IIT Madras — Computer Science",
+    college: "IIT Madras - Computer Science",
     batch: "2022–24",
     avatar: "https://placehold.co/240x240/0284c7/ffffff?text=RN",
     quote:
@@ -38,18 +38,18 @@ const stories = [
     name: "Sneha Patil",
     rank: "AIR 188",
     exam: "IIT JEE Advanced 2024",
-    college: "IIT Kharagpur — Electrical Engineering",
+    college: "IIT Kharagpur - Electrical Engineering",
     batch: "2022–24",
     avatar: "https://placehold.co/240x240/059669/ffffff?text=SP",
     quote:
-      "Chemistry was my weakest subject. My Ignite mentor redesigned my study schedule halfway through Year 1 — that level of personalisation changed everything. I scored the highest in Chemistry in my entire batch.",
+      "Chemistry was my weakest subject. My Ignite mentor redesigned my study schedule halfway through Year 1 - that level of personalisation changed everything. I scored the highest in Chemistry in my entire batch.",
     color: "emerald",
   },
 ];
 
 const colorMap = {
   indigo:  { ring: "ring-indigo-300 dark:ring-indigo-700",  badge: "bg-indigo-600",  pill: "bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300" },
-  violet:  { ring: "ring-violet-300 dark:ring-violet-700",  badge: "bg-violet-600",  pill: "bg-violet-50 text-violet-700 dark:bg-violet-950/40 dark:text-violet-300" },
+  blue:  { ring: "ring-blue-300 dark:ring-blue-700",  badge: "bg-blue-600",  pill: "bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300" },
   sky:     { ring: "ring-sky-300 dark:ring-sky-700",        badge: "bg-sky-500",     pill: "bg-sky-50 text-sky-700 dark:bg-sky-950/40 dark:text-sky-300" },
   emerald: { ring: "ring-emerald-300 dark:ring-emerald-700",badge: "bg-emerald-600", pill: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300" },
 };
@@ -75,7 +75,7 @@ export default function JLTStories() {
             From Our Classroom to the IITs
           </h2>
           <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
-            Every rank has a story behind it. Here are four of them — in their own words.
+            Every rank has a story behind it. Here are four of them - in their own words.
           </p>
         </div>
 

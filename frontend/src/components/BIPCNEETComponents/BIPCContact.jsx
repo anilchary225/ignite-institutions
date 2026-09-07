@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Send, CheckCircle2, Phone, Mail, MapPin, Stethoscope } from "lucide-react";
+import { submitEnquiry } from "../../lib/enquiryApi";
 
 export default function BIPCContact() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", city: "", currentClass: "", message: "" });
   const change = (e) => setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
   const inputCls = "w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-950 outline-none transition placeholder:text-neutral-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white";
@@ -19,7 +21,7 @@ export default function BIPCContact() {
         <div className="mt-12 grid gap-10 lg:grid-cols-2">
           <div>
             <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">Ready to become a doctor?</h2>
-            <p className="mt-4 text-base leading-7 text-neutral-600 dark:text-neutral-400">Our BiPC counsellors will call you within 24 hours to walk you through the programme, fee structure, and admission steps — no pressure.</p>
+            <p className="mt-4 text-base leading-7 text-neutral-600 dark:text-neutral-400">Our BiPC counsellors will call you within 24 hours to walk you through the programme, fee structure, and admission steps - no pressure.</p>
 
             <div className="mt-8 space-y-5">
               {[
@@ -40,7 +42,7 @@ export default function BIPCContact() {
             </div>
 
             <div className="mt-10 overflow-hidden rounded-3xl">
-              <div className="bg-gradient-to-br from-emerald-600 to-indigo-700 p-7">
+              <div className="bg-green-700 p-7">
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20">
                   <Stethoscope size={22} className="text-white" />
                 </div>
@@ -62,7 +64,14 @@ export default function BIPCContact() {
                 <button onClick={() => { setSubmitted(false); setForm({ name:"",phone:"",email:"",city:"",currentClass:"",message:"" }); }} className="mt-2 rounded-xl bg-emerald-600 px-6 py-2.5 text-sm font-bold text-white hover:bg-emerald-700">Submit Another</button>
               </div>
             ) : (
-              <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-5">
+              <form onSubmit={(e) => {
+                e.preventDefault();
+                setSubmitting(true);
+                submitEnquiry({ category: "bipc-neet", source: "bipc-contact", payload: form })
+                  .then(() => setSubmitted(true))
+                  .catch(() => {})
+                  .finally(() => setSubmitting(false));
+              }} className="space-y-5">
                 <h3 className="text-xl font-extrabold text-neutral-950 dark:text-white">Apply for BiPC NEET</h3>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
@@ -97,8 +106,8 @@ export default function BIPCContact() {
                   <label className="mb-1.5 block text-xs font-bold text-neutral-600 dark:text-neutral-400">Questions or message</label>
                   <textarea name="message" value={form.message} onChange={change} rows={3} placeholder="Your target rank, questions, anything…" className={`${inputCls} resize-none`} />
                 </div>
-                <button type="submit" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-6 py-3.5 text-sm font-black text-white transition hover:bg-emerald-700 active:scale-[0.98]">
-                  <Send size={15} /> Submit Enquiry
+                <button type="submit" disabled={submitting} className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-6 py-3.5 text-sm font-black text-white transition hover:bg-emerald-700 active:scale-[0.98]">
+                  {submitting ? "Submitting..." : (<><Send size={15} /> Submit Enquiry</>)}
                 </button>
                 <p className="text-center text-xs text-neutral-400">We'll call you within 24 hours. No spam, ever.</p>
               </form>

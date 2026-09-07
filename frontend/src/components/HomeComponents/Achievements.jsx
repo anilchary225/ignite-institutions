@@ -1,28 +1,87 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Award } from "lucide-react";
+import { RouteLink } from "../../router/BrowserRouter";
 
 const placeholderPhoto = (bg) => {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="360"><rect width="300" height="360" fill="${bg}"/><circle cx="150" cy="140" r="52" fill="#94a3b8"/><path d="M150 200c-55 0-95 35-95 90v70h190v-70c0-55-40-90-95-90z" fill="#94a3b8"/></svg>`;
   return `data:image/svg+xml;base64,${btoa(svg)}`;
 };
 
+const normalizeName = (value) =>
+  value
+    .replace(/\.(?=\s|$)/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+
+const JEE_TOPPER_IMAGES = {
+  "A. CHARITH": "/assets/JEE_TOPPER_2026/A. CHARITH.webp",
+  "B. GOWTHAM": "/assets/JEE_TOPPER_2026/B. GOWTHAM.webp",
+  "BHANU SRIKAR": "/assets/JEE_TOPPER_2026/BHANU SRIKAR.webp",
+  "DEVA SAKETH": "/assets/JEE_TOPPER_2026/DEVA SAKETH.webp",
+  "G. RISHITHA REDDY": "/assets/JEE_TOPPER_2026/G. RISHITHA REDDY.webp",
+  "M. JAGAN MOHAN REDDY": "/assets/JEE_TOPPER_2026/M. JAGAN MOHAN REDDY.webp",
+  "R. ADI PRANAV": "/assets/JEE_TOPPER_2026/R. ADI PRANAV.webp",
+  "G. RAHUL REDDY": "/assets/JEE_TOPPER_2026/G. rahul REDDY.webp",
+  "K. SIDDARTHA": "/assets/JEE_TOPPER_2026/K. SIDDARTHA.webp",
+  "P. KRISHNA CHAITANYA": "/assets/JEE_TOPPER_2026/P. KRISHNA CHAITANYA.webp",
+  "CHIDURP": "/assets/JEE_TOPPER_2026/CHIDURP.webp",
+  "RAHUL": "/assets/JEE_TOPPER_2026/RAHUL.webp",
+  "SK RIYAN KAMAL": "/assets/JEE_TOPPER_2026/SK RIYAN KAMAL.webp",
+};
+
+const NEET_RESULT_IMAGES = {
+  "A. ARCHITHA": "/assets/NEET_RESULTS_2026/A. Architha.webp",
+  "A. HARSHITHA": "/assets/NEET_RESULTS_2026/A. Harshitha.webp",
+  "B. DEEKSHITHA": "/assets/NEET_RESULTS_2026/B. Deekshitha.webp",
+  "BEGARI NAVADEEP": "/assets/NEET_RESULTS_2026/Begari Navadeep.webp",
+  "D. MEGANA SAI SREE": "/assets/NEET_RESULTS_2026/D. Megana Sai Sree.webp",
+  "D. SINDHU PRIYA": "/assets/NEET_RESULTS_2026/D. Sindhu Priya.webp",
+  "E. SAHASRA": "/assets/NEET_RESULTS_2026/E. Sahasra.webp",
+  "G. YASWANTH SAI": "/assets/NEET_RESULTS_2026/G. Yaswanth Sai.webp",
+  "GREESHMA": "/assets/NEET_RESULTS_2026/GREESHMA.webp",
+  "I. KHYTHI SAI SRI": "/assets/NEET_RESULTS_2026/I. Khythi Sai Sri.webp",
+  "JADAV GOPAL": "/assets/NEET_RESULTS_2026/Jadav Gopal.webp",
+  "K. ASMITHA PRIYA": "/assets/NEET_RESULTS_2026/K. Asmitha Priya.webp",
+  "K. SATHISH": "/assets/NEET_RESULTS_2026/K. Sathish.webp",
+  "KETHAVATH AKHILA": "/assets/NEET_RESULTS_2026/Kethavath Akhila.webp",
+  "M. KALYANI": "/assets/NEET_RESULTS_2026/M. KALYANI.webp",
+  "M. MANASA": "/assets/NEET_RESULTS_2026/M. Manasa.webp",
+  "M.M. VISWANATH REDDY": "/assets/NEET_RESULTS_2026/M.M. VISWANATH REDDY.webp",
+  "MAMIDI ABHILASH": "/assets/NEET_RESULTS_2026/Mamidi Abhilash.webp",
+  "N. SANTHOSH": "/assets/NEET_RESULTS_2026/N. Santhosh.webp",
+  "P CHARITHA": "/assets/NEET_RESULTS_2026/P CHARITHA .webp",
+  "PALLE SUSANTH": "/assets/NEET_RESULTS_2026/Palle Susanth.webp",
+  "R. CHAKRIKA REDDY": "/assets/NEET_RESULTS_2026/R. Chakrika Reddy.webp",
+  "R. JASWANTH REDDY": "/assets/NEET_RESULTS_2026/R. JASWANTH REDDY.webp",
+  "RATHOD BALAJI": "/assets/NEET_RESULTS_2026/Rathod Balaji.webp",
+  "S. SOMA SRI LAKSHMI": "/assets/NEET_RESULTS_2026/S. Soma Sri Lakshmi.webp",
+  "T. PRAVANTH REDDY": "/assets/NEET_RESULTS_2026/T. Pravanth Reddy.webp",
+  "U. TARUN TEJA": "/assets/NEET_RESULTS_2026/U. Tarun Teja.webp",
+  "V. RAHUL": "/assets/NEET_RESULTS_2026/V. RAHUL.webp",
+};
+
+function resolveImage(name, map, fallback = placeholderPhoto("#f8fafc")) {
+  return map[normalizeName(name).toUpperCase()] ?? map[name] ?? fallback;
+}
+
 const jeeStudents = [
-  { name: "A Haniketh", line1: "AIR 4078", line2: "Roll No: 256192066", image: placeholderPhoto("#1e293b") },
-  { name: "M V Hrishikesh Reddy", line1: "AIR 3955", line2: "Roll No: 256134196", image: placeholderPhoto("#273449") },
-  { name: "Yamini Tejaswi", line1: "AIR 3919", line2: "Roll No: 256127049", image: placeholderPhoto("#1e293b") },
-  { name: "S Prasanna Sai", line1: "AIR 3757", line2: "Roll No: 256142080", image: placeholderPhoto("#273449") },
-  { name: "Susheel Reddy", line1: "AIR 2270", line2: "Roll No: 256129284", image: placeholderPhoto("#1e293b") },
-  { name: "K Bhargav", line1: "AIR 1980", line2: "Roll No: 256118820", image: placeholderPhoto("#273449") },
-  { name: "P Nikhil", line1: "AIR 1745", line2: "Roll No: 256109432", image: placeholderPhoto("#1e293b") },
+  { name: "A. CHARITH", line1: "2026 Topper", line2: "", image: resolveImage("A. CHARITH", JEE_TOPPER_IMAGES) },
+  { name: "B. GOWTHAM", line1: "2026 Topper", line2: "", image: resolveImage("B. GOWTHAM", JEE_TOPPER_IMAGES) },
+  { name: "BHANU SRIKAR", line1: "2026 Topper", line2: "", image: resolveImage("BHANU SRIKAR", JEE_TOPPER_IMAGES) },
+  { name: "DEVA SAKETH", line1: "2026 Topper", line2: "", image: resolveImage("DEVA SAKETH", JEE_TOPPER_IMAGES) },
+  { name: "G. RISHITHA REDDY", line1: "2026 Topper", line2: "", image: resolveImage("G. RISHITHA REDDY", JEE_TOPPER_IMAGES) },
+  { name: "M. JAGAN MOHAN REDDY", line1: "2026 Topper", line2: "", image: resolveImage("M. JAGAN MOHAN REDDY", JEE_TOPPER_IMAGES) },
+  { name: "R. ADI PRANAV", line1: "2026 Topper", line2: "", image: resolveImage("R. ADI PRANAV", JEE_TOPPER_IMAGES) },
 ];
 
 const neetStudents = [
-  { name: "Shashank", line1: "Bhadradri Kothagudem Govt College", image: placeholderPhoto("#1e293b") },
-  { name: "Shaik Sameer", line1: "Bhadradri Kothagudem Govt College", image: placeholderPhoto("#273449") },
-  { name: "S Jashmi", line1: "Sangareddy Govt College", image: placeholderPhoto("#1e293b") },
-  { name: "P Sree Teja", line1: "Nalgonda Govt College", image: placeholderPhoto("#273449") },
-  { name: "C Bhuvaneswari", line1: "Nalgonda Govt College", image: placeholderPhoto("#1e293b") },
-  { name: "R Manasa", line1: "Warangal Govt College", image: placeholderPhoto("#273449") },
+  { name: "M.M. VISWANATH REDDY", line1: "691/720", image: resolveImage("M.M. VISWANATH REDDY", NEET_RESULT_IMAGES) },
+  { name: "V. RAHUL", line1: "686/720", image: resolveImage("V. RAHUL", NEET_RESULT_IMAGES) },
+  { name: "R. JASWANTH REDDY", line1: "685/720", image: resolveImage("R. JASWANTH REDDY", NEET_RESULT_IMAGES) },
+  { name: "M. KALYANI", line1: "525/720", image: resolveImage("M. KALYANI", NEET_RESULT_IMAGES) },
+  { name: "P. Venkata Sai", line1: "509/720", image: placeholderPhoto("#eef2ff") },
+  { name: "S. Soma Sri Lakshmi", line1: "518/720", image: resolveImage("S. SOMA SRI LAKSHMI", NEET_RESULT_IMAGES) },
 ];
 
 function AchievementCarousel({ students, accent, renderDetails, speed = 40 }) {
@@ -84,12 +143,12 @@ function AchievementCarousel({ students, accent, renderDetails, speed = 40 }) {
   const resume = () => (pausedRef.current = false);
 
   return (
-    <div className="relative" onMouseEnter={pause} onMouseLeave={resume}>
+    <div data-aos="fade-up" className="relative" onMouseEnter={pause} onMouseLeave={resume}>
       <button
         type="button"
         onClick={() => trackRef.current?.scrollBy({ left: -260, behavior: "smooth" })}
         aria-label="Previous"
-        className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-9 h-9 items-center justify-center rounded-full bg-white dark:bg-neutral-700 shadow-lg text-neutral-500 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:scale-110 transition-all"
+        className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-9 h-9 items-center justify-center rounded-full bg-white dark:bg-neutral-700 shadow-lg text-neutral-500 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white transition-all"
       >
         <ChevronLeft size={18} />
       </button>
@@ -110,23 +169,25 @@ function AchievementCarousel({ students, accent, renderDetails, speed = 40 }) {
               ref={(el) => (cardRefs.current[i] = el)}
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
-              className={`relative shrink-0 w-[150px] sm:w-[180px] h-[190px] sm:h-[230px] cursor-pointer rounded-2xl overflow-hidden bg-neutral-700 transition-all duration-300 ease-out ${
-                isFocused ? `shadow-2xl ${accent.glow}` : "opacity-80"
+              className={`relative shrink-0 w-[190px] sm:w-[170px] h-[310px] sm:h-[250px] cursor-pointer rounded-[2rem] border border-green-500 bg-white px-5 py-6 text-center transition-all duration-300 ease-out dark:bg-neutral-950 ${
+                "opacity-90"
               }`}
             >
-              <img
-                src={s.image}
-                alt={s.name}
-                className={`absolute inset-0 w-full h-full object-cover origin-center transition-transform duration-300 ${isFocused ? "scale-110" : "scale-100"}`}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-              <div className={`absolute top-2.5 left-2.5 flex items-center justify-center w-7 h-7 rounded-full text-white ${accent.badge} ${isFocused ? "opacity-100" : "opacity-0"} transition-opacity`}>
-                <Award size={13} />
+              <div className="mx-auto flex h-[106px] w-full items-center justify-center rounded-[1.35rem] bg-white p-2.5 sm:h-[120px] dark:bg-white">
+                <img
+                  src={s.image}
+                  alt={s.name}
+                  className="h-full w-full rounded-[0.9rem] object-contain object-center"
+                />
               </div>
-              <div className="absolute bottom-0 left-0 right-0 p-3">
-                <p className="text-white text-xs font-bold leading-tight line-clamp-2">{s.name}</p>
-                <div className={`mt-1 h-[2px] w-5 rounded-full ${accent.line}`} />
-                {renderDetails(s)}
+              <div className="mt-6 flex flex-col items-center">
+                <p className="text-[0.54rem] font-extrabold uppercase tracking-wide text-neutral-900 dark:text-white sm:text-[0.66rem]">
+                  {s.name}
+                </p>
+                <div className="mt-3.5 h-px w-10 bg-neutral-200 dark:bg-white" />
+                <div className="mt-2.5 text-neutral-500 dark:text-white">
+                  {renderDetails(s)}
+                </div>
               </div>
             </div>
           );
@@ -137,7 +198,7 @@ function AchievementCarousel({ students, accent, renderDetails, speed = 40 }) {
         type="button"
         onClick={() => trackRef.current?.scrollBy({ left: 260, behavior: "smooth" })}
         aria-label="Next"
-        className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-9 h-9 items-center justify-center rounded-full bg-white dark:bg-neutral-700 shadow-lg text-neutral-500 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:scale-110 transition-all"
+        className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-9 h-9 items-center justify-center rounded-full bg-white dark:bg-neutral-700 shadow-lg text-neutral-500 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white transition-all"
       >
         <ChevronRight size={18} />
       </button>
@@ -152,10 +213,10 @@ export default function Achievements() {
         {/* JEE */}
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-6">
-            <span className="h-8 w-1.5 rounded-full bg-red-500" />
+            <span data-aos="fade-up" className="h-8 w-1.5 rounded-full bg-red-500" />
             <div>
-              <span className="text-xs font-bold tracking-widest text-red-500 uppercase">Top Rankers</span>
-              <h2 className="text-xl font-extrabold text-neutral-900 dark:text-white sm:text-2xl">IIT JEE Achievements</h2>
+              <span data-aos="fade-up" className="text-xs font-bold tracking-widest text-red-500 uppercase">Top Rankers</span>
+              <h2 data-aos="fade-up" className="text-xl font-extrabold text-neutral-900 dark:text-white sm:text-2xl">IIT-JEE Achievements</h2>
             </div>
           </div>
           <AchievementCarousel
@@ -163,8 +224,8 @@ export default function Achievements() {
             accent={{ glow: "ring-2 ring-red-500/40", badge: "bg-red-600", line: "bg-red-500" }}
             renderDetails={(s) => (
               <>
-                <p className="text-white/80 text-[11px] font-semibold mt-1">{s.line1}</p>
-                <p className="text-white/60 text-[10px]">{s.line2}</p>
+                <p className="text-black dark:text-white text-[9px] font-semibold mt-0.5">{s.line1}</p>
+                <p className="text-black/70 dark:text-white text-[8px]">{s.line2}</p>
               </>
             )}
           />
@@ -173,25 +234,25 @@ export default function Achievements() {
         {/* NEET */}
         <div className="mt-12">
           <div className="flex items-center gap-3 mb-6">
-            <span className="h-8 w-1.5 rounded-full bg-orange-500" />
+            <span data-aos="fade-up" className="h-8 w-1.5 rounded-full bg-orange-500" />
             <div>
-              <span className="text-xs font-bold tracking-widest text-orange-500 uppercase">Top Rankers</span>
-              <h2 className="text-xl font-extrabold text-neutral-900 dark:text-white sm:text-2xl">NEET Achievements</h2>
+              <span data-aos="fade-up" className="text-xs font-bold tracking-widest text-orange-500 uppercase">Top Rankers</span>
+              <h2 data-aos="fade-up" className="text-xl font-extrabold text-neutral-900 dark:text-white sm:text-2xl">NEET Achievements</h2>
             </div>
           </div>
           <AchievementCarousel
             students={neetStudents}
             accent={{ glow: "ring-2 ring-orange-500/40", badge: "bg-orange-500", line: "bg-orange-400" }}
             renderDetails={(s) => (
-              <p className="text-white/80 text-[11px] font-semibold mt-1 line-clamp-2">{s.line1}</p>
+              <p className="text-black dark:text-white text-[9px] font-semibold mt-0.5 line-clamp-2">{s.line1}</p>
             )}
           />
         </div>
 
-        <div className="mt-10 text-center">
-          <button className="inline-flex items-center gap-2 bg-neutral-900 dark:bg-white hover:bg-neutral-700 dark:hover:bg-neutral-200 text-white dark:text-neutral-900 font-semibold px-6 py-2.5 rounded-full shadow-sm transition-all text-sm">
+        <div data-aos="fade-up" className="mt-10 text-center">
+          <RouteLink to='/results' className="inline-flex items-center gap-2 bg-neutral-900 dark:bg-white hover:bg-neutral-700 dark:hover:bg-neutral-200 text-white dark:text-neutral-900 font-semibold px-6 py-2.5 rounded-full shadow-sm transition-all text-sm">
             View All Results
-          </button>
+          </RouteLink>
         </div>
       </div>
     </section>

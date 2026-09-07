@@ -4,7 +4,7 @@ import { ChevronDown } from "lucide-react";
 const faqs = [
   {
     q: "What is the duration of the MPC IIT JEE programme at Ignite?",
-    a: "The programme spans 2 years — covering Class 11 and Class 12 (Intermediate). It integrates both Intermediate board preparation and full IIT JEE Main & Advanced coaching in a single structured curriculum.",
+    a: "The programme spans 2 years - covering Class 11 and Class 12 (Intermediate). It integrates both Intermediate board preparation and full IIT JEE Main & Advanced coaching in a single structured curriculum.",
   },
   {
     q: "Is board preparation included alongside JEE coaching?",
@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     q: "How often are mock tests conducted?",
-    a: "Mock tests are held at multiple levels — weekly chapter tests, bi-weekly unit tests, and full-length JEE Main and Advanced pattern mocks every month. All tests are followed by detailed rank analysis and feedback.",
+    a: "Mock tests are held at multiple levels - weekly chapter tests, bi-weekly unit tests, and full-length JEE Main and Advanced pattern mocks every month. All tests are followed by detailed rank analysis and feedback.",
   },
   {
     q: "What subjects are covered in the MPC programme?",
@@ -41,10 +41,9 @@ function FaqItem({ faq, open, onToggle }) {
     <div
       className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
         open
-          ? "border-violet-200 bg-violet-50 dark:border-violet-900/60 dark:bg-violet-950/20"
+          ? "border-blue-200 bg-blue-50 dark:border-blue-900/60 dark:bg-blue-950/20"
           : "border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900"
-      }`}
-    >
+      }`}>
       <button
         type="button"
         onClick={onToggle}
@@ -53,7 +52,7 @@ function FaqItem({ faq, open, onToggle }) {
         <span className="text-sm font-bold text-neutral-950 dark:text-white">{faq.q}</span>
         <ChevronDown
           size={18}
-          className={`shrink-0 text-neutral-400 transition-transform duration-300 ${open ? "rotate-180 text-violet-600 dark:text-violet-400" : ""}`}
+          className={`shrink-0 text-neutral-400 transition-transform duration-300 ${open ? "rotate-180 text-blue-600 dark:text-blue-400" : ""}`}
         />
       </button>
       <div
@@ -101,12 +100,12 @@ export default function MPCFaq() {
           ))}
         </div>
 
-        <div className="mt-10 rounded-3xl bg-violet-600 p-7 text-center">
-          <p className="text-sm font-bold text-violet-200">Still have questions?</p>
+        <div className="mt-10 rounded-3xl bg-blue-600 p-7 text-center">
+          <p className="text-sm font-bold text-blue-200">Still have questions?</p>
           <h3 className="mt-2 text-xl font-extrabold text-white">Talk to our admissions team</h3>
-          <p className="mt-2 text-sm text-violet-200">We're available Mon–Sat, 9 AM to 6 PM. No pressure, no obligation.</p>
+          <p className="mt-2 text-sm text-blue-200">We're available Mon–Sat, 9 AM to 6 PM. No pressure, no obligation.</p>
           <div className="mt-5 flex flex-wrap justify-center gap-3">
-            <a href="tel:+919876543210" className="rounded-xl bg-white px-6 py-3 text-sm font-black text-violet-700 hover:bg-amber-400 hover:text-white transition">
+            <a href="tel:+919876543210" className="rounded-xl bg-white px-6 py-3 text-sm font-black text-blue-700 hover:bg-amber-400 hover:text-white transition">
               Call +91 98765 43210
             </a>
             <a href="#contact" className="rounded-xl border-2 border-white/30 px-6 py-3 text-sm font-bold text-white hover:bg-white/10 transition">

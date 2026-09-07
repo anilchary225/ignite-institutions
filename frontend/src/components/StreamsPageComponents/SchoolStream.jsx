@@ -2,21 +2,6 @@ import { GraduationCap, BookMarked, Atom, Microscope, Star, Users } from "lucide
 
 const programs = [
   {
-    id: "nursery10",
-    eyebrow: "Nursery to Class 10",
-    title: "School Education",
-    description:
-      "A strong academic foundation from early childhood through secondary school. Emphasis on conceptual clarity, strong language skills, and character building across all classes.",
-    icon: GraduationCap,
-    color: "sky",
-    grades: [
-      { range: "Nursery – KG", note: "Play-based, early learning" },
-      { range: "Class 1 – 5", note: "Core subjects & language" },
-      { range: "Class 6 – 8", note: "Science, Maths, Social" },
-      { range: "Class 9 – 10", note: "Board preparation" },
-    ],
-  },
-  {
     id: "foundation",
     eyebrow: "Classes 6 – 10",
     title: "IIT & NEET Foundation",
@@ -25,7 +10,7 @@ const programs = [
     icon: Atom,
     color: "amber",
     grades: [
-      { range: "Class 6 – 8", note: "Foundation level — Maths & Science" },
+      { range: "Class 6 – 8", note: "Foundation level - Maths & Science" },
       { range: "Class 9 – 10", note: "Pre-Foundation IIT / NEET" },
     ],
     features: ["IIT JEE Foundation", "NEET Foundation", "Olympiad Prep", "NTSE / KVPY"],
@@ -66,7 +51,7 @@ function ProgramCard({ program }) {
   const Icon = program.icon;
 
   return (
-    <div className={`rounded-3xl p-8 ${c.section}`}>
+    <div data-aos="fade-up" className={`rounded-3xl p-8 ${c.section} `}>
       <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide ${c.badge}`}>
         {program.eyebrow}
       </span>
@@ -109,7 +94,7 @@ function ProgramCard({ program }) {
       )}
 
       <a
-        href="#"
+        href="/contact"
         className={`mt-8 inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-bold text-white transition ${c.cta}`}
       >
         Enquire Now
@@ -120,10 +105,10 @@ function ProgramCard({ program }) {
 
 export default function SchoolStream() {
   return (
-    <section id="school" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/50">
+    <section data-aos="fade-in" id="school" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/50">
       <div className="mx-auto max-w-7xl">
         {/* section header */}
-        <div className="flex items-center gap-3">
+        <div data-aos="zoom-in" className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
           <span className="rounded-full bg-sky-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-sky-700 dark:bg-sky-950/50 dark:text-sky-300">
             School Programs
@@ -131,18 +116,18 @@ export default function SchoolStream() {
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
         </div>
 
-        <div className="mt-8 max-w-2xl">
-          <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
-            School — Nursery to Class 10
+        <div className="mt-8 max-w-full items-center text-left">
+          <h2 data-aos="fade-up" className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+            School - 6 to Class 10
           </h2>
-          <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
+          <p data-aos="fade-up" className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Build the right habits early. Our school programs give students a
-            competitive edge from day one — with a foundation track that grooms
+            competitive edge from day one - with a foundation track that grooms
             future IIT & NEET aspirants from Class 6 itself.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
+        <div data-aos="fade-in" className="mt-10 mx-auto border-2 rounded-3xl border-amber-500">
           {programs.map((p) => (
             <ProgramCard key={p.id} program={p} />
           ))}

@@ -1,40 +1,65 @@
 const grades = [
-  {
-    grade: "Class 1",
-    emoji: "🌱",
-    color: "sky",
-    focus: "Reading, Writing & Numbers",
-    activities: ["Phonics & story time", "Number play & patterns", "Drawing & colouring", "Morning assembly"],
-  },
-  {
-    grade: "Class 2",
-    emoji: "📖",
-    color: "violet",
-    focus: "Language & Basic Maths",
-    activities: ["Reading comprehension", "Tables & addition", "Environmental studies", "Show & tell"],
-  },
-  {
-    grade: "Class 3",
-    emoji: "🔬",
-    color: "emerald",
-    focus: "Science Curiosity",
-    activities: ["Simple experiments", "Multiplication", "Map skills & geography", "Role play & drama"],
-  },
-  {
-    grade: "Class 4",
-    emoji: "🌍",
-    color: "amber",
-    focus: "Expanding World View",
-    activities: ["Essay writing", "Fractions & decimals", "Nature study", "Group projects"],
-  },
-  {
-    grade: "Class 5",
-    emoji: "🏅",
-    color: "rose",
-    focus: "Board Readiness",
-    activities: ["Exam skills & time management", "Geometry & data", "Social science projects", "Science fair"],
-  },
-];
+    {
+      grade: "Class 6",
+      emoji: "📚",
+      color: "sky",
+      focus: "Foundation in Core Subjects",
+      activities: [
+        "Advanced English grammar",
+        "Integers & algebra basics",
+        "General science experiments",
+        "Computer fundamentals"
+      ],
+    },
+    {
+      grade: "Class 7",
+      emoji: "🧮",
+      color: "violet",
+      focus: "Concept Building",
+      activities: [
+        "Essay & creative writing",
+        "Algebra & geometry",
+        "Physics and biology basics",
+        "Coding & logical reasoning"
+      ],
+    },
+    {
+      grade: "Class 8",
+      emoji: "💡",
+      color: "emerald",
+      focus: "Analytical Thinking",
+      activities: [
+        "Advanced mathematics",
+        "Chemistry practical concepts",
+        "History & civics discussions",
+        "STEM projects"
+      ],
+    },
+    {
+      grade: "Class 9",
+      emoji: "🎯",
+      color: "amber",
+      focus: "Board Exam Preparation",
+      activities: [
+        "Physics, Chemistry & Biology",
+        "Algebra, Trigonometry & Statistics",
+        "Social science projects",
+        "Weekly mock tests"
+      ],
+    },
+    {
+      grade: "Class 10",
+      emoji: "🏆",
+      color: "rose",
+      focus: "SSC Board Excellence",
+      activities: [
+        "Complete board exam revision",
+        "Sample papers & mock exams",
+        "Time management strategies",
+        "Career guidance & counseling"
+      ],
+    },
+  ]
 
 const colorMap = {
   sky: {
@@ -77,7 +102,7 @@ const colorMap = {
 function GradeCard({ grade: g }) {
   const c = colorMap[g.color];
   return (
-    <div className={`flex flex-col gap-4 rounded-3xl border p-6 ${c.bg} ${c.border}`}>
+    <div data-aos="fade-up" className={`flex flex-col gap-4 rounded-3xl border p-6 ${c.bg} ${c.border}`}>
       <div className="flex items-center gap-3">
         <div className={`flex h-12 w-12 items-center justify-center rounded-2xl text-2xl ${c.emoji}`}>
           {g.emoji}
@@ -100,34 +125,34 @@ function GradeCard({ grade: g }) {
 
 const parentActivities = [
   {
-    emoji: "📋",
-    title: "Homework Diary",
-    desc: "Daily homework assigned through a structured diary. Parents co-sign completion each evening — building the habit of accountability from Class 1.",
+    emoji: "📊",
+    title: "Academic Progress Tracking",
+    desc: "Parents receive monthly academic reports with subject-wise performance, attendance, and personalized teacher feedback to monitor continuous improvement.",
   },
   {
     emoji: "📱",
-    title: "Parent App Updates",
-    desc: "Real-time attendance, marks, and announcements sent to parents via our school app. Nothing important is ever missed.",
+    title: "Parent Portal & App",
+    desc: "Instant updates on attendance, assignments, exam schedules, circulars, and important school announcements through our dedicated parent app.",
   },
   {
-    emoji: "🎨",
-    title: "Holiday Project Packs",
-    desc: "Curated holiday project kits sent home. Designed for parent-child collaboration — science, art, and reading activities for every break.",
+    emoji: "📝",
+    title: "Board Exam Preparation",
+    desc: "Regular unit tests, pre-final exams, and detailed performance analysis shared with parents to help students stay on track for board success.",
   },
   {
-    emoji: "📅",
-    title: "Monthly Parent Meetings",
-    desc: "One-on-one teacher consultations every month. Teachers share progress, concerns, and customised tips for supporting learning at home.",
+    emoji: "👨‍🏫",
+    title: "Parent–Teacher Conferences",
+    desc: "Scheduled meetings to discuss academic progress, learning strategies, behavioral development, and personalized guidance for every student.",
   },
   {
-    emoji: "🏆",
-    title: "Family Achievement Day",
-    desc: "Termly events where students present their work to parents. Builds confidence and makes families a proud part of every achievement.",
+    emoji: "🎯",
+    title: "Career Guidance Sessions",
+    desc: "Interactive sessions for students and parents on career opportunities, subject selection, higher education pathways, and future planning.",
   },
   {
-    emoji: "📖",
-    title: "Reading Together Programme",
-    desc: "A 20-minute nightly reading ritual. Parents receive a weekly reading guide aligned with the classroom theme.",
+    emoji: "🏅",
+    title: "Achievement & Recognition",
+    desc: "Parents are invited to celebrate academic excellence, sports achievements, cultural accomplishments, and leadership awards during school events.",
   },
 ];
 
@@ -137,23 +162,23 @@ export default function SchoolPrimary() {
       <div className="mx-auto max-w-7xl">
 
         {/* ── Classes 1-5 section label ── */}
-        <div className="flex items-center gap-3">
+        <div data-aos="zoom-in" className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
           <span className="flex items-center gap-2 rounded-full bg-amber-100 px-4 py-1.5 dark:bg-amber-950/40">
             <span className="text-sm">🌟</span>
             <span className="text-xs font-bold uppercase tracking-widest text-amber-700 dark:text-amber-400">
-              Primary School · Classes 1 – 5
+              Secondary School · Classes 6 – 10
             </span>
           </span>
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
         </div>
 
         <div className="mt-8 max-w-2xl">
-          <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+          <h2 data-aos="fade-up" className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             Big ideas for{" "}
-            <span className="text-amber-500">little minds</span> 🧠
+            <span className="text-amber-500">Future Leaders</span> 🎯
           </h2>
-          <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
+          <p data-aos="fade-up" className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Our primary programme is designed around children's natural
             curiosity. Every class has a clear focus, rich activities, and a
             warm teacher who knows every student by name.
@@ -161,28 +186,32 @@ export default function SchoolPrimary() {
         </div>
 
         {/* grade cards */}
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div data-aos="fade-in" className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {grades.map((g) => (
             <GradeCard key={g.grade} grade={g} />
           ))}
         </div>
 
         {/* daily routine */}
-        <div className="mt-10 overflow-hidden rounded-3xl bg-gradient-to-br from-amber-400 to-orange-500 p-8">
-          <p className="text-xs font-black uppercase tracking-widest text-amber-100">
+        <div data-aos="fade-up" className="mt-10 overflow-hidden rounded-3xl bg-linear-to-br from-amber-400 to-orange-500 p-8">
+          <p data-aos="fade-up" className="text-xs font-black uppercase tracking-widest text-amber-100">
             A typical school day
           </p>
           <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { time: "8:00 AM", activity: "Morning assembly & prayer" },
-              { time: "9:00 AM", activity: "Core subject classes" },
-              { time: "12:30 PM", activity: "Lunch & free play" },
-              { time: "1:30 PM", activity: "Activity / art / sports" },
-              { time: "3:00 PM", activity: "Revision & homework help" },
-              { time: "4:00 PM", activity: "Story / reading time" },
-              { time: "4:30 PM", activity: "Home time 🏠" },
+                { time: "8:00 AM", activity: "Morning assembly & motivational session" },
+                { time: "8:30 AM", activity: "Mathematics & Science classes" },
+                { time: "10:30 AM", activity: "Short break" },
+                { time: "10:45 AM", activity: "Languages & Social Studies" },
+                { time: "12:30 PM", activity: "Lunch break" },
+                { time: "1:15 PM", activity: "Computer Lab / Science Practical" },
+                { time: "2:15 PM", activity: "Sports, Yoga & Physical Education" },
+                { time: "3:00 PM", activity: "Revision, doubt clarification & assessments" },
+                { time: "4:00 PM", activity: "Clubs / Career guidance / Co-curricular activities" },
+                { time: "4:30 PM", activity: "Dispersal 🏠" },
             ].map(({ time, activity }) => (
               <div
+                data-aos="fade-up"
                 key={time}
                 className="flex items-center gap-3 rounded-2xl bg-white/20 px-4 py-3"
               >
@@ -194,8 +223,8 @@ export default function SchoolPrimary() {
         </div>
 
         {/* ── Parent involvement ── */}
-        <div className="mt-20">
-          <div className="flex items-center gap-3">
+        <div data-aos="fade-in" className="mt-20">
+          <div data-aos="fade-up" className="flex items-center gap-3">
             <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
             <span className="flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-1.5 dark:bg-emerald-950/40">
               <span className="text-sm">👨‍👩‍👧‍👦</span>
@@ -207,20 +236,21 @@ export default function SchoolPrimary() {
           </div>
 
           <div className="mt-8 max-w-2xl">
-            <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+            <h2 data-aos="fade-up" className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
               Learning doesn't stop{" "}
               <span className="text-emerald-600 dark:text-emerald-400">at the school gate</span>
             </h2>
-            <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
+            <p data-aos="fade-up" className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
               We believe parents are the first teachers. Every programme at
               Ignite School is designed with parents as active partners in
               their child's growth.
             </p>
           </div>
 
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div data-aos="fade-up" className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {parentActivities.map(({ emoji, title, desc }) => (
               <div
+                data-aos="fade-up"
                 key={title}
                 className="flex gap-4 rounded-3xl bg-neutral-50 p-6 dark:bg-neutral-900"
               >

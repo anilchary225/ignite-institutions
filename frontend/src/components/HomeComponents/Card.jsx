@@ -22,8 +22,9 @@ export default function Card({ eyebrow, title, description, image, dark = false 
           <img
             src={image}
             alt=""
-            className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-in-out"
-            style={{ opacity: hovered ? 0.1 : 1 }}
+            className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-in-out "
+            style={{ opacity: hovered ? 0.3 : 1 }}
+            loading="lazy"
           />
         ) : null}
 
@@ -35,23 +36,23 @@ export default function Card({ eyebrow, title, description, image, dark = false 
           }`}
         />
 
-        <div className="relative z-10 flex min-h-[552px] flex-col justify-between p-8 sm:p-9">
+        <div className="relative z-10 flex min-h-[552px] flex-col justify-between p-8 sm:p-9 text-white">
           <div>
-            <p className="text-[15px] font-extrabold uppercase tracking-[0.08em]">
+            <p className="text-[24px] font-extrabold uppercase tracking-[0.08em] ">
               {eyebrow}
             </p>
 
-            <h3 className="mt-8 max-w-[340px] text-[28px] font-extrabold leading-[1.12] sm:text-[30px]">
+            <h3 className="mt-2 max-w-[340px] text-[16px] font-semibold leading-[1.12] sm:text-[18px]">
               {title}
             </h3>
 
             <div
-              className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                hovered ? "mt-7 max-h-56 opacity-100" : "max-h-0 opacity-0"
+              className={`mt-7 overflow-hidden transition-all duration-500 ease-in-out md:mt-0 md:max-h-0 md:opacity-0 ${
+                hovered ? "md:opacity-100 md:max-h-56" : ""
               }`}
             >
               <p
-                className={`max-w-[360px] text-[20px] leading-[1.42] ${
+                className={`max-w-[360px] text-[12px] leading-[1.42] md:text-[14px] pt-5 ${
                   dark ? "text-white" : "text-neutral-950"
                 }`}
               >
@@ -60,7 +61,7 @@ export default function Card({ eyebrow, title, description, image, dark = false 
             </div>
           </div>
 
-          <button
+          {/* <button
             type="button"
             className={`ml-auto inline-flex items-center gap-4 text-[22px] font-extrabold transition-all duration-500 ease-out ${
               hovered
@@ -71,7 +72,7 @@ export default function Card({ eyebrow, title, description, image, dark = false 
           >
             <span>Open</span>
             <ArrowRight size={28} />
-          </button>
+          </button> */}
         </div>
       </div>
     </article>

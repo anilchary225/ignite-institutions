@@ -1,5 +1,6 @@
-import React from "react";
-import HomeCards from './HomeCards';
+import React, { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import HomeCards from "./HomeCards";
 import Stats from "../components/HomeComponents/Stats";
 import HomeApply from "../components/HomeComponents/HomeApply";
 import CardsWithContent from "../components/HomeComponents/CardsWithContent";
@@ -10,57 +11,143 @@ import Events from "../components/HomeComponents/Events";
 import VideoPlayer from "../components/HomeComponents/VideoPlayer";
 import Testimonials from "../components/HomeComponents/Testimonials";
 import Form from "../components/HomeComponents/Form";
+import Navbar from "../components/Navbar/Navbar";
+import HeroSectionVideoScroll from "../components/HomeComponents/Heroscrollsection/HeroSectionVideoScroll";
 
 const Home = () => {
+  const [introDone, setIntroDone] = useState(
+    () => window.sessionStorage.getItem("ignite_intro_played") === "1"
+  );
+  const introWrapRef = useRef(null);
+  const introVideoRef = useRef(null);
+  const introFadeTimerRef = useRef(null);
+  const introEndedRef = useRef(false);
+
+  const startIntroFade = () => {
+    const video = introVideoRef.current;
+    const wrapper = introWrapRef.current;
+    if (!video || !wrapper || introEndedRef.current) return;
+
+    const duration = Number.isFinite(video.duration) ? video.duration : 0;
+    if (!duration) return;
+
+    window.clearTimeout(introFadeTimerRef.current);
+    const fadeDelay = Math.max(0, duration * 1000 - 900);
+    introFadeTimerRef.current = window.setTimeout(() => {
+      if (introEndedRef.current) return;
+        gsap.to(wrapper, {
+          opacity: 0,
+          duration: 0.7,
+          ease: "power2.out",
+          onComplete: () => {
+            introEndedRef.current = true;
+            window.sessionStorage.setItem("ignite_intro_played", "1");
+            setIntroDone(true);
+          },
+        });
+    }, fadeDelay);
+  };
+
+  useEffect(() => {
+    const video = introVideoRef.current;
+    video?.addEventListener("loadedmetadata", startIntroFade);
+    video?.addEventListener("canplay", startIntroFade);
+    return () => {
+      window.clearTimeout(introFadeTimerRef.current);
+      video?.removeEventListener("loadedmetadata", startIntroFade);
+      video?.removeEventListener("canplay", startIntroFade);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white">
-
-      {/* Hero Cards — white */}
-      <section className="bg-white dark:bg-neutral-950 px-4 py-10 sm:px-8 sm:py-12">
-        <div className="mx-auto max-w-7xl">
-          <HomeCards />
+      {!introDone ? (
+        <div ref={introWrapRef} className="fixed inset-0 z-[120] overflow-hidden bg-black">
+          <video
+            ref={introVideoRef}
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            src="/assets/entry-intro.webm"
+            className="h-full w-full object-cover"
+            onLoadedMetadata={startIntroFade}
+            onCanPlay={startIntroFade}
+            onEnded={() => {
+              if (!introEndedRef.current) {
+                introEndedRef.current = true;
+                window.sessionStorage.setItem("ignite_intro_played", "1");
+                setIntroDone(true);
+              }
+            }}
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent" />
         </div>
-      </section>
+      ) : null}
 
-      {/* Stats — green brand gradient */}
-      <Stats />
+      <div>
+        {introDone ? <Navbar /> : null}
+       
+        {/* <IgniteHero /> */}
+        <HeroSectionVideoScroll
+  videoSrc="/hero.mp4"
+  pxPerSecond={1000}
+  sentences={[
+    {
+      logo: "/favicon_io (1)/android-chrome-512x512.png",
+      eyebrow: "Welcome to Ignite",
+      heading: "IGNITE Junior Colleges and School",
+      paragraph: "A trusted name in IIT-JEE and NEET coaching in Hyderabad - built to shape confident, capable, and compassionate students.",
+    },
+    {
+      eyebrow: "Structured for Success",
+      heading: "Every detail, considered.",
+      paragraph: "Structured academic planning, daily assessments, and expert faculty guidance keep every student's progress consistent and on track.",
+    },
+    {
+      eyebrow: "Beyond the Classroom",
+      heading: "This is more than coaching. It's a complete environment.",
+      paragraph: "From premium infrastructure to personal mentorship, Ignite is built to carry students from ambition to achievement.",
+    },
+  ]}
+/>
 
-      {/* Apply — orange-50 */}
-      <HomeApply />
+        <section className=" bg-white px-4 pb-10 pt-28 dark:bg-neutral-950  sm:px-8 sm:pb-12 ">
+          <div className="mx-auto max-w-7xl">
+            <HomeCards />
+          </div>
+        </section>
 
-      {/* Programs cards — blue-50 */}
-      <section className="bg-blue-50 dark:bg-neutral-900 px-4 py-12 sm:px-8 sm:py-14 transition-colors">
-        <div className="mx-auto max-w-7xl">
-          <CardsWithContent />
-        </div>
-      </section>
+        <Stats />
 
-      {/* Campus Life hover cards — white */}
-      <CardsHover />
+        <HomeApply  />
 
-      {/* Campuses tabbed — green-50 */}
-      <section className="bg-green-50 dark:bg-neutral-900 transition-colors">
-        <Campuses />
-      </section>
+        <section data-aos="fade-up"  className="bg-blue-50 px-4 py-12 transition-colors dark:bg-neutral-900 sm:px-8 sm:py-14">
+          <div className="mx-auto max-w-7xl">
+            <CardsWithContent />
+          </div>
+        </section>
 
-      {/* Achievements — white */}
-      <Achievements />
+        <CardsHover />
 
-      {/* Events — red-50 */}
-      <section className="bg-red-50 dark:bg-neutral-900 transition-colors">
-        <Events />
-      </section>
+        <section  className="bg-green-50 transition-colors dark:bg-neutral-900">
+          <Campuses />
+        </section>
 
-      {/* Video — dark */}
-      <VideoPlayer />
+        <Achievements />
 
-      {/* Testimonials — blue-50 */}
-      <section className="bg-blue-50 dark:bg-neutral-950 transition-colors">
-        <Testimonials />
-      </section>
+        <section className="bg-red-50 transition-colors dark:bg-neutral-900">
+          <Events />
+        </section>
 
-      {/* Contact Form — white with border-top separating it from footer */}
-      <Form />
+        <VideoPlayer />
+
+        <section className="bg-blue-50 transition-colors dark:bg-neutral-950">
+          <Testimonials />
+        </section>
+
+        <Form />
+      </div>
     </div>
   );
 };

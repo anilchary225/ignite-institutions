@@ -5,34 +5,34 @@ const stories = [
     name: "Riya Kapoor",
     rank: "AIR 31",
     exam: "NEET 2024",
-    college: "AIIMS New Delhi — MBBS",
+    college: "AIIMS New Delhi - MBBS",
     batch: "2023–24 Short-Term",
     avatar: "https://placehold.co/180x180/0d9488/ffffff?text=RK",
-    quote: "I was a dropper who had scored 630 the first time. I came to Ignite expecting a crash course — what I got was a complete transformation. The daily mock system forced me to confront every weak chapter. By Month 6, I was scoring 700+.",
+    quote: "I was a dropper who had scored 630 the first time. I came to Ignite expecting a crash course - what I got was a complete transformation. The daily mock system forced me to confront every weak chapter. By Month 6, I was scoring 700+.",
     improvement: "630 → 715",
     improvementLabel: "Score jump in 12 months",
-    color: "teal",
+    color: "green",
   },
   {
     name: "Dev Pillai",
     rank: "AIR 89",
     exam: "NEET 2024",
-    college: "JIPMER Puducherry — MBBS",
+    college: "JIPMER Puducherry - MBBS",
     batch: "2023–24 Short-Term",
     avatar: "https://placehold.co/180x180/0891b2/ffffff?text=DP",
-    quote: "Biology was my biggest fear — 90 marks in Botany and Zoology felt impossible to score fully. Ignite's faculty broke it down so methodically that I started getting 85+ regularly by Month 4. NCERT stopped feeling like a textbook and started feeling like a friend.",
+    quote: "Biology was my biggest fear - 90 marks in Botany and Zoology felt impossible to score fully. Ignite's faculty broke it down so methodically that I started getting 85+ regularly by Month 4. NCERT stopped feeling like a textbook and started feeling like a friend.",
     improvement: "68%ile → AIR 89",
     improvementLabel: "Percentile to AIIMS in 12 months",
-    color: "cyan",
+    color: "green",
   },
   {
     name: "Sana Sheikh",
     rank: "AIR 176",
     exam: "NEET 2024",
-    college: "AIIMS Hyderabad — MBBS",
+    college: "AIIMS Hyderabad - MBBS",
     batch: "2023–24 Short-Term",
     avatar: "https://placehold.co/180x180/059669/ffffff?text=SS",
-    quote: "Phase 3 broke and rebuilt me. Writing a full 720-mark paper every day sounds brutal — it is. But by Week 6 of that phase, exam day felt like just another Tuesday. That mental calmness is what you can't buy anywhere except through reps.",
+    quote: "Phase 3 broke and rebuilt me. Writing a full 720-mark paper every day sounds brutal - it is. But by Week 6 of that phase, exam day felt like just another Tuesday. That mental calmness is what you can't buy anywhere except through reps.",
     improvement: "580 → 701",
     improvementLabel: "Score in a single year",
     color: "emerald",
@@ -40,8 +40,8 @@ const stories = [
 ];
 
 const colorMap = {
-  teal:    { bar: "bg-teal-500",    ring: "ring-teal-300 dark:ring-teal-700",    pill: "bg-teal-500",    text: "text-teal-600 dark:text-teal-400",    bg: "bg-teal-50 dark:bg-teal-950/10"    },
-  cyan:    { bar: "bg-cyan-500",    ring: "ring-cyan-300 dark:ring-cyan-700",    pill: "bg-cyan-500",    text: "text-cyan-600 dark:text-cyan-400",    bg: "bg-cyan-50 dark:bg-cyan-950/10"    },
+  green:    { bar: "bg-green-500",    ring: "ring-green-300 dark:ring-green-700",    pill: "bg-green-500",    text: "text-green-600 dark:text-green-400",    bg: "bg-green-50 dark:bg-green-950/10"    },
+  green:    { bar: "bg-green-500",    ring: "ring-green-300 dark:ring-green-700",    pill: "bg-green-500",    text: "text-green-600 dark:text-green-400",    bg: "bg-green-50 dark:bg-green-950/10"    },
   emerald: { bar: "bg-emerald-500", ring: "ring-emerald-300 dark:ring-emerald-700", pill: "bg-emerald-500", text: "text-emerald-600 dark:text-emerald-400", bg: "bg-emerald-50 dark:bg-emerald-950/10" },
 };
 
@@ -52,9 +52,9 @@ export default function NSTStories() {
 
         <div className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-          <div className="flex items-center gap-2 rounded-full bg-teal-100 px-4 py-1.5 dark:bg-teal-950/40">
-            <HeartPulse size={13} className="text-teal-600" />
-            <span className="text-xs font-bold uppercase tracking-widest text-teal-700 dark:text-teal-400">Inspiring Stories</span>
+          <div className="flex items-center gap-2 rounded-full bg-green-100 px-4 py-1.5 dark:bg-green-950/40">
+            <HeartPulse size={13} className="text-green-600" />
+            <span className="text-xs font-bold uppercase tracking-widest text-green-700 dark:text-green-400">Inspiring Stories</span>
           </div>
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
         </div>

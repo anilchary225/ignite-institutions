@@ -1,14 +1,19 @@
 import { ArrowRight, Zap, Clock, Users, Star } from "lucide-react";
+import { RESULTS_DATA } from "../../data_results/results_data";
 
-const rankerImages = [
-  { name: "Aarav Mehta",   rank: "AIR 23",  exam: "JEE Advanced 2024", college: "IIT Bombay — CS",     avatar: "https://placehold.co/300x360/4f46e5/ffffff?text=AIR+23",  color: "indigo" },
-  { name: "Diya Reddy",    rank: "AIR 71",  exam: "JEE Advanced 2024", college: "IIT Delhi — Maths",   avatar: "https://placehold.co/300x360/7c3aed/ffffff?text=AIR+71",  color: "violet" },
-  { name: "Rohan Nair",    rank: "AIR 104", exam: "JEE Advanced 2024", college: "IIT Madras — CS",     avatar: "https://placehold.co/300x360/0284c7/ffffff?text=AIR+104", color: "sky"    },
-];
+const rankerColors = ["indigo", "blue", "sky"];
+const rankerImages = RESULTS_DATA[2026].JEE_ADVANCED.slice(0, 3).map((student, index) => ({
+  name: student.name,
+  rank: `AIR ${student.rank}`,
+  exam: "JEE Advanced 2026",
+  college: "Ignite IIT JEE",
+  avatar: student.image,
+  color: rankerColors[index],
+}));
 
 const colorMap = {
   indigo: "bg-indigo-600",
-  violet: "bg-violet-600",
+  blue: "bg-blue-600",
   sky:    "bg-sky-500",
 };
 
@@ -35,7 +40,7 @@ export default function JLTHero() {
 
             <p className="mt-5 text-base leading-7 text-neutral-600 dark:text-neutral-400">
               Ignite's IIT JEE Long-Term programme is built for students who want to start early,
-              build deep conceptual mastery, and emerge as top rankers — not just qualifiers.
+              build deep conceptual mastery, and emerge as top rankers - not just qualifiers.
               Two full years of structured coaching, board integration, and mentorship.
             </p>
 
@@ -88,7 +93,7 @@ export default function JLTHero() {
             </div>
           </div>
 
-          {/* ── RIGHT — rank cards grid ── */}
+          {/* ── RIGHT - rank cards grid ── */}
           <div className="relative flex flex-col gap-4">
             {rankerImages.map((r, i) => (
               <div
@@ -119,7 +124,7 @@ export default function JLTHero() {
 
             <div className="mt-2 rounded-2xl bg-indigo-600 p-5 text-white">
               <p className="text-xs font-bold uppercase tracking-widest text-indigo-200">Admissions Open · 2025–27 Batch</p>
-              <p className="mt-1 text-lg font-extrabold">IIT JEE Long-Term — 2 Year Track</p>
+              <p className="mt-1 text-lg font-extrabold">IIT JEE Long-Term - 2 Year Track</p>
               <p className="mt-1 text-xs text-indigo-200">Limited seats · Hostel facility available</p>
               <a
                 href="#apply"

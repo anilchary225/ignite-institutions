@@ -3,10 +3,10 @@ import { TrendingUp, Medal, BookMarked, UserCheck, School, Laptop, Globe, Star }
 const outcomes = [
   { icon: Medal,      title: "Top All-India NEET Ranks",         stat: "AIR 18",    statLabel: "Best rank 2024",           desc: "Ignite NEET students consistently appear in the Top 100 AIR, earning seats at AIIMS across India.", color: "emerald" },
   { icon: School,     title: "Seats at AIIMS & Top Med Colleges", stat: "700+",      statLabel: "Total NEET qualifiers",    desc: "700+ students have earned MBBS seats at AIIMS Delhi, JIPMER, Maulana Azad, KGMC, and other premier institutes.", color: "green" },
-  { icon: BookMarked, title: "Board Excellence Alongside NEET",   stat: "94%",       statLabel: "Score 90%+ in boards",     desc: "94% of our students score above 90% in Intermediate boards — NEET prep and board prep go hand in hand at Ignite.", color: "teal" },
+  { icon: BookMarked, title: "Board Excellence Alongside NEET",   stat: "94%",       statLabel: "Score 90%+ in boards",     desc: "94% of our students score above 90% in Intermediate boards - NEET prep and board prep go hand in hand at Ignite.", color: "teal" },
   { icon: UserCheck,  title: "Personalised Mentorship",           stat: "1 : 8",     statLabel: "Mentor-to-student ratio",  desc: "Each student has a dedicated mentor who tracks subject-wise performance and adjusts study plans monthly.", color: "emerald" },
   { icon: TrendingUp, title: "Measurable Score Growth",           stat: "38%",       statLabel: "Avg. score growth",        desc: "Average NEET mock score grows 38% between the first Year 1 mock and the final pre-NEET mock series.", color: "green" },
-  { icon: Laptop,     title: "Digital Learning Resources",        stat: "24/7",      statLabel: "Online access included",   desc: "Recorded Biology, Chemistry and Physics lectures, NCERT annotations, and question banks — available around the clock.", color: "teal" },
+  { icon: Laptop,     title: "Digital Learning Resources",        stat: "24/7",      statLabel: "Online access included",   desc: "Recorded Biology, Chemistry and Physics lectures, NCERT annotations, and question banks - available around the clock.", color: "teal" },
   { icon: Globe,      title: "NEET Counselling Support",          stat: "Free",      statLabel: "MCC counselling guidance", desc: "After results, Ignite's counsellors guide students through MCC and state counselling rounds, college selection, and cutoffs.", color: "emerald" },
   { icon: Star,       title: "Merit Scholarships Available",      stat: "Up to 50%", statLabel: "Fee waiver for toppers",   desc: "Talent should never be stopped by finances. Merit-based scholarships available for qualifying students on application.", color: "green" },
 ];
@@ -35,7 +35,7 @@ export default function NLTOutcomes() {
             What You Walk Away With
           </h2>
           <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
-            Two years at Ignite doesn't just prepare you for NEET — it shapes the kind of
+            Two years at Ignite doesn't just prepare you for NEET - it shapes the kind of
             doctor you'll become.
           </p>
         </div>

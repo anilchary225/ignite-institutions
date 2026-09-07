@@ -2,14 +2,12 @@ import { useRef } from "react";
 import { ChevronLeft, ChevronRight, ImageIcon } from "lucide-react";
 
 const images = [
-  { id: 1, src: "https://placehold.co/400x280/059669/ffffff?text=Biology+Lab",        alt: "Biology laboratory session" },
-  { id: 2, src: "https://placehold.co/400x280/16a34a/ffffff?text=NEET+Mock+Day",      alt: "NEET mock test day" },
-  { id: 3, src: "https://placehold.co/400x280/0d9488/ffffff?text=Classroom+Session",  alt: "Classroom session" },
-  { id: 4, src: "https://placehold.co/400x280/047857/ffffff?text=Result+Day",         alt: "Result celebration" },
-  { id: 5, src: "https://placehold.co/400x280/059669/ffffff?text=Hostel+Campus",      alt: "Hostel campus life" },
-  { id: 6, src: "https://placehold.co/400x280/16a34a/ffffff?text=Mentor+Session",     alt: "1-on-1 mentor session" },
-  { id: 7, src: "https://placehold.co/400x280/0d9488/ffffff?text=Study+Hall",         alt: "Study hall" },
-  { id: 8, src: "https://placehold.co/400x280/047857/ffffff?text=Prize+Ceremony",     alt: "Award ceremony" },
+  { id: 1, src: "/assets/images/events/Science Lab/DSC09986.webp",        alt: "Biology laboratory session" },
+  { id: 2, src: "/assets/images/events/Classrooms/DSC00002.webp",      alt: "NEET mock test day" },
+  { id: 3, src: "/assets/images/events/Classrooms/DSC02152.webp",  alt: "Classroom session" },
+  { id: 6, src: "/assets/images/events/Classrooms/DSC00013.webp",     alt: "1-on-1 mentor session" },
+  { id: 7, src: "/assets/images/events/Classrooms/DSC02145.webp",         alt: "Study hall" },
+  { id: 8, src: "/assets/images/events/falicitates_with_awards/iphone 2025/Neetu Abhishek1.webp",     alt: "Award ceremony" },
 ];
 
 export default function NLTGalleryScroll() {
@@ -32,7 +30,7 @@ export default function NLTGalleryScroll() {
               Inside Our Labs & Classrooms
             </h2>
             <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
-              Where AIIMS rankers study, practice, and grow — every single day.
+              Where AIIMS rankers study, practice, and grow - every single day.
             </p>
           </div>
 
@@ -69,7 +67,7 @@ export default function NLTGalleryScroll() {
                 alt={img.alt}
                 className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <p className="absolute bottom-3 left-3 right-3 text-xs font-semibold text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 {img.alt}
               </p>
@@ -78,7 +76,7 @@ export default function NLTGalleryScroll() {
         </div>
 
         <p className="mt-4 text-center text-xs text-neutral-400">
-          Real photos of Ignite Academy campus — updated every semester.
+          Real photos of Ignite Academy campus - updated every semester.
         </p>
       </div>
     </section>

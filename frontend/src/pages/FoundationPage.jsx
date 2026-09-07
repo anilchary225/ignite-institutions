@@ -13,6 +13,7 @@ import {
   Target,
   Users,
 } from "lucide-react";
+import { submitEnquiry } from "../lib/enquiryApi";
 
 const highlights = [
   { icon: "⚛️", label: "Physics & Chemistry" },
@@ -30,7 +31,7 @@ const learningApproach = [
     title: "Conceptual Clarity",
     description:
       "Each concept in Physics, Chemistry, Biology, and Mathematics is explained in simple ways to ensure students understand and remember it.",
-    color: "violet",
+    color: "blue",
   },
   {
     icon: ArrowRight,
@@ -128,10 +129,10 @@ const faqs = [
 ];
 
 const colorStyles = {
-  violet: {
-    badge: "bg-violet-100 text-violet-700 dark:bg-violet-950/40 dark:text-violet-300",
-    icon: "bg-violet-600",
-    number: "text-violet-300 dark:text-violet-800",
+  blue: {
+    badge: "bg-blue-100 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300",
+    icon: "bg-blue-600",
+    number: "text-blue-300 dark:text-blue-800",
   },
   indigo: {
     badge: "bg-indigo-100 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300",
@@ -151,9 +152,9 @@ function FoundationHero() {
       <div className="mx-auto max-w-7xl">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-violet-100 px-4 py-2 dark:bg-violet-950/40">
+            <div className="inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-2 dark:bg-blue-950/40">
               <span className="text-lg">🚀</span>
-              <span className="text-xs font-black uppercase tracking-widest text-violet-700 dark:text-violet-400">
+              <span className="text-xs font-black uppercase tracking-widest text-blue-700 dark:text-blue-400">
                 Ignite Foundation
               </span>
             </div>
@@ -161,10 +162,10 @@ function FoundationHero() {
             <h1 className="mt-5 text-4xl font-extrabold leading-tight text-neutral-950 sm:text-5xl dark:text-white">
               Foundation Course for{" "}
               <span className="relative inline-block">
-                <span className="relative z-10 text-violet-600 dark:text-violet-400">
+                <span className="relative z-10 text-blue-600 dark:text-blue-400">
                   IIT JEE & NEET
                 </span>
-                <span className="absolute inset-x-0 bottom-1 -z-0 h-3 rounded bg-violet-100 dark:bg-violet-900/40" />
+                <span className="absolute inset-x-0 bottom-1 -z-0 h-3 rounded bg-blue-100 dark:bg-blue-900/40" />
               </span>{" "}
               Success
             </h1>
@@ -202,7 +203,7 @@ function FoundationHero() {
                 { value: "2", extra: "Exam pathways" },
               ].map(({ value, extra }) => (
                 <div key={extra}>
-                  <p className="text-2xl font-black text-violet-700 dark:text-violet-400">
+                  <p className="text-2xl font-black text-blue-700 dark:text-blue-400">
                     {value}
                   </p>
                   <p className="text-xs font-semibold text-neutral-500">{extra}</p>
@@ -211,18 +212,18 @@ function FoundationHero() {
             </div>
           </div>
 
-          <div className="relative min-h-[460px] overflow-hidden rounded-3xl bg-gradient-to-br from-violet-700 via-indigo-800 to-neutral-950 p-8 shadow-md">
-            <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-violet-400/20 blur-2xl" />
+          <div className="relative min-h-[460px] overflow-hidden rounded-3xl bg-linear-to-br from-blue-700 via-indigo-800 to-neutral-950 p-8 shadow-md">
+            <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-blue-400/20 blur-2xl" />
             <div className="absolute -bottom-20 -left-16 h-64 w-64 rounded-full bg-cyan-400/20 blur-2xl" />
             <div className="relative flex h-full flex-col justify-between">
               <div>
-                <p className="text-xs font-black uppercase tracking-widest text-violet-200">
+                <p className="text-xs font-black uppercase tracking-widest text-blue-200">
                   The right start
                 </p>
                 <h2 className="mt-4 max-w-sm text-3xl font-extrabold leading-tight text-white sm:text-4xl">
                   Build the base. Reach the top.
                 </h2>
-                <p className="mt-4 max-w-sm text-sm leading-6 text-violet-100">
+                <p className="mt-4 max-w-sm text-sm leading-6 text-blue-100">
                   Strong fundamentals today create confident problem-solvers for
                   tomorrow&apos;s biggest exams.
                 </p>
@@ -248,7 +249,7 @@ function FoundationHero() {
 
               <div className="mt-8 flex items-center gap-3">
                 <span className="h-2 w-2 rounded-full bg-cyan-300" />
-                <span className="text-xs font-bold uppercase tracking-widest text-violet-200">
+                <span className="text-xs font-bold uppercase tracking-widest text-blue-200">
                   Hyderabad&apos;s foundation coaching destination
                 </span>
               </div>
@@ -266,7 +267,7 @@ function LearningApproach() {
       <div className="mx-auto max-w-7xl">
         <div className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-          <span className="rounded-full bg-violet-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-violet-700 dark:bg-violet-950/50 dark:text-violet-300">
+          <span className="rounded-full bg-blue-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">
             Our approach
           </span>
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
@@ -275,7 +276,7 @@ function LearningApproach() {
         <div className="mt-8 max-w-3xl">
           <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             Building Strong Foundations for{" "}
-            <span className="text-violet-600 dark:text-violet-400">Your Future</span>
+            <span className="text-blue-600 dark:text-blue-400">Your Future</span>
           </h2>
           <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             At Ignite Academy, we believe that the right start leads to the
@@ -309,10 +310,10 @@ function LearningApproach() {
           })}
         </div>
 
-        <div className="mt-8 rounded-3xl bg-gradient-to-r from-violet-600 to-indigo-700 p-7 sm:p-9">
+        <div className="mt-8 rounded-3xl bg-linear-to-r from-blue-600 to-indigo-700 p-7 sm:p-9">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="text-xs font-black uppercase tracking-widest text-violet-200">
+              <p className="text-xs font-black uppercase tracking-widest text-blue-200">
                 A complete foundation
               </p>
               <p className="mt-2 max-w-2xl text-lg font-bold leading-7 text-white">
@@ -407,7 +408,7 @@ function FoundationFaq() {
                   </span>
                   <ChevronDown
                     size={18}
-                    className={`shrink-0 text-violet-600 transition-transform dark:text-violet-400 ${
+                    className={`shrink-0 text-blue-600 transition-transform dark:text-blue-400 ${
                       isOpen ? "rotate-180" : ""
                     }`}
                   />
@@ -428,6 +429,7 @@ function FoundationFaq() {
 
 function FoundationEnquiry() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", course: "" });
 
   function handleChange(event) {
@@ -436,48 +438,52 @@ function FoundationEnquiry() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
+    submitEnquiry({ category: "foundation", source: "foundation-page", payload: form })
+      .then(() => setSubmitted(true))
+      .catch(() => {})
+      .finally(() => setSubmitting(false));
   }
 
   return (
     <section className="bg-white px-6 py-20 dark:bg-neutral-950">
       <div className="mx-auto max-w-7xl">
-        <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-900 to-violet-950 px-8 py-12 text-center">
-          <p className="text-xs font-black uppercase tracking-widest text-violet-300">
+        <div className="overflow-hidden rounded-3xl bg-linear-to-br from-neutral-900 to-blue-950 px-8 py-12 text-center">
+          <p className="text-xs font-black uppercase tracking-widest text-blue-300">
             Enroll Today
           </p>
           <h2 className="mt-4 text-3xl font-extrabold text-white sm:text-4xl">
             Ignite Your Child&apos;s Future
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-violet-100">
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-blue-100">
             If you are searching for the best NEET & IIT foundation coaching in
             Hyderabad, Ignite Academy is the right choice. Start your child&apos;s
             journey with us today.
           </p>
         </div>
 
-        <div className="mt-10 overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-neutral-100 dark:bg-neutral-900 dark:ring-neutral-800">
+        <div className="mt-10 overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-neutral-100 dark:bg-neutral-900 dark:ring-neutral-800 border-4 border-blue-600">
           <div className="grid lg:grid-cols-[0.8fr_1.2fr]">
-            <div className="bg-violet-600 px-8 py-10">
+            <div className="bg-blue-600 px-8 py-10">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20">
                 <Mail size={22} className="text-white" />
               </div>
               <h3 className="mt-5 text-2xl font-extrabold text-white">Get in Touch With Us</h3>
-              <p className="mt-3 text-sm leading-7 text-violet-100">
+              <p className="mt-3 text-sm leading-7 text-blue-100">
                 Speak with our admissions team to find the right IIT JEE or NEET
                 foundation path for your child.
               </p>
               <div className="mt-8 space-y-3">
-                <div className="flex items-center gap-3 text-sm text-violet-100">
-                  <Phone size={16} className="text-violet-300" />
+                <div className="flex items-center gap-3 text-sm text-blue-100">
+                  <Phone size={16} className="text-blue-300" />
                   Admissions counselling
                 </div>
-                <div className="flex items-center gap-3 text-sm text-violet-100">
-                  <BookOpen size={16} className="text-violet-300" />
+                <div className="flex items-center gap-3 text-sm text-blue-100">
+                  <BookOpen size={16} className="text-blue-300" />
                   Course and batch guidance
                 </div>
-                <div className="flex items-center gap-3 text-sm text-violet-100">
-                  <Target size={16} className="text-violet-300" />
+                <div className="flex items-center gap-3 text-sm text-blue-100">
+                  <Target size={16} className="text-blue-300" />
                   Personalised next steps
                 </div>
               </div>
@@ -510,7 +516,7 @@ function FoundationEnquiry() {
                       onChange={handleChange}
                       placeholder="Parent / student name"
                       aria-label="Parent or student name"
-                      className="rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                      className="rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
                     />
                     <input
                       required
@@ -520,7 +526,7 @@ function FoundationEnquiry() {
                       onChange={handleChange}
                       placeholder="Phone number"
                       aria-label="Phone number"
-                      className="rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                      className="rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
                     />
                   </div>
                   <input
@@ -531,7 +537,7 @@ function FoundationEnquiry() {
                     onChange={handleChange}
                     placeholder="Email address"
                     aria-label="Email address"
-                    className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                    className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
                   />
                   <select
                     required
@@ -539,7 +545,7 @@ function FoundationEnquiry() {
                     value={form.course}
                     onChange={handleChange}
                     aria-label="Choose a course"
-                    className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                    className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
                   >
                     <option value="">Choose a foundation course</option>
                     <option>IIT JEE Foundation</option>
@@ -548,10 +554,10 @@ function FoundationEnquiry() {
                   </select>
                   <button
                     type="submit"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-violet-600 px-6 py-3.5 text-sm font-black text-white transition hover:bg-violet-700 active:scale-[0.98]"
+                    disabled={submitting}
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-black text-white transition hover:bg-blue-700 active:scale-[0.98] disabled:cursor-wait disabled:opacity-60"
                   >
-                    Request a Call Back
-                    <ArrowRight size={16} />
+                    {submitting ? "Submitting..." : <>Request a Call Back <ArrowRight size={16} /></>}
                   </button>
                 </form>
               )}
@@ -565,7 +571,7 @@ function FoundationEnquiry() {
 
 export default function FoundationPage() {
   return (
-    <div className="min-h-screen bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white">
+    <div className="min-h-screen pt-5 bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white">
       <FoundationHero />
       <LearningApproach />
       <WhyChooseIgnite />

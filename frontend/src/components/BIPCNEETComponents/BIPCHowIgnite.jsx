@@ -79,7 +79,7 @@ export default function BIPCHowIgnite() {
                 </div>
 
                 {/* points side */}
-                <div className={`rounded-2xl bg-gradient-to-br p-px ${c.line}`}>
+                <div className={`rounded-2xl bg-linear-to-br p-px ${c.line}`}>
                   <div className="flex flex-col gap-4 rounded-[14px] bg-white p-6 dark:bg-neutral-900">
                     {p.points.map((pt) => (
                       <div key={pt} className="flex items-start gap-3">
@@ -87,7 +87,7 @@ export default function BIPCHowIgnite() {
                         <p className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">{pt}</p>
                       </div>
                     ))}
-                    <div className={`h-1 w-full rounded-full bg-gradient-to-r ${c.line} opacity-30`} />
+                    <div className={`h-1 w-full rounded-full bg-linear-to-r ${c.line} opacity-30`} />
                     <p className="text-xs font-bold text-neutral-400 uppercase tracking-widest">Ignite BiPC · Hyderabad</p>
                   </div>
                 </div>

@@ -5,29 +5,31 @@ import NLTStories from "../components/NEETLongTermComponents/NLTStories";
 import NLTMotivationBar from "../components/NEETLongTermComponents/NLTMotivationBar";
 import NLTOutcomes from "../components/NEETLongTermComponents/NLTOutcomes";
 import NLTApplicationForm from "../components/NEETLongTermComponents/NLTApplicationForm";
+import BIPCRankers from "../components/BIPCNEETComponents/BIPCRankers";
 
 export default function NEETLongTermPage() {
   return (
-    <div className="min-h-screen bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white">
-      {/* S1 — Hero: left content + stacked rank cards */}
+    <div className="min-h-screen pt-8 bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white">
+      {/* S1 - Hero: left content + stacked rank cards */}
       <NLTHero />
 
-      {/* S2 — Course overview + horizontal banner */}
+      {/* S2 - Course overview + horizontal banner */}
       <NLTCourseOverview />
 
-      {/* S3 — Horizontal scrollable campus gallery */}
+      {/* S3 - Horizontal scrollable campus gallery */}
       <NLTGalleryScroll />
+      <BIPCRankers />
 
-      {/* S4 — Student stories */}
+      {/* S4 - Student stories */}
       <NLTStories />
 
-      {/* S5 — Motivational horizontal strap */}
+      {/* S5 - Motivational horizontal strap */}
       <NLTMotivationBar />
 
-      {/* S6 — Outcomes & benefits */}
+      {/* S6 - Outcomes & benefits */}
       <NLTOutcomes />
 
-      {/* S7 — Application form */}
+      {/* S7 - Application form */}
       <NLTApplicationForm />
     </div>
   );

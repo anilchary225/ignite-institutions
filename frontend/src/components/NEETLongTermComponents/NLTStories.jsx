@@ -5,44 +5,44 @@ const stories = [
     name: "Ishaan Sharma",
     rank: "AIR 18",
     exam: "NEET 2024",
-    college: "AIIMS New Delhi — MBBS",
+    college: "AIIMS New Delhi - MBBS",
     batch: "2022–24",
     avatar: "https://placehold.co/240x240/059669/ffffff?text=IS",
     quote:
-      "Biology used to feel like memorisation to me. Ignite's teachers completely changed that — they taught me to understand why systems work the way they do. By Year 2 I was answering questions I'd never seen before just by reasoning through them.",
+      "Biology used to feel like memorisation to me. Ignite's teachers completely changed that - they taught me to understand why systems work the way they do. By Year 2 I was answering questions I'd never seen before just by reasoning through them.",
     color: "emerald",
   },
   {
     name: "Priya Menon",
     rank: "AIR 64",
     exam: "NEET 2024",
-    college: "JIPMER Puducherry — MBBS",
+    college: "JIPMER Puducherry - MBBS",
     batch: "2022–24",
     avatar: "https://placehold.co/240x240/16a34a/ffffff?text=PM",
     quote:
-      "The weekly mock tests from Year 1 itself were what made the difference. By the time NEET day arrived, I had already written the paper so many times in my head. I wasn't nervous — I was ready.",
+      "The weekly mock tests from Year 1 itself were what made the difference. By the time NEET day arrived, I had already written the paper so many times in my head. I wasn't nervous - I was ready.",
     color: "green",
   },
   {
     name: "Ayaan Siddiqui",
     rank: "AIR 132",
     exam: "NEET 2024",
-    college: "AIIMS Hyderabad — MBBS",
+    college: "AIIMS Hyderabad - MBBS",
     batch: "2022–24",
     avatar: "https://placehold.co/240x240/0d9488/ffffff?text=AS",
     quote:
-      "My mentor at Ignite rebuilt my Chemistry study plan halfway through Year 1 when she noticed I was struggling with Organic. That kind of individual attention in a coaching institute is rare — it's what separates Ignite.",
+      "My mentor at Ignite rebuilt my Chemistry study plan halfway through Year 1 when she noticed I was struggling with Organic. That kind of individual attention in a coaching institute is rare - it's what separates Ignite.",
     color: "teal",
   },
   {
     name: "Sneha Nair",
     rank: "AIR 291",
     exam: "NEET 2024",
-    college: "Maulana Azad Medical College — MBBS",
+    college: "Maulana Azad Medical College - MBBS",
     batch: "2022–24",
     avatar: "https://placehold.co/240x240/047857/ffffff?text=SN",
     quote:
-      "I scored 89% in boards and AIR 291 in NEET in the same year. At Ignite they taught me that these aren't competing goals — the same conceptual clarity that gets you board marks wins NEET marks too.",
+      "I scored 89% in boards and AIR 291 in NEET in the same year. At Ignite they taught me that these aren't competing goals - the same conceptual clarity that gets you board marks wins NEET marks too.",
     color: "darkgreen",
   },
 ];
@@ -75,7 +75,7 @@ export default function NLTStories() {
             From Our Classrooms to AIIMS
           </h2>
           <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
-            Every AIIMS rank has a story of discipline behind it. Here are four — in their own words.
+            Every AIIMS rank has a story of discipline behind it. Here are four - in their own words.
           </p>
         </div>
 

@@ -1,10 +1,16 @@
 import { ArrowRight, Leaf, Clock, Star, Users } from "lucide-react";
+import { RESULTS_DATA } from "../../data_results/results_data";
 
-const rankerImages = [
-  { name: "Ishaan Sharma",  rank: "AIR 18",   exam: "NEET 2024",  score: "710/720", college: "AIIMS New Delhi — MBBS",   avatar: "https://placehold.co/300x360/059669/ffffff?text=AIR+18",  color: "emerald" },
-  { name: "Priya Menon",    rank: "AIR 64",   exam: "NEET 2024",  score: "705/720", college: "JIPMER — MBBS",             avatar: "https://placehold.co/300x360/16a34a/ffffff?text=AIR+64",  color: "green"   },
-  { name: "Ayaan Siddiqui", rank: "AIR 132",  exam: "NEET 2024",  score: "698/720", college: "AIIMS Hyderabad — MBBS",   avatar: "https://placehold.co/300x360/15803d/ffffff?text=AIR+132", color: "darkgreen"},
-];
+const rankerColors = ["emerald", "green", "darkgreen"];
+const rankerImages = RESULTS_DATA[2026].NEET.slice(0, 3).map((student, index) => ({
+  name: student.name,
+  rank: student.marks,
+  exam: "NEET 2026",
+  score: student.marks,
+  college: "Ignite BiPC",
+  avatar: student.image,
+  color: rankerColors[index],
+}));
 
 const colorMap = {
   emerald:   "bg-emerald-600",
@@ -36,7 +42,7 @@ export default function NLTHero() {
             <p className="mt-5 text-base leading-7 text-neutral-600 dark:text-neutral-400">
               Ignite's NEET Long-Term programme is designed for students who want to begin early,
               master Biology, Physics, and Chemistry from the ground up, and emerge as
-              top AIIMS & NEET rankers — not just qualifiers.
+              top AIIMS & NEET rankers - not just qualifiers.
             </p>
 
             {/* stat pills */}
@@ -88,7 +94,7 @@ export default function NLTHero() {
             </div>
           </div>
 
-          {/* ── RIGHT — stacked rank cards ── */}
+          {/* ── RIGHT - stacked rank cards ── */}
           <div className="relative flex flex-col gap-4">
             {rankerImages.map((r, i) => (
               <div
@@ -116,7 +122,7 @@ export default function NLTHero() {
             {/* admission card */}
             <div className="mt-2 rounded-2xl bg-emerald-600 p-5 text-white">
               <p className="text-xs font-bold uppercase tracking-widest text-emerald-200">Admissions Open · 2025–27 Batch</p>
-              <p className="mt-1 text-lg font-extrabold">NEET Long-Term — 2 Year Track</p>
+              <p className="mt-1 text-lg font-extrabold">NEET Long-Term - 2 Year Track</p>
               <p className="mt-1 text-xs text-emerald-200">Limited seats · Hostel facility available</p>
               <a
                 href="#apply"

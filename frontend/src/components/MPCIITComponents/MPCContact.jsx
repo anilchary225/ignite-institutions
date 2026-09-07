@@ -1,19 +1,21 @@
 import { useState } from "react";
 import { Send, CheckCircle2, Phone, Mail, MapPin } from "lucide-react";
+import { submitEnquiry } from "../../lib/enquiryApi";
 
 export default function MPCContact() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", city: "", currentClass: "", message: "" });
   const change = (e) => setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
 
-  const inputCls = "w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-950 outline-none transition placeholder:text-neutral-400 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white";
+  const inputCls = "w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-950 outline-none transition placeholder:text-neutral-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white";
 
   return (
     <section id="contact" className="bg-white px-6 py-20 dark:bg-neutral-950">
       <div className="mx-auto max-w-7xl">
         <div className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
-          <span className="rounded-full bg-violet-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-violet-700 dark:bg-violet-950/50 dark:text-violet-300">
+          <span className="rounded-full  px-4 py-1 text-xs font-bold uppercase tracking-widest bg-blue-100 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">
             Enrol Now
           </span>
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
@@ -36,8 +38,8 @@ export default function MPCContact() {
                 { Icon: MapPin, title: "Visit Us",  detail: "8+ branches across AP & Telangana. Head office: Hyderabad." },
               ].map(({ Icon, title, detail }) => (
                 <div key={title} className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-violet-100 dark:bg-violet-950/40">
-                    <Icon size={16} className="text-violet-600 dark:text-violet-400" />
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-100 dark:bg-blue-950/40">
+                    <Icon size={16} className="text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
                     <p className="text-sm font-bold text-neutral-950 dark:text-white">{title}</p>
@@ -47,11 +49,11 @@ export default function MPCContact() {
               ))}
             </div>
 
-            <div className="mt-10 rounded-3xl bg-gradient-to-br from-violet-600 to-indigo-700 p-7 text-white">
-              <p className="text-xs font-bold uppercase tracking-widest text-violet-200">Limited Time</p>
-              <h3 className="mt-2 text-xl font-extrabold">Scholarship Test — Register Free</h3>
-              <p className="mt-2 text-sm leading-6 text-violet-200">Appear for our scholarship test and earn up to <strong className="text-white">100% fee waiver</strong>. Open to all Class 10 students.</p>
-              <a href="#" className="mt-5 inline-flex items-center rounded-xl bg-white px-5 py-2.5 text-sm font-black text-violet-700 hover:bg-amber-400 hover:text-white transition">
+            <div className="mt-10 rounded-3xl bg-blue-700 p-7 text-white">
+              <p className="text-xs font-bold uppercase tracking-widest text-blue-200">Limited Time</p>
+              <h3 className="mt-2 text-xl font-extrabold">Scholarship Test - Register Free</h3>
+              <p className="mt-2 text-sm leading-6 text-blue-200">Appear for our scholarship test and earn up to <strong className="text-white">100% fee waiver</strong>. Open to all Class 10 students.</p>
+              <a href="#" className="mt-5 inline-flex items-center rounded-xl bg-white px-5 py-2.5 text-sm font-black text-blue-700 hover:bg-amber-400 hover:text-white transition">
                 Register for Scholarship Test →
               </a>
             </div>
@@ -65,12 +67,19 @@ export default function MPCContact() {
                 </div>
                 <h3 className="text-xl font-extrabold text-neutral-950 dark:text-white">Enquiry Received!</h3>
                 <p className="max-w-xs text-sm leading-6 text-neutral-500">Our counsellors will call you within 24 hours. Thank you for choosing Ignite.</p>
-                <button onClick={() => { setSubmitted(false); setForm({ name:"",phone:"",email:"",city:"",currentClass:"",message:"" }); }} className="mt-2 rounded-xl bg-violet-600 px-6 py-2.5 text-sm font-bold text-white hover:bg-violet-700">
+                <button onClick={() => { setSubmitted(false); setForm({ name:"",phone:"",email:"",city:"",currentClass:"",message:"" }); }} className="mt-2 rounded-xl bg-blue-600 px-6 py-2.5 text-sm font-bold text-white hover:bg-blue-700">
                   Submit Another
                 </button>
               </div>
             ) : (
-              <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-5">
+              <form onSubmit={(e) => {
+                e.preventDefault();
+                setSubmitting(true);
+                submitEnquiry({ category: "mpc-iit", source: "mpc-contact", payload: form })
+                  .then(() => setSubmitted(true))
+                  .catch(() => {})
+                  .finally(() => setSubmitting(false));
+              }} className="space-y-5">
                 <h3 className="text-xl font-extrabold text-neutral-950 dark:text-white">Apply for MPC IIT JEE</h3>
 
                 <div className="grid gap-4 sm:grid-cols-2">
@@ -110,8 +119,8 @@ export default function MPCContact() {
                   <textarea name="message" value={form.message} onChange={change} rows={3} placeholder="Tell us your target rank or any questions…" className={`${inputCls} resize-none`} />
                 </div>
 
-                <button type="submit" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-violet-600 px-6 py-3.5 text-sm font-black text-white transition hover:bg-violet-700 active:scale-[0.98]">
-                  <Send size={15} /> Submit Enquiry
+                <button type="submit" disabled={submitting} className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-black text-white transition hover:bg-blue-700 active:scale-[0.98]">
+                  {submitting ? "Submitting..." : (<><Send size={15} /> Submit Enquiry</>)}
                 </button>
                 <p className="text-center text-xs text-neutral-400">We'll call you within 24 hours. No spam, ever.</p>
               </form>

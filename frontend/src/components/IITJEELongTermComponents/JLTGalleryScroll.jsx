@@ -1,16 +1,16 @@
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight, ImageIcon } from "lucide-react";
 
-// Placeholder slots — user will replace src with real images
+// Placeholder slots - user will replace src with real images
 const images = [
-  { id: 1,  src: "https://placehold.co/400x280/4f46e5/ffffff?text=Classroom+1",       alt: "Ignite classroom session" },
-  { id: 2,  src: "https://placehold.co/400x280/7c3aed/ffffff?text=Lab+Session",        alt: "Chemistry lab session" },
-  { id: 3,  src: "https://placehold.co/400x280/0284c7/ffffff?text=Mock+Test+Day",      alt: "Mock test day" },
-  { id: 4,  src: "https://placehold.co/400x280/059669/ffffff?text=Result+Day",         alt: "Result celebration" },
-  { id: 5,  src: "https://placehold.co/400x280/e11d48/ffffff?text=Campus+Life",        alt: "Campus life" },
-  { id: 6,  src: "https://placehold.co/400x280/d97706/ffffff?text=Mentor+Session",     alt: "1-on-1 mentor session" },
-  { id: 7,  src: "https://placehold.co/400x280/4f46e5/ffffff?text=Study+Hall",         alt: "Study hall" },
-  { id: 8,  src: "https://placehold.co/400x280/7c3aed/ffffff?text=Prize+Ceremony",     alt: "Prize ceremony" },
+  { id: 1,  src: "/assets/images/events/Classrooms/DSC00003.webp",                     alt: "Ignite classroom session" },
+  { id: 2,  src: "/assets/images/events/Science Lab/DSC00040.webp",             alt: "Physics lab session" },
+  { id: 3,  src: "/assets/images/events/Classrooms/DSC02163.webp",                     alt: "Mock test day" },
+  { id: 4,  src: "/assets/images/events/Vybhava/al29471_DSC03258.webp",         alt: "Result celebration" },
+  { id: 5,  src: "/assets/images/events/sports/DSC05602.webp",        alt: "Campus life" },
+  { id: 6,  src: "/assets/images/events/School kids in science lab/DSC00078.webp",     alt: "1-on-1 mentor session" },
+  { id: 7,  src: "/assets/images/events/Classrooms/DSC02170.webp",         alt: "Study hall" },
+  { id: 8,  src: "/assets/images/events/falicitates_with_awards/iphone 2025/M Jagan Mohan Reddy5.webp",     alt: "Prize ceremony" },
 ];
 
 export default function JLTGalleryScroll() {
@@ -77,7 +77,7 @@ export default function JLTGalleryScroll() {
                 alt={img.alt}
                 className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <p className="absolute bottom-3 left-3 right-3 text-xs font-semibold text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 {img.alt}
               </p>
@@ -86,7 +86,7 @@ export default function JLTGalleryScroll() {
         </div>
 
         <p className="mt-4 text-center text-xs text-neutral-400">
-          Real photos of Ignite Academy campus — updated regularly.
+          Real photos of Ignite Academy campus - updated regularly.
         </p>
       </div>
     </section>

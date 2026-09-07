@@ -1,13 +1,13 @@
 import { Zap, ArrowRight } from "lucide-react";
 
 const phrases = [
-  "🔥 12 months is enough — if you make every day count",
+  "🔥 12 months is enough - if you make every day count",
   "⚡ Droppers who work smart go further than those who worked long",
   "🎯 The JEE rewards preparation, not luck",
   "🚀 Every topper had a plan. This is yours",
   "📈 Your percentile is a reflection of your daily habits",
   "💥 The only bad mock test is the one you didn't analyse",
-  "🏆 Short-term doesn't mean shortcuts — it means focus",
+  "🏆 Short-term doesn't mean shortcuts - it means focus",
   "🔑 One year. One exam. One life-changing decision",
 ];
 
@@ -15,7 +15,7 @@ export default function JSTMotivationBar() {
   const tripled = [...phrases, ...phrases, ...phrases];
 
   return (
-    <section className="overflow-hidden bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 py-14">
+    <section className="overflow-hidden bg-linear-to-r from-amber-500 via-orange-500 to-red-500 py-14">
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-6 text-center md:flex-row md:justify-between md:text-left">
         <div className="flex items-center gap-4">
           <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/20">

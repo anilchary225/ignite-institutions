@@ -10,13 +10,13 @@ export default function BIPCWhyIgnite() {
   return (
     <section id="why" className="relative overflow-hidden bg-indigo-950 px-6 py-20">
       {/* ambient blobs */}
-      <div className="pointer-events-none absolute -top-20 left-1/4 h-72 w-72 rounded-full bg-emerald-500/10 blur-3xl" />
+      <div className="pointer-events-none absolute -top-20 left-1/4 h-72 w-72 rounded-full bg-green-500/10 blur-3xl" />
       <div className="pointer-events-none absolute bottom-0 right-0 h-72 w-72 rounded-full bg-indigo-500/10 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl">
         <div className="flex items-center gap-3">
           <span className="h-px flex-1 bg-white/10" />
-          <span className="rounded-full bg-emerald-500/20 px-4 py-1 text-xs font-bold uppercase tracking-widest text-emerald-400 ring-1 ring-emerald-500/30">
+          <span className="rounded-full bg-green-500/20 px-4 py-1 text-xs font-bold uppercase tracking-widest text-green-400 ring-1 ring-green-500/30">
             Why Choose Ignite
           </span>
           <span className="h-px flex-1 bg-white/10" />
@@ -25,7 +25,7 @@ export default function BIPCWhyIgnite() {
         <div className="mt-8 max-w-2xl">
           <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
             Why Choose Ignite for{" "}
-            <span className="text-emerald-400">BiPC?</span>
+            <span className="text-green-400">BiPC?</span>
           </h2>
           <p className="mt-3 text-base leading-7 text-indigo-200">
             These strengths place Ignite firmly among the Top BiPC Colleges in Hyderabad trusted by thousands of students and parents.

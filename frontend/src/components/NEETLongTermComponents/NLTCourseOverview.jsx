@@ -1,17 +1,17 @@
 import { Leaf, FlaskConical, Atom, Brain, Target, BarChart3, Layers, Clock4 } from "lucide-react";
 
 const subjects = [
-  { icon: Leaf,         label: "Biology",   desc: "Botany & Zoology — every chapter NCERT-deep and NEET-sharp", color: "emerald" },
+  { icon: Leaf,         label: "Biology",   desc: "Botany & Zoology - every chapter NCERT-deep and NEET-sharp", color: "emerald" },
   { icon: FlaskConical, label: "Chemistry", desc: "Physical, Organic & Inorganic at NEET-level mastery",        color: "green"   },
-  { icon: Atom,         label: "Physics",   desc: "Mechanics to Modern Physics — concept-first, formula-second", color: "teal"    },
+  { icon: Atom,         label: "Physics",   desc: "Mechanics to Modern Physics - concept-first, formula-second", color: "teal"    },
 ];
 
 const highlights = [
   { icon: Brain,     title: "NCERT-First, NEET-Always",       desc: "Every concept anchored in NCERT then extended to NEET difficulty level." },
   { icon: Target,    title: "12,000+ NEET Question Bank",     desc: "Chapter-wise, difficulty-graded questions pulled from 15 years of NEET papers." },
   { icon: BarChart3, title: "Monthly Progress Reports",       desc: "Subject-wise and chapter-wise performance tracked and shared every month." },
-  { icon: Layers,    title: "Board + NEET Dual Mastery",      desc: "Syllabus synced — BiPC board and NEET preparation run in parallel, never at odds." },
-  { icon: Clock4,    title: "Revision Built Into Calendar",   desc: "Structured revision cycles designed into the 2-year plan — not an afterthought." },
+  { icon: Layers,    title: "Board + NEET Dual Mastery",      desc: "Syllabus synced - BiPC board and NEET preparation run in parallel, never at odds." },
+  { icon: Clock4,    title: "Revision Built Into Calendar",   desc: "Structured revision cycles designed into the 2-year plan - not an afterthought." },
   { icon: Leaf,      title: "AIIMS/JIPMER Alumni Faculty",    desc: "Biology faculty trained at AIIMS; Chemistry and Physics from top medical colleges." },
 ];
 
@@ -39,7 +39,7 @@ export default function NLTCourseOverview() {
             What the Programme Delivers
           </h2>
           <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
-            A rigorous 2-year curriculum across Biology, Chemistry, and Physics — built for
+            A rigorous 2-year curriculum across Biology, Chemistry, and Physics - built for
             board excellence and NEET mastery at the same time.
           </p>
         </div>
@@ -61,7 +61,7 @@ export default function NLTCourseOverview() {
         </div>
 
         {/* horizontal programme banner */}
-        <div className="mt-10 overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-700 via-green-600 to-teal-700 p-8">
+        <div className="mt-10 overflow-hidden rounded-3xl bg-linear-to-r from-emerald-700 via-green-600 to-teal-700 p-8">
           <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-200">Programme Structure</p>

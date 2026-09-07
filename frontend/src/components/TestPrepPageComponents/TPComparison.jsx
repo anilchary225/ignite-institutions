@@ -68,7 +68,7 @@ const ROWS = [
 ];
 
 const cols = [
-  { key: "inter",    label: "Intermediate (2 Yr)", color: "violet" },
+  { key: "inter",    label: "Intermediate (2 Yr)", color: "blue" },
   { key: "crash",    label: "Short Term Crash",    color: "rose" },
   { key: "longTerm", label: "Long Term (1 Yr)",    color: "indigo" },
   { key: "bitsat",   label: "BITSAT",              color: "sky" },
@@ -76,7 +76,7 @@ const cols = [
 ];
 
 const headerColors = {
-  violet: "bg-violet-600",
+  blue: "bg-blue-600",
   rose:   "bg-rose-600",
   indigo: "bg-indigo-600",
   sky:    "bg-sky-500",
@@ -84,7 +84,7 @@ const headerColors = {
 };
 
 const checkColors = {
-  violet: "text-violet-600 dark:text-violet-400",
+  blue: "text-blue-600 dark:text-blue-400",
   rose:   "text-rose-600 dark:text-rose-400",
   indigo: "text-indigo-600 dark:text-indigo-400",
   sky:    "text-sky-500 dark:text-sky-400",
@@ -112,7 +112,7 @@ export default function TPComparison() {
     <section id="compare" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
       <div className="mx-auto max-w-7xl">
         {/* header */}
-        <div className="flex items-center gap-3">
+        <div data-aos="fade-up" className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
           <span className="rounded-full bg-neutral-200 px-4 py-1 text-xs font-bold uppercase tracking-widest text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400">
             Programme Comparison
@@ -121,16 +121,16 @@ export default function TPComparison() {
         </div>
 
         <div className="mt-8 max-w-2xl">
-          <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+          <h2 data-aos="fade-up" className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             Which programme is right for you?
           </h2>
-          <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
+          <p data-aos="fade-up" className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Compare all five programmes side by side to find the one that fits your timeline and goal.
           </p>
         </div>
 
-        {/* table — horizontally scrollable on mobile */}
-        <div className="mt-10 overflow-x-auto rounded-3xl shadow-sm ring-1 ring-neutral-200 dark:ring-neutral-800">
+        {/* table - horizontally scrollable on mobile */}
+        <div data-aos="fade-in" className="mt-10 overflow-x-auto rounded-3xl shadow-sm ring-1 ring-neutral-200 dark:ring-neutral-800">
           <table className="w-full min-w-[800px] border-collapse bg-white dark:bg-neutral-900">
             <thead>
               <tr>
@@ -140,9 +140,9 @@ export default function TPComparison() {
                 </th>
                 {cols.map((col) => (
                   <th key={col.key} className="px-6 py-0 text-center">
-                    <div className={`mx-1 my-3 rounded-2xl px-4 py-3 ${headerColors[col.color]}`}>
-                      <span className="text-sm font-extrabold text-white">{col.label}</span>
-                    </div>
+                    {/* <div className={`mx-1 my-3 rounded-2xl px-4 py-3 ${headerColors[col.color]}`}> */}
+                    <span className="text-sm font-extrabold text-black dark:text-white">{col.label}</span>
+                    {/* // </div> */}
                   </th>
                 ))}
               </tr>

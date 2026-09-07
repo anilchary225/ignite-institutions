@@ -7,7 +7,16 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition-property: none !important;
+  animation: none !important;
 }
 
 body {
@@ -15,9 +24,45 @@ body {
   font-family: var(--font-sans);
   background: #ffffff;
   color: #111111;
+  overflow-y: auto;
+  overflow-x: hidden;
+  touch-action: pan-y;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
 }
 
 .dark body {
   background: #09090b;
   color: #ffffff;
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+.chat-input {
+  width: 100%;
+  border: 1px solid rgb(226 232 240);
+  border-radius: 0.5rem;
+  background: white;
+  padding: 0.6rem 0.7rem;
+  font-size: 0.75rem;
+  color: rgb(51 65 85);
+  outline: none;
+}
+
+.chat-input:focus {
+  border-color: rgb(37 99 235);
+  box-shadow: 0 0 0 2px rgb(37 99 235 / 0.15);
+}
+
+.dark .chat-input {
+  border-color: rgb(51 65 85);
+  background: rgb(15 23 42);
+  color: rgb(226 232 240);
 }

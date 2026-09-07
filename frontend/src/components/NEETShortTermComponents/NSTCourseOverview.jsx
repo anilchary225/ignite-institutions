@@ -6,8 +6,8 @@ const phases = [
     phase: "Phase 1",
     title: "NCERT Deep Dive",
     duration: "Months 1–3",
-    color: "teal",
-    desc: "Rapid but thorough coverage of all Class 11 Biology, Chemistry & Physics. Every NCERT line treated as exam material — nothing skipped.",
+    color: "green",
+    desc: "Rapid but thorough coverage of all Class 11 Biology, Chemistry & Physics. Every NCERT line treated as exam material - nothing skipped.",
     points: [
       "Complete Class 11 syllabus in condensed, focused modules",
       "NCERT line-by-line Biology annotation sessions",
@@ -18,7 +18,7 @@ const phases = [
     phase: "Phase 2",
     title: "NEET-Level Problem Solving",
     duration: "Months 4–7",
-    color: "cyan",
+    color: "green",
     desc: "Class 12 syllabus with NEET difficulty. High-weightage chapters get extra time. Previous paper analysis becomes a weekly ritual.",
     points: [
       "Class 12 full syllabus with NEET-level question banks",
@@ -43,7 +43,7 @@ const phases = [
     title: "Final 60-Day Revision Blitz",
     duration: "Months 11–12",
     color: "green",
-    desc: "High-speed final revision — Biology flowcharts, Chemistry reaction maps, Physics formula drills, and full exam conditioning.",
+    desc: "High-speed final revision - Biology flowcharts, Chemistry reaction maps, Physics formula drills, and full exam conditioning.",
     points: [
       "Biology quick-recall cards: all diagrams and cycles",
       "10 full mocks in the final 2 weeks with review",
@@ -53,16 +53,16 @@ const phases = [
 ];
 
 const colorMap = {
-  teal:    { dot: "bg-teal-500",    pill: "bg-teal-100 text-teal-700 dark:bg-teal-950/40 dark:text-teal-400",       border: "border-teal-200 dark:border-teal-900",     bg: "bg-teal-50 dark:bg-teal-950/10"    },
-  cyan:    { dot: "bg-cyan-500",    pill: "bg-cyan-100 text-cyan-700 dark:bg-cyan-950/40 dark:text-cyan-400",       border: "border-cyan-200 dark:border-cyan-900",     bg: "bg-cyan-50 dark:bg-cyan-950/10"    },
+  green:    { dot: "bg-green-500",    pill: "bg-green-100 text-green-700 dark:bg-green-950/40 dark:text-green-400",       border: "border-green-200 dark:border-green-900",     bg: "bg-green-50 dark:bg-green-950/10"    },
+  green:    { dot: "bg-green-500",    pill: "bg-green-100 text-green-700 dark:bg-green-950/40 dark:text-green-400",       border: "border-green-200 dark:border-green-900",     bg: "bg-green-50 dark:bg-green-950/10"    },
   emerald: { dot: "bg-emerald-500", pill: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400", border: "border-emerald-200 dark:border-emerald-900", bg: "bg-emerald-50 dark:bg-emerald-950/10" },
   green:   { dot: "bg-green-600",   pill: "bg-green-100 text-green-700 dark:bg-green-950/40 dark:text-green-400",   border: "border-green-200 dark:border-green-900",   bg: "bg-green-50 dark:bg-green-950/10"  },
 };
 
 const subjects = [
-  { icon: Leaf,         label: "Biology",   desc: "Botany + Zoology — NCERT mastery then NEET assertion, diagram & MCQ drills" },
-  { icon: FlaskConical, label: "Chemistry", desc: "Physical numericals, Organic reactions, Inorganic NCERT — all three treated equally" },
-  { icon: Atom,         label: "Physics",   desc: "Mechanics to Modern Physics — concept clarity with NEET-tempo speed practice" },
+  { icon: Leaf,         label: "Biology",   desc: "Botany + Zoology - NCERT mastery then NEET assertion, diagram & MCQ drills" },
+  { icon: FlaskConical, label: "Chemistry", desc: "Physical numericals, Organic reactions, Inorganic NCERT - all three treated equally" },
+  { icon: Atom,         label: "Physics",   desc: "Mechanics to Modern Physics - concept clarity with NEET-tempo speed practice" },
 ];
 
 export default function NSTCourseOverview() {
@@ -76,7 +76,7 @@ export default function NSTCourseOverview() {
 
         <div className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-          <span className="rounded-full bg-teal-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-teal-700 dark:bg-teal-950/40 dark:text-teal-400">
+          <span className="rounded-full bg-green-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-green-700 dark:bg-green-950/40 dark:text-green-400">
             Course Overview
           </span>
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
@@ -87,15 +87,15 @@ export default function NSTCourseOverview() {
             A Year Built Around One Exam
           </h2>
           <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
-            Every month serves a specific purpose. Four precision phases — zero wasted time.
+            Every month serves a specific purpose. Four precision phases - zero wasted time.
           </p>
         </div>
 
         {/* subjects */}
         <div className="mt-10 grid gap-4 sm:grid-cols-3">
           {subjects.map(({ icon: Icon, label, desc }) => (
-            <div key={label} className="flex gap-4 rounded-2xl border border-teal-100 bg-white p-5 dark:border-teal-900/30 dark:bg-neutral-900">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal-100 text-teal-600 dark:bg-teal-950/40 dark:text-teal-400">
+            <div key={label} className="flex gap-4 rounded-2xl border border-green-100 bg-white p-5 dark:border-green-900/30 dark:bg-neutral-900">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-green-100 text-green-600 dark:bg-green-950/40 dark:text-green-400">
                 <Icon size={18} />
               </div>
               <div>
@@ -107,20 +107,20 @@ export default function NSTCourseOverview() {
         </div>
 
         {/* wide banner */}
-        <div className="mt-8 overflow-hidden rounded-3xl bg-gradient-to-r from-teal-600 via-cyan-500 to-teal-600 p-8">
+        <div className="mt-8 overflow-hidden rounded-3xl bg-linear-to-r from-green-600 via-green-500 to-green-600 p-8">
           <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-teal-100">Programme Structure</p>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-green-100">Programme Structure</p>
               <h3 className="mt-1 text-2xl font-extrabold text-white sm:text-3xl">12-Month Intensive · Class 12 & Droppers</h3>
-              <p className="mt-2 text-sm text-teal-100 leading-6 max-w-lg">
-                Four laser-focused phases from NCERT deep dive to daily full-mock blitz — built
+              <p className="mt-2 text-sm text-green-100 leading-6 max-w-lg">
+                Four laser-focused phases from NCERT deep dive to daily full-mock blitz - built
                 for students who need AIIMS-level results in a single year.
               </p>
             </div>
             <div className="flex shrink-0 flex-col items-center gap-1 rounded-2xl bg-white/20 px-7 py-5 text-center backdrop-blur-sm">
               <p className="text-3xl font-black text-white">720</p>
-              <p className="text-xs font-bold uppercase tracking-widest text-teal-100">Marks</p>
-              <p className="mt-1 text-xs text-teal-200">4 Phases · 3 Subjects</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-green-100">Marks</p>
+              <p className="mt-1 text-xs text-green-200">4 Phases · 3 Subjects</p>
             </div>
           </div>
         </div>

@@ -14,7 +14,7 @@ const colorMap = {
 
 export default function BIPCHero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-indigo-950 via-indigo-900 to-emerald-950 px-6 pt-16 pb-20">
+    <section className="relative overflow-hidden bg-linear-to-br from-indigo-950 via-indigo-900 to-emerald-950 px-6 pt-16 pb-20">
       {/* decorative blobs */}
       <div className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-emerald-500/10 blur-3xl" />
       <div className="pointer-events-none absolute -right-20 top-1/2 h-80 w-80 rounded-full bg-indigo-500/10 blur-3xl" />
@@ -33,7 +33,7 @@ export default function BIPCHero() {
 
             <h1 className="mt-5 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
               Your dream of{" "}
-              <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">
                 becoming a doctor
               </span>{" "}
               starts here.
@@ -41,7 +41,7 @@ export default function BIPCHero() {
 
             <p className="mt-5 text-base leading-7 text-indigo-200">
               Ignite's BiPC programme combines Intermediate board mastery with
-              systematic NEET UG preparation — Biology, Physics & Chemistry
+              systematic NEET UG preparation - Biology, Physics & Chemistry
               taught by expert faculty for both board excellence and top NEET ranks.
             </p>
 
@@ -68,15 +68,15 @@ export default function BIPCHero() {
             </div>
           </div>
 
-          {/* RIGHT — image + floating info cards */}
-          <div className="relative">
+          {/* RIGHT - image + floating info cards */}
+          <div className="relative flex flex-col justify-between gap-5 rounded-3xl bg-indigo-950/20 p-5 backdrop-blur-sm">
             <div className="overflow-hidden rounded-3xl ring-1 ring-white/10 shadow-2xl">
               <img
-                src="https://placehold.co/640x520/059669/ffffff?text=BiPC+NEET+Classroom"
+                src="/assets/images/events/Science Lab/DSC00036.webp"
                 alt="BiPC NEET Classroom"
-                className="h-full w-full object-cover"
+                className="h-80 w-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/80 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-indigo-950/80 to-transparent" />
             </div>
 
             {/* floating stat pills */}
@@ -90,9 +90,9 @@ export default function BIPCHero() {
             </div>
 
             {/* bottom apply card */}
-            <div className="absolute inset-x-4 bottom-4 rounded-2xl bg-white/90 p-5 backdrop-blur-sm dark:bg-neutral-900/90">
+            <div className=" inset-x-4 bottom-4 rounded-t-2xl bg-white/90 p-5 backdrop-blur-sm dark:bg-neutral-900/90">
               <p className="text-xs font-bold uppercase tracking-widest text-emerald-600">Admissions Open · 2025–26</p>
-              <p className="mt-1 text-base font-extrabold text-neutral-950 dark:text-white">BiPC — NEET UG Integrated Batch</p>
+              <p className="mt-1 text-base font-extrabold text-neutral-950 dark:text-white">BiPC - NEET UG Integrated Batch</p>
               <a href="#contact" className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 py-3 text-sm font-black text-white transition hover:bg-emerald-700">
                 Secure Your Seat <ArrowRight size={14} />
               </a>

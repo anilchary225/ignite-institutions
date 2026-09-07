@@ -4,10 +4,10 @@ const courses = [
   {
     id: "mpc-jee",
     stream: "MPC",
-    color: "violet",
-    title: "MPC — IIT JEE (Main & Advanced)",
+    color: "orange",
+    title: "MPC - IIT-JEE (Main & Advanced)",
     duration: "2 Years · Class 11 & 12",
-    targets: ["IIT JEE Main", "IIT JEE Advanced", "EAPCET", "BITSAT"],
+    targets: ["IIT-JEE Main", "IIT-JEE Advanced", "EAPCET", "BITSAT"],
     features: [
       "Daily 6-hour structured classes",
       "Weekly mock tests with rank analysis",
@@ -21,7 +21,7 @@ const courses = [
     id: "bipc-neet",
     stream: "BiPC",
     color: "indigo",
-    title: "BiPC — NEET UG",
+    title: "BiPC - NEET UG",
     duration: "2 Years · Class 11 & 12",
     targets: ["NEET UG", "AIIMS", "EAPCET (Medical)", "State Medical"],
     features: [
@@ -37,7 +37,7 @@ const courses = [
     id: "mpc-eapcet",
     stream: "MPC",
     color: "orange",
-    title: "MPC — EAPCET Focus",
+    title: "MPC - EAPCET Focus",
     duration: "2 Years · Class 11 & 12",
     targets: ["AP EAPCET", "TS EAPCET", "Board Excellence"],
     features: [
@@ -53,7 +53,7 @@ const courses = [
     id: "bipc-eapcet",
     stream: "BiPC",
     color: "emerald",
-    title: "BiPC — EAPCET Focus",
+    title: "BiPC - EAPCET Focus",
     duration: "2 Years · Class 11 & 12",
     targets: ["AP EAPCET Medical", "TS EAPCET Medical", "Board Excellence"],
     features: [
@@ -69,7 +69,7 @@ const courses = [
     id: "bitsat",
     stream: "MPC",
     color: "rose",
-    title: "MPC — BITSAT Add-on",
+    title: "MPC - BITSAT Add-on",
     duration: "Alongside JEE · Last 3 Months Intensive",
     targets: ["BITSAT", "BITS Pilani", "BITS Goa", "BITS Hyderabad"],
     features: [
@@ -83,11 +83,11 @@ const courses = [
 ];
 
 const colorMap = {
-  violet: {
-    badge: "bg-violet-100 text-violet-700 dark:bg-violet-950/50 dark:text-violet-300",
-    pill: "border-violet-200 bg-violet-50 text-violet-700 dark:border-violet-800 dark:bg-violet-950/30 dark:text-violet-300",
-    check: "text-violet-500",
-    cta: "bg-violet-600 hover:bg-violet-700 text-white",
+  orange: {
+    badge: "bg-orange-100 text-orange-700 dark:bg-orange-950/50 dark:text-orange-300",
+    pill: "border-orange-200 bg-orange-50 text-orange-700 dark:border-orange-800 dark:bg-orange-950/30 dark:text-orange-300",
+    check: "text-orange-500",
+    cta: "bg-orange-600 hover:bg-orange-700 text-white",
   },
   indigo: {
     badge: "bg-indigo-100 text-indigo-700 dark:bg-indigo-950/50 dark:text-indigo-300",
@@ -118,7 +118,7 @@ const colorMap = {
 function CourseCard({ course }) {
   const c = colorMap[course.color];
   return (
-    <div className="flex flex-col rounded-3xl bg-white shadow-sm ring-1 ring-neutral-100 transition hover:shadow-md dark:bg-neutral-900 dark:ring-neutral-800">
+    <div data-aos="fade-up" className="flex flex-col rounded-3xl bg-white shadow-sm ring-1 ring-neutral-100 transition hover:shadow-2xl dark:bg-neutral-900 dark:ring-neutral-800">
       <div className="p-7">
         <div className="flex items-start justify-between gap-4">
           <span className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide ${c.badge}`}>
@@ -166,17 +166,17 @@ export default function JCCourses() {
   return (
     <section id="courses" className="bg-white px-6 pb-20 dark:bg-neutral-950">
       {/* admissions open strip */}
-      <div className="w-full bg-gradient-to-r from-violet-600 via-indigo-600 to-violet-700 py-4">
+      <div data-aos="zoom-in" className="w-full bg-linear-to-r from-orange-600 via-indigo-600 to-orange-700 py-4">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6">
           <div className="flex items-center gap-3">
             <span className="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-amber-400" />
             <p className="text-sm font-black uppercase tracking-[0.18em] text-white">
-              Admissions Are Open — 2025–26
+              Admissions Are Open - 2025–26
             </p>
           </div>
           <a
             href="#contact"
-            className="rounded-full bg-white px-5 py-2 text-xs font-black uppercase tracking-wide text-violet-700 transition hover:bg-amber-400 hover:text-white"
+            className="rounded-full bg-white px-5 py-2 text-xs font-black uppercase tracking-wide text-orange-700 transition hover:bg-amber-400 hover:text-white"
           >
             Enquire Now →
           </a>
@@ -184,7 +184,7 @@ export default function JCCourses() {
       </div>
 
       <div className="mx-auto mt-16 max-w-7xl">
-        <div className="flex items-center gap-3">
+        <div data-aos="fade-up" className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
           <span className="rounded-full bg-neutral-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400">
             Courses Offered
@@ -193,16 +193,16 @@ export default function JCCourses() {
         </div>
 
         <div className="mt-8 max-w-2xl">
-          <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+          <h2 data-aos="fade-up" className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             Choose your programme
           </h2>
-          <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
+          <p data-aos="fade-up" className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Every course is designed for both board performance and entrance
-            exam success — no compromise on either.
+            exam success - no compromise on either.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div data-aos="fade-up" className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {courses.map((c) => (
             <CourseCard key={c.id} course={c} />
           ))}

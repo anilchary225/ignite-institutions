@@ -4,7 +4,7 @@ const outcomes = [
   {
     icon: Medal,
     title: "Top All-India Ranks",
-    desc: "Our students consistently appear in IIT JEE Advanced Top 500 AIR — year after year.",
+    desc: "Our students consistently appear in IIT JEE Advanced Top 500 AIR - year after year.",
     stat: "AIR 23",
     statLabel: "Best rank 2024",
     color: "amber",
@@ -15,12 +15,12 @@ const outcomes = [
     desc: "600+ students from Ignite have earned seats at IIT Bombay, Delhi, Madras, Kharagpur, and top NITs.",
     stat: "600+",
     statLabel: "Total selections",
-    color: "indigo",
+    color: "blue",
   },
   {
     icon: BookMarked,
     title: "Board Excellence",
-    desc: "93% of our students score above 90% in Intermediate boards — JEE prep doesn't come at the cost of boards.",
+    desc: "93% of our students score above 90% in Intermediate boards - JEE prep doesn't come at the cost of boards.",
     stat: "93%",
     statLabel: "Score 90%+ in boards",
     color: "violet",
@@ -44,7 +44,7 @@ const outcomes = [
   {
     icon: Laptop,
     title: "Digital Learning Support",
-    desc: "Access to recorded lectures, doubt portals, and JEE problem banks — available 24/7.",
+    desc: "Access to recorded lectures, doubt portals, and JEE problem banks - available 24/7.",
     stat: "24/7",
     statLabel: "Digital access",
     color: "rose",
@@ -52,7 +52,7 @@ const outcomes = [
   {
     icon: Globe,
     title: "College Counselling",
-    desc: "After results, our experts guide every student through JoSAA counselling — branch selection, cutoffs, and decisions.",
+    desc: "After results, our experts guide every student through JoSAA counselling - branch selection, cutoffs, and decisions.",
     stat: "Free",
     statLabel: "Counselling included",
     color: "violet",
@@ -60,7 +60,7 @@ const outcomes = [
   {
     icon: Star,
     title: "Scholarship Opportunities",
-    desc: "Merit-based fee waivers available for qualifying students — talent should never be stopped by finances.",
+    desc: "Merit-based fee waivers available for qualifying students - talent should never be stopped by finances.",
     stat: "Up to 50%",
     statLabel: "Fee waiver available",
     color: "amber",
@@ -69,7 +69,7 @@ const outcomes = [
 
 const colorMap = {
   amber:   { bg: "bg-amber-50 dark:bg-amber-950/20",   icon: "bg-amber-100 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400",   stat: "text-amber-600 dark:text-amber-400",   border: "border-amber-200 dark:border-amber-900" },
-  indigo:  { bg: "bg-indigo-50 dark:bg-indigo-950/20", icon: "bg-indigo-100 text-indigo-600 dark:bg-indigo-950/40 dark:text-indigo-400", stat: "text-indigo-600 dark:text-indigo-400", border: "border-indigo-200 dark:border-indigo-900" },
+  blue:  { bg: "bg-blue-50 dark:bg-blue-950/20", icon: "bg-blue-100 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400", stat: "text-blue-600 dark:text-blue-400", border: "border-blue-200 dark:border-blue-900" },
   violet:  { bg: "bg-violet-50 dark:bg-violet-950/20", icon: "bg-violet-100 text-violet-600 dark:bg-violet-950/40 dark:text-violet-400", stat: "text-violet-600 dark:text-violet-400", border: "border-violet-200 dark:border-violet-900" },
   sky:     { bg: "bg-sky-50 dark:bg-sky-950/20",       icon: "bg-sky-100 text-sky-600 dark:bg-sky-950/40 dark:text-sky-400",             stat: "text-sky-600 dark:text-sky-400",       border: "border-sky-200 dark:border-sky-900" },
   emerald: { bg: "bg-emerald-50 dark:bg-emerald-950/20",icon:"bg-emerald-100 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400",stat:"text-emerald-600 dark:text-emerald-400",border:"border-emerald-200 dark:border-emerald-900"},
@@ -83,7 +83,7 @@ export default function JLTOutcomes() {
 
         <div className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-          <span className="rounded-full bg-indigo-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-400">
+          <span className="rounded-full bg-blue-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-blue-700 dark:bg-blue-950/40 dark:text-blue-400">
             Outcomes & Benefits
           </span>
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
@@ -94,7 +94,7 @@ export default function JLTOutcomes() {
             What You Walk Away With
           </h2>
           <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
-            The IIT JEE Long-Term programme isn't just about a rank — it shapes how you
+            The IIT JEE Long-Term programme isn't just about a rank - it shapes how you
             think, study, and perform under pressure for the rest of your life.
           </p>
         </div>
