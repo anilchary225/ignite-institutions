@@ -38,7 +38,7 @@ const faqs = [
 
 function FaqItem({ faq, open, onToggle }) {
   return (
-    <div
+    <div data-aos="zoom-in"
       className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
         open
           ? "border-blue-200 bg-blue-50 dark:border-blue-900/60 dark:bg-blue-950/20"
@@ -72,7 +72,7 @@ export default function MPCFaq() {
   return (
     <section id="faq" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
       <div className="mx-auto max-w-4xl">
-        <div className="flex items-center gap-3">
+        <div data-aos="fade-up" className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
           <span className="rounded-full bg-neutral-200 px-4 py-1 text-xs font-bold uppercase tracking-widest text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400">
             FAQs
@@ -81,10 +81,10 @@ export default function MPCFaq() {
         </div>
 
         <div className="mt-8 text-center">
-          <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+          <h2 data-aos="fade-up" className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             Frequently Asked Questions
           </h2>
-          <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
+          <p data-aos="fade-up" className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Everything you need to know about the Ignite MPC IIT JEE programme.
           </p>
         </div>
@@ -100,15 +100,15 @@ export default function MPCFaq() {
           ))}
         </div>
 
-        <div className="mt-10 rounded-3xl bg-blue-600 p-7 text-center">
+        <div data-aos="fade-up" className="mt-10 rounded-3xl bg-blue-600 p-7 text-center">
           <p className="text-sm font-bold text-blue-200">Still have questions?</p>
           <h3 className="mt-2 text-xl font-extrabold text-white">Talk to our admissions team</h3>
           <p className="mt-2 text-sm text-blue-200">We're available Mon–Sat, 9 AM to 6 PM. No pressure, no obligation.</p>
           <div className="mt-5 flex flex-wrap justify-center gap-3">
-            <a href="tel:+919876543210" className="rounded-xl bg-white px-6 py-3 text-sm font-black text-blue-700 hover:bg-amber-400 hover:text-white transition">
+            <a data-aos="zoom-in" href="tel:+919876543210" className="rounded-xl bg-white px-6 py-3 text-sm font-black text-blue-700 hover:bg-amber-400 hover:text-white transition">
               Call +91 98765 43210
             </a>
-            <a href="#contact" className="rounded-xl border-2 border-white/30 px-6 py-3 text-sm font-bold text-white hover:bg-white/10 transition">
+            <a data-aos="zoom-in" href="#contact" className="rounded-xl border-2 border-white/30 px-6 py-3 text-sm font-bold text-white hover:bg-white/10 transition">
               Send a Message
             </a>
           </div>

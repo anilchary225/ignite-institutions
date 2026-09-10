@@ -249,19 +249,19 @@ const previewByHref = {
   },
   "/streams/junior-college/after-college-program": {
     title: "After College Program",
-    description: "",
+    description: "Career-focused guidance and skill development to help students choose the right career path and prepare for higher education or future opportunities.",
     image: "/assets/images/events/Classrooms/C0156T01.webp",
     secondaryImage: "/assets/images/events/sports/DSC05505.webp",
   },
   "/streams/junior-college/mec": {
     title: "BIPC NEET Coaching",
-    description: "",
+    description: "Focused preparation for the MEC exam covering core subjects, concepts, practice questions, and mock tests.",
     image: "/assets/images/navbar_images/navbar_mec1.webp",
     secondaryImage: "/assets/images/navbar_images/navbar_mec2.webp"
   },
   "/streams/junior-college/nda": {
     title: "NDA",
-    description: "",
+    description: "Comprehensive preparation for the NDA exam covering Mathematics, English, General Knowledge, current affairs, and mock tests.",
     image: "/assets/images/navbar_images/nda.webp",
     secondaryImage: "/assets/images/navbar_images/nda2.webp"
   },
@@ -273,7 +273,7 @@ const previewByHref = {
   },
   "/streams/school/after-school-program": {
     title: "After School Program",
-    description: "",
+    description: "Career guidance and skill development to help school students explore their interests and prepare for future studies and career opportunities.",
     image: "/assets/images/events/Summer camp/DSC09937.webp",
     secondaryImage : "/assets/images/events/Summer camp/summercamp3.webp"
   },

@@ -1,8 +1,8 @@
 import { TrendingUp, Timer, Medal, Users, BookOpen, BarChart2, Star, Shield } from "lucide-react";
 
 const outcomes = [
-  { icon: Medal,     title: "Top JEE Ranks in 12 Months",       stat: "AIR 52",   statLabel: "Best 2024 short-term rank",   desc: "Short-term students consistently punch above their weight - structured intensity produces results faster than prolonged unfocused prep.", color: "amber" },
-  { icon: Users,     title: "400+ JEE Qualifiers - 2024 Alone", stat: "400+",     statLabel: "Qualifiers in one year",       desc: "The largest single-year cohort of JEE qualifiers in Ignite's history came from the Short-Term 2024 batch.", color: "orange" },
+  { icon: Medal,     title: "Top JEE Ranks in 12 Months",       stat: "AIR 52",   statLabel: "Best 2026 short-term rank",   desc: "Short-term students consistently punch above their weight - structured intensity produces results faster than prolonged unfocused prep.", color: "amber" },
+  { icon: Users,     title: "400+ JEE Qualifiers - 2026 Alone", stat: "400+",     statLabel: "Qualifiers in one year",       desc: "The largest single-year cohort of JEE qualifiers in Ignite's history came from the Short-Term 2026 batch.", color: "orange" },
   { icon: TrendingUp,title: "Average Percentile Gain of 18+",    stat: "+18 %ile", statLabel: "Average improvement",         desc: "Students who join with 80th percentile in their first mock leave consistently above 98th percentile in the final mock series.", color: "red" },
   { icon: Timer,     title: "JEE Exam-Day Speed & Accuracy",     stat: "100+",     statLabel: "Problems solved per mock",    desc: "By Phase 3, our students solve 100+ problems in 3 hours with 78%+ accuracy - JEE-qualifying speed built through daily reps.", color: "rose" },
   { icon: BookOpen,  title: "Board + JEE, Never a Compromise",   stat: "91%",      statLabel: "Score 85%+ in boards",        desc: "Short-Term students maintain strong board performance. Our calendar synchronises board and JEE deadlines so neither suffers.", color: "amber" },

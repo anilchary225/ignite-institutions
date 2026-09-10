@@ -45,7 +45,7 @@ export default function MPCWhyIgnite() {
   return (
     <section id="why" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
       <div className="mx-auto max-w-7xl">
-        <div className="flex items-center gap-3">
+        <div data-aos="fade-up" className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
           <span className="rounded-full bg-amber-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-amber-700 dark:bg-amber-950/40 dark:text-amber-400">
             Why Choose Ignite
@@ -54,11 +54,11 @@ export default function MPCWhyIgnite() {
         </div>
 
         <div className="mt-8 max-w-2xl">
-          <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+          <h2 data-aos="fade-up" className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             Why Choose Ignite for{" "}
             <span className="text-blue-600 dark:text-blue-400">MPC IIT Coaching?</span>
           </h2>
-          <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
+          <p data-aos="fade-up" className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Five reasons thousands of Hyderabad families trust Ignite to prepare their children for IIT JEE.
           </p>
         </div>
@@ -68,7 +68,7 @@ export default function MPCWhyIgnite() {
             const c = colorMap[r.color];
             const Icon = r.icon;
             return (
-              <div key={r.title} className={`flex flex-col gap-4 rounded-3xl border-2 p-7 ${c.light} ${c.border}`}>
+              <div data-aos="fade-up" key={r.title} className={`flex flex-col gap-4 rounded-3xl border-2 p-7 ${c.light} ${c.border}`}>
                 <div className="flex items-center gap-3">
                   <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${c.bg}`}>
                     <Icon size={20} className="text-white" />

@@ -23,7 +23,7 @@ const colorMap = {
 function RankerCard({ r, pos }) {
   const c = colorMap[r.color];
   return (
-    <div className="group relative flex flex-col items-center rounded-3xl bg-white px-6 py-8 text-center shadow-sm ring-1 ring-neutral-100 transition hover:shadow-lg dark:bg-neutral-900 dark:ring-neutral-800">
+    <div data-aos="zoom-in" className="group relative flex flex-col items-center rounded-3xl bg-white px-6 py-8 text-center shadow-sm ring-1 ring-neutral-100 transition hover:shadow-lg dark:bg-neutral-900 dark:ring-neutral-800">
       {pos <= 3 && (
         <div className={`absolute -top-3 left-1/2 -translate-x-1/2 flex h-7 w-7 items-center justify-center rounded-full text-xs font-black text-white shadow-md ${c.num}`}>
           {pos}
@@ -50,7 +50,7 @@ export default function BIPCRankers() {
   return (
     <section id="rankers" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
       <div className="mx-auto max-w-7xl">
-        <div className="flex items-center gap-3">
+        <div data-aos="zoom-in" className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
           <div className="flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-1.5 dark:bg-emerald-950/40">
             <Trophy size={14} className="text-emerald-600" />
@@ -59,13 +59,13 @@ export default function BIPCRankers() {
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
         </div>
         <div className="mx-auto mt-8 max-w-2xl text-center">
-          <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">Future doctors from Ignite</h2>
-          <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">Our BiPC students consistently crack NEET with top scores and secure seats at India's premier medical colleges.</p>
+          <h2 data-aos="fade-up" className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">Future doctors from Ignite</h2>
+          <p data-aos="fade-up" className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">Our BiPC students consistently crack NEET with top scores and secure seats at India's premier medical colleges.</p>
         </div>
         <div className="mt-12 grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-          {rankers.map((r, i) => <RankerCard key={r.hall} r={r} pos={i + 1} />)}
+          {rankers.map((r, i) => <RankerCard  key={r.hall} r={r} pos={i + 1} />)}
         </div>
-        <p className="mt-6 text-center text-xs text-neutral-400">Ranks and scores verified against official NTA NEET results.</p>
+        <p data-aos="fade-up" className="mt-6 text-center text-xs text-neutral-400">Ranks and scores verified against official NTA NEET results.</p>
       </div>
     </section>
   );

@@ -14,7 +14,7 @@ const faqs = [
 
 function Item({ faq, open, onToggle }) {
   return (
-    <div className={`overflow-hidden rounded-2xl border transition-all ${open ? "border-emerald-200 bg-emerald-50 dark:border-emerald-900/60 dark:bg-emerald-950/20" : "border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900"}`}>
+    <div data-aos="fade-up" className={`overflow-hidden rounded-2xl border transition-all ${open ? "border-emerald-200 bg-emerald-50 dark:border-emerald-900/60 dark:bg-emerald-950/20" : "border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900"}`}>
       <button type="button" onClick={onToggle} className="flex w-full items-start justify-between gap-4 px-6 py-5 text-left">
         <span className="text-sm font-bold text-neutral-950 dark:text-white">{faq.q}</span>
         <ChevronDown size={18} className={`shrink-0 text-neutral-400 transition-transform duration-300 ${open ? "rotate-180 text-emerald-600" : ""}`} />
@@ -39,13 +39,13 @@ export default function BIPCFaq() {
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
         </div>
         <div className="mt-8 text-center">
-          <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">Frequently Asked Questions</h2>
-          <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">Everything you need to know about Ignite's BiPC NEET programme.</p>
+          <h2 data-aos="fade-up" className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">Frequently Asked Questions</h2>
+          <p data-aos="fade-up" className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">Everything you need to know about Ignite's BiPC NEET programme.</p>
         </div>
         <div className="mt-10 space-y-3">
           {faqs.map((faq, i) => <Item key={i} faq={faq} open={open === i} onToggle={() => setOpen(open === i ? -1 : i)} />)}
         </div>
-        <div className="mt-10 rounded-3xl bg-green-700 p-7 text-center">
+        <div data-aos="fade-up" className="mt-10 rounded-3xl bg-green-700 p-7 text-center">
           <p className="text-sm font-bold text-emerald-200">Still have questions?</p>
           <h3 className="mt-2 text-xl font-extrabold text-white">Talk to our BiPC counsellors</h3>
           <p className="mt-2 text-sm text-emerald-100">Available Mon–Sat, 9 AM–6 PM.</p>

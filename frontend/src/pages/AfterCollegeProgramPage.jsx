@@ -80,7 +80,7 @@ function Marquee() {
   const repeated = useMemo(() => [...bannerItems, ...bannerItems], []);
 
   return (
-    <div className="overflow-hidden rounded-[2rem] border border-sky-200 bg-gradient-to-r from-sky-500 via-cyan-500 to-blue-600 p-2 text-white shadow-[0_18px_50px_rgba(14,165,233,0.18)] dark:border-white/10 dark:from-black dark:via-neutral-950 dark:to-sky-950">
+    <div data-aos="fade-up" className="overflow-hidden rounded-[2rem] border border-sky-200 bg-gradient-to-r from-sky-500 via-cyan-500 to-blue-600 p-2 text-white shadow-[0_18px_50px_rgba(14,165,233,0.18)] dark:border-white/10 dark:from-black dark:via-neutral-950 dark:to-sky-950">
       <div className="animate-[marquee_22s_linear_infinite] flex w-max gap-3 whitespace-nowrap">
         {repeated.map((item, index) => (
           <span
@@ -98,6 +98,7 @@ function Marquee() {
 function FaqItem({ item, open, onToggle }) {
   return (
     <button
+    data-aos="fade-up"
       type="button"
       onClick={onToggle}
       className="w-full rounded-[1.25rem] border border-neutral-200 bg-white p-5 text-left dark:border-white/10 dark:bg-neutral-900"
@@ -128,7 +129,7 @@ export default function AfterCollegeProgramPage() {
       <div className="mx-auto max-w-7xl space-y-16 pt-10 md:pt-12">
         <section className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr]">
           <header className="max-w-4xl">
-            <p className="text-xs font-black uppercase tracking-[0.28em] text-sky-600 dark:text-sky-400">
+            <p data-aos="fade-up" className="text-xs font-black uppercase tracking-[0.28em] text-sky-600 dark:text-sky-400">
               Academic Program
             </p>
             <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">
@@ -175,9 +176,9 @@ export default function AfterCollegeProgramPage() {
         </section>
 
         <section className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="rounded-[2rem] border border-sky-100 bg-gradient-to-br from-sky-50 via-white to-sky-100 p-8 dark:border-white/10 dark:from-black dark:via-neutral-950 dark:to-sky-950/30">
-            <h2 className="text-2xl font-extrabold">For First-Year Students</h2>
-            <p className="mt-4 text-sm leading-7 text-neutral-700 dark:text-neutral-300">
+          <div data-aos="fade-up" className="rounded-[2rem] border border-sky-100 bg-gradient-to-br from-sky-50 via-white to-sky-100 p-8 dark:border-white/10 dark:from-black dark:via-neutral-950 dark:to-sky-950/30">
+            <h2 data-aos="fade-up" className="text-2xl font-extrabold">For First-Year Students</h2>
+            <p data-aos="fade-up" className="mt-4 text-sm leading-7 text-neutral-700 dark:text-neutral-300">
               Revise important concepts, strengthen weak subjects, practice important questions,
               and build confidence for improvement or supplementary examinations.
             </p>
@@ -190,7 +191,7 @@ export default function AfterCollegeProgramPage() {
                 "Prepare for improvement or supplementary exams",
                 "Build strong fundamentals for higher studies",
               ].map((point) => (
-                <div
+                <div data-aos="fade-up"
                   key={point}
                   className="rounded-[1rem] bg-white/80 px-4 py-3 text-sm font-medium text-neutral-700 shadow-sm dark:bg-white/5 dark:text-neutral-200"
                 >
@@ -200,9 +201,9 @@ export default function AfterCollegeProgramPage() {
             </div>
           </div>
 
-          <div className="rounded-[2rem] border border-neutral-200 bg-white p-8 dark:border-white/10 dark:bg-neutral-900">
-            <h2 className="text-2xl font-extrabold">One Program. Multiple Opportunities.</h2>
-            <p className="mt-4 text-sm leading-7 text-neutral-600 dark:text-neutral-300">
+          <div data-aos="fade-up" className="rounded-[2rem] border border-neutral-200 bg-white p-8 dark:border-white/10 dark:bg-neutral-900">
+            <h2 data-aos="fade-up" className="text-2xl font-extrabold">One Program. Multiple Opportunities.</h2>
+            <p data-aos="fade-up" className="mt-4 text-sm leading-7 text-neutral-600 dark:text-neutral-300">
               Improve first-year marks, strengthen academic foundations, and prepare for entrance
               exams in a structured way.
             </p>
@@ -215,22 +216,22 @@ export default function AfterCollegeProgramPage() {
                 "Prepare for BITSAT",
                 "Prepare for EAPCET",
               ].map((step) => (
-                <div key={step} className="rounded-[1rem] bg-neutral-50 px-4 py-3 dark:bg-neutral-800/60">
+                <div data-aos="fade-up" key={step} className="rounded-[1rem] bg-neutral-50 px-4 py-3 dark:bg-neutral-800/60">
                   {step}
                 </div>
               ))}
             </div>
-            <p className="mt-6 rounded-[1.25rem] bg-gradient-to-r from-sky-50 via-white to-sky-100 p-4 text-sm font-semibold text-sky-700 shadow-sm dark:from-black dark:via-neutral-950 dark:to-sky-950/20 dark:text-sky-300">
+            <p data-aos="fade-up" className="mt-6 rounded-[1.25rem] bg-gradient-to-r from-sky-50 via-white to-sky-100 p-4 text-sm font-semibold text-sky-700 shadow-sm dark:from-black dark:via-neutral-950 dark:to-sky-950/20 dark:text-sky-300">
               Strong fundamentals today can make competitive exam preparation easier tomorrow.
             </p>
           </div>
         </section>
 
-        <section className="rounded-[2rem] border border-neutral-200 bg-white p-8 dark:border-white/10 dark:bg-neutral-900">
-          <h2 className="text-2xl font-extrabold">For Second-Year Students – Competitive Exam Preparation</h2>
+        <section data-aos="fade-up" className="rounded-[2rem] border border-neutral-200 bg-white p-8 dark:border-white/10 dark:bg-neutral-900">
+          <h2 data-aos="fade-up" className="text-2xl font-extrabold">For Second-Year Students – Competitive Exam Preparation</h2>
           <div className="mt-6 grid gap-4 lg:grid-cols-2">
             {examBlocks.map((block) => (
-              <div key={block.title} className="rounded-[1.5rem] bg-gradient-to-br from-sky-50 via-white to-sky-100 p-5 dark:from-black dark:via-neutral-950 dark:to-sky-950/20">
+              <div data-aos="fade-up" key={block.title} className="rounded-[1.5rem] bg-gradient-to-br from-sky-50 via-white to-sky-100 p-5 dark:from-black dark:via-neutral-950 dark:to-sky-950/20">
                 <p className="text-xs font-black uppercase tracking-[0.22em] text-sky-600 dark:text-sky-400">
                   {block.title}
                 </p>
@@ -241,26 +242,26 @@ export default function AfterCollegeProgramPage() {
           </div>
         </section>
 
-        <section className="grid gap-6 lg:grid-cols-2">
+        <section data-aos="fade-up" className="grid gap-6 lg:grid-cols-2">
           <div className="rounded-[2rem] border border-neutral-200 bg-white p-8 dark:border-white/10 dark:bg-neutral-900">
-            <h2 className="text-2xl font-extrabold">Why Choose Our After College Program?</h2>
+            <h2 data-aos="fade-up" className="text-2xl font-extrabold">Why Choose Our After College Program?</h2>
             <ul className="mt-5 space-y-3">
               {benefits.map((benefit) => (
-                <li key={benefit} className="flex gap-3 text-sm leading-7 text-neutral-700 dark:text-neutral-300">
+                <li data-aos="fade-up" key={benefit} className="flex gap-3 text-sm leading-7 text-neutral-700 dark:text-neutral-300">
                   <span className="mt-2 h-2.5 w-2.5 rounded-full bg-sky-500" />
                   <span>{benefit}</span>
                 </li>
               ))}
             </ul>
-            <p className="mt-6 rounded-[1.25rem] border border-sky-100 bg-gradient-to-r from-sky-50 via-white to-sky-100 p-4 text-sm italic leading-7 text-sky-800 dark:border-white/10 dark:from-black dark:via-neutral-950 dark:to-sky-950/20 dark:text-sky-300">
+            <p data-aos="fade-up" className="mt-6 rounded-[1.25rem] border border-sky-100 bg-gradient-to-r from-sky-50 via-white to-sky-100 p-4 text-sm italic leading-7 text-sky-800 dark:border-white/10 dark:from-black dark:via-neutral-950 dark:to-sky-950/20 dark:text-sky-300">
               “Focused after-college hours turn ordinary effort into measurable academic progress.”
             </p>
           </div>
-          <div className="rounded-[2rem] border border-neutral-200 bg-neutral-50 p-8 dark:border-white/10 dark:bg-neutral-900">
-            <h2 className="text-2xl font-extrabold">Benefits and Outcomes</h2>
+          <div data-aos="fade-up" className="rounded-[2rem] border border-neutral-200 bg-neutral-50 p-8 dark:border-white/10 dark:bg-neutral-900">
+            <h2 data-aos="fade-up" className="text-2xl font-extrabold">Benefits and Outcomes</h2>
             <div className="mt-5 grid gap-4">
               {highlights.map((highlight) => (
-                <div key={highlight.title} className="rounded-[1.25rem] bg-white p-4 shadow-sm dark:bg-black">
+                <div data-aos="fade-up" key={highlight.title} className="rounded-[1.25rem] bg-white p-4 shadow-sm dark:bg-black">
                   <h3 className="font-bold">{highlight.title}</h3>
                   <p className="mt-2 text-sm leading-7 text-neutral-600 dark:text-neutral-300">{highlight.text}</p>
                 </div>
@@ -269,14 +270,14 @@ export default function AfterCollegeProgramPage() {
           </div>
         </section>
 
-        <section className="rounded-[2rem] border border-neutral-200 bg-neutral-50 p-8 dark:border-white/10 dark:bg-neutral-900">
+        <section data-aos="fade-up" className="rounded-[2rem] border border-neutral-200 bg-neutral-50 p-8 dark:border-white/10 dark:bg-neutral-900">
           <h2 className="text-2xl font-extrabold">Make Your After-College Hours Count</h2>
           <p className="mt-4 max-w-4xl text-sm leading-7 text-neutral-600 dark:text-neutral-300">
             Revise your concepts. Strengthen your fundamentals. Practice consistently. Prepare for
             your target examination. Join our After College Academic Program and take a confident
             step toward better academic results and competitive-exam success.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div data-aos="fade-up" className="mt-6 flex flex-wrap gap-3">
             <RouteLink
               to="/contact"
               className="rounded-full bg-sky-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-sky-500"
@@ -293,16 +294,16 @@ export default function AfterCollegeProgramPage() {
         </section>
 
         <section className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-[2rem] border border-neutral-200 bg-white p-8 dark:border-white/10 dark:bg-neutral-900">
-            <h2 className="text-2xl font-extrabold">How to register</h2>
-            <p className="mt-4 text-sm leading-7 text-neutral-600 dark:text-neutral-300">
+          <div data-aos="fade-up" className="rounded-[2rem] border border-neutral-200 bg-white p-8 dark:border-white/10 dark:bg-neutral-900">
+            <h2 data-aos="fade-up" className="text-2xl font-extrabold">How to register</h2>
+            <p data-aos="fade-up" className="mt-4 text-sm leading-7 text-neutral-600 dark:text-neutral-300">
               Contact the admissions team, share the student’s current year, target exams, and
               preferred batch timing, and the team will guide you through next steps.
             </p>
           </div>
-          <div className="rounded-[2rem] border border-neutral-200 bg-white p-8 dark:border-white/10 dark:bg-neutral-900">
-            <h2 className="text-2xl font-extrabold">Eligibility</h2>
-            <p className="mt-4 text-sm leading-7 text-neutral-600 dark:text-neutral-300">
+          <div data-aos="fade-up" className="rounded-[2rem] border border-neutral-200 bg-white p-8 dark:border-white/10 dark:bg-neutral-900">
+            <h2 data-aos="fade-up" className="text-2xl font-extrabold">Eligibility</h2>
+            <p data-aos="fade-up" className="mt-4 text-sm leading-7 text-neutral-600 dark:text-neutral-300">
               Students who want first-year improvement or entrance preparation after college hours
               are eligible. Batch placement may vary by level and preparation goal.
             </p>
@@ -310,7 +311,7 @@ export default function AfterCollegeProgramPage() {
         </section>
 
         <section className="space-y-4">
-          <h2 className="text-2xl font-extrabold">FAQs</h2>
+          <h2 data-aos="fade-up" className="text-2xl font-extrabold">FAQs</h2>
           <div className="space-y-3">
             {faqs.map((item, index) => (
               <FaqItem

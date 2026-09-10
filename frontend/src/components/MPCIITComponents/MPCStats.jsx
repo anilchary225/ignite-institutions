@@ -3,9 +3,9 @@ import { useEffect, useRef, useState } from "react";
 const stats = [
   { value: 6000,  suffix: "+", label: "Students Trained",       color: "violet" },
   { value: 2800,  suffix: "+", label: "Board Toppers",          color: "indigo" },
-  { value: 500,   suffix: "+", label: "IIT Selections",         color: "rose" },
-  { value: 1200,  suffix: "+", label: "EAPCET Qualifiers",      color: "emerald" },
-  { value: 98,    suffix: "%", label: "Board Pass Rate",        color: "amber" },
+  { value: 600,   suffix: "+", label: "IIT Selections",         color: "rose" },
+  { value: 900,  suffix: "+", label: "EAPCET Qualifiers",      color: "emerald" },
+  { value: 100,    suffix: "%", label: "Board Pass Rate",        color: "amber" },
   { value: 20,    suffix: "+", label: "Years of Excellence",    color: "sky" },
 ];
 
@@ -46,7 +46,7 @@ function StatItem({ stat, active }) {
       <p className={`text-4xl font-black tabular-nums ${c.text}`}>
         {count.toLocaleString()}{stat.suffix}
       </p>
-      <p className="mt-2 text-xs font-bold text-neutral-600 dark:text-neutral-400">{stat.label}</p>
+      <p data-aos="zoom-in" className="mt-2 text-xs font-bold text-neutral-600 dark:text-neutral-400">{stat.label}</p>
     </div>
   );
 }
@@ -62,9 +62,9 @@ export default function MPCStats() {
   }, []);
 
   return (
-    <section ref={ref} className="bg-neutral-950 px-6 py-14">
+    <section data-aos="fade-up" ref={ref} className="bg-neutral-950 px-6 py-14">
       <div className="mx-auto max-w-7xl">
-        <p className="mb-8 text-center text-xs font-bold uppercase tracking-[0.25em] text-neutral-500">
+        <p data-aos="zoom-in" className="mb-8 text-center text-xs font-bold uppercase tracking-[0.25em] text-neutral-500">
           Ignite by the numbers
         </p>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">

@@ -37,7 +37,7 @@ export default function BIPCHowIgnite() {
   return (
     <section id="how" className="bg-white px-6 py-20 dark:bg-neutral-950">
       <div className="mx-auto max-w-7xl">
-        <div className="flex items-center gap-3">
+        <div data-aos="fade-up" className="flex items-center gap-3">
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
           <span className="rounded-full bg-emerald-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300">
             Our Approach
@@ -46,11 +46,11 @@ export default function BIPCHowIgnite() {
         </div>
 
         <div className="mt-8 max-w-2xl">
-          <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+          <h2 data-aos="fade-up" className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             How Ignite Shapes{" "}
             <span className="text-emerald-600 dark:text-emerald-400">BiPC Success</span>
           </h2>
-          <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
+          <p data-aos="fade-up" className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Three core pillars that power every Ignite BiPC student's journey from classroom to medical college.
           </p>
         </div>
@@ -63,6 +63,7 @@ export default function BIPCHowIgnite() {
             const flip = i % 2 === 1;
             return (
               <div
+                data-aos="fade-up"
                 key={p.title}
                 className={`grid items-center gap-8 overflow-hidden rounded-3xl bg-neutral-50 p-8 dark:bg-neutral-900 md:grid-cols-2 ${flip ? "md:[&>*:first-child]:order-2" : ""}`}
               >

@@ -46,17 +46,20 @@ const highlights = [
   {
     title: "Supportive Enrichment",
     text: "The program combines academic reinforcement with engaging activities that help students stay motivated.",
-    image:"/assets/images/events/Science Lab/DSC05690.webp"
+    image:"/assets/images/events/Science Lab/DSC05690.webp",
+    delay: 200
   },
   {
     title: "Teacher Guidance",
     text: "Teachers guide students personally, monitor progress, and support them with structured feedback.",
-    image:"/assets/images/events/School kids in science lab/IMG_9605.webp"
+    image:"/assets/images/events/School kids in science lab/IMG_9605.webp",
+    delay: 400
   },
   {
     title: "Gallery Moments",
     text: "Students participate in activities, celebrations, and learning moments that will be featured in the after-school gallery.",
-    image:"/assets/images/events/Summer camp/DSC09937.webp"
+    image:"/assets/images/events/Summer camp/DSC09937.webp",
+    delay: 600
   },
 ];
 
@@ -100,7 +103,7 @@ function Marquee() {
 
 function FaqItem({ item, open, onToggle }) {
   return (
-    <button
+    <button data-aos="fade-up"
       type="button"
       onClick={onToggle}
       className="w-full rounded-[1.25rem] border border-neutral-200 bg-white p-5 text-left dark:border-white/10 dark:bg-neutral-900"
@@ -129,8 +132,8 @@ export default function AfterSchoolProgramPage() {
       `}</style>
 
       <div className="mx-auto max-w-7xl pt-10 md:pt-12 space-y-16">
-        <section className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-          <header className="max-w-4xl">
+        <section  className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+          <header data-aos="fade-up" className="max-w-4xl">
             <p className="text-xs font-black uppercase tracking-[0.28em] text-sky-600 dark:text-sky-400">
               School Program
             </p>
@@ -144,7 +147,7 @@ export default function AfterSchoolProgramPage() {
             </p>
           </header>
 
-          <div className="relative overflow-hidden rounded-[2.5rem] border border-sky-100 bg-gradient-to-br from-sky-50 via-white to-sky-200 p-4 shadow-[0_24px_70px_rgba(56,189,248,0.18)] dark:border-white/10 dark:from-black dark:via-neutral-950 dark:to-sky-950/40">
+          <div data-aos="fade-up" className="relative overflow-hidden rounded-[2.5rem] border border-sky-100 bg-gradient-to-br from-sky-50 via-white to-sky-200 p-4 shadow-[0_24px_70px_rgba(56,189,248,0.18)] dark:border-white/10 dark:from-black dark:via-neutral-950 dark:to-sky-950/40">
             {/* <div className="absolute -right-10 -top-10 h-44 w-44 rounded-full bg-sky-200/80 blur-2xl dark:bg-sky-500/20" />
             <div className="absolute -left-10 bottom-0 h-40 w-40 rounded-full bg-cyan-200/70 blur-2xl dark:bg-cyan-500/20" /> */}
             {/* <div className="relative overflow-hidden rounded-[2rem] bg-white p-4 dark:bg-neutral-950"> */}
@@ -178,8 +181,8 @@ export default function AfterSchoolProgramPage() {
         </section>
 
         <section className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="rounded-[2rem] flex flex-col justify-between bg-gradient-to-br from-sky-100 via-white to-sky-200 p-8 dark:from-black dark:via-neutral-950 dark:to-sky-950/30">
-            <div className="rounded-[2rem] border border-sky-100 bg-white p-8 shadow-[0_24px_70px_rgba(56,189,248,0.18)] dark:border-white/10 dark:bg-neutral-950">
+          <div data-aos="fade-up" className="rounded-[2rem] flex flex-col justify-between bg-gradient-to-br from-sky-100 via-white to-sky-200 p-8 dark:from-black dark:via-neutral-950 dark:to-sky-950/30">
+            <div data-aos="fade-up" className="rounded-[2rem] border border-sky-100 bg-white p-8 shadow-[0_24px_70px_rgba(56,189,248,0.18)] dark:border-white/10 dark:bg-neutral-950">
               <h2 className="mt-3 text-2xl font-extrabold">Why this program exists</h2>
               <p className="mt-4 text-sm leading-7 text-neutral-700 dark:text-neutral-300">
                 After school hours can be productive when they are organized with purpose. This
@@ -192,7 +195,7 @@ export default function AfterSchoolProgramPage() {
             <div className="absolute -left-10 bottom-0 h-40 w-40 rounded-full bg-cyan-200/70 blur-2xl dark:bg-cyan-500/20" /> */}
             {/* <div className="relative overflow-hidden rounded-[2rem] bg-white p-4 dark:bg-neutral-950"> */}
               {/* <div className="overflow-hidden rounded-[2rem] bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.26),transparent_32%),radial-gradient(circle_at_80%_20%,rgba(125,211,252,0.28),transparent_24%),linear-gradient(135deg,#dbeafe,#eff6ff,#bae6fd)] p-4 dark:bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.2),transparent_32%),radial-gradient(circle_at_80%_20%,rgba(125,211,252,0.18),transparent_24%),linear-gradient(135deg,#020617,#0f172a,#082f49)]"> */}
-                <div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem]">
+                <div data-aos="fade-up" className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem]">
                   <img
                     src="/assets/images/events/Summer camp/summercamp17.webp"
                     alt="After school program"
@@ -215,11 +218,11 @@ export default function AfterSchoolProgramPage() {
             {/* </div> */}
           </div>
           </div>
-          <div className="rounded-[2rem] border border-neutral-200 bg-white p-8 dark:border-white/10 dark:bg-neutral-900">
-            <h2 className="mt-3 text-2xl font-extrabold">Programs and teacher support</h2>
+          <div data-aos="fade-up" className="rounded-[2rem] border border-neutral-200 bg-white p-8 dark:border-white/10 dark:bg-neutral-900">
+            <h2 data-aos="fade-up" className="mt-3 text-2xl font-extrabold">Programs and teacher support</h2>
             <div className="mt-5 grid gap-4">
               {programs.map((program) => (
-                <div key={program.title} className="rounded-[1.25rem] bg-neutral-50 p-4 dark:bg-neutral-800/60">
+                <div data-aos="fade-up" key={program.title} className="rounded-[1.25rem] bg-neutral-50 p-4 dark:bg-neutral-800/60">
                   <h3 className="font-bold">{program.title}</h3>
                   <p className="mt-2 text-sm leading-7 text-neutral-600 dark:text-neutral-300">{program.text}</p>
                 </div>
@@ -229,18 +232,18 @@ export default function AfterSchoolProgramPage() {
         </section>
 
         <section className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-[2rem] border border-neutral-200 bg-white p-8 dark:border-white/10 dark:bg-neutral-900">
-            <h2 className="mt-3 text-2xl font-extrabold">Why it suits students</h2>
-            <p className="mt-4 text-sm leading-7 text-neutral-600 dark:text-neutral-300">
+          <div data-aos="fade-up" className="rounded-[2rem] border border-neutral-200 bg-white p-8 dark:border-white/10 dark:bg-neutral-900">
+            <h2 data-aos="fade-up" className="mt-3 text-2xl font-extrabold">Why it suits students</h2>
+            <p data-aos="fade-up" className="mt-4 text-sm leading-7 text-neutral-600 dark:text-neutral-300">
               The program is suited to students who need structure after school, more practice,
               calm support, and a balanced environment that keeps them active without overload.
             </p>
           </div>
-          <div className="rounded-[2rem] border border-neutral-200 bg-white p-8 dark:border-white/10 dark:bg-neutral-900">
-            <h2 className="mt-3 text-2xl font-extrabold">Benefits and outcomes</h2>
+          <div data-aos="fade-up" className="rounded-[2rem] border border-neutral-200 bg-white p-8 dark:border-white/10 dark:bg-neutral-900">
+            <h2 data-aos="fade-up" className="mt-3 text-2xl font-extrabold">Benefits and outcomes</h2>
             <ul className="mt-5 space-y-3">
               {benefits.map((benefit) => (
-                <li key={benefit} className="flex gap-3 text-sm leading-7 text-neutral-700 dark:text-neutral-300">
+                <li data-aos="fade-up" key={benefit} className="flex gap-3 text-sm leading-7 text-neutral-700 dark:text-neutral-300">
                   <span className="mt-2 h-2.5 w-2.5 rounded-full bg-sky-500" />
                   <span>{benefit}</span>
                 </li>
@@ -249,18 +252,18 @@ export default function AfterSchoolProgramPage() {
           </div>
         </section>
 
-        <section className="rounded-[2rem] border border-neutral-200 bg-neutral-50 p-8 dark:border-white/10 dark:bg-neutral-900">
-          <h2 className="mt-3 text-2xl font-extrabold">Highlights and gallery preview</h2>
+        <section data-aos="fade-up" className="rounded-[2rem] border border-neutral-200 bg-neutral-50 p-8 dark:border-white/10 dark:bg-neutral-900">
+          <h2 data-aos="fade-up" className="mt-3 text-2xl font-extrabold">Highlights and gallery preview</h2>
           <div className="mt-6 grid gap-5 lg:grid-cols-3">
             {highlights.map((highlight) => (
-              <div key={highlight.title} className="rounded-[1.5rem] bg-white p-5 shadow-sm dark:bg-black">
+              <div data-aos="zoom-in" data-aos-delay={highlight.delay} key={highlight.title} className="rounded-[1.5rem] bg-white p-5 shadow-sm dark:bg-black">
                 <img src={highlight.image} className="aspect-[4/3] rounded-[1.25rem] object-cover" />
                 <h3 className="mt-4 font-bold">{highlight.title}</h3>
                 <p className="mt-2 text-sm leading-7 text-neutral-600 dark:text-neutral-300">{highlight.text}</p>
               </div>
             ))}
           </div>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div data-aos="fade-up" className="mt-8 flex flex-wrap items-center gap-3">
             <RouteLink
               to="/gallery"
               className="rounded-full bg-sky-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-sky-500"
@@ -271,7 +274,7 @@ export default function AfterSchoolProgramPage() {
         </section>
 
         <section className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-[2rem] border border-neutral-200 bg-white p-8 dark:border-white/10 dark:bg-neutral-900">
+          <div data-aos="fade-up" className="rounded-[2rem] border border-neutral-200 bg-white p-8 dark:border-white/10 dark:bg-neutral-900">
             <h2 className="mt-3 text-2xl font-extrabold">How to register</h2>
             <p className="mt-4 text-sm leading-7 text-neutral-600 dark:text-neutral-300">
               Register through the school office or admissions team. Share the student’s class,
@@ -279,7 +282,7 @@ export default function AfterSchoolProgramPage() {
               availability and next steps.
             </p>
           </div>
-          <div className="rounded-[2rem] border border-neutral-200 bg-white p-8 dark:border-white/10 dark:bg-neutral-900">
+          <div data-aos="fade-up" className="rounded-[2rem] border border-neutral-200 bg-white p-8 dark:border-white/10 dark:bg-neutral-900">
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-sky-700 dark:text-sky-300">
               Eligibility
             </p>
@@ -292,7 +295,7 @@ export default function AfterSchoolProgramPage() {
         </section>
 
         <section className="space-y-4">
-          <h2 className="text-2xl font-extrabold">FAQs</h2>
+          <h2 data-aos="fade-up" className="text-2xl font-extrabold">FAQs</h2>
           <div className="space-y-3">
             {faqs.map((item, index) => (
               <FaqItem

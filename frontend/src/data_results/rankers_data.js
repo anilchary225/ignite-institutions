@@ -1925,98 +1925,213 @@ export const EAPCET_2026_RANKERS = [
     }
   ]
 // Neet rankers
+// export const NEET_2026_RANKERS = [
+//   {
+//     name: "M.M. Viswanath Reddy",
+//     marks: "691/720",
+//     totalMarks: 720,
+//     image: "/assets/NEET_RESULTS_2026/M.M. VISWANATH REDDY.webp"
+//   },
+//   {
+//     name: "V. Rahul",
+//     marks: "686/720",
+//     totalMarks: 720,
+//     image: "/assets/NEET_RESULTS_2026/V. RAHUL.webp"
+//   },
+//   {
+//     name: "R. Jaswanth Reddy",
+//     marks: "685/720",
+//     totalMarks: 720,
+//     image: "/assets/NEET_RESULTS_2026/R. JASWANTH REDDY.webp"
+//   },
+//   {
+//     name: "B. Goutham Raj",
+//     marks: "612/720",
+//     totalMarks: 720,
+//     image: "/assets/results-profile-placeholder.png"
+//   },
+//   {
+//     name: "P. Keerthan Reddy",
+//     marks: "592/720",
+//     totalMarks: 720,
+//     image: "/assets/results-profile-placeholder.png"
+//   },
+//   {
+//     name: "Viswa Patil",
+//     marks: "584/720",
+//     totalMarks: 720,
+//     image: "/assets/results-profile-placeholder.png"
+//   },
+//   {
+//     name: "N. Roshini",
+//     marks: "554/720",
+//     totalMarks: 720,
+//     image: "/assets/results-profile-placeholder.png"
+//   },
+//   {
+//     name: "J. Amulya Chowdary",
+//     marks: "557/720",
+//     totalMarks: 720,
+//     image: "/assets/results-profile-placeholder.png"
+//   },
+//   {
+//     name: "Samuel",
+//     marks: "544/720",
+//     totalMarks: 720,
+//     image: "/assets/results-profile-placeholder.png"
+//   },
+//   {
+//     name: "M. Ramya Sree",
+//     marks: "536/720",
+//     totalMarks: 720,
+//     image: "/assets/results-profile-placeholder.png"
+//   },
+//   {
+//     name: "A. Lavanya",
+//     marks: "538/720",
+//     totalMarks: 720,
+//     image: "/assets/results-profile-placeholder.png"
+//   },
+//   {
+//     name: "M. Kalyani",
+//     marks: "525/720",
+//     totalMarks: 720,
+//     image: "/assets/NEET_RESULTS_2026/M. KALYANI.webp"
+//   },
+//   {
+//     name: "E. V. Poojitha",
+//     marks: "529/720",
+//     totalMarks: 720,
+//     image: "/assets/results-profile-placeholder.png"
+//   },
+//   {
+//     name: "T. Sai Eshwari",
+//     marks: "530/720",
+//     totalMarks: 720,
+//     image: "/assets/results-profile-placeholder.png"
+//   },
+//   {
+//     name: "M. Srujan",
+//     marks: "559/720",
+//     totalMarks: 720,
+//     image: "/assets/results-profile-placeholder.png"
+//   }
+// ];
+
+// neet 2026 rankers
+
 export const NEET_2026_RANKERS = [
   {
-    name: "M.M. Viswanath Reddy",
-    marks: "691/720",
-    totalMarks: 720,
-    image: "/assets/NEET_RESULTS_2026/M.M. VISWANATH REDDY.webp"
+    name: "Kethavath Akhila",
+    rank: 1874,
+    image: "/assets/NEET_RESULTS_2026/Kethavath Akhila.webp"
   },
   {
-    name: "V. Rahul",
-    marks: "686/720",
-    totalMarks: 720,
-    image: "/assets/NEET_RESULTS_2026/V. RAHUL.webp"
+    name: "I. Khythi Sai Sri",
+    rank: 2463,
+    image: "/assets/NEET_RESULTS_2026/I. Khythi Sai Sri.webp"
   },
   {
-    name: "R. Jaswanth Reddy",
-    marks: "685/720",
-    totalMarks: 720,
-    image: "/assets/NEET_RESULTS_2026/R. JASWANTH REDDY.webp"
+    name: "M. Manasa",
+    rank: 3876,
+    image: "/assets/NEET_RESULTS_2026/M. Manasa.webp"
   },
   {
-    name: "B. Goutham Raj",
-    marks: "612/720",
-    totalMarks: 720,
-    image: "/assets/results-profile-placeholder.png"
+    name: "Begari Navadeep",
+    rank: 4283,
+    image: "/assets/NEET_RESULTS_2026/Begari Navadeep.webp"
   },
   {
-    name: "P. Keerthan Reddy",
-    marks: "592/720",
-    totalMarks: 720,
-    image: "/assets/results-profile-placeholder.png"
+    name: "N. Santhosh",
+    rank: 4750,
+    image: "/assets/NEET_RESULTS_2026/N. Santhosh.webp"
   },
   {
-    name: "Viswa Patil",
-    marks: "584/720",
-    totalMarks: 720,
-    image: "/assets/results-profile-placeholder.png"
+    name: "Rathod Balaji",
+    rank: 5416,
+    image: "/assets/NEET_RESULTS_2026/Rathod Balaji.webp"
   },
   {
-    name: "N. Roshini",
-    marks: "554/720",
-    totalMarks: 720,
-    image: "/assets/results-profile-placeholder.png"
+    name: "Mamidi Abhilash",
+    rank: 5827,
+    image: "/assets/NEET_RESULTS_2026/Mamidi Abhilash.webp"
   },
   {
-    name: "J. Amulya Chowdary",
-    marks: "557/720",
-    totalMarks: 720,
-    image: "/assets/results-profile-placeholder.png"
+    name: "Jadav Gopal",
+    rank: 6416,
+    image: "/assets/NEET_RESULTS_2026/Jadav Gopal.webp"
   },
   {
-    name: "Samuel",
-    marks: "544/720",
-    totalMarks: 720,
-    image: "/assets/results-profile-placeholder.png"
+    name: "K. Sathish",
+    rank: 7583,
+    image: "/assets/NEET_RESULTS_2026/K. Sathish.webp"
   },
   {
-    name: "M. Ramya Sree",
-    marks: "536/720",
-    totalMarks: 720,
-    image: "/assets/results-profile-placeholder.png"
+    name: "Palle Susanth",
+    rank: 8227,
+    image: "/assets/NEET_RESULTS_2026/Palle Susanth.webp"
   },
   {
-    name: "A. Lavanya",
-    marks: "538/720",
-    totalMarks: 720,
-    image: "/assets/results-profile-placeholder.png"
+    name: "B. Deekshitha",
+    rank: 8426,
+    image: "/assets/NEET_RESULTS_2026/B. Deekshitha.webp"
   },
   {
-    name: "M. Kalyani",
-    marks: "525/720",
-    totalMarks: 720,
-    image: "/assets/NEET_RESULTS_2026/M. KALYANI.webp"
+    name: "D. Megana Sai Sree",
+    rank: 8948,
+    image: "/assets/NEET_RESULTS_2026/D. Megana Sai Sree.webp"
   },
   {
-    name: "E. V. Poojitha",
-    marks: "529/720",
-    totalMarks: 720,
-    image: "/assets/results-profile-placeholder.png"
+    name: "D. Sindhu Priya",
+    rank: 10232,
+    image: "/assets/NEET_RESULTS_2026/D. Sindhu Priya.webp"
   },
   {
-    name: "T. Sai Eshwari",
-    marks: "530/720",
-    totalMarks: 720,
-    image: "/assets/results-profile-placeholder.png"
+    name: "A. Architha",
+    rank: 10381,
+    image: "/assets/NEET_RESULTS_2026/A. Architha.webp"
   },
   {
-    name: "M. Srujan",
-    marks: "559/720",
-    totalMarks: 720,
-    image: "/assets/results-profile-placeholder.png"
-  }
-];
+    name: "K. Asmitha Priya",
+    rank: 10780,
+    image: "/assets/NEET_RESULTS_2026/K. Asmitha Priya.webp"
+  },
+  {
+    name: "E. Sahasra",
+    rank: 12265,
+    image: "/assets/NEET_RESULTS_2026/E. Sahasra.webp"
+  },
+  {
+    name: "T. Pravanth Reddy",
+    rank: 13693,
+    image: "/assets/NEET_RESULTS_2026/T. Pravanth Reddy.webp"
+  },
+  {
+    name: "A. Harshitha",
+    rank: 13912,
+    image: "/assets/NEET_RESULTS_2026/A. Harshitha.webp"
+  },
+  {
+    name: "R. Chakrika Reddy",
+    rank: 20914,
+    image: "/assets/NEET_RESULTS_2026/R. Chakrika Reddy.webp"
+  },
+  {
+    name: "U. Tarun Teja",
+    rank: 21045,
+    image: "/assets/NEET_RESULTS_2026/U. Tarun Teja.webp"
+  },
+  {
+    name: "G. Yaswanth Sai",
+    rank: 24974,
+    image: "/assets/NEET_RESULTS_2026/G. Yaswanth Sai.webp"
+  },
+  {
+    name: "S. Soma Sri Lakshmi",
+    rank: 28594,
+    image: "/assets/NEET_RESULTS_2026/S. Soma Sri Lakshmi.webp"
+  },
+]
 
   // ipe senior rankers
 
@@ -3746,5 +3861,45 @@ export const NEET_2026_RANKERS = [
     {
       title : "EAPCET 2025",
       file : "/assets/posters/EAPCET-2025.webp"
+    },
+    {
+      title : "IIT JEE ADVANCED RESULTS - 2026",
+      file : "/assets/posters/IIT JEE ADVANCED RESULTS - 2026.webp"
+    },
+    {
+      title : "JEE MAIN - 2026 RANKS",
+      file : "/assets/posters/JEE MAIN - 2026 RANKS_6X4.webp"
+    },
+    {
+      title : "JEE MAIN RESULTS__2026 APRIL",
+      file : "/assets/posters/JEE MAIN RESULTS__2026 APRIL.webp"
+    },
+    {
+      title : "LT MAIN STUDENTS GROWTH",
+      file : "/assets/posters/LT MAIN STUDENTS GROWTH.webp"
+    },
+    {
+      title : "LT NEET STUDENTS GROWTH",
+      file : "/assets/posters/LT NEET STUDENTS GROWTH.webp"
+    },
+    {
+      title : "NEET GROWTH",
+      file : "/assets/posters/NEET__GROWTH.webp"
+    },
+    {
+      title: "NEET__TOP GROWTH PERFORMERS",
+      file: "/assets/posters/NEET__TOP GROWTH PERFORMERS.webp"
+    },
+    {
+      title : "OUR BEST ALL INDIA RANKS OF NEET-2026",
+      file : "/assets/posters/OUR BEST ALL INDIA RANKS OF NEET-2026.webp"
+    },
+    {
+      title : "OUR NEET BEST RANKS",
+      file : "/assets/posters/OUR NEET BEST RANKS.webp"
+    },
+    {
+      title : "OUR TG EAPCET TOPPERS- 2026__2K",
+      file : "/assets/posters/OUR TG EAPCET TOPPERS- 2026__2K.webp"
     }
   ];

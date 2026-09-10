@@ -14,6 +14,7 @@ const RoadmapCard = ({ phase, position, expanded, onToggle, colors }) => {
   return (
     <div className="relative">
       <div
+      data-aos="zoom-in"
         className={`
 relative z-20
 h-40
@@ -275,6 +276,7 @@ const IITRoadmap = ({ phases, title, course, colors, heading, subheading }) => {
       {/* HEADER */}
 
       <div
+      data-aos="fade-up"
         className="
   mx-auto
   mb-8
@@ -284,6 +286,7 @@ const IITRoadmap = ({ phases, title, course, colors, heading, subheading }) => {
   "
       >
         <p
+        data-aos="fade-up"
           className="
   text-sm
   font-black
@@ -296,6 +299,7 @@ const IITRoadmap = ({ phases, title, course, colors, heading, subheading }) => {
         </p>
 
         <h2
+        data-aos="fade-up"
           className="
   mt-3
   text-3xl
@@ -308,6 +312,7 @@ const IITRoadmap = ({ phases, title, course, colors, heading, subheading }) => {
         </h2>
 
         <p
+        data-aos="fade-up"
           className="
   mx-auto
   mt-4

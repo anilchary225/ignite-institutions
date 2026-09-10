@@ -45,7 +45,7 @@ export default function JSTHero() {
               {[
                 { icon: Calendar, label: "12-Month Track",      sub: "Class 12 & Droppers" },
                 { icon: Zap,      label: "Daily Mock Tests",     sub: "JEE-pattern papers" },
-                { icon: Award,    label: "AIR 52",               sub: "Best rank 2024" },
+                { icon: Award,    label: "AIR 45",               sub: "Best rank 2026" },
               ].map(({ icon: Icon, label, sub }) => (
                 <div key={label} className="flex items-center gap-3 rounded-2xl bg-neutral-50 px-4 py-3 dark:bg-neutral-900">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-100 dark:bg-amber-950/40">
@@ -65,7 +65,7 @@ export default function JSTHero() {
                 "Crash course + full syllabus coverage in structured phases",
                 "Speed & accuracy drills focused on JEE exam temperament",
                 "IIT-alumni mentors with individual attention sessions",
-                "Proven result track - 400+ JEE qualifiers in 2024 alone",
+                "Proven result track - 400+ JEE qualifiers in 2026 alone",
               ].map(item => (
                 <div key={item} className="flex items-start gap-2.5 rounded-xl bg-amber-50 px-4 py-3 text-sm text-neutral-700 dark:bg-amber-950/10 dark:text-neutral-300">
                   <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-amber-200 dark:bg-amber-900">
@@ -110,7 +110,7 @@ export default function JSTHero() {
             {/* floating badge */}
             <div className="absolute -right-4 -top-4 flex h-20 w-20 flex-col items-center justify-center rounded-full bg-neutral-950 shadow-xl dark:bg-white">
               <p className="text-lg font-black text-white leading-none dark:text-neutral-950">400+</p>
-              <p className="text-[9px] font-bold text-white/70 text-center leading-tight dark:text-neutral-500">2024 JEE Qualifiers</p>
+              <p className="text-[9px] font-bold text-white/70 text-center leading-tight dark:text-neutral-500">2026 JEE Qualifiers</p>
             </div>
 
             {/* admission card */}

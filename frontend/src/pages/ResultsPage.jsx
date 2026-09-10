@@ -42,10 +42,10 @@ const bannerSlides = [
     tone: "from-sky-950/95 via-sky-950/55 to-transparent",
   },
   {
-    image: "/assets/posters/TG INTERMEDIATE RESULTS__SR MPC & BIPC-2.webp",
-    eyebrow: "Board Results",
+    image: "/assets/posters/JEE MAIN RESULTS__2026 APRIL.webp",
+    eyebrow: "MAINS Results",
     title: "Excellence across every stream.",
-    sub: "MPC and BiPC students continue to shine year after year.",
+    sub: "MAINS RESULTS students continue to shine year after year.",
     tone: "from-amber-950/95 via-amber-950/55 to-transparent",
   },
 ];
@@ -122,8 +122,8 @@ function ResultBanner() {
 const overallStats = [
   { exam: "JEE Mains", count: "340+", icon: BookOpen, color: "blue", year: "2026" },
   { exam: "JEE Advanced", count: "120+", icon: Award, color: "indigo", year: "2026" },
-  { exam: "NEET", count: "480+", icon: Medal, color: "rose", year: "2026" },
-  { exam: "EAPCET", count: "890+", icon: Trophy, color: "sky", year: "2026" },
+  { exam: "NEET", count: "380+", icon: Medal, color: "rose", year: "2026" },
+  { exam: "EAPCET", count: "750+", icon: Trophy, color: "sky", year: "2026" },
   { exam: "IPE", count: "100%", icon: Star, color: "amber", year: "2026" },
 ];
 
@@ -171,7 +171,8 @@ function SelectionStats() {
 
                 <h3 className="mt-4 text-3xl font-black dark:text-white">{item.count}</h3>
                 <p className="mt-2 font-bold">{item.exam}</p>
-                <p className="text-xs text-neutral-400">Selections · {item.year}</p>
+                {/* <p className="text-xs text-neutral-400">Selections · {item.year}</p> */}
+                <p className="text-xs text-neutral-400">Overall Selections</p>
               </div>
             );
           })}

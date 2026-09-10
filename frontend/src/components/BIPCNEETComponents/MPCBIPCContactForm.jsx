@@ -28,7 +28,7 @@ export default function MPCBIPCContactForm({ name, course }) {
             <div className="mt-8 space-y-5">
               {[
                 { Icon: Phone,  title: "Call Us",   detail: "+91 98765 43210" },
-                { Icon: Mail,   title: "Email Us",  detail: "admissions@ignitejc.edu.in" },
+                { Icon: Mail,   title: "Email Us",  detail: "Info@ignite.academy" },
                 { Icon: MapPin, title: "Visit Us",  detail: "8+ branches across AP & Telangana." },
               ].map(({ Icon, title, detail }) => (
                 <div key={title} className="flex items-start gap-4">
@@ -112,7 +112,7 @@ export default function MPCBIPCContactForm({ name, course }) {
                   <label className="mb-1.5 block text-xs font-bold text-neutral-600 dark:text-neutral-400">Questions or message</label>
                   <textarea name="message" value={form.message} onChange={change} rows={3} placeholder="Your target rank, questions, anything…" className={`${inputCls} resize-none`} />
                 </div>
-                <button type="submit" disabled={submitting} className={`inline-flex w-full items-center justify-center gap-2 rounded-xl  px-6 py-3.5 text-sm font-black text-white transition ${course === 'BiPC' ? 'bg-emerald-600 hover:bg-emerald-700' :'bg-blue-600 hover:bg-blue-700'} active:scale-[0.98] disabled:cursor-wait disabled:opacity-60`}>
+                <button data-aos="zoom-in" type="submit" disabled={submitting} className={`inline-flex w-full items-center justify-center gap-2 rounded-xl  px-6 py-3.5 text-sm font-black text-white transition ${course === 'BiPC' ? 'bg-emerald-600 hover:bg-emerald-700' :'bg-blue-600 hover:bg-blue-700'} active:scale-[0.98] disabled:cursor-wait disabled:opacity-60`}>
                   {submitting ? "Submitting..." : <><Send size={15} /> Submit Enquiry</>}
                 </button>
                 <p className="text-center text-xs text-neutral-400">We'll call you within 24 hours. No spam, ever.</p>

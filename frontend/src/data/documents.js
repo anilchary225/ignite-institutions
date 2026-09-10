@@ -1,16 +1,16 @@
 
 
 export const documents = [
-    {
-      id: "handbook",
-      title: "Ignite Institutions Handbook",
-      category: "Documents",
-      file: "/assets/pdfs/Hand Book.pdf",
-      updated: "2026-01-05"
-    },
+      {
+        id: "handbook",
+        title: "Ignite Institutions Handbook",
+        category: "Documents",
+        file: "/assets/pdfs/Hand Book.pdf",
+        updated: "2026-01-05"
+      },
       {
         id: "neet_2026",
-        title: "Neet 2026 Results",
+        title: "Overall Neet Results",
         category: "Results",
         file: "/assets/pdfs/IGNITIANS NEET Results.pdf",
         updated: "2026-01-10",
@@ -29,4 +29,11 @@ export const documents = [
         file: "/assets/pdfs/EAPCET.pdf",
         updated: "2026-01-05",
       },
+      {
+        id : "ipe-banner",
+        title : "IPE Results 2026",
+        category : "Results",
+        file : "/assets/pdfs/IPE__BANNER__4x6__MPC & BIPC.pdf",
+        updated : "2026-01-05",
+      }
   ];

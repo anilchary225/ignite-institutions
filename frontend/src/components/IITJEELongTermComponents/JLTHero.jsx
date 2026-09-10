@@ -48,7 +48,7 @@ export default function JLTHero() {
             <div className="mt-8 grid grid-cols-3 gap-3">
               {[
                 { value: "2 Years",  label: "Intensive Coaching", icon: Clock },
-                { value: "AIR 23",   label: "Best Rank 2024",     icon: Star  },
+                { value: "AIR 71",   label: "Best Rank 2026",     icon: Star  },
                 { value: "≤ 25",     label: "Students / Batch",   icon: Users },
               ].map(({ value, label, icon: Icon }) => (
                 <div key={label} className="rounded-2xl bg-neutral-50 px-4 py-4 dark:bg-neutral-900">

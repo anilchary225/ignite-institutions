@@ -175,7 +175,7 @@ export default function BlogsPage() {
           </RouteLink>
         </div>
 
-        <div className="space-y-4">
+        {/* <div className="space-y-4">
           {blogs.map((blog) => (
             <BlogCard
               key={blog.id}
@@ -186,7 +186,7 @@ export default function BlogsPage() {
               }
             />
           ))}
-        </div>
+        </div> */}
       </div>
     </section>
   );

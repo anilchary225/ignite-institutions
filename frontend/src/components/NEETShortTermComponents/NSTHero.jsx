@@ -45,7 +45,7 @@ export default function NSTHero() {
               {[
                 { icon: Calendar,   label: "12-Month Track",    sub: "Class 12 & Droppers" },
                 { icon: Zap,        label: "Daily NEET Mocks",  sub: "720-mark full papers" },
-                { icon: Award,      label: "AIR 31",            sub: "Best rank 2024"       },
+                { icon: Award,      label: "AIR 31",            sub: "Best rank 2026"       },
               ].map(({ icon: Icon, label, sub }) => (
                 <div key={label} className="flex items-center gap-3 rounded-2xl bg-neutral-50 px-4 py-3 dark:bg-neutral-900">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-green-100 dark:bg-green-950/40">
@@ -108,7 +108,7 @@ export default function NSTHero() {
             {/* floating badge */}
             <div className="absolute -right-4 -top-4 flex h-20 w-20 flex-col items-center justify-center rounded-full bg-neutral-950 shadow-xl dark:bg-white">
               <p className="text-lg font-black text-white leading-none dark:text-neutral-950">450+</p>
-              <p className="text-[9px] font-bold text-white/70 text-center leading-tight dark:text-neutral-500">2024 NEET Qualifiers</p>
+              <p className="text-[9px] font-bold text-white/70 text-center leading-tight dark:text-neutral-500">2026 NEET Qualifiers</p>
             </div>
 
             {/* admission card */}

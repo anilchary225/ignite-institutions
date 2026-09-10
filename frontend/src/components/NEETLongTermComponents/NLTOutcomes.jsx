@@ -1,7 +1,7 @@
 import { TrendingUp, Medal, BookMarked, UserCheck, School, Laptop, Globe, Star } from "lucide-react";
 
 const outcomes = [
-  { icon: Medal,      title: "Top All-India NEET Ranks",         stat: "AIR 18",    statLabel: "Best rank 2024",           desc: "Ignite NEET students consistently appear in the Top 100 AIR, earning seats at AIIMS across India.", color: "emerald" },
+  { icon: Medal,      title: "Top All-India NEET Ranks",         stat: "AIR 18",    statLabel: "Best rank 2026",           desc: "Ignite NEET students consistently appear in the Top 100 AIR, earning seats at AIIMS across India.", color: "emerald" },
   { icon: School,     title: "Seats at AIIMS & Top Med Colleges", stat: "700+",      statLabel: "Total NEET qualifiers",    desc: "700+ students have earned MBBS seats at AIIMS Delhi, JIPMER, Maulana Azad, KGMC, and other premier institutes.", color: "green" },
   { icon: BookMarked, title: "Board Excellence Alongside NEET",   stat: "94%",       statLabel: "Score 90%+ in boards",     desc: "94% of our students score above 90% in Intermediate boards - NEET prep and board prep go hand in hand at Ignite.", color: "teal" },
   { icon: UserCheck,  title: "Personalised Mentorship",           stat: "1 : 8",     statLabel: "Mentor-to-student ratio",  desc: "Each student has a dedicated mentor who tracks subject-wise performance and adjusts study plans monthly.", color: "emerald" },

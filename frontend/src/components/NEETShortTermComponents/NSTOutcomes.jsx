@@ -1,8 +1,8 @@
 import { TrendingUp, Timer, Medal, Users, BookOpen, BarChart2, Star, Shield } from "lucide-react";
 
 const outcomes = [
-  { icon: Medal,     title: "Top NEET Ranks in 12 Months",         stat: "AIR 31",    statLabel: "Best 2024 short-term rank",    desc: "Short-term students at Ignite regularly break into the Top 100 AIR - structured intensity produces AIIMS-level results.", color: "green"    },
-  { icon: Users,     title: "450+ NEET Qualifiers - 2024",          stat: "450+",      statLabel: "Qualifiers in one year",        desc: "The biggest single-year NEET cohort from Ignite's short-term batch - qualifying for AIIMS, JIPMER, Maulana Azad and top state colleges.", color: "green"    },
+  { icon: Medal,     title: "Top NEET Ranks in 12 Months",         stat: "AIR 31",    statLabel: "Best 2026 short-term rank",    desc: "Short-term students at Ignite regularly break into the Top 100 AIR - structured intensity produces AIIMS-level results.", color: "green"    },
+  { icon: Users,     title: "450+ NEET Qualifiers - 2026",          stat: "450+",      statLabel: "Qualifiers in one year",        desc: "The biggest single-year NEET cohort from Ignite's short-term batch - qualifying for AIIMS, JIPMER, Maulana Azad and top state colleges.", color: "green"    },
   { icon: TrendingUp,title: "Average Score Jump of 65+ Marks",      stat: "+65 marks", statLabel: "Average improvement",          desc: "Students who join with 630–650 consistently exit with 700+ scores. The daily mock regimen is the primary driver of this jump.", color: "green"    },
   { icon: Timer,     title: "NEET Exam Stamina Through Daily Mocks", stat: "180 Qs",    statLabel: "Daily mock questions",         desc: "By Phase 3 every student writes 180 questions in 200 minutes with 80%+ accuracy. Exam day is just another day.", color: "green"    },
   { icon: BookOpen,  title: "Board Performance Maintained",          stat: "90%",       statLabel: "Score 80%+ in boards",         desc: "NEET and board syllabi overlap heavily at Class 12. Our calendar ensures both targets are hit - no compromises.", color: "green"    },
@@ -34,7 +34,7 @@ export default function NSTOutcomes() {
             Twelve Months, Measurable NEET Results
           </h2>
           <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
-            Every number below is backed by real student data from our 2024 NEET batch.
+            Every number below is backed by real student data from our 2026 NEET batch.
           </p>
         </div>
 
