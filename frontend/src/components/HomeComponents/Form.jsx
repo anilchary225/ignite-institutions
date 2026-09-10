@@ -157,7 +157,7 @@ export default function Form() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    console.log("Changed:", name, value);
+    // console.log("Changed:", name, value);
 
     if (errors[name]) {
       setErrors((prev) => {
