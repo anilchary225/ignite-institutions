@@ -61,7 +61,10 @@ router.post("/", enquiryLimit, async (req, res) => {
     } : {}),
     payload: safePayload,
   });
-  await sendEnquiryEmail(enquiry.toObject());
+  sendEnquiryEmail(enquiry.toObject()).catch((error) => {
+    console.error("Enquiry email failed:", error);
+  });
+
   res.status(201).json({ message: "Enquiry saved", id: enquiry._id });
 });
 
