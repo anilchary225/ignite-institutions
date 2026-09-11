@@ -10,7 +10,15 @@ export function createApp() {
   if (process.env.NODE_ENV === "production") app.set("trust proxy", 1);
   app.use(helmet());
   const allowedOrigins = new Set(
-    [process.env.FRONTEND_URL, ...(process.env.NODE_ENV === "production" ? [] : ["http://localhost:5001", "http://localhost:5173"])].filter(Boolean)
+    [
+      ...String(process.env.FRONTEND_URLS || process.env.FRONTEND_URL || "")
+        .split(",")
+        .map((url) => url.trim())
+        .filter(Boolean),
+      ...(process.env.NODE_ENV === "production"
+        ? []
+        : ["http://localhost:5000", "http://localhost:5001", "http://localhost:5173"]),
+    ]
   );
   app.use(
     cors({
