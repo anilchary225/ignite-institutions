@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "https://ignite-institutions-website-backend.onrender.com/api";
+const API_BASE_URL = "https://api.ignite.academy/api";
 
 const api = axios.create({
   baseURL: API_BASE_URL,
