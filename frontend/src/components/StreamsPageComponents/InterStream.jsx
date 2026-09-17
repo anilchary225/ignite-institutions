@@ -1,4 +1,6 @@
+import { motion } from "framer-motion";
 import { BookOpen, FlaskConical, Trophy, Users, Clock, Star } from "lucide-react";
+import { fadeUp, staggerContainer, cardReveal, defaultViewport } from "../../animations/variants";
 
 const courses = [
   {
@@ -55,21 +57,27 @@ const accentMap = {
 };
 
 function CourseCard({ course }) {
-  const a = accentMap[course.accent];
+  const a = accentMap[course.accent] || accentMap.orange;
   const Icon = course.icon;
 
   return (
-    <div
-      data-aos="fade-up"
-      className={`relative flex flex-col rounded-3xl border bg-white p-8 shadow-sm transition hover:shadow-md dark:bg-neutral-900 dark:hover:shadow-neutral-800 ${a.border}`}>
+    <motion.div
+      variants={cardReveal}
+      whileHover={{ y: -6, transition: { duration: 0.25 } }}
+      className={`relative flex flex-col rounded-3xl border bg-white p-8 shadow-sm transition hover:shadow-xl dark:bg-neutral-900 dark:hover:shadow-neutral-800 ${a.border}`}
+    >
       <span className={`self-start rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide ${a.badge}`}>
         {course.badge}
       </span>
 
       <div className="mt-6 flex items-start gap-4">
-        <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${a.iconBg}`}>
+        <motion.div
+          whileHover={{ scale: 1.1, rotate: 5 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${a.iconBg}`}
+        >
           <Icon size={22} className="text-white" />
-        </div>
+        </motion.div>
         <div>
           <h3 className="text-xl font-extrabold text-neutral-950 dark:text-white">
             {course.title}
@@ -101,43 +109,63 @@ function CourseCard({ course }) {
         ))}
       </ul>
 
-      <a
+      <motion.a
         href="/contact"
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
         className={`mt-8 inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-bold text-white transition ${a.cta}`}
       >
         Enquire about {course.title}
-      </a>
-    </div>
+      </motion.a>
+    </motion.div>
   );
 }
 
 export default function InterStream() {
   return (
-    <section data-aos="fade-in" id="inter" className="bg-white px-6 py-20 dark:bg-neutral-950">
+    <section id="inter" className="bg-white px-6 py-20 dark:bg-neutral-950 overflow-hidden">
       <div className="mx-auto max-w-7xl">
-        <div className="flex items-center gap-3">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={fadeUp}
+          className="flex items-center gap-3"
+        >
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
-          <span data-aos="fade-up" className="rounded-full bg-orange-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-orange-700 dark:bg-orange-950/40 dark:text-orange-300">
+          <span className="rounded-full bg-orange-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-orange-700 dark:bg-orange-950/40 dark:text-orange-300">
             Junior College - Inter
           </span>
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
-        </div>
+        </motion.div>
 
-        <div className="mt-8 max-w-2xl">
-          <h2 data-aos="fade-up" className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={fadeUp}
+          className="mt-8 max-w-2xl"
+        >
+          <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             Intermediate + IIT JEE / NEET
           </h2>
-          <p data-aos="fade-up" className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
+          <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Classes 11 & 12 with fully integrated entrance exam coaching. Board
             marks and rank - both, together.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={staggerContainer}
+          className="mt-10 grid gap-6 sm:grid-cols-2"
+        >
           {courses.map((c) => (
             <CourseCard key={c.id} course={c} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

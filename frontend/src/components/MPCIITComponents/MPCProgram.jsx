@@ -1,4 +1,6 @@
 import { CheckCircle2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeUp, staggerContainer } from "../../animations/variants";
 
 const phases = [
   {
@@ -56,39 +58,61 @@ const phases = [
 ];
 
 const colorMap = {
-  blue: { phase: "bg-blue-600 text-white", dot: "bg-blue-600", line: "bg-blue-200 dark:bg-blue-900", check: "text-blue-500", border: "border-blue-100 dark:border-blue-200/40",darkborder: "hover:border-blue-700 dark:hover:border-blue-900" },
-  indigo: { phase: "bg-indigo-600 text-white", dot: "bg-indigo-600", line: "bg-indigo-200 dark:bg-indigo-900", check: "text-indigo-500", border: "border-indigo-100 dark:border-indigo-200/40",darkborder: "hover:border-indigo-700 dark:hover:border-indigo-900" },
-  sky:    { phase: "bg-sky-500 text-white",    dot: "bg-sky-500",    line: "bg-sky-200 dark:bg-sky-900",       check: "text-sky-500",    border: "border-sky-100 dark:border-sky-200/40",darkborder: "hover:border-sky-700 dark:hover:border-sky-900" },
-  rose:   { phase: "bg-rose-600 text-white",   dot: "bg-rose-600",   line: "bg-rose-200 dark:bg-rose-900",     check: "text-rose-500",   border: "border-rose-100 dark:border-rose-200/40",darkborder: "hover:border-rose-700 dark:hover:border-rose-900" },
+  blue: { phase: "bg-blue-600 text-white", dot: "bg-blue-600", line: "bg-blue-200 dark:bg-blue-900", check: "text-blue-500", border: "border-blue-100 dark:border-blue-200/40", darkborder: "hover:border-blue-700 dark:hover:border-blue-900" },
+  indigo: { phase: "bg-indigo-600 text-white", dot: "bg-indigo-600", line: "bg-indigo-200 dark:bg-indigo-900", check: "text-indigo-500", border: "border-indigo-100 dark:border-indigo-200/40", darkborder: "hover:border-indigo-700 dark:hover:border-indigo-900" },
+  sky:    { phase: "bg-sky-500 text-white",    dot: "bg-sky-500",    line: "bg-sky-200 dark:bg-sky-900",       check: "text-sky-500",    border: "border-sky-100 dark:border-sky-200/40", darkborder: "hover:border-sky-700 dark:hover:border-sky-900" },
+  rose:   { phase: "bg-rose-600 text-white",   dot: "bg-rose-600",   line: "bg-rose-200 dark:bg-rose-900",     check: "text-rose-500",   border: "border-rose-100 dark:border-rose-200/40", darkborder: "hover:border-rose-700 dark:hover:border-rose-900" },
 };
 
 export default function MPCProgram() {
   return (
     <section id="program" className="bg-white px-6 py-20 dark:bg-neutral-950">
       <div className="mx-auto max-w-7xl">
-        <div className="flex items-center gap-3">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-3"
+        >
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
           <span className="rounded-full bg-blue-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">
             Programme Structure
           </span>
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
-        </div>
+        </motion.div>
 
-        <div className="mt-8 max-w-2xl">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-8 max-w-2xl"
+        >
           <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             Your 2-year roadmap to <span className="text-blue-600 dark:text-blue-400">IIT</span>
           </h2>
           <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             A phased, structured programme that builds concept, speed, and confidence quarter by quarter.
           </p>
-        </div>
+        </motion.div>
 
         {/* timeline grid */}
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <motion.div
+          variants={staggerContainer(0.12, 0.1)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
+        >
           {phases.map((ph) => {
             const c = colorMap[ph.color];
             return (
-              <div key={ph.phase} className={`relative flex flex-col rounded-3xl border bg-white p-7 shadow-sm dark:bg-neutral-900 ${c.border} ${c.darkborder}`}>
+              <motion.div
+                key={ph.phase}
+                variants={fadeUp}
+                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                className={`relative flex flex-col rounded-3xl border bg-white p-7 shadow-sm transition-shadow hover:shadow-lg dark:bg-neutral-900 ${c.border} ${c.darkborder}`}
+              >
                 {/* phase badge */}
                 <span className={`self-start rounded-full px-3 py-1 text-xs font-black uppercase tracking-wide ${c.phase}`}>
                   {ph.phase}
@@ -104,25 +128,36 @@ export default function MPCProgram() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* programme overview strip */}
-        <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4 rounded-3xl overflow-hidden">
+        <motion.div
+          variants={staggerContainer(0.1, 0.2)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4 rounded-3xl overflow-hidden shadow-sm"
+        >
           {[
             { label: "Daily Classes", value: "6 hrs" },
             { label: "Mock Tests / Month", value: "4+" },
             { label: "Doubt Sessions / Week", value: "Daily" },
             { label: "DPPs per Chapter", value: "50+" },
           ].map(({ label, value }) => (
-            <div key={label} className="bg-blue-600 px-6 py-5 text-center">
+            <motion.div
+              key={label}
+              variants={fadeUp}
+              whileHover={{ scale: 1.02 }}
+              className="bg-blue-600 px-6 py-5 text-center"
+            >
               <p className="text-2xl font-black text-white">{value}</p>
               <p className="mt-0.5 text-xs font-semibold text-blue-200">{label}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

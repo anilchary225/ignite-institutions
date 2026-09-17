@@ -1,4 +1,6 @@
+import { motion } from "framer-motion";
 import { Check, Minus } from "lucide-react";
+import { fadeUp, defaultViewport } from "../../animations/variants";
 
 const ROWS = [
   {
@@ -75,14 +77,6 @@ const cols = [
   { key: "eapcet",   label: "EAPCET",              color: "orange" },
 ];
 
-const headerColors = {
-  blue: "bg-blue-600",
-  rose:   "bg-rose-600",
-  indigo: "bg-indigo-600",
-  sky:    "bg-sky-500",
-  orange: "bg-orange-500",
-};
-
 const checkColors = {
   blue: "text-blue-600 dark:text-blue-400",
   rose:   "text-rose-600 dark:text-rose-400",
@@ -109,28 +103,46 @@ function Cell({ value, color }) {
 
 export default function TPComparison() {
   return (
-    <section id="compare" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
+    <section id="compare" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40 overflow-hidden">
       <div className="mx-auto max-w-7xl">
         {/* header */}
-        <div data-aos="fade-up" className="flex items-center gap-3">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={fadeUp}
+          className="flex items-center gap-3"
+        >
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
           <span className="rounded-full bg-neutral-200 px-4 py-1 text-xs font-bold uppercase tracking-widest text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400">
             Programme Comparison
           </span>
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-        </div>
+        </motion.div>
 
-        <div className="mt-8 max-w-2xl">
-          <h2 data-aos="fade-up" className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={fadeUp}
+          className="mt-8 max-w-2xl"
+        >
+          <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             Which programme is right for you?
           </h2>
-          <p data-aos="fade-up" className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
+          <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Compare all five programmes side by side to find the one that fits your timeline and goal.
           </p>
-        </div>
+        </motion.div>
 
-        {/* table - horizontally scrollable on mobile */}
-        <div data-aos="fade-in" className="mt-10 overflow-x-auto rounded-3xl shadow-sm ring-1 ring-neutral-200 dark:ring-neutral-800">
+        {/* table */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={defaultViewport}
+          transition={{ duration: 0.6 }}
+          className="mt-10 overflow-x-auto rounded-3xl shadow-sm ring-1 ring-neutral-200 dark:ring-neutral-800"
+        >
           <table className="w-full min-w-[800px] border-collapse bg-white dark:bg-neutral-900">
             <thead>
               <tr>
@@ -139,10 +151,8 @@ export default function TPComparison() {
                   Feature
                 </th>
                 {cols.map((col) => (
-                  <th key={col.key} className="px-6 py-0 text-center">
-                    {/* <div className={`mx-1 my-3 rounded-2xl px-4 py-3 ${headerColors[col.color]}`}> */}
+                  <th key={col.key} className="px-6 py-4 text-center">
                     <span className="text-sm font-extrabold text-black dark:text-white">{col.label}</span>
-                    {/* // </div> */}
                   </th>
                 ))}
               </tr>
@@ -169,7 +179,7 @@ export default function TPComparison() {
               ))}
             </tbody>
           </table>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

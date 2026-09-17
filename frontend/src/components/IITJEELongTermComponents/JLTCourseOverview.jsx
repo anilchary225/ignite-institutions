@@ -1,4 +1,6 @@
 import { BookOpen, FlaskConical, Atom, Brain, Target, BarChart3, Layers, Clock4 } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeUp, staggerContainer } from "../../animations/variants";
 
 const subjects = [
   { icon: Atom,         label: "Physics",     desc: "Mechanics to Modern Physics - every concept exam-ready", color: "blue" },
@@ -27,15 +29,26 @@ export default function JLTCourseOverview() {
       <div className="mx-auto max-w-7xl">
 
         {/* section label */}
-        <div className="flex items-center gap-3">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-3"
+        >
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
           <span className="rounded-full bg-indigo-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-400">
             Course Overview
           </span>
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-        </div>
+        </motion.div>
 
-        <div className="mx-auto mt-6 max-w-2xl text-center">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mx-auto mt-6 max-w-2xl text-center"
+        >
           <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             What the Programme Delivers
           </h2>
@@ -43,26 +56,43 @@ export default function JLTCourseOverview() {
             A rigorous, structured 2-year curriculum covering three core subjects - balanced
             for board excellence and JEE mastery simultaneously.
           </p>
-        </div>
+        </motion.div>
 
         {/* 3 subject cards */}
-        <div className="mt-12 grid gap-5 sm:grid-cols-3">
+        <motion.div
+          variants={staggerContainer(0.12, 0.1)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-12 grid gap-5 sm:grid-cols-3"
+        >
           {subjects.map(({ icon: Icon, label, desc, color }) => {
             const c = colorMap[color];
             return (
-              <div key={label} className={`rounded-3xl border p-7 ${c.bg} ${c.border}`}>
+              <motion.div
+                key={label}
+                variants={fadeUp}
+                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                className={`rounded-3xl border p-7 shadow-sm transition-shadow hover:shadow-xl ${c.bg} ${c.border}`}
+              >
                 <div className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl ${c.icon}`}>
                   <Icon size={20} />
                 </div>
                 <h3 className="mt-4 text-xl font-extrabold text-neutral-950 dark:text-white">{label}</h3>
                 <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{desc}</p>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* horizontal programme banner */}
-        <div className="mt-10 overflow-hidden rounded-3xl bg-linear-to-r from-indigo-700 via-indigo-600 to-blue-700 p-8">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-10 overflow-hidden rounded-3xl bg-linear-to-r from-indigo-700 via-indigo-600 to-blue-700 p-8 shadow-xl"
+        >
           <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-200">Programme Structure</p>
@@ -87,12 +117,23 @@ export default function JLTCourseOverview() {
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* 6 highlight cards */}
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.div
+          variants={staggerContainer(0.08, 0.15)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {highlights.map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="flex items-start gap-4 rounded-2xl bg-neutral-50 p-5 dark:bg-neutral-900">
+            <motion.div
+              key={title}
+              variants={fadeUp}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
+              className="flex items-start gap-4 rounded-2xl bg-neutral-50 p-5 shadow-sm transition-shadow hover:shadow-md dark:bg-neutral-900"
+            >
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 dark:bg-indigo-950/40 dark:text-indigo-400">
                 <Icon size={18} />
               </div>
@@ -100,9 +141,9 @@ export default function JLTCourseOverview() {
                 <h4 className="text-sm font-extrabold text-neutral-950 dark:text-white">{title}</h4>
                 <p className="mt-1 text-xs leading-5 text-neutral-500 dark:text-neutral-400">{desc}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </section>

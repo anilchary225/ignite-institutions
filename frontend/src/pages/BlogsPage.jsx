@@ -1,6 +1,14 @@
-import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { RouteLink } from "../router/BrowserRouter";
+import {
+  fadeUp,
+  fadeIn,
+  staggerContainer,
+  staggerItem,
+  cardReveal,
+  defaultViewport,
+} from "../animations/variants";
 
 const blogs = [
   {
@@ -36,62 +44,17 @@ const blogs = [
 ];
 
 function BlogCard({ blog, active, onReadMore }) {
-  const contentRef = useRef(null);
-  const [isMounted, setIsMounted] = useState(false);
-
-  // Step 1: mount the content element as soon as the card becomes active.
-  // We do NOT unmount it here on collapse -- that happens after the
-  // collapse animation finishes (see the animation effect below).
-  useEffect(() => {
-    if (active) {
-      setIsMounted(true);
-    }
-  }, [active]);
-
-  // Step 2: once the element actually exists in the DOM (isMounted is
-  // true and the ref is attached), run the expand/collapse animation.
-  useEffect(() => {
-    const element = contentRef.current;
-    if (!isMounted || !element) return undefined;
-
-    gsap.killTweensOf(element);
-
-    if (active) {
-      gsap.fromTo(
-        element,
-        { height: 0, opacity: 0, y: -8 },
-        {
-          height: "auto",
-          opacity: 1,
-          y: 0,
-          duration: 0.35,
-          ease: "power2.out",
-          onComplete: () => gsap.set(element, { height: "auto" }),
-        }
-      );
-    } else {
-      gsap.to(element, {
-        height: 0,
-        opacity: 0,
-        y: -8,
-        duration: 0.28,
-        ease: "power2.in",
-        onComplete: () => setIsMounted(false),
-      });
-    }
-
-    return () => gsap.killTweensOf(element);
-  }, [active, isMounted]);
-
   return (
-    <article
-      className={`overflow-hidden rounded-[1.75rem] border transition ${
+    <motion.article
+      variants={cardReveal}
+      className={`overflow-hidden rounded-[1.75rem] border transition duration-300 ${
         active
-          ? "border-sky-300 bg-gradient-to-br from-sky-100 via-sky-200 to-sky-300 text-neutral-950 shadow-[0_18px_50px_rgba(14,165,233,0.18)] dark:border-neutral-700 dark:bg-black dark:text-white"
+          ? "border-sky-300 bg-linear-to-br from-sky-100 via-sky-200 to-sky-300 text-neutral-950 shadow-[0_18px_50px_rgba(14,165,233,0.18)] dark:border-neutral-700 dark:bg-black dark:text-white"
           : "border-neutral-300 bg-white text-neutral-950 dark:border-neutral-700 dark:bg-neutral-950 dark:text-white"
-      }`}>
+      }`}
+    >
       <div className="grid gap-0 lg:grid-cols-[320px_1fr]">
-        <div className="relative min-h-[220px] bg-gradient-to-br from-sky-300 via-sky-500 to-sky-700 dark:from-neutral-900 dark:via-black dark:to-black">
+        <div className="relative min-h-[220px] bg-linear-to-br from-sky-300 via-sky-500 to-sky-700 dark:from-neutral-900 dark:via-black dark:to-black">
           <div className="absolute left-4 top-4 rounded-full bg-white/25 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur">
             {blog.category}
           </div>
@@ -119,18 +82,26 @@ function BlogCard({ blog, active, onReadMore }) {
             </div>
           </div>
 
-          {isMounted ? (
-            <div
-              ref={contentRef}
-              className="mt-5 overflow-hidden rounded-[1.25rem] bg-sky-50 p-4 text-sm leading-7 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-200"
-              style={{ height: 0 }}
-            >
-              {blog.content}
-            </div>
-          ) : null}
+          <AnimatePresence initial={false}>
+            {active && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                className="overflow-hidden"
+              >
+                <div className="mt-5 rounded-[1.25rem] bg-sky-50 p-4 text-sm leading-7 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-200">
+                  {blog.content}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <div className="mt-5 flex items-center justify-end">
-            <button
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               type="button"
               onClick={onReadMore}
               className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
@@ -140,11 +111,11 @@ function BlogCard({ blog, active, onReadMore }) {
               }`}
             >
               {active ? "Read less" : "Read more"}
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }
 
@@ -152,42 +123,42 @@ export default function BlogsPage() {
   const [openBlogId, setOpenBlogId] = useState(blogs[0].id);
 
   return (
-    <section className="min-h-screen pt-24 bg-white dark:bg-neutral-950 px-4 py-10 text-black dark:text-white sm:px-6 lg:px-8">
+    <motion.section
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35 }}
+      className="min-h-screen pt-24 bg-white dark:bg-neutral-950 px-4 py-10 text-black dark:text-white sm:px-6 lg:px-8 overflow-hidden"
+    >
       <div className="mx-auto max-w-6xl">
-        <div className="mb-8 flex items-end justify-between gap-4">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mb-8 flex items-end justify-between gap-4"
+        >
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.28em] text-orange-400">
+            <motion.p variants={fadeUp} className="text-xs font-black uppercase tracking-[0.28em] text-orange-400">
               coming soon Blogs
-            </p>
-            <h1 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
+            </motion.p>
+            <motion.h1 variants={fadeUp} className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
               Alumni and student blogs
-            </h1>
-            <p className="mt-3 max-w-2xl text-sm leading-7 dark:text-white/40 text-neutral-700">
+            </motion.h1>
+            <motion.p variants={fadeUp} className="mt-3 max-w-2xl text-sm leading-7 dark:text-white/40 text-neutral-700">
               Stories from alumni and current students. Only one blog stays expanded at a time.
-            </p>
+            </motion.p>
           </div>
 
-          <RouteLink
-            to="/contact"
-            className="hidden rounded-full bg-orange-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-orange-400 sm:inline-flex"
-          >
-            Contact Us
-          </RouteLink>
-        </div>
-
-        {/* <div className="space-y-4">
-          {blogs.map((blog) => (
-            <BlogCard
-              key={blog.id}
-              blog={blog}
-              active={openBlogId === blog.id}
-              onReadMore={() =>
-                setOpenBlogId((current) => (current === blog.id ? null : blog.id))
-              }
-            />
-          ))}
-        </div> */}
+          <motion.div variants={fadeUp} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <RouteLink
+              to="/contact"
+              className="hidden rounded-full bg-orange-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-orange-400 sm:inline-flex"
+            >
+              Contact Us
+            </RouteLink>
+          </motion.div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }

@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { MapPin, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeUp, defaultViewport } from "../../animations/variants";
 
 export const campusData = {
   Colleges: [
@@ -71,7 +73,7 @@ function FocusCarousel({ items }) {
   }, [items]);
 
   return (
-    <div data-aos="fade-up" className="relative">
+    <div className="relative">
       <div
         ref={trackRef}
         onWheel={(event) => {
@@ -87,7 +89,6 @@ function FocusCarousel({ items }) {
             key={i}
             ref={(el) => (cardRefs.current[i] = el)}
             onClick={() => i !== active && scrollToIndex(i)}
-            data-motion-card
             className="group relative flex h-96 w-[78%] shrink-0 cursor-pointer snap-center flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white text-left dark:border-neutral-800 dark:bg-neutral-900 sm:w-[46%] lg:w-[28%]"
           >
             {/* Photo — always shrunk on mobile, shrinks on hover for sm+ */}
@@ -184,33 +185,46 @@ export default function Campuses() {
   return (
     <section className="py-14 px-4 sm:px-8 sm:py-16 transition-colors">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-8">
-          <span data-aos="fade-up" className="inline-block text-xs font-medium tracking-[0.25em] text-blue-600 dark:text-blue-400 uppercase mb-2">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="text-center mb-8"
+        >
+          <span className="inline-block text-xs font-medium tracking-[0.25em] text-blue-600 dark:text-blue-400 uppercase mb-2">
             Campuses
           </span>
-          <h2 data-aos="fade-up" className="text-2xl font-semibold text-neutral-900 dark:text-white sm:text-3xl">
+          <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white sm:text-3xl">
             Our Branches
           </h2>
-          <p data-aos="fade-up" className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
+          <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
             Explore Ignite branches across Hyderabad
           </p>
-        </div>
+        </motion.div>
 
-        <div data-aos="fade-up" className="flex justify-center gap-2 mb-10">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="flex justify-center gap-2 mb-10"
+        >
           {tabs.map((tab) => (
-            <button
+            <motion.button
               key={tab}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setActiveTab(tab)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`px-5 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer ${
                 activeTab === tab
-                  ? "bg-blue-600 text-white"
+                  ? "bg-blue-600 text-white shadow-[0_4px_14px_rgba(37,99,235,0.3)]"
                   : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-blue-50 dark:hover:bg-blue-500/10 hover:text-blue-600"
               }`}
             >
               {tab}
-            </button>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
 
         <FocusCarousel key={activeTab} items={campusData[activeTab]} />
       </div>

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { fadeUp, staggerContainer } from "../../animations/variants";
 
 const faqs = [
   { q: "What is the duration of the BiPC NEET programme at Ignite?", a: "The programme runs for 2 years covering Class 11 and Class 12 (Intermediate). It integrates Intermediate board preparation with full NEET UG coaching - Biology, Physics, and Chemistry - in a single structured plan." },
@@ -14,17 +16,34 @@ const faqs = [
 
 function Item({ faq, open, onToggle }) {
   return (
-    <div data-aos="fade-up" className={`overflow-hidden rounded-2xl border transition-all ${open ? "border-emerald-200 bg-emerald-50 dark:border-emerald-900/60 dark:bg-emerald-950/20" : "border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900"}`}>
+    <motion.div
+      variants={fadeUp}
+      className={`overflow-hidden rounded-2xl border transition-colors ${open ? "border-emerald-200 bg-emerald-50 dark:border-emerald-900/60 dark:bg-emerald-950/20" : "border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900"}`}
+    >
       <button type="button" onClick={onToggle} className="flex w-full items-start justify-between gap-4 px-6 py-5 text-left">
         <span className="text-sm font-bold text-neutral-950 dark:text-white">{faq.q}</span>
-        <ChevronDown size={18} className={`shrink-0 text-neutral-400 transition-transform duration-300 ${open ? "rotate-180 text-emerald-600" : ""}`} />
+        <motion.div
+          animate={{ rotate: open ? 180 : 0 }}
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="shrink-0 text-neutral-400"
+        >
+          <ChevronDown size={18} className={open ? "text-emerald-600" : ""} />
+        </motion.div>
       </button>
-      <div className={`grid transition-all duration-300 ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
-        <div className="overflow-hidden">
-          <p className="px-6 pb-5 text-sm leading-7 text-neutral-600 dark:text-neutral-400">{faq.a}</p>
-        </div>
-      </div>
-    </div>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden"
+          >
+            <p className="px-6 pb-5 text-sm leading-7 text-neutral-600 dark:text-neutral-400">{faq.a}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 }
 
@@ -33,27 +52,64 @@ export default function BIPCFaq() {
   return (
     <section id="faq" className="bg-white px-6 py-20 dark:bg-neutral-950">
       <div className="mx-auto max-w-4xl">
-        <div className="flex items-center gap-3">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-3"
+        >
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
           <span className="rounded-full bg-neutral-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400">FAQs</span>
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
-        </div>
-        <div className="mt-8 text-center">
-          <h2 data-aos="fade-up" className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">Frequently Asked Questions</h2>
-          <p data-aos="fade-up" className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">Everything you need to know about Ignite's BiPC NEET programme.</p>
-        </div>
-        <div className="mt-10 space-y-3">
+        </motion.div>
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-8 text-center"
+        >
+          <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">Frequently Asked Questions</h2>
+          <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">Everything you need to know about Ignite's BiPC NEET programme.</p>
+        </motion.div>
+        <motion.div
+          variants={staggerContainer(0.08, 0.1)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-10 space-y-3"
+        >
           {faqs.map((faq, i) => <Item key={i} faq={faq} open={open === i} onToggle={() => setOpen(open === i ? -1 : i)} />)}
-        </div>
-        <div data-aos="fade-up" className="mt-10 rounded-3xl bg-green-700 p-7 text-center">
+        </motion.div>
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-10 rounded-3xl bg-green-700 p-7 text-center shadow-lg"
+        >
           <p className="text-sm font-bold text-emerald-200">Still have questions?</p>
           <h3 className="mt-2 text-xl font-extrabold text-white">Talk to our BiPC counsellors</h3>
           <p className="mt-2 text-sm text-emerald-100">Available Mon–Sat, 9 AM–6 PM.</p>
           <div className="mt-5 flex flex-wrap justify-center gap-3">
-            <a href="tel:+919876543210" className="rounded-xl bg-white px-6 py-3 text-sm font-black text-emerald-700 hover:bg-amber-400 hover:text-white transition">Call +91 98765 43210</a>
-            <a href="#contact" className="rounded-xl border-2 border-white/30 px-6 py-3 text-sm font-bold text-white hover:bg-white/10 transition">Send a Message</a>
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.96 }}
+              href="tel:+919876543210"
+              className="rounded-xl bg-white px-6 py-3 text-sm font-black text-emerald-700 shadow hover:bg-amber-400 hover:text-white transition"
+            >
+              Call +91 98765 43210
+            </motion.a>
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.96 }}
+              href="#contact"
+              className="rounded-xl border-2 border-white/30 px-6 py-3 text-sm font-bold text-white hover:bg-white/10 transition"
+            >
+              Send a Message
+            </motion.a>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

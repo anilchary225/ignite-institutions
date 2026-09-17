@@ -2,9 +2,11 @@ import React, { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { motion } from "framer-motion";
 import { Home, Key, Heart } from "lucide-react";
 
 import Hero from "./AboutPage/Hero";
+import { fadeUp, defaultViewport } from "../../animations/variants";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -90,7 +92,7 @@ function IntroDual({ imageSrc, imageAlt = "", paragraphs = [] }) {
             alt={imageAlt}
             className="id-photo aspect-4/5 w-full rounded-2xl object-cover"
           />
-          <div data-aos="zoom-in" className="id-tag absolute -bottom-4 -right-4 flex items-center gap-2 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 px-3 py-2.5">
+          <div className="id-tag absolute -bottom-4 -right-4 flex items-center gap-2 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 px-3 py-2.5">
             <IconBadge icon={Home} />
             <span className="text-xs font-medium text-neutral-700 dark:text-neutral-300">
               Welcome home
@@ -165,18 +167,24 @@ function AltRow({ heading, text, imageSrc, reverse = false, index }) {
 ============================================================ */
 function CenteredStatement({ heading, text }) {
   return (
-    <section data-aos="fade-in" className="bg-neutral-50 dark:bg-neutral-950 px-6 py-20">
+    <section className="bg-neutral-50 dark:bg-neutral-950 px-6 py-20">
       <div className="mx-auto max-w-2xl">
-        <div className="relative overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-10 text-center">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="relative overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-10 text-center shadow-sm"
+        >
           <AbstractBg position="bottom-left" />
           <div className="relative z-10">
-            <div data-aos="zoom-in" className="mb-6 flex justify-center">
+            <div className="mb-6 flex justify-center">
               <IconBadge icon={Key} />
             </div>
-            <h2 data-aos="fade-up" className="mb-4 text-3xl font-semibold text-neutral-900 dark:text-white">{heading}</h2>
-            <p data-aos="fade-up" className="text-neutral-600 dark:text-neutral-300 leading-relaxed">{text}</p>
+            <h2 className="mb-4 text-3xl font-semibold text-neutral-900 dark:text-white">{heading}</h2>
+            <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed">{text}</p>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -187,15 +195,21 @@ function CenteredStatement({ heading, text }) {
 ============================================================ */
 function SolidBanner({ text }) {
   return (
-    <section data-aos="fade-in" className="bg-blue-700 px-6 py-20 text-center">
-      <div className="mx-auto max-w-3xl">
-        <div data-aos="fade-up" className="mb-6 flex justify-center">
+    <section className="bg-blue-700 px-6 py-20 text-center">
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        className="mx-auto max-w-3xl"
+      >
+        <div className="mb-6 flex justify-center">
           <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10">
             <Heart size={20} className="text-white" strokeWidth={1.75} />
           </div>
         </div>
-        <p data-aos="fade-up" className="text-lg sm:text-xl leading-relaxed text-white/90">{text}</p>
-      </div>
+        <p className="text-lg sm:text-xl leading-relaxed text-white/90">{text}</p>
+      </motion.div>
     </section>
   );
 }

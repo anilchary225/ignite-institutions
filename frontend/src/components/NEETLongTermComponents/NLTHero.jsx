@@ -1,4 +1,6 @@
 import { ArrowRight, Leaf, Clock, Star, Users } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeUp, staggerContainer, scaleIn } from "../../animations/variants";
 import { RESULTS_DATA } from "../../data_results/results_data";
 
 const rankerColors = ["emerald", "green", "darkgreen"];
@@ -25,7 +27,11 @@ export default function NLTHero() {
         <div className="grid items-center gap-14 lg:grid-cols-2">
 
           {/* ── LEFT CONTENT ── */}
-          <div>
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+          >
             <div className="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-2 dark:bg-emerald-950/40">
               <Leaf size={14} className="text-emerald-600 dark:text-emerald-400" />
               <span className="text-xs font-black uppercase tracking-widest text-emerald-700 dark:text-emerald-400">
@@ -46,92 +52,138 @@ export default function NLTHero() {
             </p>
 
             {/* stat pills */}
-            <div className="mt-8 grid grid-cols-3 gap-3">
+            <motion.div
+              variants={staggerContainer(0.08, 0.1)}
+              initial="hidden"
+              animate="visible"
+              className="mt-8 grid grid-cols-3 gap-3"
+            >
               {[
                 { value: "2 Years",   label: "Integrated Coaching",  icon: Clock },
                 { value: "AIR 18",    label: "Best Rank 2026",        icon: Star  },
                 { value: "≤ 25",      label: "Students / Batch",      icon: Users },
               ].map(({ value, label, icon: Icon }) => (
-                <div key={label} className="rounded-2xl bg-neutral-50 px-4 py-4 dark:bg-neutral-900">
+                <motion.div
+                  key={label}
+                  variants={scaleIn}
+                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                  className="rounded-2xl bg-neutral-50 px-4 py-4 dark:bg-neutral-900"
+                >
                   <Icon size={14} className="mb-1.5 text-emerald-500" />
                   <p className="text-xl font-black text-emerald-700 dark:text-emerald-400">{value}</p>
                   <p className="mt-0.5 text-xs font-semibold text-neutral-500">{label}</p>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             {/* highlights */}
-            <ul className="mt-7 space-y-2">
+            <motion.ul
+              variants={staggerContainer(0.07, 0.15)}
+              initial="hidden"
+              animate="visible"
+              className="mt-7 space-y-2"
+            >
               {[
                 "Integrated Board + NEET curriculum aligned from Day 1",
                 "Biology taught by AIIMS-qualified faculty",
                 "Weekly NEET-pattern mock tests from Year 1 itself",
                 "Individual performance tracking with monthly analytics",
               ].map(item => (
-                <li key={item} className="flex items-start gap-2.5 text-sm text-neutral-600 dark:text-neutral-400">
+                <motion.li
+                  key={item}
+                  variants={fadeUp}
+                  className="flex items-start gap-2.5 text-sm text-neutral-600 dark:text-neutral-400"
+                >
                   <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-950/40">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-600" />
                   </span>
                   {item}
-                </li>
+                </motion.li>
               ))}
-            </ul>
+            </motion.ul>
 
             {/* CTAs */}
             <div className="mt-8 flex flex-wrap gap-3">
-              <a
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.96 }}
                 href="#apply"
                 className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-6 py-3.5 text-sm font-black text-white transition hover:bg-emerald-700"
               >
                 Apply Now <ArrowRight size={16} />
-              </a>
-              <a
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.96 }}
                 href="#course"
                 className="inline-flex items-center gap-2 rounded-xl border border-neutral-200 bg-white px-6 py-3.5 text-sm font-bold text-neutral-700 transition hover:border-emerald-300 hover:text-emerald-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300"
               >
                 Explore Programme
-              </a>
+              </motion.a>
             </div>
-          </div>
+          </motion.div>
 
           {/* ── RIGHT - stacked rank cards ── */}
-          <div className="relative flex flex-col gap-4">
-            {rankerImages.map((r, i) => (
-              <div
-                key={r.name}
-                className={`flex items-center gap-4 overflow-hidden rounded-2xl bg-neutral-50 shadow-sm ring-1 ring-neutral-100 dark:bg-neutral-900 dark:ring-neutral-800 ${i === 1 ? "ml-6" : i === 2 ? "ml-2" : ""}`}
-              >
-                <img src={r.avatar} alt={r.name} className="h-28 w-24 shrink-0 object-cover" />
-                <div className="flex-1 py-4 pr-4">
-                  <span className={`inline-block rounded-full px-3 py-0.5 text-xs font-black text-white ${colorMap[r.color]}`}>
-                    {r.rank}
-                  </span>
-                  <p className="mt-2 text-base font-extrabold text-neutral-950 dark:text-white">{r.name}</p>
-                  <p className="text-xs text-neutral-500">{r.exam} · {r.score}</p>
-                  <p className="mt-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400">{r.college}</p>
-                </div>
-              </div>
-            ))}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="relative flex flex-col gap-4"
+          >
+            <motion.div
+              variants={staggerContainer(0.1, 0.1)}
+              initial="hidden"
+              animate="visible"
+              className="flex flex-col gap-4"
+            >
+              {rankerImages.map((r, i) => (
+                <motion.div
+                  key={r.name}
+                  variants={scaleIn}
+                  whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                  className={`flex items-center gap-4 overflow-hidden rounded-2xl bg-neutral-50 shadow-sm ring-1 ring-neutral-100 dark:bg-neutral-900 dark:ring-neutral-800 ${i === 1 ? "ml-6" : i === 2 ? "ml-2" : ""}`}
+                >
+                  <img src={r.avatar} alt={r.name} className="h-28 w-24 shrink-0 object-cover" />
+                  <div className="flex-1 py-4 pr-4">
+                    <span className={`inline-block rounded-full px-3 py-0.5 text-xs font-black text-white ${colorMap[r.color]}`}>
+                      {r.rank}
+                    </span>
+                    <p className="mt-2 text-base font-extrabold text-neutral-950 dark:text-white">{r.name}</p>
+                    <p className="text-xs text-neutral-500">{r.exam} · {r.score}</p>
+                    <p className="mt-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400">{r.college}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
 
             {/* floating badge */}
-            <div className="absolute -right-3 -top-3 flex h-20 w-20 flex-col items-center justify-center rounded-full bg-emerald-500 shadow-lg">
+            <motion.div
+              animate={{ rotate: [0, 5, -5, 0], scale: [1, 1.05, 1] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -right-3 -top-3 flex h-20 w-20 flex-col items-center justify-center rounded-full bg-emerald-500 shadow-lg"
+            >
               <p className="text-lg font-black text-white leading-none">700+</p>
               <p className="text-[9px] font-bold text-white/90 text-center leading-tight">NEET Qualifiers</p>
-            </div>
+            </motion.div>
 
             {/* admission card */}
-            <div className="mt-2 rounded-2xl bg-emerald-600 p-5 text-white">
+            <motion.div
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
+              className="mt-2 rounded-2xl bg-emerald-600 p-5 text-white"
+            >
               <p className="text-xs font-bold uppercase tracking-widest text-emerald-200">Admissions Open · 2025–27 Batch</p>
               <p className="mt-1 text-lg font-extrabold">NEET Long-Term - 2 Year Track</p>
               <p className="mt-1 text-xs text-emerald-200">Limited seats · Hostel facility available</p>
-              <a
+              <motion.a
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
                 href="#apply"
                 className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white py-3 text-sm font-black text-emerald-700 transition hover:bg-emerald-50"
               >
                 Secure Your Seat <ArrowRight size={14} />
-              </a>
-            </div>
-          </div>
+              </motion.a>
+            </motion.div>
+          </motion.div>
 
         </div>
       </div>

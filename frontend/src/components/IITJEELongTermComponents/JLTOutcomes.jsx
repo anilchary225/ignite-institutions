@@ -1,4 +1,6 @@
 import { TrendingUp, Medal, BookMarked, UserCheck, School, Laptop, Globe, Star } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeUp, staggerContainer } from "../../animations/variants";
 
 const outcomes = [
   {
@@ -81,15 +83,26 @@ export default function JLTOutcomes() {
     <section className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
       <div className="mx-auto max-w-7xl">
 
-        <div className="flex items-center gap-3">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-3"
+        >
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
           <span className="rounded-full bg-blue-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-blue-700 dark:bg-blue-950/40 dark:text-blue-400">
             Outcomes & Benefits
           </span>
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-        </div>
+        </motion.div>
 
-        <div className="mx-auto mt-6 max-w-2xl text-center">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mx-auto mt-6 max-w-2xl text-center"
+        >
           <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             What You Walk Away With
           </h2>
@@ -97,13 +110,24 @@ export default function JLTOutcomes() {
             The IIT JEE Long-Term programme isn't just about a rank - it shapes how you
             think, study, and perform under pressure for the rest of your life.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <motion.div
+          variants={staggerContainer(0.08, 0.1)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
+        >
           {outcomes.map(({ icon: Icon, title, desc, stat, statLabel, color }) => {
             const c = colorMap[color];
             return (
-              <div key={title} className={`flex flex-col rounded-3xl border p-6 ${c.bg} ${c.border}`}>
+              <motion.div
+                key={title}
+                variants={fadeUp}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                className={`flex flex-col rounded-3xl border p-6 shadow-sm transition-shadow hover:shadow-lg ${c.bg} ${c.border}`}
+              >
                 <div className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl ${c.icon}`}>
                   <Icon size={20} />
                 </div>
@@ -113,10 +137,10 @@ export default function JLTOutcomes() {
                 </div>
                 <h3 className="mt-3 text-sm font-extrabold text-neutral-950 dark:text-white">{title}</h3>
                 <p className="mt-1.5 flex-1 text-xs leading-5 text-neutral-500 dark:text-neutral-400">{desc}</p>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
       </div>
     </section>

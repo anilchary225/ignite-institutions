@@ -1,4 +1,6 @@
+import { motion } from "framer-motion";
 import { Zap, CalendarDays, Target, BookOpen } from "lucide-react";
+import { fadeUp, staggerContainer, staggerItem, cardReveal, defaultViewport } from "../../animations/variants";
 
 const programs = [
   {
@@ -79,15 +81,22 @@ const colorMap = {
 };
 
 function ProgramCard({ prog }) {
-  const c = colorMap[prog.color];
+  const c = colorMap[prog.color] || colorMap.green;
   const Icon = prog.icon;
   return (
-    <div data-aos="fade-up" className={`flex flex-col rounded-3xl border bg-white shadow-sm transition hover:shadow-md dark:bg-neutral-900 ${c.border}`}>
+    <motion.div
+      variants={cardReveal}
+      whileHover={{ y: -6, transition: { duration: 0.25 } }}
+      className={`flex flex-col rounded-3xl border bg-white shadow-sm transition hover:shadow-xl dark:bg-neutral-900 ${c.border}`}
+    >
       <div className="p-7 flex-1">
         <div className="flex items-center gap-3">
-          <div className={`flex h-11 w-11 items-center justify-center rounded-2xl ${c.iconBg}`}>
+          <motion.div
+            whileHover={{ scale: 1.1, rotate: 6 }}
+            className={`flex h-11 w-11 items-center justify-center rounded-2xl ${c.iconBg}`}
+          >
             <Icon size={18} className="text-white" />
-          </div>
+          </motion.div>
           <div>
             <span className={`rounded-full px-3 py-0.5 text-xs font-black uppercase tracking-wide ${c.badge}`}>
               {prog.badge}
@@ -118,48 +127,71 @@ function ProgramCard({ prog }) {
         </ul>
       </div>
       <div className="px-7 pb-7">
-        <a href="#contact" className={`inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-sm font-bold text-white transition ${c.cta}`}>
+        <motion.a
+          href="#contact"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className={`inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-sm font-bold text-white transition ${c.cta}`}
+        >
           Enquire Now
-        </a>
+        </motion.a>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 export default function TPHero() {
   return (
-    <section data-aos="fade-up" id="programs" className="bg-white px-6 py-20 dark:bg-neutral-950">
+    <section id="programs" className="bg-white px-6 py-20 dark:bg-neutral-950 overflow-hidden">
       <div className="mx-auto max-w-7xl">
-        <p className="text-sm font-bold uppercase tracking-[0.2em] text-green-600 dark:text-green-400">
-          Ignite Test Prep
-        </p>
-        <h1 className="mt-3 max-w-3xl text-4xl font-extrabold leading-tight text-neutral-950 sm:text-5xl dark:text-white">
-          Every exam. Every timeline.{" "}
-          <span className="text-green-600 dark:text-green-400">One destination.</span>
-        </h1>
-        <p className="mt-4 max-w-2xl text-base leading-7 text-neutral-600 dark:text-neutral-400">
-          Whether you're starting from Class 11 or cramming for one final attempt,
-          Ignite has a programme built exactly for your position and your goal.
-        </p>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={staggerContainer}
+        >
+          <motion.p variants={fadeUp} className="text-sm font-bold uppercase tracking-[0.2em] text-green-600 dark:text-green-400">
+            Ignite Test Prep
+          </motion.p>
+          <motion.h1 variants={fadeUp} className="mt-3 max-w-3xl text-4xl font-extrabold leading-tight text-neutral-950 sm:text-5xl dark:text-white">
+            Every exam. Every timeline.{" "}
+            <span className="text-green-600 dark:text-green-400">One destination.</span>
+          </motion.h1>
+          <motion.p variants={fadeUp} className="mt-4 max-w-2xl text-base leading-7 text-neutral-600 dark:text-neutral-400">
+            Whether you're starting from Class 11 or cramming for one final attempt,
+            Ignite has a programme built exactly for your position and your goal.
+          </motion.p>
 
-        {/* stat strip */}
-        <div className="mt-8 flex flex-wrap gap-6">
-          {[
-            { v: "500+", l: "IIT & NEET Selections",datadelay: 150 },
-            { v: "20+", l: "Years of Coaching", datadelay: 300 },
-            { v: "6", l: "Programmes Available", datadelay: 450 },
-            { v: "8+", l: "Branches", datadelay: 600 },
-          ].map(({ v, l,datadelay }) => (
-            <div data-aos="fade-up" data-aos-delay={datadelay} key={l} className="rounded-2xl bg-green-50 px-5 py-4 dark:bg-green-950/20">
-              <p className="text-2xl font-black text-green-700 dark:text-green-400">{v}</p>
-              <p className="text-xs font-semibold text-neutral-500 dark:text-neutral-400">{l}</p>
-            </div>
-          ))}
-        </div>
+          {/* stat strip */}
+          <motion.div variants={staggerContainer} className="mt-8 flex flex-wrap gap-6">
+            {[
+              { v: "500+", l: "IIT & NEET Selections" },
+              { v: "20+", l: "Years of Coaching" },
+              { v: "6", l: "Programmes Available" },
+              { v: "8+", l: "Branches" },
+            ].map(({ v, l }) => (
+              <motion.div
+                key={l}
+                variants={staggerItem}
+                whileHover={{ y: -4 }}
+                className="rounded-2xl bg-green-50 px-5 py-4 dark:bg-green-950/20"
+              >
+                <p className="text-2xl font-black text-green-700 dark:text-green-400">{v}</p>
+                <p className="text-xs font-semibold text-neutral-500 dark:text-neutral-400">{l}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
 
-        <div data-aos = "fade-up" data-aos-delay="650" className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={staggerContainer}
+          className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {programs.map((p) => <ProgramCard key={p.id} prog={p} />)}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,4 +1,6 @@
 import { Microscope, Target, ClipboardList } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeUp, staggerContainer } from "../../animations/variants";
 
 const pillars = [
   {
@@ -37,35 +39,53 @@ export default function BIPCHowIgnite() {
   return (
     <section id="how" className="bg-white px-6 py-20 dark:bg-neutral-950">
       <div className="mx-auto max-w-7xl">
-        <div data-aos="fade-up" className="flex items-center gap-3">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-3"
+        >
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
           <span className="rounded-full bg-emerald-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300">
             Our Approach
           </span>
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
-        </div>
+        </motion.div>
 
-        <div className="mt-8 max-w-2xl">
-          <h2 data-aos="fade-up" className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-8 max-w-2xl"
+        >
+          <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             How Ignite Shapes{" "}
             <span className="text-emerald-600 dark:text-emerald-400">BiPC Success</span>
           </h2>
-          <p data-aos="fade-up" className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
+          <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Three core pillars that power every Ignite BiPC student's journey from classroom to medical college.
           </p>
-        </div>
+        </motion.div>
 
         {/* alternating layout */}
-        <div className="mt-12 space-y-6">
+        <motion.div
+          variants={staggerContainer(0.15, 0.1)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-12 space-y-6"
+        >
           {pillars.map((p, i) => {
             const c = colorMap[p.color];
             const Icon = p.icon;
             const flip = i % 2 === 1;
             return (
-              <div
-                data-aos="fade-up"
+              <motion.div
                 key={p.title}
-                className={`grid items-center gap-8 overflow-hidden rounded-3xl bg-neutral-50 p-8 dark:bg-neutral-900 md:grid-cols-2 ${flip ? "md:[&>*:first-child]:order-2" : ""}`}
+                variants={fadeUp}
+                whileHover={{ y: -4, transition: { duration: 0.25 } }}
+                className={`grid items-center gap-8 overflow-hidden rounded-3xl bg-neutral-50 p-8 shadow-sm transition-shadow hover:shadow-xl dark:bg-neutral-900 md:grid-cols-2 ${flip ? "md:[&>*:first-child]:order-2" : ""}`}
               >
                 {/* text side */}
                 <div>
@@ -92,10 +112,10 @@ export default function BIPCHowIgnite() {
                     <p className="text-xs font-bold text-neutral-400 uppercase tracking-widest">Ignite BiPC · Hyderabad</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

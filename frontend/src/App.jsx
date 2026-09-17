@@ -50,9 +50,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Footer from "./components/Footer";
 import Chatbot from "./components/Chatbot/Chatbot";
 import { useLocation } from "./router/BrowserRouter";
+import { motion, AnimatePresence } from "framer-motion";
 import "./App.css";
-import { useGsapMotion } from "./hooks/useGsapMotion";
-
 
 function BackToTopButton() {
   const [visible, setVisible] = useState(false);
@@ -71,28 +70,34 @@ function BackToTopButton() {
   }
 
   return createPortal(
-    <button
-      type="button"
-      onClick={scrollToTop}
-      aria-label="Back to top"
-      className={`ignite-floating-control group fixed bottom-5 right-5 z-[9999] flex h-[50px] w-[50px] items-center justify-center overflow-hidden rounded-[15px] border-4 border-double border-neutral-200 bg-blue-800 text-[#e9e9e9] shadow-[0_10px_25px_rgba(0,0,0,0.18)] transition-all duration-300 hover:w-[140px] hover:justify-start sm:right-6 ${
-        visible ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-4 pointer-events-none"
-      }`}
-    >
-            <svg
-        viewBox="0 0 384 512"
-        className="h-3 w-3 shrink-0 transition-transform duration-300 group-hover:-translate-y-[200%]"
-        aria-hidden="true"
-      >
-        <path
-          fill="currentColor"
-          d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
-        />
-      </svg>
-      <span className="pointer-events-none absolute inset-y-0 left-0 flex w-full items-center justify-center whitespace-nowrap pl-1 text-[0px] font-medium text-[#e9e9e9] opacity-0 transition-all duration-300 group-hover:text-[15px] group-hover:opacity-100">
-        Back to Top
-      </span>
-    </button>,
+    <AnimatePresence>
+      {visible ? (
+        <motion.button
+          type="button"
+          onClick={scrollToTop}
+          initial={{ opacity: 0, y: 16, scale: 0.85 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 16, scale: 0.85 }}
+          transition={{ duration: 0.25, ease: "easeOut" }}
+          aria-label="Back to top"
+          className="ignite-floating-control group fixed bottom-5 right-5 z-[9999] flex h-[50px] w-[50px] items-center justify-center overflow-hidden rounded-[15px] border-4 border-double border-neutral-200 bg-blue-800 text-[#e9e9e9] shadow-[0_10px_25px_rgba(0,0,0,0.18)] transition-all duration-300 hover:w-[140px] hover:justify-start sm:right-6"
+        >
+          <svg
+            viewBox="0 0 384 512"
+            className="h-3 w-3 shrink-0 transition-transform duration-300 group-hover:-translate-y-[200%]"
+            aria-hidden="true"
+          >
+            <path
+              fill="currentColor"
+              d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
+            />
+          </svg>
+          <span className="pointer-events-none absolute inset-y-0 left-0 flex w-full items-center justify-center whitespace-nowrap pl-1 text-[0px] font-medium text-[#e9e9e9] opacity-0 transition-all duration-300 group-hover:text-[15px] group-hover:opacity-100">
+            Back to Top
+          </span>
+        </motion.button>
+      ) : null}
+    </AnimatePresence>,
     document.body
   );
 }
@@ -102,10 +107,8 @@ export default function App() {
   const showNavbar = !pathname.startsWith("/admin");
   const motionRootRef = useRef(null);
 
-  useGsapMotion(motionRootRef);
-
   return (
-      <div ref={motionRootRef} className="min-h-screen bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white">
+    <div ref={motionRootRef} className="min-h-screen bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white">
       {showNavbar && pathname !== "/" && (
         <div className="relative z-100 w-full px-4">
           <Navbar />
@@ -118,8 +121,16 @@ export default function App() {
           </div>
         }
       >
-      <Routes>
-        <Route path="/" element={<Home />} />
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={pathname}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.22, ease: "easeInOut" }}
+        >
+          <Routes>
+            <Route path="/" element={<Home />} />
 
         {/* About */}
         <Route path="/about" element={<AboutPage />} />
@@ -237,6 +248,8 @@ export default function App() {
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      </motion.div>
+      </AnimatePresence>
       </Suspense>
       {showNavbar && <Footer/>}
       {showNavbar && <Chatbot />}

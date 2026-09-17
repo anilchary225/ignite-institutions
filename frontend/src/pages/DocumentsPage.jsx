@@ -1,5 +1,7 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { DocumentsViewer } from "../components/DocumentsViewer";
+import { pageVariants } from "../animations/variants";
 
 /**
  * DocumentsPage
@@ -12,14 +14,19 @@ import { DocumentsViewer } from "../components/DocumentsViewer";
  */
 export default function DocumentsPage() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-slate-50 dark:bg-slate-950">
+    <motion.main
+      initial="hidden"
+      animate="visible"
+      variants={pageVariants}
+      className="relative min-h-screen overflow-hidden bg-slate-50 dark:bg-slate-950"
+    >
       {/* Abstract decorative background */}
       <AbstractBackdrop />
 
       <div className="relative z-10">
         <DocumentsViewer />
       </div>
-    </main>
+    </motion.main>
   );
 }
 

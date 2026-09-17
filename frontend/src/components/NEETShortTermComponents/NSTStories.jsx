@@ -1,4 +1,6 @@
 import { HeartPulse } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeUp, staggerContainer } from "../../animations/variants";
 
 const stories = [
   {
@@ -40,9 +42,8 @@ const stories = [
 ];
 
 const colorMap = {
-  green:    { bar: "bg-green-500",    ring: "ring-green-300 dark:ring-green-700",    pill: "bg-green-500",    text: "text-green-600 dark:text-green-400",    bg: "bg-green-50 dark:bg-green-950/10"    },
-  green:    { bar: "bg-green-500",    ring: "ring-green-300 dark:ring-green-700",    pill: "bg-green-500",    text: "text-green-600 dark:text-green-400",    bg: "bg-green-50 dark:bg-green-950/10"    },
-  emerald: { bar: "bg-emerald-500", ring: "ring-emerald-300 dark:ring-emerald-700", pill: "bg-emerald-500", text: "text-emerald-600 dark:text-emerald-400", bg: "bg-emerald-50 dark:bg-emerald-950/10" },
+  green:   { bar: "bg-green-500",   ring: "ring-green-300 dark:ring-green-700",   pill: "bg-green-500",   text: "text-green-600 dark:text-green-400",   bg: "bg-green-50 dark:bg-green-950/10"   },
+  emerald: { bar: "bg-emerald-500", ring: "ring-emerald-300 dark:ring-emerald-700",pill: "bg-emerald-500", text: "text-emerald-600 dark:text-emerald-400",bg: "bg-emerald-50 dark:bg-emerald-950/10" },
 };
 
 export default function NSTStories() {
@@ -50,27 +51,49 @@ export default function NSTStories() {
     <section className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
       <div className="mx-auto max-w-7xl">
 
-        <div className="flex items-center gap-3">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-3"
+        >
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
           <div className="flex items-center gap-2 rounded-full bg-green-100 px-4 py-1.5 dark:bg-green-950/40">
             <HeartPulse size={13} className="text-green-600" />
             <span className="text-xs font-bold uppercase tracking-widest text-green-700 dark:text-green-400">Inspiring Stories</span>
           </div>
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-        </div>
+        </motion.div>
 
-        <div className="mx-auto mt-6 max-w-2xl text-center">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mx-auto mt-6 max-w-2xl text-center"
+        >
           <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">One Year, One White Coat</h2>
           <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             They arrived with doubts. They left with AIIMS offers. In their own words.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mt-12 space-y-5">
+        <motion.div
+          variants={staggerContainer(0.12, 0.1)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-12 space-y-5"
+        >
           {stories.map((s) => {
             const c = colorMap[s.color];
             return (
-              <div key={s.name} className="group relative overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-neutral-100 transition hover:shadow-md dark:bg-neutral-900 dark:ring-neutral-800">
+              <motion.div
+                key={s.name}
+                variants={fadeUp}
+                whileHover={{ scale: 1.01, transition: { duration: 0.2 } }}
+                className="group relative overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-neutral-100 transition hover:shadow-md dark:bg-neutral-900 dark:ring-neutral-800"
+              >
                 <div className={`h-1 w-full ${c.bar}`} />
 
                 <div className="flex flex-col gap-6 p-7 sm:flex-row sm:items-center">
@@ -103,10 +126,10 @@ export default function NSTStories() {
                     <p className="mt-0.5 max-w-[110px] text-center text-[10px] text-neutral-500 leading-tight">{s.improvementLabel}</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
       </div>
     </section>

@@ -1,4 +1,6 @@
 import { Stethoscope, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations/variants";
 
 const phrases = [
   "🩺 12 months is enough - if every day is focused on 720 marks",
@@ -17,11 +19,21 @@ export default function NSTMotivationBar() {
   return (
     <section className="overflow-hidden bg-linear-to-r from-green-600 via-green-500 to-green-600 py-14">
 
-      <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-6 text-center md:flex-row md:justify-between md:text-left">
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-6 text-center md:flex-row md:justify-between md:text-left"
+      >
         <div className="flex items-center gap-4">
-          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/20">
+          <motion.div
+            animate={{ rotate: [0, 10, -10, 0], scale: [1, 1.05, 1] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm"
+          >
             <Stethoscope size={26} className="text-white" />
-          </div>
+          </motion.div>
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-green-100">Built for Urgency</p>
             <h2 className="mt-1 text-3xl font-extrabold text-white sm:text-4xl">
@@ -31,20 +43,24 @@ export default function NSTMotivationBar() {
         </div>
 
         <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
-          <a
+          <motion.a
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.96 }}
             href="#apply"
             className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-4 text-sm font-black text-green-700 shadow-lg transition hover:bg-neutral-950 hover:text-white"
           >
             Apply Now <ArrowRight size={16} />
-          </a>
-          <a
+          </motion.a>
+          <motion.a
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.96 }}
             href="tel:+919876543210"
             className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-7 py-4 text-sm font-bold text-white backdrop-blur-sm transition hover:bg-white/20"
           >
             Call: +91 98765 43210
-          </a>
+          </motion.a>
         </div>
-      </div>
+      </motion.div>
 
       <div className="mt-10 overflow-hidden border-t border-white/20 pt-6">
         <div className="flex gap-12 whitespace-nowrap" style={{ animation: "nst-ticker 28s linear infinite" }}>

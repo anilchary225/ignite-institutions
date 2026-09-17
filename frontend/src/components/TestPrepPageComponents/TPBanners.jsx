@@ -49,11 +49,11 @@ export default function TPBanners() {
   return (
     <section className="overflow-hidden bg-neutral-950 py-10 dark:bg-neutral-900">
       {/* heading */}
-      <p data-aos="fade-in" className="mb-6 text-center text-xs font-bold uppercase tracking-[0.25em] text-neutral-500">
+      <p className="mb-6 text-center text-xs font-bold uppercase tracking-[0.25em] text-neutral-500">
         Latest Updates & Programmes
       </p>
 
-      <div data-aos="fade-in" className="overflow-hidden">
+      <div className="overflow-hidden">
         <div ref={trackRef} className="flex gap-4 will-change-transform" style={{ width: "max-content" }}>
           {allBanners.map((b, i) => (
             <div

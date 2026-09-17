@@ -1,4 +1,6 @@
 import { CheckCircle2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeUp, staggerContainer } from "../../animations/variants";
 
 const highlights = [
   { color: "green", icon: "🎯", title: "Focused NEET Coaching",           desc: "Covering core concepts and exam strategies aligned to NTA's NEET pattern." },
@@ -37,49 +39,87 @@ export default function BIPCProgram() {
     <section id="program" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
       <div className="mx-auto max-w-7xl">
         {/* HIGHLIGHTS */}
-        <div className="flex items-center gap-3">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-3"
+        >
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
           <span className="rounded-full bg-green-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-green-700 dark:bg-green-950/50 dark:text-green-300">
             Programme Highlights
           </span>
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-        </div>
+        </motion.div>
 
-        <div className="mt-8 max-w-2xl">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-8 max-w-2xl"
+        >
           <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             What you get at Ignite BiPC
           </h2>
           <p className="mt-3 text-sm leading-7 text-neutral-600 dark:text-neutral-400">
             Our approach has made Ignite one of the Best BiPC Colleges in Hyderabad with NEET Coaching.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.div
+          variants={staggerContainer(0.08, 0.1)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {highlights.map((h) => (
-            <div key={h.title} className={`flex gap-4 rounded-3xl border p-6 ${colorMap[h.color]}`}>
+            <motion.div
+              key={h.title}
+              variants={fadeUp}
+              whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              className={`flex gap-4 rounded-3xl border p-6 transition-shadow hover:shadow-lg ${colorMap[h.color]}`}
+            >
               <span className="text-3xl shrink-0">{h.icon}</span>
               <div>
                 <p className="font-extrabold text-neutral-950 dark:text-white">{h.title}</p>
                 <p className="mt-1.5 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{h.desc}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* PHASES */}
-        <div className="mt-16 flex items-center gap-3">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-16 flex items-center gap-3"
+        >
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
           <span className="rounded-full bg-indigo-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-indigo-700 dark:bg-indigo-950/50 dark:text-indigo-300">
             2-Year Roadmap
           </span>
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-        </div>
+        </motion.div>
 
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <motion.div
+          variants={staggerContainer(0.1, 0.15)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
+        >
           {phases.map((ph) => {
             const c = phaseColors[ph.color];
             return (
-              <div key={ph.phase} className="flex flex-col rounded-3xl bg-white p-7 shadow-sm ring-1 ring-neutral-100 dark:bg-neutral-900 dark:ring-neutral-800">
+              <motion.div
+                key={ph.phase}
+                variants={fadeUp}
+                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                className="flex flex-col rounded-3xl bg-white p-7 shadow-sm ring-1 ring-neutral-100 transition-shadow hover:shadow-xl dark:bg-neutral-900 dark:ring-neutral-800"
+              >
                 <span className={`self-start rounded-full px-3 py-1 text-xs font-black uppercase ${c.badge}`}>{ph.phase}</span>
                 <h3 className="mt-4 text-base font-extrabold text-neutral-950 dark:text-white">{ph.label}</h3>
                 <p className="mt-0.5 text-xs font-semibold text-neutral-400">{ph.period}</p>
@@ -91,20 +131,31 @@ export default function BIPCProgram() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* closing statement */}
-        <div className="mt-10 rounded-3xl bg-green-700 p-8 text-center">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-10 rounded-3xl bg-green-700 p-8 text-center shadow-lg"
+        >
           <p className="mx-auto max-w-2xl text-base leading-7 text-white/90">
             Ignite Academy is more than just a college - it's a foundation for future doctors and life science professionals. As one of the best BiPC junior colleges in Hyderabad, we provide the right mix of guidance, discipline, and motivation to help you succeed in NEET and beyond.
           </p>
-          <a href="#contact" className="mt-6 inline-flex items-center rounded-xl bg-white px-7 py-3.5 text-sm font-black text-green-700 transition hover:bg-green-50">
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.96 }}
+            href="#contact"
+            className="mt-6 inline-flex items-center rounded-xl bg-white px-7 py-3.5 text-sm font-black text-green-700 transition hover:bg-green-50 shadow"
+          >
             Take the Next Step →
-          </a>
-        </div>
+          </motion.a>
+        </motion.div>
       </div>
     </section>
   );

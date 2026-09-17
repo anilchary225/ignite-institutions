@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { fadeUp, staggerContainer } from "../../animations/variants";
 
 const faqs = [
   {
@@ -38,31 +40,42 @@ const faqs = [
 
 function FaqItem({ faq, open, onToggle }) {
   return (
-    <div data-aos="zoom-in"
-      className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
+    <motion.div
+      variants={fadeUp}
+      className={`overflow-hidden rounded-2xl border transition-colors duration-300 ${
         open
           ? "border-blue-200 bg-blue-50 dark:border-blue-900/60 dark:bg-blue-950/20"
           : "border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900"
-      }`}>
+      }`}
+    >
       <button
         type="button"
         onClick={onToggle}
-        className="flex w-full items-start justify-between gap-4 px-6 py-5 text-left"
+        className="flex w-full items-start justify-between gap-4 px-6 py-5 text-left transition-colors"
       >
         <span className="text-sm font-bold text-neutral-950 dark:text-white">{faq.q}</span>
-        <ChevronDown
-          size={18}
-          className={`shrink-0 text-neutral-400 transition-transform duration-300 ${open ? "rotate-180 text-blue-600 dark:text-blue-400" : ""}`}
-        />
+        <motion.div
+          animate={{ rotate: open ? 180 : 0 }}
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="shrink-0 text-neutral-400"
+        >
+          <ChevronDown size={18} className={open ? "text-blue-600 dark:text-blue-400" : ""} />
+        </motion.div>
       </button>
-      <div
-        className={`grid transition-all duration-300 ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
-      >
-        <div className="overflow-hidden">
-          <p className="px-6 pb-5 text-sm leading-7 text-neutral-600 dark:text-neutral-400">{faq.a}</p>
-        </div>
-      </div>
-    </div>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden"
+          >
+            <p className="px-6 pb-5 text-sm leading-7 text-neutral-600 dark:text-neutral-400">{faq.a}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 }
 
@@ -72,24 +85,41 @@ export default function MPCFaq() {
   return (
     <section id="faq" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
       <div className="mx-auto max-w-4xl">
-        <div data-aos="fade-up" className="flex items-center gap-3">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-3"
+        >
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
           <span className="rounded-full bg-neutral-200 px-4 py-1 text-xs font-bold uppercase tracking-widest text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400">
             FAQs
           </span>
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-        </div>
+        </motion.div>
 
-        <div className="mt-8 text-center">
-          <h2 data-aos="fade-up" className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-8 text-center"
+        >
+          <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             Frequently Asked Questions
           </h2>
-          <p data-aos="fade-up" className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
+          <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Everything you need to know about the Ignite MPC IIT JEE programme.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mt-10 space-y-3">
+        <motion.div
+          variants={staggerContainer(0.08, 0.1)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-10 space-y-3"
+        >
           {faqs.map((faq, i) => (
             <FaqItem
               key={i}
@@ -98,21 +128,37 @@ export default function MPCFaq() {
               onToggle={() => setOpenIdx(openIdx === i ? -1 : i)}
             />
           ))}
-        </div>
+        </motion.div>
 
-        <div data-aos="fade-up" className="mt-10 rounded-3xl bg-blue-600 p-7 text-center">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-10 rounded-3xl bg-blue-600 p-7 text-center shadow-lg"
+        >
           <p className="text-sm font-bold text-blue-200">Still have questions?</p>
           <h3 className="mt-2 text-xl font-extrabold text-white">Talk to our admissions team</h3>
           <p className="mt-2 text-sm text-blue-200">We're available Mon–Sat, 9 AM to 6 PM. No pressure, no obligation.</p>
           <div className="mt-5 flex flex-wrap justify-center gap-3">
-            <a data-aos="zoom-in" href="tel:+919876543210" className="rounded-xl bg-white px-6 py-3 text-sm font-black text-blue-700 hover:bg-amber-400 hover:text-white transition">
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.96 }}
+              href="tel:+919876543210"
+              className="rounded-xl bg-white px-6 py-3 text-sm font-black text-blue-700 shadow transition hover:bg-amber-400 hover:text-white"
+            >
               Call +91 98765 43210
-            </a>
-            <a data-aos="zoom-in" href="#contact" className="rounded-xl border-2 border-white/30 px-6 py-3 text-sm font-bold text-white hover:bg-white/10 transition">
+            </motion.a>
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.96 }}
+              href="#contact"
+              className="rounded-xl border-2 border-white/30 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10"
+            >
               Send a Message
-            </a>
+            </motion.a>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Atom, FlaskConical, BookOpen, CheckCircle2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { fadeUp, staggerContainer } from "../../animations/variants";
 
 const phases = [
   {
@@ -58,27 +60,49 @@ export default function JSTCourseOverview() {
     <section id="course" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
       <div className="mx-auto max-w-7xl">
 
-        <div className="flex items-center gap-3">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-3"
+        >
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
           <span className="rounded-full bg-amber-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-amber-700 dark:bg-amber-950/40 dark:text-amber-400">
             Course Overview
           </span>
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-        </div>
+        </motion.div>
 
-        <div className="mx-auto mt-6 max-w-2xl text-center">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mx-auto mt-6 max-w-2xl text-center"
+        >
           <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             A Year Engineered for One Outcome
           </h2>
           <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Every month of the Short-Term programme has a precise purpose. Four phases, zero filler.
           </p>
-        </div>
+        </motion.div>
 
         {/* subjects row */}
-        <div className="mt-10 grid gap-4 sm:grid-cols-3">
+        <motion.div
+          variants={staggerContainer(0.1, 0.1)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-10 grid gap-4 sm:grid-cols-3"
+        >
           {subjects.map(({ icon: Icon, label, desc }) => (
-            <div key={label} className="flex gap-4 rounded-2xl border border-amber-100 bg-white p-5 dark:border-amber-900/30 dark:bg-neutral-900">
+            <motion.div
+              key={label}
+              variants={fadeUp}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
+              className="flex gap-4 rounded-2xl border border-amber-100 bg-white p-5 shadow-sm transition-shadow hover:shadow-md dark:border-amber-900/30 dark:bg-neutral-900"
+            >
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400">
                 <Icon size={18} />
               </div>
@@ -86,12 +110,18 @@ export default function JSTCourseOverview() {
                 <p className="text-sm font-extrabold text-neutral-950 dark:text-white">{label}</p>
                 <p className="mt-1 text-xs leading-5 text-neutral-500 dark:text-neutral-400">{desc}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* wide banner */}
-        <div className="mt-8 overflow-hidden rounded-3xl bg-linear-to-r from-amber-500 via-orange-500 to-red-500 p-8">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-8 overflow-hidden rounded-3xl bg-linear-to-r from-amber-500 via-orange-500 to-red-500 p-8 shadow-xl"
+        >
           <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-100">Programme Structure</p>
@@ -107,7 +137,7 @@ export default function JSTCourseOverview() {
               <p className="mt-1 text-xs text-amber-200">4 Phases · 3 Subjects</p>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* interactive timeline */}
         <div className="mt-10 grid gap-6 lg:grid-cols-[220px_1fr]">
@@ -134,26 +164,35 @@ export default function JSTCourseOverview() {
           </div>
 
           {/* phase detail */}
-          <div className={`rounded-3xl border p-8 ${c.bg} ${c.border}`}>
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <span className={`rounded-full px-3 py-1 text-xs font-black ${c.pill}`}>{ph.phase} · {ph.duration}</span>
-                <h3 className="mt-3 text-2xl font-extrabold text-neutral-950 dark:text-white">{ph.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{ph.desc}</p>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.25 }}
+              className={`rounded-3xl border p-8 ${c.bg} ${c.border}`}
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <span className={`rounded-full px-3 py-1 text-xs font-black ${c.pill}`}>{ph.phase} · {ph.duration}</span>
+                  <h3 className="mt-3 text-2xl font-extrabold text-neutral-950 dark:text-white">{ph.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{ph.desc}</p>
+                </div>
+                <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-2xl font-black text-white ${c.dot}`}>
+                  {active + 1}
+                </div>
               </div>
-              <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-2xl font-black text-white ${c.dot}`}>
-                {active + 1}
-              </div>
-            </div>
-            <ul className="mt-6 space-y-3">
-              {ph.points.map(pt => (
-                <li key={pt} className="flex items-start gap-3 text-sm text-neutral-700 dark:text-neutral-300">
-                  <CheckCircle2 size={16} className={`mt-0.5 shrink-0 text-${ph.color}-500`} />
-                  {pt}
-                </li>
-              ))}
-            </ul>
-          </div>
+              <ul className="mt-6 space-y-3">
+                {ph.points.map(pt => (
+                  <li key={pt} className="flex items-start gap-3 text-sm text-neutral-700 dark:text-neutral-300">
+                    <CheckCircle2 size={16} className={`mt-0.5 shrink-0 text-${ph.color}-500`} />
+                    {pt}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
       </div>

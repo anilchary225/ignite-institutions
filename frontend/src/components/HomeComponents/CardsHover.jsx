@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import { RouteLink } from "../../router/BrowserRouter";
 import ScrollRevealText from "./ScrollRevealText";
+import { staggerContainer, cardReveal, defaultViewport } from "../../animations/variants";
 
 const cards = [
   {
@@ -46,50 +48,55 @@ function Card({ card }) {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <RouteLink
-      to={card.href}
-      data-motion-card
-      className="group block cursor-pointer"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+    <motion.div
+      variants={cardReveal}
+      whileHover={{ y: -6, transition: { duration: 0.28 } }}
+      className="h-full"
     >
-      <div  className="relative isolate overflow-hidden rounded-[2rem] border border-white/20 bg-white/35 shadow-[0_18px_50px_rgba(15,23,42,0.14)] backdrop-blur-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(15,23,42,0.18)] dark:border-white/10 dark:bg-white/5">
-        <div className="absolute inset-0 bg-linear-to-br from-white/40 via-white/10 to-transparent dark:from-white/10 dark:via-white/5 dark:to-transparent" />
-        <div className="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent opacity-70" />
+      <RouteLink
+        to={card.href}
+        className="group block cursor-pointer h-full"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <div className="relative isolate overflow-hidden rounded-[2rem] border border-white/20 bg-white/35 shadow-[0_18px_50px_rgba(15,23,42,0.14)] backdrop-blur-2xl transition-shadow duration-300 hover:shadow-[0_24px_70px_rgba(15,23,42,0.18)] dark:border-white/10 dark:bg-white/5 h-full flex flex-col justify-between">
+          <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-white/10 to-transparent dark:from-white/10 dark:via-white/5 dark:to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-70" />
 
-        <div className="relative h-52 sm:h-56 overflow-hidden">
-          <img
-            src={card.image}
-            alt={card.title}
-            className={`h-full w-full object-cover transition-transform duration-700 ease-out ${
-              hovered ? "scale-110" : "scale-100"
-            }`}
-          />
-          <div className={`absolute inset-0 bg-linear-to-t from-neutral-950/70 via-neutral-950/20 to-transparent transition-opacity duration-300 ${hovered ? "opacity-100" : "opacity-70"}`} />
-        </div>
+          <div className="relative h-52 sm:h-56 overflow-hidden">
+            <img
+              src={card.image}
+              alt={card.title}
+              className={`h-full w-full object-cover transition-transform duration-700 ease-out ${
+                hovered ? "scale-110" : "scale-100"
+              }`}
+            />
+            <div className={`absolute inset-0 bg-gradient-to-t from-neutral-950/70 via-neutral-950/20 to-transparent transition-opacity duration-300 ${hovered ? "opacity-100" : "opacity-70"}`} />
+          </div>
 
-        <div className="relative -mt-8 px-4 pb-5">
-          <div className="rounded-[1.5rem] border border-white/25 bg-white/70 p-4 shadow-[0_12px_40px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:border-white/10 dark:bg-neutral-950/40">
-            <span className={`inline-block rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-widest ${card.tagBg} mb-3`}>
-              {card.eyebrow}
-            </span>
-
-            <h3 className={`text-sm font-bold leading-snug transition-colors duration-200 ${hovered ? card.accent : "text-neutral-900 dark:text-white"}`}>
-              {card.title}
-            </h3>
-
-            <div className="mt-3 flex items-center justify-between gap-3">
-              <p className="text-xs text-neutral-600 dark:text-neutral-300">
-                {card.date}
-              </p>
-              <span className={`inline-flex items-center gap-1 text-xs font-bold ${card.accent} transition-all duration-300 ${hovered ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2"}`}>
-                Explore <ArrowRight size={12} />
+          <div className="relative -mt-8 px-4 pb-5">
+            <div className="rounded-[1.5rem] border border-white/25 bg-white/70 p-4 shadow-[0_12px_40px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:border-white/10 dark:bg-neutral-950/40">
+              <span className={`inline-block rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-widest ${card.tagBg} mb-3`}>
+                {card.eyebrow}
               </span>
+
+              <h3 className={`text-sm font-bold leading-snug transition-colors duration-200 ${hovered ? card.accent : "text-neutral-900 dark:text-white"}`}>
+                {card.title}
+              </h3>
+
+              <div className="mt-3 flex items-center justify-between gap-3">
+                <p className="text-xs text-neutral-600 dark:text-neutral-300">
+                  {card.date}
+                </p>
+                <span className={`inline-flex items-center gap-1 text-xs font-bold ${card.accent} transition-all duration-300 ${hovered ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2"}`}>
+                  Explore <ArrowRight size={12} />
+                </span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </RouteLink>
+      </RouteLink>
+    </motion.div>
   );
 }
 
@@ -98,18 +105,24 @@ export default function CardsHover() {
     <section className="bg-white dark:bg-neutral-950 py-14 px-4 sm:px-8 transition-colors">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
-          <span data-aos="fade-up" className="inline-block text-xs font-bold tracking-[0.25em] text-orange-500 uppercase mb-2">
+          <span className="inline-block text-xs font-bold tracking-[0.25em] text-orange-500 uppercase mb-2">
             <ScrollRevealText text="Campus Life" className="inline-block" />
           </span>
-          <h2 data-aos="fade-up" className="text-2xl font-extrabold text-neutral-900 dark:text-white sm:text-3xl">
+          <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-white sm:text-3xl">
             <ScrollRevealText as="span" text="Life at IGNITE" className="inline-block" />
           </h2>
         </div>
-        <div data-aos="fade-up" className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
+        >
           {cards.map((card, i) => (
             <Card key={i} card={card} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   Award,
@@ -21,6 +22,15 @@ import {
   Zap,
 } from "lucide-react";
 import { RouteLink } from "../router/BrowserRouter";
+import {
+  fadeUp,
+  fadeIn,
+  staggerContainer,
+  staggerItem,
+  cardReveal,
+  defaultViewport,
+  scaleIn,
+} from "../animations/variants";
 
 /* ─────────────────────────── DATA ─────────────────────────── */
 
@@ -356,6 +366,8 @@ function AutoPlayVideo({ src, className = "", onClick }) {
 
 /* ─────────────────────────── MODAL ─────────────────────────── */
 
+/* ─────────────────────────── MODAL ─────────────────────────── */
+
 function VideoModal({ video, onClose }) {
   useEffect(() => {
     function onKey(e) {
@@ -370,21 +382,32 @@ function VideoModal({ video, onClose }) {
   }, [onClose]);
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
-      onClick={onClose}>
-      <div
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        transition={{ type: "spring", stiffness: 300, damping: 25 }}
         className="relative w-full max-w-3xl rounded-2xl overflow-hidden bg-neutral-950 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <button
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
           type="button"
           onClick={onClose}
           className="absolute right-3 top-3 z-10 grid h-9 w-9 place-items-center rounded-full bg-black/60 text-white backdrop-blur-sm transition hover:bg-white hover:text-neutral-950"
           aria-label="Close video"
         >
           <X size={16} />
-        </button>
+        </motion.button>
         <div className="relative aspect-video w-full bg-neutral-900">
           <video
             key={video.id}
@@ -410,8 +433,8 @@ function VideoModal({ video, onClose }) {
             <span className="flex items-center gap-1.5"><CalendarDays size={13} />{video.date}</span>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -441,8 +464,11 @@ function VideoHero() {
 
   return (
     <>
-      <section className="px-4 pb-10 pt-5 sm:px-6 sm:pt-8">
-        <div
+      <section className="px-4 pb-10 pt-5 sm:px-6 sm:pt-8 overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-neutral-950 shadow-[0_24px_80px_rgba(42,25,86,0.25)]"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
@@ -468,45 +494,56 @@ function VideoHero() {
                 <div className="absolute inset-0 flex flex-col justify-end p-7 sm:p-12 lg:p-16">
                   <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
                     {/* Left text */}
-                    <div className="max-w-2xl">
-                      <div className="flex flex-wrap items-center gap-3">
-                        <span className={`rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-widest ${tagColorMap[video.tagColor]}`}>
-                          {video.tag}
-                        </span>
-                        <span className="text-xs font-bold uppercase tracking-widest text-white/60">
-                          {video.eyebrow}
-                        </span>
-                      </div>
-                      <h1 className="mt-5 text-xl font-extrabold leading-[1.05] text-white sm:text-2xl lg:text-4xl">
-                        {video.title}
-                      </h1>
-                      <p className="mt-4 max-w-xl text-sm leading-7 text-white/75 sm:text-base">
-                        {video.description}
-                      </p>
-                      <div className="mt-5 flex flex-wrap gap-4 text-xs font-semibold text-white/60">
-                        {/* <span className="flex items-center gap-1.5"><Clock3 size={13} />{video.duration}</span>
-                        <span className="flex items-center gap-1.5"><Eye size={13} />{video.views} views</span> */}
-                        <span className="flex items-center gap-1.5"><CalendarDays size={13} />{video.date}</span>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setIsPaused(true);
-                          setModal(video);
-                        }}
-                        className="mt-7 inline-flex items-center gap-3 rounded-full bg-orange-600 px-6 py-3.5 text-sm font-black text-white shadow-lg shadow-orange-900/40 transition hover:bg-orange-500 hover:gap-4"
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={video.id}
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                        className="max-w-2xl"
                       >
-                        <Play size={15} fill="white" />
-                        Watch Now
-                      </button>
-                    </div>
+                        <div className="flex flex-wrap items-center gap-3">
+                          <span className={`rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-widest ${tagColorMap[video.tagColor]}`}>
+                            {video.tag}
+                          </span>
+                          <span className="text-xs font-bold uppercase tracking-widest text-white/60">
+                            {video.eyebrow}
+                          </span>
+                        </div>
+                        <h1 className="mt-5 text-xl font-extrabold leading-[1.05] text-white sm:text-2xl lg:text-4xl">
+                          {video.title}
+                        </h1>
+                        <p className="mt-4 max-w-xl text-sm leading-7 text-white/75 sm:text-base">
+                          {video.description}
+                        </p>
+                        <div className="mt-5 flex flex-wrap gap-4 text-xs font-semibold text-white/60">
+                          <span className="flex items-center gap-1.5"><CalendarDays size={13} />{video.date}</span>
+                        </div>
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.96 }}
+                          type="button"
+                          onClick={() => {
+                            setIsPaused(true);
+                            setModal(video);
+                          }}
+                          className="mt-7 inline-flex items-center gap-3 rounded-full bg-orange-600 px-6 py-3.5 text-sm font-black text-white shadow-lg shadow-orange-900/40 transition hover:bg-orange-500 hover:gap-4"
+                        >
+                          <Play size={15} fill="white" />
+                          Watch Now
+                        </motion.button>
+                      </motion.div>
+                    </AnimatePresence>
 
                     {/* Right - thumbnail strip (hover-preview) */}
                     <div className="hidden shrink-0 flex-col gap-3 lg:flex">
                       {featuredVideos.map((v, i) => (
-                        <button
+                        <motion.button
                           key={v.id}
                           type="button"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
                           onClick={() => setActive(i)}
                           className={`flex items-center gap-3 rounded-xl p-2.5 pr-4 text-left transition ${
                             i === active
@@ -527,7 +564,7 @@ function VideoHero() {
                             <p className="max-w-[160px] truncate text-xs font-extrabold text-white">{v.title}</p>
                             <p className="mt-0.5 text-[10px] text-white/55">{v.duration} · {v.views} views</p>
                           </div>
-                        </button>
+                        </motion.button>
                       ))}
                     </div>
                   </div>
@@ -548,10 +585,12 @@ function VideoHero() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
-      {modal && <VideoModal video={modal} onClose={() => setModal(null)} />}
+      <AnimatePresence>
+        {modal && <VideoModal video={modal} onClose={() => setModal(null)} />}
+      </AnimatePresence>
     </>
   );
 }
@@ -560,10 +599,12 @@ function VideoHero() {
 
 function ScrollVideoCard({ video, onPlay }) {
   return (
-    <button
+    <motion.button
       type="button"
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.2 }}
       onClick={() => onPlay(video)}
-      className="group relative block shrink-0 w-64 sm:w-72 overflow-hidden rounded-2xl bg-neutral-900 shadow-md ring-1 ring-neutral-800 transition hover:-translate-y-1 hover:shadow-xl focus:outline-none text-left"
+      className="group relative block shrink-0 w-64 sm:w-72 overflow-hidden rounded-2xl bg-neutral-900 shadow-md ring-1 ring-neutral-800 transition hover:shadow-xl focus:outline-none text-left"
     >
       <div className="relative aspect-video overflow-hidden">
         <HoverVideo
@@ -584,12 +625,8 @@ function ScrollVideoCard({ video, onPlay }) {
       </div>
       <div className="p-4 text-left">
         <p className="truncate text-sm font-extrabold text-white">{video.title}</p>
-        {/* <div className="mt-1.5 flex gap-3 text-[11px] font-semibold text-neutral-500">
-          <span className="flex items-center gap-1"><Eye size={10} />{video.views}</span>
-          <span className="flex items-center gap-1"><CalendarDays size={10} />{video.date}</span>
-        </div> */}
       </div>
-    </button>
+    </motion.button>
   );
 }
 
@@ -605,43 +642,53 @@ function HorizontalScrollVideos() {
 
   return (
     <>
-      <section className="bg-neutral-950 py-20">
+      <section className="bg-neutral-950 py-20 overflow-hidden">
         <div className="px-6 lg:px-10">
           {/* Header */}
-          <div className="mx-auto flex max-w-7xl items-end justify-between gap-6">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={defaultViewport}
+            className="mx-auto flex max-w-7xl items-end justify-between gap-6"
+          >
             <div>
-              <div className="flex items-center gap-3">
+              <motion.div variants={fadeUp} className="flex items-center gap-3">
                 <span className="h-px w-10 bg-orange-500" />
                 <span className="text-xs font-black uppercase tracking-[0.2em] text-orange-400">
                   Highlights Reel
                 </span>
-              </div>
-              <h2 className="mt-4 text-3xl font-extrabold text-white sm:text-4xl">
+              </motion.div>
+              <motion.h2 variants={fadeUp} className="mt-4 text-3xl font-extrabold text-white sm:text-4xl">
                 Popular campus videos
-              </h2>
-              <p className="mt-2 max-w-lg text-sm leading-6 text-neutral-400">
+              </motion.h2>
+              <motion.p variants={fadeUp} className="mt-2 max-w-lg text-sm leading-6 text-neutral-400">
                 Scroll through our most-watched moments - from classroom sessions to grand event stages.
-              </p>
+              </motion.p>
             </div>
             <div className="hidden shrink-0 items-center gap-2 sm:flex">
-              <button
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 type="button"
                 onClick={() => scroll(-1)}
                 aria-label="Scroll left"
                 className="grid h-11 w-11 place-items-center rounded-full border border-neutral-700 text-neutral-400 transition hover:border-orange-500 hover:bg-orange-600 hover:text-white"
               >
                 <ChevronLeft size={19} />
-              </button>
-              <button
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 type="button"
                 onClick={() => scroll(1)}
                 aria-label="Scroll right"
                 className="grid h-11 w-11 place-items-center rounded-full border border-neutral-700 text-neutral-400 transition hover:border-orange-500 hover:bg-orange-600 hover:text-white"
               >
                 <ChevronRight size={19} />
-              </button>
+              </motion.button>
             </div>
-          </div>
+          </motion.div>
 
           {/* Scroll track */}
           <div
@@ -661,7 +708,9 @@ function HorizontalScrollVideos() {
         </div>
       </section>
 
-      {modal && <VideoModal video={modal} onClose={() => setModal(null)} />}
+      <AnimatePresence>
+        {modal && <VideoModal video={modal} onClose={() => setModal(null)} />}
+      </AnimatePresence>
     </>
   );
 }
@@ -670,9 +719,15 @@ function HorizontalScrollVideos() {
 
 function StatsStrip() {
   return (
-    <section className="bg-linear-to-r from-orange-700 via-orange-600 to-indigo-600 px-6 py-14">
+    <section className="bg-linear-to-r from-orange-700 via-orange-600 to-indigo-600 px-6 py-14 overflow-hidden">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-10 text-center">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mb-10 text-center"
+        >
           <span className="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-white">
             <Zap size={13} fill="white" />
             Our Impact in Numbers
@@ -680,25 +735,34 @@ function StatsStrip() {
           <h2 className="mt-4 text-2xl font-extrabold text-white sm:text-3xl">
             Events that shaped thousands of futures
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6"
+        >
           {statsData.map((stat) => {
             const Icon = stat.icon;
             return (
-              <div
+              <motion.div
                 key={stat.label}
-                className="flex flex-col items-center gap-3 rounded-2xl bg-white/15 p-5 text-center backdrop-blur-sm ring-1 ring-white/20 transition hover:bg-white/20"
+                variants={cardReveal}
+                whileHover={{ y: -4, backgroundColor: "rgba(255,255,255,0.22)" }}
+                transition={{ duration: 0.2 }}
+                className="flex flex-col items-center gap-3 rounded-2xl bg-white/15 p-5 text-center backdrop-blur-sm ring-1 ring-white/20"
               >
                 <span className="grid h-10 w-10 place-items-center rounded-full bg-white/20">
                   <Icon size={18} className="text-white" />
                 </span>
                 <span className="text-2xl font-black text-white">{stat.value}</span>
                 <span className="text-xs font-semibold text-white/70">{stat.label}</span>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -708,10 +772,12 @@ function StatsStrip() {
 
 function CategoryVideoCard({ video, onPlay }) {
   return (
-    <button
+    <motion.button
+      variants={cardReveal}
+      whileHover={{ y: -6, transition: { duration: 0.25 } }}
       type="button"
       onClick={() => onPlay(video)}
-      className="group block text-left w-full overflow-hidden rounded-2xl bg-white ring-1 ring-neutral-100 shadow-sm transition hover:-translate-y-1 hover:shadow-lg focus:outline-none dark:bg-neutral-900 dark:ring-neutral-800"
+      className="group block text-left w-full overflow-hidden rounded-2xl bg-white ring-1 ring-neutral-100 shadow-sm transition hover:shadow-lg focus:outline-none dark:bg-neutral-900 dark:ring-neutral-800"
     >
       <div className="relative aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-800">
         <HoverVideo
@@ -728,16 +794,7 @@ function CategoryVideoCard({ video, onPlay }) {
           {video.duration}
         </span>
       </div>
-      {/* <div className="p-4">
-        <p className="text-sm font-extrabold leading-snug text-neutral-950 line-clamp-2 dark:text-white">
-          {video.title}
-        </p>
-        <div className="mt-2 flex gap-3 text-[11px] font-semibold text-neutral-500">
-          <span className="flex items-center gap-1"><Eye size={10} />{video.views} views</span>
-          <span className="flex items-center gap-1"><CalendarDays size={10} />{video.date}</span>
-        </div>
-      </div> */}
-    </button>
+    </motion.button>
   );
 }
 
@@ -746,7 +803,6 @@ function CategoryVideos() {
   const [active, setActive] = useState(categories[0] ?? "");
   const [modal, setModal] = useState(null);
   const activeVideos = categoryVideos[active] ?? [];
-  const Icon = categoryIcons[active] ?? BookOpen;
 
   useEffect(() => {
     if (categories.length && !categoryVideos[active]) {
@@ -756,25 +812,31 @@ function CategoryVideos() {
 
   return (
     <>
-      <section className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
+      <section className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40 overflow-hidden">
         <div className="mx-auto max-w-7xl">
           {/* Header */}
-          <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={defaultViewport}
+            className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end"
+          >
             <div>
-              <div className="flex items-center gap-3">
+              <motion.div variants={fadeUp} className="flex items-center gap-3">
                 <span className="h-px w-10 bg-orange-500" />
                 <span className="text-xs font-black uppercase tracking-[0.2em] text-orange-700 dark:text-orange-400">
                   Browse by Category
                 </span>
-              </div>
-              <h2 className="mt-4 text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+              </motion.div>
+              <motion.h2 variants={fadeUp} className="mt-4 text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
                 Find videos that matter to you
-              </h2>
-              <p className="mt-2 max-w-xl text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+              </motion.h2>
+              <motion.p variants={fadeUp} className="mt-2 max-w-xl text-sm leading-6 text-neutral-600 dark:text-neutral-400">
                 Academic sessions, event highlights, student life diaries, and result celebrations - all in one place.
-              </p>
+              </motion.p>
             </div>
-          </div>
+          </motion.div>
 
           {/* Tab bar */}
           <div className="mt-8 flex flex-wrap gap-2">
@@ -782,9 +844,11 @@ function CategoryVideos() {
               const CatIcon = categoryIcons[cat] ?? BookOpen;
               const isActive = cat === active;
               return (
-                <button
+                <motion.button
                   key={cat}
                   type="button"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={() => setActive(cat)}
                   className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold transition ${
                     isActive
@@ -794,31 +858,51 @@ function CategoryVideos() {
                 >
                   <CatIcon size={14} />
                   {cat}
-                </button>
+                </motion.button>
               );
             })}
           </div>
 
           {/* Grid */}
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {activeVideos.map((v) => (
-              <CategoryVideoCard key={v.id} video={v} onPlay={setModal} />
-            ))}
-          </div>
-
-          <div className="mt-8 text-center">
-            <RouteLink
-              to="/gallery"
-              className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-6 py-3 text-sm font-bold text-neutral-700 transition hover:border-orange-500 hover:text-orange-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300"
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active}
+              variants={staggerContainer}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              viewport={defaultViewport}
+              className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
             >
-              Back to Gallery
-              <ArrowRight size={14} />
-            </RouteLink>
-          </div>
+              {activeVideos.map((v) => (
+                <CategoryVideoCard key={v.id} video={v} onPlay={setModal} />
+              ))}
+            </motion.div>
+          </AnimatePresence>
+
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={defaultViewport}
+            className="mt-8 text-center"
+          >
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block">
+              <RouteLink
+                to="/gallery"
+                className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-6 py-3 text-sm font-bold text-neutral-700 transition hover:border-orange-500 hover:text-orange-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300"
+              >
+                Back to Gallery
+                <ArrowRight size={14} />
+              </RouteLink>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      {modal && <VideoModal video={modal} onClose={() => setModal(null)} />}
+      <AnimatePresence>
+        {modal && <VideoModal video={modal} onClose={() => setModal(null)} />}
+      </AnimatePresence>
     </>
   );
 }
@@ -854,34 +938,47 @@ function AboutIgnite() {
   ];
 
   return (
-    <section className="bg-white px-6 py-24 dark:bg-neutral-950">
+    <section className="bg-white px-6 py-24 dark:bg-neutral-950 overflow-hidden">
       <div className="mx-auto max-w-7xl">
         {/* Top band */}
-        <div className="flex flex-col items-center gap-6 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full bg-orange-50 px-4 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-orange-700 dark:bg-orange-950/40 dark:text-orange-400">
-            <Sparkles size={13} />
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="flex flex-col items-center gap-6 text-center"
+        >
+          <motion.span variants={fadeUp} className="inline-flex items-center gap-2 rounded-full bg-orange-50 px-4 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-orange-700 dark:bg-orange-950/40 dark:text-orange-400">
             About Ignite
-          </span>
-          <h2 className="max-w-3xl text-4xl font-extrabold leading-tight text-neutral-950 sm:text-5xl dark:text-white">
+          </motion.span>
+          <motion.h2 variants={fadeUp} className="max-w-3xl text-4xl font-extrabold leading-tight text-neutral-950 sm:text-5xl dark:text-white">
             Building India's next generation of scholars and leaders
-          </h2>
-          <p className="max-w-2xl text-base leading-7 text-neutral-600 dark:text-neutral-400">
+          </motion.h2>
+          <motion.p variants={fadeUp} className="max-w-2xl text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Ignite Academy, Hyderabad, is a premium Junior College & School that has shaped over
             12 000 students across 18 years. Our campus combines rigorous academics with a vibrant
             co-curricular life, residential facilities, and a faculty of experienced educators
             dedicated to making every student succeed.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Pillars */}
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+        >
           {pillars.map((p) => {
             const Icon = p.icon;
             const c = colorMap[p.color];
             return (
-              <div
+              <motion.div
                 key={p.title}
-                className="flex flex-col gap-4 rounded-3xl border border-neutral-100 hover:shadow-2xl hover:border-orange-600 bg-neutral-50 p-6 dark:border-neutral-800 dark:bg-neutral-900"
+                variants={cardReveal}
+                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                className="flex flex-col gap-4 rounded-3xl border border-neutral-100 hover:shadow-2xl hover:border-orange-600 bg-neutral-50 p-6 dark:border-neutral-800 dark:bg-neutral-900 transition"
               >
                 <span className={`grid h-11 w-11 place-items-center rounded-2xl ${c.icon}`}>
                   <Icon size={20} />
@@ -890,13 +987,19 @@ function AboutIgnite() {
                   {p.title}
                 </h3>
                 <p className="text-sm leading-6 text-neutral-600 dark:text-neutral-400">{p.text}</p>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* Bottom CTA */}
-        <div className="mt-14 flex flex-col items-center justify-between gap-8 rounded-3xl border-2 border-orange-600 p-8 text-center sm:flex-row sm:rounded-full sm:px-10 sm:text-left">
+        <motion.div
+          variants={scaleIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mt-14 flex flex-col items-center justify-between gap-8 rounded-3xl border-2 border-orange-600 p-8 text-center sm:flex-row sm:rounded-full sm:px-10 sm:text-left shadow-lg"
+        >
           <div>
             <p className="text-xs font-black uppercase tracking-widest text-orange-600">
               Come visit us
@@ -906,47 +1009,50 @@ function AboutIgnite() {
             </h3>
           </div>
           <div className="flex shrink-0 flex-wrap justify-center gap-3">
-            <RouteLink
-              to="/gallery/all-videos"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-black text-orange-700 border-2 border-orange-600 transition hover:bg-orange-600 hover:text-white dark:bg-orange-600 dark:text-white dark:hover:bg-orange-700"
-            >
-              View All
-              <ArrowRight size={14} />
-            </RouteLink>
-            <RouteLink
-              to="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-black text-orange-700 border-2 border-orange-600 hover:text-white transition hover:bg-orange-600 dark:bg-orange-600 dark:text-white dark:hover:bg-orange-700"
-            >
-              Contact Us
-              <ArrowRight size={14} />
-            </RouteLink>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <RouteLink
+                to="/gallery/all-videos"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-black text-orange-700 border-2 border-orange-600 transition hover:bg-orange-600 hover:text-white dark:bg-orange-600 dark:text-white dark:hover:bg-orange-700"
+              >
+                View All
+                <ArrowRight size={14} />
+              </RouteLink>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <RouteLink
+                to="/contact"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-black text-orange-700 border-2 border-orange-600 hover:text-white transition hover:bg-orange-600 dark:bg-orange-600 dark:text-white dark:hover:bg-orange-700"
+              >
+                Contact Us
+                <ArrowRight size={14} />
+              </RouteLink>
+            </motion.div>
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-5 py-3 text-sm font-bold text-black dark:text-white ring-1 ring-white/20">
               <MapPin size={13} />
               Hyderabad
             </span>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
-}
-
-/* ─────────────────────────── SPARKLES IMPORT ─────────────────────────── */
-
-function Sparkles(props) {
-  return <Star {...props} />;
 }
 
 /* ─────────────────────────── PAGE ─────────────────────────── */
 
 export default function VideosPage() {
   return (
-    <div className="min-h-screen pt-16 bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.35 }}
+      className="min-h-screen pt-16 bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white"
+    >
       <VideoHero />
       <HorizontalScrollVideos />
       <StatsStrip />
       <CategoryVideos />
       <AboutIgnite />
-    </div>
+    </motion.div>
   );
 }

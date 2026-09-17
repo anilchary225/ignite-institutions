@@ -1,6 +1,8 @@
 import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import ScrollRevealText from "./ScrollRevealText";
 import { RouteLink } from "../../router/BrowserRouter";
+import { staggerContainer, cardReveal, defaultViewport } from "../../animations/variants";
 
 export function CardWithContent({
   eyebrow,
@@ -12,15 +14,18 @@ export function CardWithContent({
   accentColor = "text-orange-500",
 }) {
   return (
-    <article className="group">
-      <RouteLink to={link} className="block">
+    <motion.article
+      whileHover={{ y: -6, transition: { duration: 0.28 } }}
+      className="group h-full"
+    >
+      <RouteLink to={link} className="block h-full">
         <div className="relative overflow-hidden rounded-2xl bg-white dark:bg-neutral-800 shadow-sm border border-neutral-100 dark:border-neutral-700">
           <div className="aspect-[16/10] overflow-hidden bg-neutral-100 dark:bg-neutral-700">
             {image ? (
               <img
                 src={image}
                 alt=""
-                className="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-[1.04]"
+                className="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-[1.05]"
               />
             ) : null}
           </div>
@@ -45,7 +50,7 @@ export function CardWithContent({
           </div>
         </div>
       </RouteLink>
-    </article>
+    </motion.article>
   );
 }
 
@@ -81,21 +86,27 @@ export default function CardsWithContent({ cards = [] }) {
 
   return (
     <div>
-      <div className="text-center mb-8 ">
-        <span className="inline-block text-xs  tracking-[0.25em] text-blue-500 uppercase mb-2">
+      <div className="text-center mb-8">
+        <span className="inline-block text-xs tracking-[0.25em] text-blue-500 uppercase mb-2">
           <ScrollRevealText text="Our Programs" className="inline-block" />
         </span>
         <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white sm:text-3xl">
           <ScrollRevealText as="span" text="What We Offer" className="inline-block" />
         </h2>
       </div>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        className="grid grid-cols-1 gap-6 sm:grid-cols-3"
+      >
         {items.map((card) => (
-          <div key={card.title} data-motion-card>
+          <motion.div key={card.title} variants={cardReveal}>
             <CardWithContent {...card} />
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }

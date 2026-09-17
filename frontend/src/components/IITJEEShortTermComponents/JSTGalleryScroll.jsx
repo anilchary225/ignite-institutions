@@ -1,5 +1,7 @@
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight, Camera } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations/variants";
 
 const images = [
   { id: 1,  src: "/assets/images/events/Classrooms/DSC00004.webp",                     alt: "Ignite classroom session" },
@@ -20,7 +22,13 @@ export default function JSTGalleryScroll() {
     <section className="bg-white px-6 py-20 dark:bg-neutral-950">
       <div className="mx-auto max-w-7xl">
 
-        <div className="flex items-end justify-between">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="flex items-end justify-between"
+        >
           <div>
             <div className="inline-flex items-center gap-2 rounded-full bg-amber-100 px-4 py-1.5 dark:bg-amber-950/40">
               <Camera size={13} className="text-amber-600 dark:text-amber-400" />
@@ -30,19 +38,32 @@ export default function JSTGalleryScroll() {
             <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">The environment, the people, the energy - see it for yourself.</p>
           </div>
           <div className="hidden shrink-0 gap-2 sm:flex">
-            <button onClick={() => scroll(-1)} className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-600 transition hover:border-amber-400 hover:text-amber-600 dark:border-neutral-700 dark:bg-neutral-900" aria-label="Previous">
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.92 }}
+              onClick={() => scroll(-1)}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-600 transition hover:border-amber-400 hover:text-amber-600 dark:border-neutral-700 dark:bg-neutral-900"
+              aria-label="Previous"
+            >
               <ChevronLeft size={18} />
-            </button>
-            <button onClick={() => scroll(1)} className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-600 transition hover:border-amber-400 hover:text-amber-600 dark:border-neutral-700 dark:bg-neutral-900" aria-label="Next">
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.92 }}
+              onClick={() => scroll(1)}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-600 transition hover:border-amber-400 hover:text-amber-600 dark:border-neutral-700 dark:bg-neutral-900"
+              aria-label="Next"
+            >
               <ChevronRight size={18} />
-            </button>
+            </motion.button>
           </div>
-        </div>
+        </motion.div>
 
         <div ref={scrollRef} className="mt-8 flex gap-4 overflow-x-auto scroll-smooth pb-3" style={{ scrollbarWidth: "none" }}>
           {images.map((img, i) => (
-            <div
+            <motion.div
               key={img.id}
+              whileHover={{ y: -4 }}
               className={`group relative shrink-0 overflow-hidden rounded-2xl shadow-sm ${i % 3 === 1 ? "mt-5" : ""}`}
               style={{ width: 340 }}
             >
@@ -55,11 +76,13 @@ export default function JSTGalleryScroll() {
               <div className="absolute left-3 top-3 rounded-full bg-amber-500 px-2.5 py-0.5 text-[10px] font-black text-white">
                 {String(i + 1).padStart(2, "0")}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        <p className="mt-5 text-center text-xs text-neutral-400">Real photos from Ignite Academy. Updated each semester.</p>
+        <p className="mt-4 text-center text-xs text-neutral-400">
+          Real photos of Ignite Academy campus - updated regularly.
+        </p>
       </div>
     </section>
   );

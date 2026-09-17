@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Trophy, Users, Heart, Star } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeUp, scaleIn, staggerContainer, defaultViewport } from "../../../animations/variants";
 
 const defaultReasons = [
   {
@@ -45,29 +47,44 @@ export default function WhyChooseUs({
   return (
     <section className="px-4 py-14 sm:px-8 sm:py-16">
       <div className="mx-auto max-w-6xl">
-        <div className="text-center mb-10">
-          <span data-aos="zoom-in" className="inline-block text-xs font-bold tracking-[0.25em] text-orange-500 uppercase mb-2">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={defaultViewport}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-10"
+        >
+          <span className="inline-block text-xs font-bold tracking-[0.25em] text-orange-500 uppercase mb-2">
             Our Strengths
           </span>
-          <h2 data-aos="zoom-in" className="text-2xl font-extrabold text-neutral-900 dark:text-white sm:text-3xl">
+          <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-white sm:text-3xl">
             {heading}
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <motion.div
+          variants={staggerContainer(0.08, 0.1)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+        >
           {reasons.map((reason, index) => {
             const active = index === activeIndex;
             const Icon = reason.icon;
             return (
-              <button
+              <motion.button
                 key={reason.title}
+                variants={scaleIn}
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                whileTap={{ scale: 0.98 }}
                 type="button"
                 onMouseEnter={() => setActiveIndex(index)}
                 onFocus={() => setActiveIndex(index)}
-                className={`group relative overflow-hidden rounded-2xl border p-6 text-left transition-all duration-300 ${
+                className={`group relative overflow-hidden rounded-2xl border p-6 text-left transition-all duration-300 cursor-pointer ${
                   active
                     ? `${reason.color} border-transparent text-white shadow-lg`
-                    : `border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-800`
+                    : `border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-800 hover:shadow-md`
                 }`}
               >
                 <div className={`inline-flex h-10 w-10 items-center justify-center rounded-xl mb-4 ${
@@ -81,11 +98,12 @@ export default function WhyChooseUs({
                 <p className={`text-sm leading-relaxed ${active ? "text-white/90" : "text-neutral-600 dark:text-neutral-400"}`}>
                   {reason.description}
                 </p>
-              </button>
+              </motion.button>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 }
+

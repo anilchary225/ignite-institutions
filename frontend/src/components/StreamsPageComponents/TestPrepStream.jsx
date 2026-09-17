@@ -1,5 +1,7 @@
+import { motion } from "framer-motion";
 import { Zap, CalendarDays, Target, CheckCircle2 } from "lucide-react";
 import { RouteLink } from "../../router/BrowserRouter";
+import { fadeUp, staggerContainer, cardReveal, defaultViewport } from "../../animations/variants";
 
 const exams = [
   {
@@ -110,7 +112,7 @@ const colorMap = {
 };
 
 function BatchCard({ batch, color }) {
-  const c = colorMap[color];
+  const c = colorMap[color] || colorMap.blue;
   const Icon = batch.icon;
   return (
     <div className={`flex gap-4 rounded-2xl border p-5 ${c.border} ${c.card}`}>
@@ -135,9 +137,13 @@ function BatchCard({ batch, color }) {
 }
 
 function ExamBlock({ exam }) {
-  const c = colorMap[exam.color];
+  const c = colorMap[exam.color] || colorMap.blue;
   return (
-    <div data-aos="fade-up" className="flex flex-col rounded-3xl border bg-white p-8 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+    <motion.div
+      variants={cardReveal}
+      whileHover={{ y: -6, transition: { duration: 0.25 } }}
+      className="flex flex-col rounded-3xl border bg-white p-8 shadow-sm transition hover:shadow-xl dark:border-neutral-800 dark:bg-neutral-900"
+    >
       {/* exam name */}
       <div className="flex items-start justify-between gap-4">
         <div>
@@ -158,67 +164,94 @@ function ExamBlock({ exam }) {
         ))}
       </div>
 
-      <a
+      <motion.a
         href="/contact"
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
         className={`mt-6 inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-bold text-white transition ${c.nameBg} hover:opacity-90`}
       >
         Enquire about {exam.name}
-      </a>
-    </div>
+      </motion.a>
+    </motion.div>
   );
 }
 
 export default function TestPrepStream() {
   return (
-    <section data-aos="fade-in" id="testprep" className="bg-white px-6 py-20 dark:bg-neutral-950">
+    <section id="testprep" className="bg-white px-6 py-20 dark:bg-neutral-950 overflow-hidden">
       <div className="mx-auto max-w-7xl">
         {/* section header */}
-        <div data-aos="zoom-in" className="flex items-center gap-3">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={fadeUp}
+          className="flex items-center gap-3"
+        >
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
           <span className="rounded-full bg-emerald-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300">
             Test Preparation
           </span>
           <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
-        </div>
+        </motion.div>
 
-        <div className="mt-8 max-w-2xl">
-          <h2 data-aos="fade-up" className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={fadeUp}
+          className="mt-8 max-w-2xl"
+        >
+          <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             Crack the exam. Own the rank.
           </h2>
-          <p data-aos="fade-up" className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
+          <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Dedicated coaching for India's most competitive entrance exams -
             available as long-term, short-term, or integrated programmes to
             suit every student's timeline.
           </p>
-        </div>
+        </motion.div>
 
-        {/* 2-col grid for JEE & NEET (larger), then 2-col for BITSAT & EAPCET */}
-        <div data-aos="fade-in" className="mt-10 grid gap-6 sm:grid-cols-2">
+        {/* 2-col grid for JEE & NEET, BITSAT & EAPCET */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={staggerContainer}
+          className="mt-10 grid gap-6 sm:grid-cols-2"
+        >
           {exams.map((exam) => (
             <ExamBlock key={exam.id} exam={exam} />
           ))}
-        </div>
+        </motion.div>
 
         {/* bottom CTA banner */}
-        <div data-aos="fade-in" className="mt-12 rounded-3xl bg-linear-to-br from-blue-600 to-indigo-700 p-8 text-center shadow-lg">
-          <p data-aos="fade-up" className="text-xs font-bold uppercase tracking-widest text-blue-200">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={defaultViewport}
+          transition={{ duration: 0.6 }}
+          className="mt-12 rounded-3xl bg-linear-to-br from-blue-600 to-indigo-700 p-8 text-center shadow-lg"
+        >
+          <p className="text-xs font-bold uppercase tracking-widest text-blue-200">
             Not sure which batch fits?
           </p>
-          <h3 data-aos="fade-up" className="mt-3 text-2xl font-extrabold text-white">
+          <h3 className="mt-3 text-2xl font-extrabold text-white">
             Talk to our counsellors
           </h3>
-          <p data-aos="fade-up" className="mx-auto mt-2 max-w-md text-sm leading-6 text-blue-200">
+          <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-blue-200">
             Our academic counsellors will assess your current level and
             recommend the right programme - free, no obligation.
           </p>
-          <RouteLink
-            data-aos="zoom-in"
-            to="/contact"
-            className="mt-6 inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 text-sm font-bold text-blue-700 transition hover:bg-blue-50"
-          >
-            Book a Free Counselling Session
-          </RouteLink>
-        </div>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block mt-6">
+            <RouteLink
+              to="/contact"
+              className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 text-sm font-bold text-blue-700 transition hover:bg-blue-50"
+            >
+              Book a Free Counselling Session
+            </RouteLink>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

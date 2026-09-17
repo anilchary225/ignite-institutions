@@ -1,7 +1,15 @@
 import React from "react";
 import { CheckCircle2, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import { RouteLink } from "../../router/BrowserRouter";
 import ScrollRevealText from "./ScrollRevealText";
+import {
+  fadeUp,
+  staggerContainer,
+  staggerItem,
+  imageReveal,
+  defaultViewport,
+} from "../../animations/variants";
 
 const highlights = [
   "Admissions open for MPC and BiPC programs.",
@@ -19,60 +27,91 @@ const tags = [
 
 export default function HomeApply() {
   return (
-    <section className="bg-neutral-50 px-4 py-14 transition-colors dark:bg-neutral-900 sm:px-8 sm:py-16">
+    <section className="bg-neutral-50 px-4 py-14 transition-colors dark:bg-neutral-900 sm:px-8 sm:py-16 overflow-hidden">
       <div className="mx-auto grid max-w-7xl items-center gap-10 md:grid-cols-2">
         {/* Text content */}
-        <div>
-          <span data-aos="fade-up" className="mb-3 inline-block text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+        >
+          <motion.span
+            variants={staggerItem}
+            className="mb-3 inline-block text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400"
+          >
             <ScrollRevealText text="Admissions 2026–28" className="inline-block" />
-          </span>
-          <h2 data-aos="fade-up" className="text-2xl font-semibold leading-tight text-neutral-900 dark:text-white sm:text-3xl">
+          </motion.span>
+          <motion.h2
+            variants={staggerItem}
+            className="text-2xl font-semibold leading-tight text-neutral-900 dark:text-white sm:text-3xl"
+          >
             <ScrollRevealText as="span" text="Apply for Admission" className="inline-block" />
-          </h2>
-          <p data-aos="fade-up" className="mt-1 text-base font-medium text-neutral-500 dark:text-neutral-400">
+          </motion.h2>
+          <motion.p
+            variants={staggerItem}
+            className="mt-1 text-base font-medium text-neutral-500 dark:text-neutral-400"
+          >
             For the current academic year
-          </p>
+          </motion.p>
 
-          <p data-aos="fade-up" className="mt-4 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
+          <motion.p
+            variants={staggerItem}
+            className="mt-4 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300"
+          >
             We give our students not only the education but also the experiences
             that set them up for lifelong success in their career.
-          </p>
+          </motion.p>
 
           <ul className="mt-5 space-y-3">
             {highlights.map((item, i) => (
-              <li data-aos="fade-up" key={i} className="flex items-start gap-3">
+              <motion.li
+                variants={staggerItem}
+                key={i}
+                className="flex items-start gap-3"
+              >
                 <CheckCircle2 size={17} className="mt-0.5 shrink-0 text-blue-600 dark:text-blue-400" />
                 <span className="text-sm text-neutral-700 dark:text-neutral-300">{item}</span>
-              </li>
+              </motion.li>
             ))}
           </ul>
 
-          <div className="mt-6 flex flex-wrap gap-2">
+          <motion.div variants={staggerItem} className="mt-6 flex flex-wrap gap-2">
             {tags.map((t) => (
-              <span data-aos="fade-up" key={t.label} className={`rounded-full px-3 py-1 text-xs font-medium ${t.color}`}>
+              <span
+                key={t.label}
+                className={`rounded-full px-3 py-1 text-xs font-medium ${t.color}`}
+              >
                 {t.label}
               </span>
             ))}
-          </div>
+          </motion.div>
 
-          <RouteLink
-          data-aos="fade-up"
-            to="/contact"
-            className="mt-7 inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700"
-          >
-            Apply Now
-            <ArrowRight size={15} />
-          </RouteLink>
-        </div>
+          <motion.div variants={staggerItem} className="mt-7">
+            <RouteLink
+              to="/contact"
+              className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-2.5 text-sm font-medium text-white transition-all hover:bg-blue-700 hover:gap-3 active:scale-95"
+            >
+              Apply Now
+              <ArrowRight size={15} />
+            </RouteLink>
+          </motion.div>
+        </motion.div>
 
-        {/* Image - hidden on mobile to avoid layout break */}
-        <div data-aos="fade-up" className="hidden overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800 md:block">
+        {/* Image */}
+        <motion.div
+          variants={imageReveal}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="hidden overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800 md:block"
+        >
           <img
             src="/assets/images/home_admission.webp"
             alt="Ignite Junior College"
-            className="h-72 w-full object-cover"
+            className="h-72 w-full object-cover transition-transform duration-700 hover:scale-105"
           />
-        </div>
+        </motion.div>
       </div>
     </section>
   );

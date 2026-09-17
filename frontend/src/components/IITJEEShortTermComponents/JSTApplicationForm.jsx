@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Send, CheckCircle, AlertCircle, User, Mail, Phone, GraduationCap, MapPin, BookOpen, Calendar } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { fadeUp, staggerContainer } from "../../animations/variants";
 import { submitEnquiry } from "../../lib/enquiryApi";
 
 const INITIAL = { name: "", email: "", phone: "", currentClass: "", school: "", city: "", stream: "", attemptYear: "", message: "" };
@@ -89,160 +91,213 @@ export default function JSTApplicationForm() {
     }
   };
 
-  if (status === "success") {
-    return (
-      <section id="apply" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
-        <div className="mx-auto max-w-lg text-center">
-          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-950/30">
-            <CheckCircle size={40} className="text-amber-500" />
-          </div>
-          <h2 className="mt-6 text-2xl font-extrabold text-neutral-950 dark:text-white">You're on the list!</h2>
-          <p className="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
-            Thanks, <strong>{form.name}</strong>! Our team will call you within 24 hours to walk you through the
-            batch schedule, eligibility, and fee structure.
-          </p>
-          <button
-            onClick={() => { setStatus("idle"); setForm(INITIAL); }}
-            className="mt-6 rounded-xl border border-neutral-200 px-6 py-2.5 text-sm font-bold text-neutral-600 transition hover:border-amber-400 hover:text-amber-600 dark:border-neutral-700"
-          >
-            Submit another
-          </button>
-        </div>
-      </section>
-    );
-  }
-
   return (
-    <section id="apply" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
-      <div className="mx-auto max-w-7xl">
-
-        <div className="flex items-center gap-3">
-          <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-          <span className="rounded-full bg-amber-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-amber-700 dark:bg-amber-950/40 dark:text-amber-400">
-            Apply Now
-          </span>
-          <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-        </div>
-
-        <div className="mt-6 grid gap-10 lg:grid-cols-[1fr_520px]">
-
-          {/* left info */}
-          <div>
-            <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
-              Your IIT Year Starts Here
-            </h2>
-            <p className="mt-4 text-sm leading-7 text-neutral-600 dark:text-neutral-400">
-              Fill in your details and our admissions counsellor will reach out within 24 hours
-              with batch options, fee structure, and eligibility criteria.
+    <AnimatePresence mode="wait">
+      {status === "success" ? (
+        <motion.section
+          key="success"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          id="apply"
+          className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40"
+        >
+          <div className="mx-auto max-w-lg text-center">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 200, damping: 15 }}
+              className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-950/30"
+            >
+              <CheckCircle size={40} className="text-amber-500" />
+            </motion.div>
+            <h2 className="mt-6 text-2xl font-extrabold text-neutral-950 dark:text-white">You're on the list!</h2>
+            <p className="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+              Thanks, <strong>{form.name}</strong>! Our team will call you within 24 hours to walk you through the
+              batch schedule, eligibility, and fee structure.
             </p>
-
-            {/* who should apply */}
-            <div className="mt-8 rounded-3xl border border-amber-200 bg-amber-50 p-6 dark:border-amber-900/30 dark:bg-amber-950/10">
-              <p className="text-xs font-black uppercase tracking-widest text-amber-700 dark:text-amber-400">Who Should Apply?</p>
-              <ul className="mt-4 space-y-3">
-                {[
-                  "Students currently in Class 12 (2025 JEE attempt)",
-                  "Droppers targeting JEE 2025 or 2026",
-                  "Students who appeared but want a better rank",
-                  "Class 11 completers who want intensive 12-month prep",
-                ].map(item => (
-                  <li key={item} className="flex items-start gap-2.5 text-sm text-neutral-700 dark:text-neutral-300">
-                    <span className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-amber-200 dark:bg-amber-900">
-                      <span className="h-1.5 w-1.5 rounded-full bg-amber-600" />
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <ul className="mt-6 space-y-4">
-              {[
-                { icon: Calendar, label: "Batch Starts",  value: "January, April & June batches available" },
-                { icon: MapPin,   label: "Location",      value: "Ignite Academy, Hyderabad · Hostel available" },
-                { icon: Phone,    label: "Helpline",      value: "+91 98765 43210 (Mon–Sat, 9am–6pm)" },
-              ].map(({ icon: Icon, label, value }) => (
-                <li key={label} className="flex items-start gap-3">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400">
-                    <Icon size={14} />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-widest text-neutral-500">{label}</p>
-                    <p className="mt-0.5 text-sm font-semibold text-neutral-800 dark:text-neutral-200">{value}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.96 }}
+              onClick={() => { setStatus("idle"); setForm(INITIAL); }}
+              className="mt-6 rounded-xl border border-neutral-200 px-6 py-2.5 text-sm font-bold text-neutral-600 transition hover:border-amber-400 hover:text-amber-600 dark:border-neutral-700"
+            >
+              Submit another
+            </motion.button>
           </div>
+        </motion.section>
+      ) : (
+        <motion.section
+          key="form"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          id="apply"
+          className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40"
+        >
+          <div className="mx-auto max-w-7xl">
 
-          {/* right form */}
-          <div>
-            <form onSubmit={handleSubmit} noValidate className="rounded-3xl bg-white p-8 shadow-sm ring-1 ring-neutral-100 dark:bg-neutral-900 dark:ring-neutral-800">
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-amber-500 to-orange-500">
-                  <Send size={16} className="text-white" />
-                </div>
-                <div>
-                  <h3 className="text-base font-extrabold text-neutral-950 dark:text-white">Short-Term Enquiry Form</h3>
-                  <p className="text-xs text-neutral-400">We'll respond within 24 hours</p>
-                </div>
-              </div>
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-3"
+            >
+              <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
+              <span className="rounded-full bg-amber-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-amber-700 dark:bg-amber-950/40 dark:text-amber-400">
+                Apply Now
+              </span>
+              <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
+            </motion.div>
 
-              <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                <div className="sm:col-span-2">
-                  <Field label="Full Name" name="name" type="text" required icon={User} placeholder="Your full name" value={form.name} onChange={handleChange} error={errors.name} />
-                </div>
-                <Field label="Email" name="email" type="email" required icon={Mail} placeholder="you@example.com" value={form.email} onChange={handleChange} error={errors.email} />
-                <Field label="Phone" name="phone" type="tel" required icon={Phone} placeholder="10-digit mobile" value={form.phone} onChange={handleChange} error={errors.phone} />
-                <SelectField
-                  label="Current Status" name="currentClass" required icon={GraduationCap}
-                  options={["Currently in Class 12 (2025 JEE)", "Dropper - 1st attempt", "Dropper - 2nd attempt", "Class 11 completed"]}
-                  value={form.currentClass} onChange={handleChange} error={errors.currentClass}
-                />
-                <SelectField
-                  label="Target Year" name="attemptYear" icon={Calendar}
-                  options={["JEE 2025", "JEE 2026"]}
-                  value={form.attemptYear} onChange={handleChange} error={errors.attemptYear}
-                />
-                <Field label="School / Last Institution" name="school" type="text" icon={GraduationCap} placeholder="School or college name" value={form.school} onChange={handleChange} error={errors.school} />
-                <Field label="City" name="city" type="text" required icon={MapPin} placeholder="Your city" value={form.city} onChange={handleChange} error={errors.city} />
-                <div className="sm:col-span-2">
-                  <label className="mb-1.5 block text-xs font-bold text-neutral-700 dark:text-neutral-300">
-                    Anything specific you'd like to know? <span className="font-normal text-neutral-400">(optional)</span>
-                  </label>
-                  <textarea
-                    name="message" value={form.message} onChange={handleChange} rows={3}
-                    placeholder="Fee structure, hostel, batch timings, previous JEE score…"
-                    className="w-full resize-none rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-950 placeholder-neutral-400 outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-100 dark:border-neutral-700 dark:bg-neutral-950 dark:text-white dark:placeholder-neutral-600"
-                  />
-                </div>
-              </div>
+            <div className="mt-6 grid gap-10 lg:grid-cols-[1fr_520px]">
 
-              {status === "error" && (
-                <div className="mt-4 flex items-center gap-2 rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700 dark:bg-rose-950/20 dark:text-rose-400">
-                  <AlertCircle size={14} /> Something went wrong. Please try again.
-                </div>
-              )}
-
-              <button
-                type="submit"
-                disabled={status === "submitting"}
-                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-amber-500 to-orange-500 py-3.5 text-sm font-black text-white shadow-lg shadow-amber-100 transition hover:from-amber-600 hover:to-orange-600 disabled:opacity-60 dark:shadow-amber-900/20"
+              {/* left info */}
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
               >
-                {status === "submitting" ? (
-                  <><span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" /> Submitting…</>
-                ) : (
-                  <>Submit Enquiry <Send size={14} /></>
-                )}
-              </button>
+                <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+                  Your IIT Year Starts Here
+                </h2>
+                <p className="mt-4 text-sm leading-7 text-neutral-600 dark:text-neutral-400">
+                  Fill in your details and our admissions counsellor will reach out within 24 hours
+                  with batch options, fee structure, and eligibility criteria.
+                </p>
 
-              <p className="mt-3 text-center text-xs text-neutral-400">
-                🔒 Your data is private. No spam. No third-party sharing.
-              </p>
-            </form>
+                {/* who should apply */}
+                <motion.div
+                  variants={fadeUp}
+                  className="mt-8 rounded-3xl border border-amber-200 bg-amber-50 p-6 dark:border-amber-900/30 dark:bg-amber-950/10"
+                >
+                  <p className="text-xs font-black uppercase tracking-widest text-amber-700 dark:text-amber-400">Who Should Apply?</p>
+                  <ul className="mt-4 space-y-3">
+                    {[
+                      "Students currently in Class 12 (2025 JEE attempt)",
+                      "Droppers targeting JEE 2025 or 2026",
+                      "Students who appeared but want a better rank",
+                      "Class 11 completers who want intensive 12-month prep",
+                    ].map(item => (
+                      <li key={item} className="flex items-start gap-2.5 text-sm text-neutral-700 dark:text-neutral-300">
+                        <span className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-amber-200 dark:bg-amber-900">
+                          <span className="h-1.5 w-1.5 rounded-full bg-amber-600" />
+                        </span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+
+                <motion.ul
+                  variants={staggerContainer(0.1, 0.1)}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  className="mt-6 space-y-4"
+                >
+                  {[
+                    { icon: Calendar, label: "Batch Starts",  value: "January, April & June batches available" },
+                    { icon: MapPin,   label: "Location",      value: "Ignite Academy, Hyderabad · Hostel available" },
+                    { icon: Phone,    label: "Helpline",      value: "+91 98765 43210 (Mon–Sat, 9am–6pm)" },
+                  ].map(({ icon: Icon, label, value }) => (
+                    <motion.li key={label} variants={fadeUp} className="flex items-start gap-3">
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400">
+                        <Icon size={14} />
+                      </div>
+                      <div>
+                        <p className="text-xs font-bold uppercase tracking-widest text-neutral-500">{label}</p>
+                        <p className="mt-0.5 text-sm font-semibold text-neutral-800 dark:text-neutral-200">{value}</p>
+                      </div>
+                    </motion.li>
+                  ))}
+                </motion.ul>
+              </motion.div>
+
+              {/* right form */}
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+              >
+                <form onSubmit={handleSubmit} noValidate className="rounded-3xl bg-white p-8 shadow-sm ring-1 ring-neutral-100 dark:bg-neutral-900 dark:ring-neutral-800">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-amber-500 to-orange-500">
+                      <Send size={16} className="text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-base font-extrabold text-neutral-950 dark:text-white">Short-Term Enquiry Form</h3>
+                      <p className="text-xs text-neutral-400">We'll respond within 24 hours</p>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                    <div className="sm:col-span-2">
+                      <Field label="Full Name" name="name" type="text" required icon={User} placeholder="Your full name" value={form.name} onChange={handleChange} error={errors.name} />
+                    </div>
+                    <Field label="Email" name="email" type="email" required icon={Mail} placeholder="you@example.com" value={form.email} onChange={handleChange} error={errors.email} />
+                    <Field label="Phone" name="phone" type="tel" required icon={Phone} placeholder="10-digit mobile" value={form.phone} onChange={handleChange} error={errors.phone} />
+                    <SelectField
+                      label="Current Status" name="currentClass" required icon={GraduationCap}
+                      options={["Currently in Class 12 (2025 JEE)", "Dropper - 1st attempt", "Dropper - 2nd attempt", "Class 11 completed"]}
+                      value={form.currentClass} onChange={handleChange} error={errors.currentClass}
+                    />
+                    <SelectField
+                      label="Target Year" name="attemptYear" icon={Calendar}
+                      options={["JEE 2025", "JEE 2026"]}
+                      value={form.attemptYear} onChange={handleChange} error={errors.attemptYear}
+                    />
+                    <Field label="School / Last Institution" name="school" type="text" icon={GraduationCap} placeholder="School or college name" value={form.school} onChange={handleChange} error={errors.school} />
+                    <Field label="City" name="city" type="text" required icon={MapPin} placeholder="Your city" value={form.city} onChange={handleChange} error={errors.city} />
+                    <div className="sm:col-span-2">
+                      <label className="mb-1.5 block text-xs font-bold text-neutral-700 dark:text-neutral-300">
+                        Anything specific you'd like to know? <span className="font-normal text-neutral-400">(optional)</span>
+                      </label>
+                      <textarea
+                        name="message" value={form.message} onChange={handleChange} rows={3}
+                        placeholder="Fee structure, hostel, batch timings, previous JEE score…"
+                        className="w-full resize-none rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-950 placeholder-neutral-400 outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-100 dark:border-neutral-700 dark:bg-neutral-950 dark:text-white dark:placeholder-neutral-600"
+                      />
+                    </div>
+                  </div>
+
+                  <AnimatePresence>
+                    {status === "error" && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="mt-4 flex items-center gap-2 rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700 dark:bg-rose-950/20 dark:text-rose-400"
+                      >
+                        <AlertCircle size={14} /> Something went wrong. Please try again.
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.97 }}
+                    type="submit"
+                    disabled={status === "submitting"}
+                    className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-amber-500 to-orange-500 py-3.5 text-sm font-black text-white shadow-lg shadow-amber-100 transition hover:from-amber-600 hover:to-orange-600 disabled:opacity-60 dark:shadow-amber-900/20"
+                  >
+                    {status === "submitting" ? (
+                      <><span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" /> Submitting…</>
+                    ) : (
+                      <>Submit Enquiry <Send size={14} /></>
+                    )}
+                  </motion.button>
+
+                  <p className="mt-3 text-center text-xs text-neutral-400">
+                    🔒 Your data is private. No spam. No third-party sharing.
+                  </p>
+                </form>
+              </motion.div>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </motion.section>
+      )}
+    </AnimatePresence>
   );
 }

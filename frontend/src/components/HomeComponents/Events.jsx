@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Calendar, MapPin } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeUp, defaultViewport } from "../../animations/variants";
 
 const placeholderEventPhoto = (bg, label) => {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="500" height="380">
@@ -105,7 +107,11 @@ function PhotoStack({ images, autoShuffleMs = 2200 }) {
 
 function EventCard({ event, reverse }) {
   return (
-    <div data-aos="fade-up"
+    <motion.div
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={defaultViewport}
       className={`grid items-center gap-8 md:grid-cols-[0.8fr_1fr] md:gap-12`}
     >
       <div className={reverse ? "md:order-2" : ""}>
@@ -129,7 +135,7 @@ function EventCard({ event, reverse }) {
         </div>
         <p className="mt-3 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">{event.description}</p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -137,17 +143,23 @@ export default function Events() {
   return (
     <section className="px-4 py-14 transition-colors sm:px-8 sm:py-16">
       <div className="mx-auto max-w-7xl">
-        <div className="mx-auto mb-10 max-w-2xl text-center">
-          <span data-aos="fade-up" className="mb-2 inline-block text-xs font-medium uppercase tracking-[0.25em] text-red-500">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mx-auto mb-10 max-w-2xl text-center"
+        >
+          <span className="mb-2 inline-block text-xs font-medium uppercase tracking-[0.25em] text-red-500">
             Events
           </span>
-          <h2 data-aos="fade-up" className="text-2xl font-semibold text-neutral-900 dark:text-white sm:text-3xl">
+          <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white sm:text-3xl">
             Life at IGNITE
           </h2>
-          <p data-aos="fade-up" className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
+          <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
             A glimpse into the moments, milestones, and memories made across campus.
           </p>
-        </div>
+        </motion.div>
 
         <div className="space-y-16">
           {eventsData.map((event, i) => (

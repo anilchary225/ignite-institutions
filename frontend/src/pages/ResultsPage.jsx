@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { POSTERS } from "../data_results/rankers_data";
-
 import {
   Award,
   BookOpen,
@@ -9,10 +9,11 @@ import {
   Trophy,
   Zap,
 } from "lucide-react";
-
 import { RESULTS_DATA } from "../data_results/results_data";
-
 import PosterGallery from "../components/PosterGallery";
+import {
+  staggerContainer, cardReveal, fadeUp, defaultViewport, scaleIn,
+} from "../animations/variants";
 
 /* =========================================================
    CHECK DATA
@@ -328,7 +329,11 @@ function ProfileCard({ student, color }) {
   const identifier = getIdentifier(student);
 
   return (
-    <div className="group overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-neutral-200 transition hover:-translate-y-1 hover:shadow-xl dark:bg-neutral-900 dark:ring-neutral-800">
+    <motion.div
+      variants={cardReveal}
+      whileHover={{ y: -5, boxShadow: "0 20px 40px rgba(0,0,0,0.12)", transition: { duration: 0.25 } }}
+      className="group overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-neutral-200 dark:bg-neutral-900 dark:ring-neutral-800"
+    >
       {/* IMAGE */}
       <div className="relative p-2 aspect-4/5 overflow-hidden bg-neutral-100">
         <img
@@ -385,7 +390,7 @@ function ProfileCard({ student, color }) {
 
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
 
@@ -514,97 +519,176 @@ function AllResults() {
   return (
     <section className="bg-neutral-50 px-5 py-20 dark:bg-neutral-950">
       <div className="mx-auto max-w-[1600px]">
-        <h2 className="text-center text-4xl font-black dark:text-white">Student Results</h2>
+        <motion.h2
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="text-center text-4xl font-black dark:text-white"
+        >
+          Student Results
+        </motion.h2>
 
         {/* YEAR TABS */}
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mt-10 flex flex-wrap justify-center gap-3"
+        >
           {years.map((year) => (
-            <button
+            <motion.button
               key={year}
               onClick={() => setActiveYear(year)}
-              className={`rounded-xl px-5 py-3 text-xs font-black ${
+              whileTap={{ scale: 0.94 }}
+              style={{ isolation: "isolate" }}
+              className={`relative rounded-xl px-5 py-3 text-xs font-black transition-colors ${
                 activeYear === year
                   ? "bg-blue-600 text-white"
-                  : "bg-white text-neutral-500 dark:bg-neutral-900"
+                  : "bg-white text-neutral-600 hover:bg-blue-50 hover:text-blue-700 dark:bg-neutral-900 dark:text-neutral-400 dark:hover:bg-blue-900/20"
               }`}
             >
-              {year}
-            </button>
+              {activeYear === year && (
+                <motion.div
+                  layoutId="activeYear"
+                  className="absolute inset-0 rounded-xl bg-blue-600"
+                  style={{ zIndex: -1 }}
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
+              <span className="relative z-10">{year}</span>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
 
         {/* EXAM TABS */}
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mt-8 flex flex-wrap justify-center gap-3"
+        >
           {availableExams.map((exam) => (
-            <button
+            <motion.button
               key={exam}
               onClick={() => setActiveExam(exam)}
-              className={`rounded-full px-6 py-3 text-xs font-black ${
+              whileTap={{ scale: 0.94 }}
+              style={{ isolation: "isolate" }}
+              className={`relative rounded-full px-6 py-3 text-xs font-black transition-colors ${
                 activeExam === exam
                   ? "bg-blue-600 text-white"
-                  : "bg-white text-neutral-500 dark:bg-neutral-900"
+                  : "bg-white text-neutral-600 hover:bg-blue-50 hover:text-blue-700 dark:bg-neutral-900 dark:text-neutral-400 dark:hover:bg-blue-900/20"
               }`}
             >
-              {examConfig[exam]?.label}
-            </button>
+              {activeExam === exam && (
+                <motion.div
+                  layoutId="activeExam"
+                  className="absolute inset-0 rounded-full bg-blue-600"
+                  style={{ zIndex: -1 }}
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
+              <span className="relative z-10">{examConfig[exam]?.label}</span>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
 
         {/* IPE TABS */}
-        {activeExam === "IPE" && availableIpeTabs.length > 0 && (
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
-            {availableIpeTabs.map(([value, label]) => (
-              <button
-                key={value}
-                onClick={() => setActiveIpe(value)}
-                className={`rounded-full px-5 py-2 text-xs font-black ${
-                  activeIpe === value
-                    ? "bg-amber-500 text-white"
-                    : "bg-neutral-200 text-neutral-700"
-                }`}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-        )}
+        <AnimatePresence>
+          {activeExam === "IPE" && availableIpeTabs.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25 }}
+              className="mt-6 flex flex-wrap justify-center gap-3"
+            >
+              {availableIpeTabs.map(([value, label]) => (
+                <motion.button
+                  key={value}
+                  onClick={() => setActiveIpe(value)}
+                  whileTap={{ scale: 0.94 }}
+                  style={{ isolation: "isolate" }}
+                  className={`relative rounded-full px-5 py-2 text-xs font-black transition-colors ${
+                    activeIpe === value
+                      ? "bg-amber-500 text-white"
+                      : "bg-neutral-200 text-neutral-700 hover:bg-amber-100 hover:text-amber-700"
+                  }`}
+                >
+                  {activeIpe === value && (
+                    <motion.div
+                      layoutId="activeIpe"
+                      className="absolute inset-0 rounded-full bg-amber-500"
+                      style={{ zIndex: -1 }}
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{label}</span>
+                </motion.button>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* RESULTS GRID */}
         <div className="mt-14 flex justify-center">
-  <div className="w-full max-w-7xl">
-    {selectedStudents.length === 0 ? (
-      <div className="rounded-3xl border border-dashed bg-white py-20 text-center dark:bg-neutral-900">
-        <h3 className="text-xl font-black">No Data Available</h3>
-        <p className="mt-2 text-sm text-neutral-500">
-          Results not available for {examConfig[activeExam]?.label || activeExam}{" "}
-          {activeYear}
-        </p>
-      </div>
-    ) : (
-      <>
-        <div className="mb-8 text-center">
-          <h3 className="text-xl font-black dark:text-white">
-            {examConfig[activeExam]?.label} {activeYear}
-          </h3>
+          <div className="w-full max-w-7xl">
+            <AnimatePresence mode="wait">
+              {selectedStudents.length === 0 ? (
+                <motion.div
+                  key="empty"
+                  initial={{ opacity: 0, scale: 0.97 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="rounded-3xl border border-dashed bg-white py-20 text-center dark:bg-neutral-900"
+                >
+                  <h3 className="text-xl font-black">No Data Available</h3>
+                  <p className="mt-2 text-sm text-neutral-500">
+                    Results not available for {examConfig[activeExam]?.label || activeExam}{" "}{activeYear}
+                  </p>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key={`${activeYear}-${activeExam}-${activeIpe}`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.28 }}
+                >
+                  <motion.div
+                    variants={staggerContainer}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={defaultViewport}
+                    className="mb-8 text-center"
+                  >
+                    <motion.h3 variants={fadeUp} className="text-xl font-black dark:text-white">
+                      {examConfig[activeExam]?.label} {activeYear}
+                    </motion.h3>
+                    <motion.p variants={fadeUp} className="mt-2 text-sm text-neutral-500">
+                      {selectedStudents.length} Students
+                    </motion.p>
+                  </motion.div>
 
-          <p className="mt-2 text-sm text-neutral-500">
-            {selectedStudents.length} Students
-          </p>
+                  <motion.div
+                    variants={staggerContainer}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.05 }}
+                    className="grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-8"
+                  >
+                    {selectedStudents.map((student, index) => (
+                      <ProfileCard key={index} student={student} color={currentColor} />
+                    ))}
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
-
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-8">
-          {selectedStudents.map((student, index) => (
-            <ProfileCard
-              key={index}
-              student={student}
-              color={currentColor}
-            />
-          ))}
-        </div>
-      </>
-    )}
-  </div>
-</div>
       </div>
     </section>
   );
@@ -631,15 +715,49 @@ function MotivationStrip() {
   }, []);
 
   return (
-    <section className="bg-white px-6 py-20 dark:bg-neutral-950">
+    <motion.section
+      variants={scaleIn}
+      initial="hidden"
+      whileInView="visible"
+      viewport={defaultViewport}
+      className="bg-white px-6 py-20 dark:bg-neutral-950"
+    >
       <div className="mx-auto max-w-5xl text-center">
-        <Trophy className="mx-auto text-amber-500" />
+        <motion.div
+          animate={{ rotate: [0, 10, -10, 10, 0], scale: [1, 1.15, 1] }}
+          transition={{ duration: 1.2, delay: 0.3 }}
+          className="inline-block"
+        >
+          <Trophy className="mx-auto text-amber-500" size={32} />
+        </motion.div>
 
-        <h2 className="mt-5 text-3xl font-black dark:text-white">"{quotes[index].text}"</h2>
+        <AnimatePresence mode="wait">
+          <motion.h2
+            key={index}
+            initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: -12, filter: "blur(4px)" }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-5 text-3xl font-black dark:text-white"
+          >
+            "{quotes[index].text}"
+          </motion.h2>
+        </AnimatePresence>
 
-        <p className="mt-4 text-sm font-bold text-neutral-500">- {quotes[index].by}</p>
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={`by-${index}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="mt-4 text-sm font-bold text-neutral-500"
+          >
+            — {quotes[index].by}
+          </motion.p>
+        </AnimatePresence>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
@@ -649,12 +767,17 @@ function MotivationStrip() {
 
 export default function ResultsPage() {
   return (
-    <div className="min-h-screen bg-white text-neutral-900 dark:bg-neutral-950 dark:text-white">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4 }}
+      className="min-h-screen bg-white text-neutral-900 dark:bg-neutral-950 dark:text-white"
+    >
       <ResultBanner />
       <SelectionStats />
       <AllResults />
       <PosterGallery posters={POSTERS} />
       <MotivationStrip />
-    </div>
+    </motion.div>
   );
 }

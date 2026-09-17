@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { MessageCircle, Send, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { submitEnquiry } from "../../lib/enquiryApi";
 
 const WHATSAPP_NUMBER = "917036511111";
@@ -138,22 +139,240 @@ export default function Chatbot() {
   const courseOptions = ["IIT-JEE", "NEET", "Foundation - Intermediate", "EAPCET", "Talk to Counsellor"];
   const visibleOptions = step === "userType" ? ["👨‍👩‍👧 Parent", "🎓 Student"] : step === "studentClass" ? classes : step === "courseCategory" ? courseOptions : step === "courseType" ? ["Long Term", "Short Term"] : step === "requirement" ? (schoolStudent ? requirements.school : requirements[data.userType]) : [];
 
-  return <>
-    <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello Ignite Institutions, I would like to know more about your courses.")}`} target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp" className="ignite-floating-control fixed bottom-[5rem] right-5 z-[9998] grid h-12 w-12 place-items-center rounded-full bg-[#087f5b] text-white shadow-lg transition hover:scale-105 sm:right-6"><WhatsAppIcon /></a>
-    <div className="ignite-floating-control fixed bottom-[8.5rem] right-5 z-[9997] sm:right-6">
-      {open && <div className="absolute bottom-16 right-0 flex h-[min(520px,calc(100vh-8rem))] w-[min(330px,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl dark:border-slate-700 dark:bg-slate-950">
-        <div className="flex items-center justify-between bg-[#006b4f] px-4 py-3 text-white"><div><p className="font-bold">Ignite Institutions</p><p className="text-xs text-white/75">How can we help you?</p></div><button type="button" onClick={() => setOpen(false)} aria-label="Close chat" className="rounded-full p-1 hover:bg-white/15"><X size={18} /></button></div>
-        <div ref={messagesRef} className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto bg-slate-50 p-3 dark:bg-slate-900/60">{messages.map((message, index) => message.from === "bot" ? <BotMessage key={index}>{message.text.split("\n").map((line) => <span key={line} className="block">{line}</span>)}</BotMessage> : <UserMessage key={index}>{message.text}</UserMessage>)}
-          {step === "userType" && <><BotMessage>Are you a Parent or Student?</BotMessage><QuickReplies options={visibleOptions} onSelect={chooseUserType} /></>}
-          {visibleOptions.length > 0 && !["userType", "contact", "summary", "success", "parentName", "studentName", "otherClass", "otherRequirement"].includes(step) && <QuickReplies options={visibleOptions} onSelect={step === "studentClass" ? chooseClass : step === "courseCategory" ? chooseCourseCategory : step === "courseType" ? chooseCourseType : chooseRequirement} />}
-          {step === "contact" && <form onSubmit={review} className="space-y-2 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-950"><p className="text-xs font-semibold text-slate-600 dark:text-slate-300">Contact details</p>{data.userType === "parent" && <input value={data.parentName} readOnly className="chat-input" aria-label="Parent name" /> }<input value={data.studentName} readOnly className="chat-input" aria-label="Student name" /><input value={data.phone} onChange={(event) => update("phone", event.target.value)} placeholder="Phone number *" inputMode="tel" className="chat-input" required /><input value={data.email} onChange={(event) => update("email", event.target.value)} placeholder="Email (optional)" type="email" className="chat-input" /><div className="rounded-lg bg-slate-50 p-2 text-xs text-slate-600 dark:bg-slate-900 dark:text-slate-300">{data.courseCategory}{data.courseType ? ` · ${data.courseType}` : ""}</div><p className="text-[11px] text-slate-500">Your details are used only to respond to this enquiry.</p><button disabled={submitting} className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-3 py-2.5 text-sm font-semibold text-white disabled:opacity-60">Review Enquiry <Send size={15} /></button></form>}
-          {step === "summary" && <div className="space-y-2 rounded-xl border border-slate-200 bg-white p-3 text-xs dark:border-slate-700 dark:bg-slate-950"><p className="font-semibold text-slate-700 dark:text-slate-200">Please confirm your details:</p>{[["Name", data.userType === "parent" ? data.parentName : data.studentName], ["Student", data.studentName], ["Class", data.studentClass], ["Course", `${data.courseCategory} · ${data.courseType}`], ["Phone", data.phone], ["Email", data.email || "Not provided"], ["Requirement", data.requirement]].map(([label, value]) => <p key={label} className="flex gap-2"><span className="w-20 shrink-0 text-slate-500">{label}</span><span className="font-medium text-slate-700 dark:text-slate-200">{value}</span></p>)}<div className="flex gap-2 pt-2"><button type="button" onClick={() => setStep("contact")} className="flex-1 rounded-lg border border-slate-200 px-3 py-2 font-semibold text-slate-600 dark:border-slate-700 dark:text-slate-300">Edit Details</button><button type="button" onClick={submit} disabled={submitting} className="flex-1 rounded-lg bg-blue-600 px-3 py-2 font-semibold text-white disabled:opacity-60">{submitting ? "Sending…" : "Submit Enquiry"}</button></div></div>}
-          {step === "success" && <button type="button" onClick={reset} className="self-start rounded-full bg-blue-600 px-3 py-2 text-xs font-semibold text-white">Start New Chat</button>}
-        </div>
-        {error && <p className="border-t border-rose-100 bg-rose-50 px-3 py-2 text-xs text-rose-700 dark:border-rose-900 dark:bg-rose-950/40 dark:text-rose-300">{error}</p>}
-        {(["parentName", "studentName", "otherClass", "otherRequirement"].includes(step)) && <form onSubmit={(event) => { event.preventDefault(); askText(step); }} className="flex gap-2 border-t border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-950"><input autoFocus value={input} onChange={(event) => setInput(event.target.value)} placeholder="Type your answer…" className="chat-input flex-1" required /><button type="submit" aria-label="Send answer" className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-blue-600 text-white"><Send size={16} /></button></form>}
-      </div>}
-      <button type="button" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-label={open ? "Close chatbot" : "Chat with Ignite"} className="grid h-12 w-12 place-items-center rounded-full bg-[#006b4f] text-white shadow-lg transition hover:scale-105">{open ? <X size={22} /> : <MessageCircle size={22} />}</button>
-    </div>
-  </>;
+  return (
+    <>
+      <motion.a
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.94 }}
+        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello Ignite Institutions, I would like to know more about your courses.")}`}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Chat on WhatsApp"
+        className="ignite-floating-control fixed bottom-[5rem] right-5 z-[9998] grid h-12 w-12 place-items-center rounded-full bg-[#087f5b] text-white shadow-lg transition-colors hover:bg-[#076d4e] sm:right-6"
+      >
+        <WhatsAppIcon />
+      </motion.a>
+      <div className="ignite-floating-control fixed bottom-[8.5rem] right-5 z-[9997] sm:right-6">
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              key="chatbot-window"
+              initial={{ opacity: 0, scale: 0.9, y: 16, originX: 1, originY: 1 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 16 }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute bottom-16 right-0 flex h-[min(520px,calc(100vh-8rem))] w-[min(330px,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl dark:border-slate-700 dark:bg-slate-950"
+            >
+              <div className="flex items-center justify-between bg-[#006b4f] px-4 py-3 text-white">
+                <div>
+                  <p className="font-bold">Ignite Institutions</p>
+                  <p className="text-xs text-white/75">How can we help you?</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  aria-label="Close chat"
+                  className="rounded-full p-1 hover:bg-white/15"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+              <div
+                ref={messagesRef}
+                className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto bg-slate-50 p-3 dark:bg-slate-900/60"
+              >
+                {messages.map((message, index) =>
+                  message.from === "bot" ? (
+                    <BotMessage key={index}>
+                      {message.text.split("\n").map((line) => (
+                        <span key={line} className="block">
+                          {line}
+                        </span>
+                      ))}
+                    </BotMessage>
+                  ) : (
+                    <UserMessage key={index}>{message.text}</UserMessage>
+                  )
+                )}
+                {step === "userType" && (
+                  <>
+                    <BotMessage>Are you a Parent or Student?</BotMessage>
+                    <QuickReplies options={visibleOptions} onSelect={chooseUserType} />
+                  </>
+                )}
+                {visibleOptions.length > 0 &&
+                  ![
+                    "userType",
+                    "contact",
+                    "summary",
+                    "success",
+                    "parentName",
+                    "studentName",
+                    "otherClass",
+                    "otherRequirement",
+                  ].includes(step) && (
+                    <QuickReplies
+                      options={visibleOptions}
+                      onSelect={
+                        step === "studentClass"
+                          ? chooseClass
+                          : step === "courseCategory"
+                          ? chooseCourseCategory
+                          : step === "courseType"
+                          ? chooseCourseType
+                          : chooseRequirement
+                      }
+                    />
+                  )}
+                {step === "contact" && (
+                  <form
+                    onSubmit={review}
+                    className="space-y-2 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-950"
+                  >
+                    <p className="text-xs font-semibold text-slate-600 dark:text-slate-300">
+                      Contact details
+                    </p>
+                    {data.userType === "parent" && (
+                      <input
+                        value={data.parentName}
+                        readOnly
+                        className="chat-input"
+                        aria-label="Parent name"
+                      />
+                    )}
+                    <input
+                      value={data.studentName}
+                      readOnly
+                      className="chat-input"
+                      aria-label="Student name"
+                    />
+                    <input
+                      value={data.phone}
+                      onChange={(event) => update("phone", event.target.value)}
+                      placeholder="Phone number *"
+                      inputMode="tel"
+                      className="chat-input"
+                      required
+                    />
+                    <input
+                      value={data.email}
+                      onChange={(event) => update("email", event.target.value)}
+                      placeholder="Email (optional)"
+                      type="email"
+                      className="chat-input"
+                    />
+                    <div className="rounded-lg bg-slate-50 p-2 text-xs text-slate-600 dark:bg-slate-900 dark:text-slate-300">
+                      {data.courseCategory}
+                      {data.courseType ? ` · ${data.courseType}` : ""}
+                    </div>
+                    <p className="text-[11px] text-slate-500">
+                      Your details are used only to respond to this enquiry.
+                    </p>
+                    <button
+                      disabled={submitting}
+                      className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-3 py-2.5 text-sm font-semibold text-white disabled:opacity-60"
+                    >
+                      Review Enquiry <Send size={15} />
+                    </button>
+                  </form>
+                )}
+                {step === "summary" && (
+                  <div className="space-y-2 rounded-xl border border-slate-200 bg-white p-3 text-xs dark:border-slate-700 dark:bg-slate-950">
+                    <p className="font-semibold text-slate-700 dark:text-slate-200">
+                      Please confirm your details:
+                    </p>
+                    {[
+                      ["Name", data.userType === "parent" ? data.parentName : data.studentName],
+                      ["Student", data.studentName],
+                      ["Class", data.studentClass],
+                      ["Course", `${data.courseCategory} · ${data.courseType}`],
+                      ["Phone", data.phone],
+                      ["Email", data.email || "Not provided"],
+                      ["Requirement", data.requirement],
+                    ].map(([label, value]) => (
+                      <p key={label} className="flex gap-2">
+                        <span className="w-20 shrink-0 text-slate-500">{label}</span>
+                        <span className="font-medium text-slate-700 dark:text-slate-200">
+                          {value}
+                        </span>
+                      </p>
+                    ))}
+                    <div className="flex gap-2 pt-2">
+                      <button
+                        type="button"
+                        onClick={() => setStep("contact")}
+                        className="flex-1 rounded-lg border border-slate-200 px-3 py-2 font-semibold text-slate-600 dark:border-slate-700 dark:text-slate-300"
+                      >
+                        Edit Details
+                      </button>
+                      <button
+                        type="button"
+                        onClick={submit}
+                        disabled={submitting}
+                        className="flex-1 rounded-lg bg-blue-600 px-3 py-2 font-semibold text-white disabled:opacity-60"
+                      >
+                        {submitting ? "Sending…" : "Submit Enquiry"}
+                      </button>
+                    </div>
+                  </div>
+                )}
+                {step === "success" && (
+                  <button
+                    type="button"
+                    onClick={reset}
+                    className="self-start rounded-full bg-blue-600 px-3 py-2 text-xs font-semibold text-white"
+                  >
+                    Start New Chat
+                  </button>
+                )}
+              </div>
+              {error && (
+                <p className="border-t border-rose-100 bg-rose-50 px-3 py-2 text-xs text-rose-700 dark:border-rose-900 dark:bg-rose-950/40 dark:text-rose-300">
+                  {error}
+                </p>
+              )}
+              {["parentName", "studentName", "otherClass", "otherRequirement"].includes(
+                step
+              ) && (
+                <form
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                    askText(step);
+                  }}
+                  className="flex gap-2 border-t border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-950"
+                >
+                  <input
+                    autoFocus
+                    value={input}
+                    onChange={(event) => setInput(event.target.value)}
+                    placeholder="Type your answer…"
+                    className="chat-input flex-1"
+                    required
+                  />
+                  <button
+                    type="submit"
+                    aria-label="Send answer"
+                    className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-blue-600 text-white"
+                  >
+                    <Send size={16} />
+                  </button>
+                </form>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <motion.button
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.94 }}
+          type="button"
+          onClick={() => setOpen((value) => !value)}
+          aria-expanded={open}
+          aria-label={open ? "Close chatbot" : "Chat with Ignite"}
+          className="grid h-12 w-12 place-items-center rounded-full bg-[#006b4f] text-white shadow-lg transition-colors hover:bg-[#076d4e]"
+        >
+          {open ? <X size={22} /> : <MessageCircle size={22} />}
+        </motion.button>
+      </div>
+    </>
+  );
 }

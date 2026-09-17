@@ -2,8 +2,10 @@ import React, { useMemo, useRef, useState } from "react";
 import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import { motion, AnimatePresence } from "framer-motion";
 import Hero from "./AboutPage/Hero";
 import { parentTestimonials,studentTestimonials } from "../../data_results/testimonial_data";
+import { fadeUp, defaultViewport } from "../../animations/variants";
 
 // Generates a lightweight inline SVG avatar (initials on a soft blue field)
 // as a base64 data URI. Used as a fallback until a real photo is supplied
@@ -65,7 +67,7 @@ function TestimonialSlide({ t, role, seed = 0 }) {
           <div className="relative z-10">
             <Quote className="absolute -top-1 right-0 text-blue-50 dark:text-neutral-800" size={28} strokeWidth={1.5} />
 
-            <div data-aos="fade-left" className="flex gap-0.5 mb-4">
+            <div className="flex gap-0.5 mb-4">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star
                   key={i}
@@ -79,16 +81,16 @@ function TestimonialSlide({ t, role, seed = 0 }) {
               ))}
             </div>
 
-            <p data-aos="fade-up" className="text-neutral-700 dark:text-neutral-300 leading-relaxed text-[15px] sm:text-base min-h-[96px]">
+            <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed text-[15px] sm:text-base min-h-[96px]">
               {t.quote}
             </p>
 
             <div className="mt-6 flex items-center gap-3 pt-5 border-t border-neutral-100 dark:border-neutral-800">
               <div className="flex-1 min-w-0">
-                <p data-aos="zoom-in" className="font-medium text-neutral-900 dark:text-white text-sm">{t.name}</p>
-                <p data-aos="zoom-in" className="text-xs text-neutral-500 dark:text-neutral-400 truncate">{t.child}</p>
+                <p className="font-medium text-neutral-900 dark:text-white text-sm">{t.name}</p>
+                <p className="text-xs text-neutral-500 dark:text-neutral-400 truncate">{t.child}</p>
               </div>
-              <span data-aos="fade-in" className="text-[11px] font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 px-2.5 py-1 rounded-full shrink-0">
+              <span className="text-[11px] font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 px-2.5 py-1 rounded-full shrink-0">
                 {role}
               </span>
             </div>
@@ -220,18 +222,23 @@ export default function AboutTestimonials() {
   return (
     <section className="bg-white dark:bg-neutral-950">
       <Hero
-  title="Testimonials"
-  subtitle="Real experiences from the students and parents who've been part of the Ignite journey."
-  eyebrow="Success Stories"
-  imageSrc="/assets/images/testimonial_bg.webp"
-  abstract={<PDHeroWaveGrid/>}
-/>
+        title="Testimonials"
+        subtitle="Real experiences from the students and parents who've been part of the Ignite journey."
+        eyebrow="Success Stories"
+        imageSrc="/assets/images/testimonial_bg.webp"
+        abstract={<PDHeroWaveGrid />}
+      />
       <div className="max-w-7xl my-10 mx-auto px-6">
-        
-
-        <div className="flex justify-center mb-10">
-          <div className="inline-flex bg-neutral-100 dark:bg-neutral-900 rounded-full p-1">
-            <button
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={defaultViewport}
+          transition={{ duration: 0.5 }}
+          className="flex justify-center mb-10"
+        >
+          <div className="inline-flex bg-neutral-100 dark:bg-neutral-900 rounded-full p-1 border border-neutral-200/50 dark:border-neutral-800">
+            <motion.button
+              whileTap={{ scale: 0.96 }}
               type="button"
               onClick={() => setTab("parents")}
               className={`px-5 py-2 text-sm font-medium rounded-full transition-colors ${
@@ -241,8 +248,9 @@ export default function AboutTestimonials() {
               }`}
             >
               Parents
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileTap={{ scale: 0.96 }}
               type="button"
               onClick={() => setTab("students")}
               className={`px-5 py-2 text-sm font-medium rounded-full transition-colors ${
@@ -252,15 +260,33 @@ export default function AboutTestimonials() {
               }`}
             >
               Students
-            </button>
+            </motion.button>
           </div>
-        </div>
+        </motion.div>
 
-        {tab === "parents" ? (
-          <TestimonialCarousel data={parentTestimonials} role="Parent" />
-        ) : (
-          <TestimonialCarousel data={studentTestimonials} role="Student" />
-        )}
+        <AnimatePresence mode="wait">
+          {tab === "parents" ? (
+            <motion.div
+              key="parents"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+            >
+              <TestimonialCarousel data={parentTestimonials} role="Parent" />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="students"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+            >
+              <TestimonialCarousel data={studentTestimonials} role="Student" />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );

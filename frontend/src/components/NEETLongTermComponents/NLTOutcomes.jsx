@@ -1,4 +1,6 @@
 import { TrendingUp, Medal, BookMarked, UserCheck, School, Laptop, Globe, Star } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeUp, staggerContainer, scaleIn } from "../../animations/variants";
 
 const outcomes = [
   { icon: Medal,      title: "Top All-India NEET Ranks",         stat: "AIR 18",    statLabel: "Best rank 2026",           desc: "Ignite NEET students consistently appear in the Top 100 AIR, earning seats at AIIMS across India.", color: "emerald" },
@@ -22,15 +24,26 @@ export default function NLTOutcomes() {
     <section className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
       <div className="mx-auto max-w-7xl">
 
-        <div className="flex items-center gap-3">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-3"
+        >
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
           <span className="rounded-full bg-emerald-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400">
             Outcomes & Benefits
           </span>
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-        </div>
+        </motion.div>
 
-        <div className="mx-auto mt-6 max-w-2xl text-center">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mx-auto mt-6 max-w-2xl text-center"
+        >
           <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             What You Walk Away With
           </h2>
@@ -38,13 +51,24 @@ export default function NLTOutcomes() {
             Two years at Ignite doesn't just prepare you for NEET - it shapes the kind of
             doctor you'll become.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <motion.div
+          variants={staggerContainer(0.07, 0.1)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
+        >
           {outcomes.map(({ icon: Icon, title, desc, stat, statLabel, color }) => {
             const c = colorMap[color];
             return (
-              <div key={title} className={`flex flex-col rounded-3xl border p-6 ${c.bg} ${c.border}`}>
+              <motion.div
+                key={title}
+                variants={scaleIn}
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                className={`flex flex-col rounded-3xl border p-6 ${c.bg} ${c.border}`}
+              >
                 <div className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl ${c.icon}`}>
                   <Icon size={20} />
                 </div>
@@ -54,10 +78,10 @@ export default function NLTOutcomes() {
                 </div>
                 <h3 className="mt-3 text-sm font-extrabold text-neutral-950 dark:text-white">{title}</h3>
                 <p className="mt-1.5 flex-1 text-xs leading-5 text-neutral-500 dark:text-neutral-400">{desc}</p>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
       </div>
     </section>

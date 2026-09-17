@@ -1,4 +1,6 @@
-import { Atom, FlaskConical, BookOpen, Target, Star, Clock, Users, Trophy } from "lucide-react";
+import { motion } from "framer-motion";
+import { Atom, FlaskConical, BookOpen, Target, Star, Trophy } from "lucide-react";
+import { fadeUp, staggerContainer, staggerItem, cardReveal, defaultViewport } from "../../animations/variants";
 
 const subjects = [
   { icon: "🔢", name: "Mathematics", note: "Problem solving & aptitude" },
@@ -81,16 +83,23 @@ const colorMap = {
 };
 
 function TrackCard({ track }) {
-  const c = colorMap[track.color];
+  const c = colorMap[track.color] || colorMap.blue;
   const Icon = track.icon;
   return (
-    <div data-aos="fade-up" className="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-neutral-100 dark:bg-neutral-900 dark:ring-neutral-800">
+    <motion.div
+      variants={cardReveal}
+      whileHover={{ y: -6, transition: { duration: 0.25 } }}
+      className="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-neutral-100 dark:bg-neutral-900 dark:ring-neutral-800"
+    >
       {/* card header linear */}
       <div className={`bg-linear-to-br px-7 py-7 ${c.header}`}>
         <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/20">
+          <motion.div
+            whileHover={{ scale: 1.1, rotate: 6 }}
+            className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/20"
+          >
             <Icon size={20} className="text-white" />
-          </div>
+          </motion.div>
           <div>
             <p className="text-xs font-bold uppercase tracking-widest text-white/70">
               {track.classes}
@@ -139,43 +148,62 @@ function TrackCard({ track }) {
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 export default function SchoolFoundation() {
   return (
-    <section id="foundation" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
+    <section id="foundation" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40 overflow-hidden">
       <div className="mx-auto max-w-7xl">
         {/* section label */}
-        <div data-aos="fade-up" className="flex items-center gap-3">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={fadeUp}
+          className="flex items-center gap-3"
+        >
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
           <span className="rounded-full bg-blue-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">
             Classes 6 – 10 · Foundation
           </span>
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-        </div>
+        </motion.div>
 
-        <div className="mt-8 max-w-2xl">
-          <h2 data-aos="fade-up" className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={fadeUp}
+          className="mt-8 max-w-2xl"
+        >
+          <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             IIT & NEET Foundation{" "}
-            <span data-aos="fade-up" className="text-blue-600 dark:text-blue-400">
+            <span className="text-blue-600 dark:text-blue-400">
               from Class 6
             </span>
           </h2>
-          <p data-aos="fade-up" className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
+          <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Students who start preparing early have a decisive edge. Our
             foundation programme introduces competitive exam thinking in a
             fun, age-appropriate way - without overwhelming the child.
           </p>
-        </div>
+        </motion.div>
 
         {/* subjects covered strip */}
-        <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={staggerContainer}
+          className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4"
+        >
           {subjects.map(({ icon, name, note }) => (
-            <div
-              data-aos="zoom-in"
+            <motion.div
               key={name}
+              variants={staggerItem}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
               className="flex items-center gap-3 rounded-2xl bg-white px-4 py-4 shadow-sm dark:bg-neutral-900"
             >
               <span className="text-2xl">{icon}</span>
@@ -183,23 +211,36 @@ export default function SchoolFoundation() {
                 <p className="text-sm font-bold text-neutral-950 dark:text-white">{name}</p>
                 <p className="text-xs text-neutral-500">{note}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* track cards */}
-        <div data-aos="fade-up" className="mt-10 grid gap-6 md:grid-cols-2">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={staggerContainer}
+          className="mt-10 grid gap-6 md:grid-cols-2"
+        >
           {tracks.map((t) => (
             <TrackCard key={t.id} track={t} />
           ))}
-        </div>
+        </motion.div>
 
         {/* extras row */}
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={staggerContainer}
+          className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+        >
           {extras.map(({ icon: Icon, label, desc }) => (
-            <div
-              data-aos="zoom-in"
+            <motion.div
               key={label}
+              variants={staggerItem}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
               className="flex gap-3 rounded-2xl bg-white p-5 shadow-sm dark:bg-neutral-900"
             >
               <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-100 dark:bg-blue-950/40">
@@ -209,9 +250,9 @@ export default function SchoolFoundation() {
                 <p className="text-sm font-bold text-neutral-950 dark:text-white">{label}</p>
                 <p className="mt-0.5 text-xs leading-5 text-neutral-500 dark:text-neutral-500">{desc}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

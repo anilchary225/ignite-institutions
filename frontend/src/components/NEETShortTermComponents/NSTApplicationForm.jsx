@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Send, CheckCircle, AlertCircle, User, Mail, Phone, GraduationCap, MapPin, BookOpen, Calendar } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { fadeUp, staggerContainer } from "../../animations/variants";
 import { submitEnquiry } from "../../lib/enquiryApi";
 
 const INITIAL = { name: "", email: "", phone: "", currentClass: "", school: "", city: "", previousScore: "", targetYear: "", message: "" };
@@ -89,157 +91,210 @@ export default function NSTApplicationForm() {
     }
   };
 
-  if (status === "success") {
-    return (
-      <section id="apply" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
-        <div className="mx-auto max-w-lg text-center">
-          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-green-100 dark:bg-green-950/30">
-            <CheckCircle size={40} className="text-green-500" />
-          </div>
-          <h2 className="mt-6 text-2xl font-extrabold text-neutral-950 dark:text-white">You're on the list!</h2>
-          <p className="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
-            Thanks, <strong>{form.name}</strong>! Our admissions counsellor will call within 24 hours to walk you through batch options, eligibility, and fee structure.
-          </p>
-          <button
-            onClick={() => { setStatus("idle"); setForm(INITIAL); }}
-            className="mt-6 rounded-xl border border-neutral-200 px-6 py-2.5 text-sm font-bold text-neutral-600 transition hover:border-green-400 hover:text-green-600 dark:border-neutral-700"
-          >
-            Submit another
-          </button>
-        </div>
-      </section>
-    );
-  }
-
   return (
-    <section id="apply" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
-      <div className="mx-auto max-w-7xl">
-
-        <div className="flex items-center gap-3">
-          <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-          <span className="rounded-full bg-green-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-green-700 dark:bg-green-950/40 dark:text-green-400">
-            Apply Now
-          </span>
-          <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-        </div>
-
-        <div className="mt-6 grid gap-10 lg:grid-cols-[1fr_520px]">
-
-          {/* left info */}
-          <div>
-            <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
-              Your AIIMS Year Starts Here
-            </h2>
-            <p className="mt-4 text-sm leading-7 text-neutral-600 dark:text-neutral-400">
-              Fill in your details and our counsellor will get in touch within 24 hours with batch schedules, fee options, and eligibility for the NEET Short-Term programme.
+    <AnimatePresence mode="wait">
+      {status === "success" ? (
+        <motion.section
+          key="success"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          id="apply"
+          className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40"
+        >
+          <div className="mx-auto max-w-lg text-center">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 200, damping: 15 }}
+              className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-green-100 dark:bg-green-950/30"
+            >
+              <CheckCircle size={40} className="text-green-500" />
+            </motion.div>
+            <h2 className="mt-6 text-2xl font-extrabold text-neutral-950 dark:text-white">You're on the list!</h2>
+            <p className="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+              Thanks, <strong>{form.name}</strong>! Our admissions counsellor will call within 24 hours to walk you through batch options, eligibility, and fee structure.
             </p>
-
-            <div className="mt-8 rounded-3xl border border-green-200 bg-green-50 p-6 dark:border-green-900/30 dark:bg-green-950/10">
-              <p className="text-xs font-black uppercase tracking-widest text-green-700 dark:text-green-400">Who Should Apply?</p>
-              <ul className="mt-4 space-y-3">
-                {[
-                  "Students currently in Class 12 targeting NEET 2025",
-                  "Droppers who want a structured, intensive second attempt",
-                  "Students who appeared but want a significantly better score",
-                  "Class 11 completers who want 12-month intensive prep",
-                ].map(item => (
-                  <li key={item} className="flex items-start gap-2.5 text-sm text-neutral-700 dark:text-neutral-300">
-                    <span className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-green-200 dark:bg-green-900">
-                      <span className="h-1.5 w-1.5 rounded-full bg-green-600" />
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <ul className="mt-6 space-y-4">
-              {[
-                { icon: Calendar, label: "Batch Starts",  value: "January, April & June batches available" },
-                { icon: MapPin,   label: "Location",      value: "Ignite Academy, Hyderabad · Hostel available" },
-                { icon: Phone,    label: "Helpline",      value: "+91 98765 43210 (Mon–Sat, 9am–6pm)" },
-              ].map(({ icon: Icon, label, value }) => (
-                <li key={label} className="flex items-start gap-3">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-green-100 text-green-600 dark:bg-green-950/40 dark:text-green-400">
-                    <Icon size={14} />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-widest text-neutral-500">{label}</p>
-                    <p className="mt-0.5 text-sm font-semibold text-neutral-800 dark:text-neutral-200">{value}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.96 }}
+              onClick={() => { setStatus("idle"); setForm(INITIAL); }}
+              className="mt-6 rounded-xl border border-neutral-200 px-6 py-2.5 text-sm font-bold text-neutral-600 transition hover:border-green-400 hover:text-green-600 dark:border-neutral-700"
+            >
+              Submit another
+            </motion.button>
           </div>
+        </motion.section>
+      ) : (
+        <motion.section
+          key="form"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          id="apply"
+          className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40"
+        >
+          <div className="mx-auto max-w-7xl">
 
-          {/* right form */}
-          <div>
-            <form onSubmit={handleSubmit} noValidate className="rounded-3xl bg-white p-8 shadow-sm ring-1 ring-neutral-100 dark:bg-neutral-900 dark:ring-neutral-800">
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-green-500 to-green-500">
-                  <Send size={16} className="text-white" />
-                </div>
-                <div>
-                  <h3 className="text-base font-extrabold text-neutral-950 dark:text-white">NEET Short-Term Enquiry</h3>
-                  <p className="text-xs text-neutral-400">We'll respond within 24 hours</p>
-                </div>
-              </div>
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-3"
+            >
+              <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
+              <span className="rounded-full bg-green-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-green-700 dark:bg-green-950/40 dark:text-green-400">
+                Apply Now
+              </span>
+              <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
+            </motion.div>
 
-              <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                <div className="sm:col-span-2">
-                  <Field label="Full Name" name="name" type="text" required icon={User} placeholder="Your full name" value={form.name} onChange={handleChange} error={errors.name} />
-                </div>
-                <Field label="Email" name="email" type="email" required icon={Mail} placeholder="you@example.com" value={form.email} onChange={handleChange} error={errors.email} />
-                <Field label="Phone" name="phone" type="tel" required icon={Phone} placeholder="10-digit mobile" value={form.phone} onChange={handleChange} error={errors.phone} />
-                <SelectField
-                  label="Current Status" name="currentClass" required icon={GraduationCap}
-                  options={["Currently in Class 12 (NEET 2025)", "Dropper - 1st attempt", "Dropper - 2nd attempt", "Class 11 completed"]}
-                  value={form.currentClass} onChange={handleChange} error={errors.currentClass}
-                />
-                <SelectField
-                  label="Target Year" name="targetYear" icon={Calendar}
-                  options={["NEET 2025", "NEET 2026"]}
-                  value={form.targetYear} onChange={handleChange} error={errors.targetYear}
-                />
-                <Field label="Previous NEET Score" name="previousScore" type="text" icon={BookOpen} placeholder="e.g. 620/720 (if appeared)" value={form.previousScore} onChange={handleChange} error={errors.previousScore} />
-                <Field label="City" name="city" type="text" required icon={MapPin} placeholder="Your city" value={form.city} onChange={handleChange} error={errors.city} />
-                <div className="sm:col-span-2">
-                  <label className="mb-1.5 block text-xs font-bold text-neutral-700 dark:text-neutral-300">
-                    Anything specific? <span className="font-normal text-neutral-400">(optional)</span>
-                  </label>
-                  <textarea
-                    name="message" value={form.message} onChange={handleChange} rows={3}
-                    placeholder="Hostel availability, fee structure, dropper batch details, Biology coaching…"
-                    className="w-full resize-none rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-950 placeholder-neutral-400 outline-none transition focus:border-green-400 focus:ring-2 focus:ring-green-100 dark:border-neutral-700 dark:bg-neutral-950 dark:text-white dark:placeholder-neutral-600"
-                  />
-                </div>
-              </div>
+            <div className="mt-6 grid gap-10 lg:grid-cols-[1fr_520px]">
 
-              {status === "error" && (
-                <div className="mt-4 flex items-center gap-2 rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700 dark:bg-rose-950/20">
-                  <AlertCircle size={14} /> Something went wrong. Please try again.
-                </div>
-              )}
-
-              <button
-                type="submit"
-                disabled={status === "submitting"}
-                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-green-500 to-green-500 py-3.5 text-sm font-black text-white shadow-lg shadow-green-100 transition hover:from-green-600 hover:to-green-600 disabled:opacity-60 dark:shadow-green-900/20"
+              {/* left info */}
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
               >
-                {status === "submitting" ? (
-                  <><span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" /> Submitting…</>
-                ) : (
-                  <>Submit Enquiry <Send size={14} /></>
-                )}
-              </button>
+                <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+                  Your AIIMS Year Starts Here
+                </h2>
+                <p className="mt-4 text-sm leading-7 text-neutral-600 dark:text-neutral-400">
+                  Fill in your details and our counsellor will get in touch within 24 hours with batch schedules, fee options, and eligibility for the NEET Short-Term programme.
+                </p>
 
-              <p className="mt-3 text-center text-xs text-neutral-400">
-                🔒 Your data is private. No spam. No third-party sharing.
-              </p>
-            </form>
+                <motion.div
+                  variants={fadeUp}
+                  className="mt-8 rounded-3xl border border-green-200 bg-green-50 p-6 dark:border-green-900/30 dark:bg-green-950/10"
+                >
+                  <p className="text-xs font-black uppercase tracking-widest text-green-700 dark:text-green-400">Who Should Apply?</p>
+                  <ul className="mt-4 space-y-3">
+                    {[
+                      "Students currently in Class 12 targeting NEET 2025",
+                      "Droppers who want a structured, intensive second attempt",
+                      "Students who appeared but want a significantly better score",
+                      "Class 11 completers who want 12-month intensive prep",
+                    ].map(item => (
+                      <li key={item} className="flex items-start gap-2.5 text-sm text-neutral-700 dark:text-neutral-300">
+                        <span className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-green-200 dark:bg-green-900">
+                          <span className="h-1.5 w-1.5 rounded-full bg-green-600" />
+                        </span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+
+                <motion.ul
+                  variants={staggerContainer(0.1, 0.1)}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  className="mt-6 space-y-4"
+                >
+                  {[
+                    { icon: Calendar, label: "Batch Starts",  value: "January, April & June batches available" },
+                    { icon: MapPin,   label: "Location",      value: "Ignite Academy, Hyderabad · Hostel available" },
+                    { icon: Phone,    label: "Helpline",      value: "+91 98765 43210 (Mon–Sat, 9am–6pm)" },
+                  ].map(({ icon: Icon, label, value }) => (
+                    <motion.li key={label} variants={fadeUp} className="flex items-start gap-3">
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-green-100 text-green-600 dark:bg-green-950/40 dark:text-green-400">
+                        <Icon size={14} />
+                      </div>
+                      <div>
+                        <p className="text-xs font-bold uppercase tracking-widest text-neutral-500">{label}</p>
+                        <p className="mt-0.5 text-sm font-semibold text-neutral-800 dark:text-neutral-200">{value}</p>
+                      </div>
+                    </motion.li>
+                  ))}
+                </motion.ul>
+              </motion.div>
+
+              {/* right form */}
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+              >
+                <form onSubmit={handleSubmit} noValidate className="rounded-3xl bg-white p-8 shadow-sm ring-1 ring-neutral-100 dark:bg-neutral-900 dark:ring-neutral-800">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-green-500 to-green-600">
+                      <Send size={16} className="text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-base font-extrabold text-neutral-950 dark:text-white">NEET Short-Term Enquiry</h3>
+                      <p className="text-xs text-neutral-400">We'll respond within 24 hours</p>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                    <div className="sm:col-span-2">
+                      <Field label="Full Name" name="name" type="text" required icon={User} placeholder="Your full name" value={form.name} onChange={handleChange} error={errors.name} />
+                    </div>
+                    <Field label="Email" name="email" type="email" required icon={Mail} placeholder="you@example.com" value={form.email} onChange={handleChange} error={errors.email} />
+                    <Field label="Phone" name="phone" type="tel" required icon={Phone} placeholder="10-digit mobile" value={form.phone} onChange={handleChange} error={errors.phone} />
+                    <SelectField
+                      label="Current Status" name="currentClass" required icon={GraduationCap}
+                      options={["Currently in Class 12 (NEET 2025)", "Dropper - 1st attempt", "Dropper - 2nd attempt", "Class 11 completed"]}
+                      value={form.currentClass} onChange={handleChange} error={errors.currentClass}
+                    />
+                    <SelectField
+                      label="Target Year" name="targetYear" icon={Calendar}
+                      options={["NEET 2025", "NEET 2026"]}
+                      value={form.targetYear} onChange={handleChange} error={errors.targetYear}
+                    />
+                    <Field label="Previous NEET Score" name="previousScore" type="text" icon={BookOpen} placeholder="e.g. 620/720 (if appeared)" value={form.previousScore} onChange={handleChange} error={errors.previousScore} />
+                    <Field label="City" name="city" type="text" required icon={MapPin} placeholder="Your city" value={form.city} onChange={handleChange} error={errors.city} />
+                    <div className="sm:col-span-2">
+                      <label className="mb-1.5 block text-xs font-bold text-neutral-700 dark:text-neutral-300">
+                        Anything specific? <span className="font-normal text-neutral-400">(optional)</span>
+                      </label>
+                      <textarea
+                        name="message" value={form.message} onChange={handleChange} rows={3}
+                        placeholder="Hostel availability, fee structure, dropper batch details, Biology coaching…"
+                        className="w-full resize-none rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-950 placeholder-neutral-400 outline-none transition focus:border-green-400 focus:ring-2 focus:ring-green-100 dark:border-neutral-700 dark:bg-neutral-950 dark:text-white dark:placeholder-neutral-600"
+                      />
+                    </div>
+                  </div>
+
+                  <AnimatePresence>
+                    {status === "error" && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="mt-4 flex items-center gap-2 rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700 dark:bg-rose-950/20"
+                      >
+                        <AlertCircle size={14} /> Something went wrong. Please try again.
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.97 }}
+                    type="submit"
+                    disabled={status === "submitting"}
+                    className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-green-500 to-green-600 py-3.5 text-sm font-black text-white shadow-lg shadow-green-100 transition hover:from-green-600 hover:to-green-700 disabled:opacity-60 dark:shadow-green-900/20"
+                  >
+                    {status === "submitting" ? (
+                      <><span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" /> Submitting…</>
+                    ) : (
+                      <>Submit Enquiry <Send size={14} /></>
+                    )}
+                  </motion.button>
+
+                  <p className="mt-3 text-center text-xs text-neutral-400">
+                    🔒 Your data is private. No spam. No third-party sharing.
+                  </p>
+                </form>
+              </motion.div>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </motion.section>
+      )}
+    </AnimatePresence>
   );
 }

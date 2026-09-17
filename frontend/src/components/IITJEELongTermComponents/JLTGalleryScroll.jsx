@@ -1,7 +1,8 @@
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight, ImageIcon } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations/variants";
 
-// Placeholder slots - user will replace src with real images
 const images = [
   { id: 1,  src: "/assets/images/events/Classrooms/DSC00003.webp",                     alt: "Ignite classroom session" },
   { id: 2,  src: "/assets/images/events/Science Lab/DSC00040.webp",             alt: "Physics lab session" },
@@ -26,7 +27,13 @@ export default function JLTGalleryScroll() {
       <div className="mx-auto max-w-7xl">
 
         {/* header row */}
-        <div className="flex items-end justify-between">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="flex items-end justify-between"
+        >
           <div>
             <div className="inline-flex items-center gap-2 rounded-full bg-indigo-100 px-4 py-1.5 dark:bg-indigo-950/40">
               <ImageIcon size={13} className="text-indigo-600 dark:text-indigo-400" />
@@ -44,22 +51,26 @@ export default function JLTGalleryScroll() {
 
           {/* scroll controls */}
           <div className="hidden shrink-0 items-center gap-2 sm:flex">
-            <button
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.92 }}
               onClick={() => scroll(-1)}
               className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-600 transition hover:border-indigo-400 hover:text-indigo-600 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400"
               aria-label="Scroll left"
             >
               <ChevronLeft size={18} />
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.92 }}
               onClick={() => scroll(1)}
               className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-600 transition hover:border-indigo-400 hover:text-indigo-600 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400"
               aria-label="Scroll right"
             >
               <ChevronRight size={18} />
-            </button>
+            </motion.button>
           </div>
-        </div>
+        </motion.div>
 
         {/* horizontal scroll strip */}
         <div
@@ -68,8 +79,9 @@ export default function JLTGalleryScroll() {
           style={{ scrollbarWidth: "none" }}
         >
           {images.map((img) => (
-            <div
+            <motion.div
               key={img.id}
+              whileHover={{ y: -4 }}
               className="group relative shrink-0 w-[340px] sm:w-[400px] overflow-hidden rounded-2xl shadow-sm"
             >
               <img
@@ -81,7 +93,7 @@ export default function JLTGalleryScroll() {
               <p className="absolute bottom-3 left-3 right-3 text-xs font-semibold text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 {img.alt}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
 

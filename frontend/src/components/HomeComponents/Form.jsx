@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Phone,
   Mail,
@@ -9,6 +10,7 @@ import {
   Clock,
 } from "lucide-react";
 import { submitEnquiry } from "../../lib/enquiryApi";
+import { staggerContainer, staggerItem, cardReveal, defaultViewport, fadeUp, scaleIn } from "../../animations/variants";
 
 const mpcOptions = ["IIT-JEE", "BITSAT", "EAPCET"];
 const bipcOptions = ["NEET", "EAPCET"];
@@ -55,9 +57,11 @@ function InputField({
 
 function Chip({ label, active, onClick }) {
   return (
-    <button
+    <motion.button
       type="button"
       onClick={onClick}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.94 }}
       className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all ${
         active
           ? "bg-orange-500 border-orange-500 text-white shadow-sm"
@@ -65,7 +69,7 @@ function Chip({ label, active, onClick }) {
       }`}
     >
       {label}
-    </button>
+    </motion.button>
   );
 }
 
@@ -202,47 +206,64 @@ export default function Form() {
     <section className="bg-white dark:bg-neutral-950 border-t border-neutral-100 dark:border-neutral-800 py-14 px-4 sm:px-8 sm:py-16 transition-colors">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-10">
-          <span className="inline-block text-xs font-bold tracking-[0.25em] text-orange-500 uppercase mb-2">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="text-center mb-10"
+        >
+          <motion.span variants={staggerItem} className="inline-block text-xs font-bold tracking-[0.25em] text-orange-500 uppercase mb-2">
             Get In Touch
-          </span>
-          <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-white sm:text-3xl">
+          </motion.span>
+          <motion.h2 variants={staggerItem} className="text-2xl font-extrabold text-neutral-900 dark:text-white sm:text-3xl">
             Contact Us
-          </h2>
-          <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400 max-w-md mx-auto">
-            Have questions about admissions or programs? We're here to help.
-          </p>
-        </div>
+          </motion.h2>
+          <motion.p variants={staggerItem} className="mt-2 text-sm text-neutral-500 dark:text-neutral-400 max-w-md mx-auto">
+            Have questions about admissions or programs? We&apos;re here to help.
+          </motion.p>
+        </motion.div>
 
         <div className="grid lg:grid-cols-[320px_1fr] gap-6">
           {/* Left panel */}
-          <div className="flex flex-col gap-4">
-            <div className="bg-neutral-50 dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-5 shadow-sm">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={defaultViewport}
+            className="flex flex-col gap-4"
+          >
+            <motion.div
+              variants={cardReveal}
+              className="bg-neutral-50 dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-5 shadow-sm"
+            >
               <h3 className="text-sm font-bold text-neutral-900 dark:text-white mb-4">
                 Contact Information
               </h3>
               <div className="flex flex-col gap-4">
                 {contactInfo.map(({ icon: Icon, label, value, color }) => (
-                  <div key={label} className="flex items-center gap-3">
-                    <span
-                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${color} text-white`}
-                    >
+                  <motion.div
+                    key={label}
+                    variants={staggerItem}
+                    whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                    className="flex items-center gap-3"
+                  >
+                    <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${color} text-white`}>
                       <Icon size={15} />
                     </span>
                     <div>
-                      <p className="text-[10px] font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide">
-                        {label}
-                      </p>
-                      <p className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
-                        {value}
-                      </p>
+                      <p className="text-[10px] font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide">{label}</p>
+                      <p className="text-sm font-medium text-neutral-800 dark:text-neutral-200">{value}</p>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
-            <div className="rounded-2xl bg-orange-500 p-5 text-white">
+            <motion.div
+              variants={scaleIn}
+              className="rounded-2xl bg-orange-500 p-5 text-white"
+            >
               <h4 className="font-bold text-sm mb-2">Admissions 2026–28</h4>
               <p className="text-xs text-white/90 leading-relaxed">
                 MPC (IIT-JEE) and BiPC (NEET) seats are filling fast. Submit
@@ -250,38 +271,52 @@ export default function Form() {
               </p>
               <div className="mt-3 flex gap-2 flex-wrap">
                 {["MPC", "BiPC", "Foundation"].map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2.5 py-0.5 rounded-full bg-white/20 text-xs font-semibold"
-                  >
-                    {tag}
-                  </span>
+                  <span key={tag} className="px-2.5 py-0.5 rounded-full bg-white/20 text-xs font-semibold">{tag}</span>
                 ))}
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Form */}
-          <div className="bg-neutral-50 dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-5 sm:p-7 shadow-sm">
-            {submitted ? (
-              <div className="flex flex-col items-center justify-center h-full gap-4 py-12 text-center">
-                <div className="w-14 h-14 rounded-full bg-green-100 dark:bg-green-700/20 flex items-center justify-center text-green-600 dark:text-green-400 text-2xl font-black">
-                  ✓
-                </div>
-                <h3 className="text-lg font-bold text-neutral-900 dark:text-white">
-                  Message Sent!
-                </h3>
-                <p className="text-sm text-neutral-500 dark:text-neutral-400 max-w-xs">
-                  Our admissions team will contact you within 24 hours.
-                </p>
-                <button
-                  onClick={() => setSubmitted(false)}
-                  className="text-sm text-orange-500 font-semibold hover:underline"
+          <motion.div
+            variants={cardReveal}
+            initial="hidden"
+            whileInView="visible"
+            viewport={defaultViewport}
+            className="bg-neutral-50 dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-5 sm:p-7 shadow-sm"
+          >
+            <AnimatePresence mode="wait">
+              {submitted ? (
+                <motion.div
+                  key="success"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex flex-col items-center justify-center h-full gap-4 py-12 text-center"
                 >
-                  Send another
-                </button>
-              </div>
-            ) : (
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 18, delay: 0.1 }}
+                    className="w-14 h-14 rounded-full bg-green-100 dark:bg-green-700/20 flex items-center justify-center text-green-600 dark:text-green-400 text-2xl font-black"
+                  >
+                    ✓
+                  </motion.div>
+                  <h3 className="text-lg font-bold text-neutral-900 dark:text-white">Message Sent!</h3>
+                  <p className="text-sm text-neutral-500 dark:text-neutral-400 max-w-xs">
+                    Our admissions team will contact you within 24 hours.
+                  </p>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => setSubmitted(false)}
+                    className="text-sm text-orange-500 font-semibold hover:underline"
+                  >
+                    Send another
+                  </motion.button>
+                </motion.div>
+              ) : (
               <form onSubmit={handleSubmit} noValidate className="space-y-4">
                 <div className="grid sm:grid-cols-2 gap-4">
                   {/* First Name */}
@@ -427,22 +462,32 @@ export default function Form() {
                     )}
                   </div>
                 </div>
-                <button
+                <motion.button
                   type="submit"
                   disabled={loading}
+                  whileHover={!loading ? { scale: 1.03 } : {}}
+                  whileTap={!loading ? { scale: 0.96 } : {}}
                   className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-white font-semibold px-6 py-2.5 rounded-xl text-sm shadow-sm shadow-orange-500/20"
                 >
                   {loading ? "Sending..." : "Send Message"}
                   {!loading && <Send size={14} />}
-                </button>
-                {submitStatus && (
-                  <p className="text-sm font-medium text-green-600 dark:text-green-400">
-                    {submitStatus}
-                  </p>
-                )}
+                </motion.button>
+                <AnimatePresence>
+                  {submitStatus && (
+                    <motion.p
+                      initial={{ opacity: 0, y: -6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      className="text-sm font-medium text-green-600 dark:text-green-400"
+                    >
+                      {submitStatus}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
               </form>
-            )}
-          </div>
+              )}
+            </AnimatePresence>
+          </motion.div>
         </div>
       </div>
     </section>

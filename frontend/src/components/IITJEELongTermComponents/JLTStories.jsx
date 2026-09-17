@@ -1,4 +1,6 @@
 import { Quote, Trophy } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeUp, staggerContainer } from "../../animations/variants";
 
 const stories = [
   {
@@ -59,7 +61,12 @@ export default function JLTStories() {
     <section className="bg-white px-6 py-20 dark:bg-neutral-950">
       <div className="mx-auto max-w-7xl">
 
-        <div className="flex items-center gap-3">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-3"
+        >
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
           <div className="flex items-center gap-2 rounded-full bg-amber-100 px-4 py-1.5 dark:bg-amber-950/40">
             <Trophy size={14} className="text-amber-600" />
@@ -68,24 +75,38 @@ export default function JLTStories() {
             </span>
           </div>
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-        </div>
+        </motion.div>
 
-        <div className="mx-auto mt-6 max-w-2xl text-center">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mx-auto mt-6 max-w-2xl text-center"
+        >
           <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             From Our Classroom to the IITs
           </h2>
           <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Every rank has a story behind it. Here are four of them - in their own words.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2">
+        <motion.div
+          variants={staggerContainer(0.12, 0.15)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-12 grid gap-6 sm:grid-cols-2"
+        >
           {stories.map((s) => {
             const c = colorMap[s.color];
             return (
-              <div
+              <motion.div
                 key={s.name}
-                className="group relative flex flex-col gap-5 rounded-3xl bg-neutral-50 p-7 shadow-sm ring-1 ring-neutral-100 transition hover:shadow-md dark:bg-neutral-900 dark:ring-neutral-800"
+                variants={fadeUp}
+                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                className="group relative flex flex-col gap-5 rounded-3xl bg-neutral-50 p-7 shadow-sm ring-1 ring-neutral-100 transition-shadow hover:shadow-xl dark:bg-neutral-900 dark:ring-neutral-800"
               >
                 {/* quote icon */}
                 <Quote size={28} className="text-neutral-200 dark:text-neutral-800" />
@@ -114,10 +135,10 @@ export default function JLTStories() {
                     <p className="mt-0.5 text-[9px] text-white/70">AIR</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
       </div>
     </section>

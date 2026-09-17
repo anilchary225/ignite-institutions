@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
 import { FileText, Check } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeUp, staggerContainer } from "../../animations/variants";
 
 /**
  * DocumentsSidebar
@@ -35,9 +37,12 @@ export default function DocumentsSidebar({ documents, selectedId, onSelect }) {
         lg:sticky lg:top-24 lg:self-start
       "
     >
-      <ul
+      <motion.ul
         role="listbox"
         aria-label="Available documents"
+        variants={staggerContainer(0.04, 0.05)}
+        initial="hidden"
+        animate="visible"
         className="
           flex flex-row lg:flex-col gap-2.5
           overflow-x-auto lg:overflow-x-hidden lg:overflow-y-auto
@@ -54,8 +59,9 @@ export default function DocumentsSidebar({ documents, selectedId, onSelect }) {
         {documents.map((doc, index) => {
           const isActive = doc.id === selectedId;
           return (
-            <li
+            <motion.li
               key={doc.id}
+              variants={fadeUp}
               role="option"
               aria-selected={isActive}
               className="flex-shrink-0 lg:flex-shrink lg:w-full"
@@ -120,10 +126,10 @@ export default function DocumentsSidebar({ documents, selectedId, onSelect }) {
                   </span>
                 )}
               </button>
-            </li>
+            </motion.li>
           );
         })}
-      </ul>
+      </motion.ul>
     </nav>
   );
 }

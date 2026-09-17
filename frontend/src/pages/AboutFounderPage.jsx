@@ -1,5 +1,16 @@
 import React from "react";
+import { motion } from "framer-motion";
 import Hero from "../components/AboutPageComponents/AboutPage/Hero";
+import {
+  fadeUp,
+  fadeIn,
+  staggerContainer,
+  staggerItem,
+  cardReveal,
+  imageReveal,
+  defaultViewport,
+  scaleIn,
+} from "../animations/variants";
 
 const highlights = [
   {
@@ -87,7 +98,12 @@ function AbstractBg({ position = "top-right", className = "" }) {
 
 export default function AboutFounderPage() {
   return (
-    <main className="bg-white text-neutral-900 transition-colors dark:bg-neutral-950 dark:text-white">
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4 }}
+      className="bg-white text-neutral-900 transition-colors dark:bg-neutral-950 dark:text-white"
+    >
       <Hero
         title="About the founder"
         subtitle="Mr. K. Ramesh, Founder and Chairman of IGNITE"
@@ -96,97 +112,125 @@ export default function AboutFounderPage() {
       />
 
       {/* PORTRAIT + INTRO */}
-      <section className="mx-auto max-w-6xl px-6 py-14 sm:py-16 lg:py-20">
-        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-          <div className="relative mx-auto w-full max-w-sm lg:mx-0">
-            <div data-aos="fade-up" className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800">
+      <section className="mx-auto max-w-6xl px-6 py-14 sm:py-16 lg:py-20 overflow-hidden">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start"
+        >
+          <motion.div variants={imageReveal} className="relative mx-auto w-full max-w-sm lg:mx-0">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-neutral-200 shadow-sm dark:border-neutral-800">
               <img
                 src="/assets/images/Ramesh sir/VIJ06233.webp"
                 alt="Portrait of Mr. K. Ramesh, Founder and Chairman of IGNITE"
-                className="h-full w-full object-cover object-top"
+                className="h-full w-full object-cover object-top transition duration-500 hover:scale-105"
               />
             </div>
-            <div data-aos="zoom-in" className="absolute -bottom-4 left-5 right-5 rounded-xl border border-neutral-200 bg-white px-4 py-3 dark:border-neutral-800 dark:bg-neutral-900">
+            <motion.div
+              variants={fadeUp}
+              className="absolute -bottom-4 left-5 right-5 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-md dark:border-neutral-800 dark:bg-neutral-900"
+            >
               <p className="text-[11px] font-medium uppercase tracking-widest text-blue-600 dark:text-blue-400">
                 Founder & Chairman
               </p>
-              <p  className="mt-0.5 text-sm font-medium text-neutral-900 dark:text-white">Mr. K. Ramesh</p>
-            </div>
-          </div>
+              <p className="mt-0.5 text-sm font-medium text-neutral-900 dark:text-white">Mr. K. Ramesh</p>
+            </motion.div>
+          </motion.div>
 
-          <div>
-            <p data-aos="fade-up" className="text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
+          <motion.div variants={staggerContainer}>
+            <motion.p variants={fadeUp} className="text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
               Founder & Chairman
-            </p>
-            <h2 data-aos="fade-up" className="mt-3 text-3xl font-semibold text-neutral-900 dark:text-white sm:text-4xl">
+            </motion.p>
+            <motion.h2 variants={fadeUp} className="mt-3 text-3xl font-semibold text-neutral-900 dark:text-white sm:text-4xl">
               Mr. K. Ramesh
-            </h2>
-            <p data-aos="fade-up" className="mt-5 max-w-2xl text-base leading-8 text-neutral-600 dark:text-neutral-300">
+            </motion.h2>
+            <motion.p variants={fadeUp} className="mt-5 max-w-2xl text-base leading-8 text-neutral-600 dark:text-neutral-300">
               Mr. K. Ramesh built IGNITE with a clear belief: education must do more
               than produce ranks. It must shape confident, compassionate, and
               responsible young people who are ready to lead in life.
-            </p>
-            <p data-aos="fade-up" className="mt-4 max-w-2xl text-base leading-8 text-neutral-600 dark:text-neutral-300">
+            </motion.p>
+            <motion.p variants={fadeUp} className="mt-4 max-w-2xl text-base leading-8 text-neutral-600 dark:text-neutral-300">
               His philosophy combines practical wisdom, disciplined teaching, and a
               student-first mindset. The result is an institution that values both
               strong academic outcomes and the complete development of every child.
-            </p>
+            </motion.p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <span data-aos="fade-up" className="rounded-full bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700 dark:bg-blue-500/10 dark:text-blue-400">
+            <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-3">
+              <motion.span
+                whileHover={{ scale: 1.05 }}
+                className="rounded-full bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700 dark:bg-blue-500/10 dark:text-blue-400 cursor-default"
+              >
                 Common sense over convention
-              </span>
-              <span data-aos="fade-up" className="rounded-full border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-700 dark:border-neutral-800 dark:text-neutral-300">
+              </motion.span>
+              <motion.span
+                whileHover={{ scale: 1.05 }}
+                className="rounded-full border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-700 dark:border-neutral-800 dark:text-neutral-300 cursor-default"
+              >
                 Student-centred learning
-              </span>
-            </div>
+              </motion.span>
+            </motion.div>
 
-            {/* QUOTE CARD - flat surface, abstract art, no gradient */}
-            <div className="relative mt-8 overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-900">
+            {/* QUOTE CARD */}
+            <motion.div
+              variants={cardReveal}
+              whileHover={{ y: -4, transition: { duration: 0.25 } }}
+              className="relative mt-8 overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-neutral-900"
+            >
               <AbstractBg />
               <div className="relative z-10">
-                <p data-aos="fade-up" className="text-[11px] font-medium uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
+                <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
                   Founder quote
                 </p>
-                <p data-aos="fade-up" className="mt-3 text-2xl font-medium leading-snug text-neutral-900 dark:text-white">
+                <p className="mt-3 text-2xl font-medium leading-snug text-neutral-900 dark:text-white">
                   Common sense is better than all sciences.
                 </p>
-                <div  className="mt-6 grid gap-3 sm:grid-cols-2">
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
                   <div className="rounded-xl bg-neutral-50 p-4 dark:bg-neutral-800/60">
-                    <p data-aos="fade-up" className="text-xs text-neutral-500 dark:text-neutral-400">Education focus</p>
-                    <p data-aos="fade-up" className="mt-1 text-sm font-medium text-neutral-900 dark:text-white">
+                    <p className="text-xs text-neutral-500 dark:text-neutral-400">Education focus</p>
+                    <p className="mt-1 text-sm font-medium text-neutral-900 dark:text-white">
                       IIT, NEET, schools, and junior colleges
                     </p>
                   </div>
                   <div className="rounded-xl bg-neutral-50 p-4 dark:bg-neutral-800/60">
-                    <p data-aos="fade-up" className="text-xs text-neutral-500 dark:text-neutral-400">Core outcome</p>
-                    <p data-aos="fade-up" className="mt-1 text-sm font-medium text-neutral-900 dark:text-white">
+                    <p className="text-xs text-neutral-500 dark:text-neutral-400">Core outcome</p>
+                    <p className="mt-1 text-sm font-medium text-neutral-900 dark:text-white">
                       Responsible, confident, and compassionate students
                     </p>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* CHAIRMAN'S NOTE */}
-      <section className="border-y border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900/40">
+      <section className="border-y border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900/40 overflow-hidden">
         <div className="mx-auto max-w-6xl px-6 py-14 sm:py-16 lg:py-20">
-          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-            <div className="relative overflow-hidden rounded-2xl border border-neutral-200 bg-white p-8 dark:border-neutral-800 dark:bg-neutral-950 sm:p-10">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={defaultViewport}
+            className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center"
+          >
+            <motion.div
+              variants={cardReveal}
+              className="relative overflow-hidden rounded-2xl border border-neutral-200 bg-white p-8 dark:border-neutral-800 dark:bg-neutral-950 sm:p-10 shadow-sm"
+            >
               <AbstractBg />
               <div className="relative z-10">
-                <p data-aos="fade-up" className="text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
+                <p className="text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
                   Chairman's Note
                 </p>
-                <h3 data-aos="fade-up" className="mt-3 text-2xl font-semibold text-neutral-900 dark:text-white sm:text-3xl">
+                <h3 className="mt-3 text-2xl font-semibold text-neutral-900 dark:text-white sm:text-3xl">
                   A message from our founder
                 </h3>
 
                 <div className="mt-6 space-y-5 text-base leading-8 text-neutral-600 dark:text-neutral-300">
-                  <p data-aos="fade-up">
+                  <p>
                     Dear Students, Parents, and Well-Wishers, education is not
                     merely about securing marks or achieving ranks - it is
                     about shaping character, building confidence, and
@@ -196,7 +240,7 @@ export default function AboutFounderPage() {
                     responsibility to nurture that potential with the right
                     guidance, values, and opportunities.
                   </p>
-                  <p data-aos="fade-up">
+                  <p>
                     Since the inception of IGNIITe Classes in 2017 and the
                     establishment of our junior colleges and schools in 2018,
                     our vision has been to build an institution that blends
@@ -206,7 +250,7 @@ export default function AboutFounderPage() {
                     sports, leadership, creativity, discipline, and emotional
                     well-being.
                   </p>
-                  <p data-aos="fade-up">
+                  <p>
                     We believe true success lies in becoming responsible human
                     beings who contribute positively to society. Through
                     social initiatives, community service, environmental
@@ -217,7 +261,7 @@ export default function AboutFounderPage() {
                 </div>
 
                 <div className="mt-8 flex items-center gap-4 border-t border-neutral-100 pt-6 dark:border-neutral-800">
-                  <div data-aos="zoom-in" className="h-12 w-12 shrink-0 overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-700">
+                  <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-700">
                     <img
                       src="/assets/images/Ramesh sir/VIJ06233.webp"
                       alt="Mr. K. Ramesh"
@@ -225,93 +269,123 @@ export default function AboutFounderPage() {
                     />
                   </div>
                   <div>
-                    <p data-aos="fade-left" className="text-sm font-semibold text-neutral-900 dark:text-white">
+                    <p className="text-sm font-semibold text-neutral-900 dark:text-white">
                       Mr. K. Ramesh
                     </p>
-                    <p data-aos="fade-left" className="text-xs text-neutral-500 dark:text-neutral-400">
+                    <p className="text-xs text-neutral-500 dark:text-neutral-400">
                       Founder &amp; Chairman · Faculty in Chemistry, 20+ years experience
                     </p>
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="relative mx-auto w-full max-w-sm lg:mx-0">
-              <div data-aos="fade-up" className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800">
+            <motion.div variants={imageReveal} className="relative mx-auto w-full max-w-sm lg:mx-0">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm">
                 <img
                   src="/assets/images/events/Vybhava/ARM02727.webp"
                   alt="Mr. K. Ramesh addressing students and parents"
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover transition duration-500 hover:scale-105"
                 />
               </div>
-              <div data-aos="zoom-in" className="absolute -bottom-4 left-5 right-5 rounded-xl border border-neutral-200 bg-white px-4 py-3 dark:border-neutral-800 dark:bg-neutral-900">
-                <p  className="text-[11px] font-medium uppercase tracking-widest text-blue-600 dark:text-blue-400">
+              <motion.div
+                variants={fadeUp}
+                className="absolute -bottom-4 left-5 right-5 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-md dark:border-neutral-800 dark:bg-neutral-900"
+              >
+                <p className="text-[11px] font-medium uppercase tracking-widest text-blue-600 dark:text-blue-400">
                   In his own words
                 </p>
                 <p className="mt-0.5 text-sm font-medium text-neutral-900 dark:text-white">
                   Building future-ready, compassionate leaders
                 </p>
-              </div>
-            </div>
-          </div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* PHILOSOPHY */}
-      <section>
+      <section className="overflow-hidden">
         <div className="mx-auto max-w-6xl px-6 py-14 sm:py-16 lg:py-20">
-          <div className="max-w-3xl">
-            <p data-aos="fade-up" className="text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={defaultViewport}
+            className="max-w-3xl"
+          >
+            <p className="text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
               Founder philosophy
             </p>
-            <h3 data-aos="fade-up" className="mt-3 text-2xl font-semibold text-neutral-900 dark:text-white sm:text-3xl">
+            <h3 className="mt-3 text-2xl font-semibold text-neutral-900 dark:text-white sm:text-3xl">
               Education with discipline, dignity, and direction
             </h3>
-            <p data-aos="fade-up" className="mt-4 text-base leading-8 text-neutral-600 dark:text-neutral-300">
+            <p className="mt-4 text-base leading-8 text-neutral-600 dark:text-neutral-300">
               The founder's approach is rooted in the belief that students need more
               than textbooks. They need resilience, leadership, creativity, critical
               thinking, and the confidence to pursue ambitious goals.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={defaultViewport}
+            className="mt-10 grid gap-5 md:grid-cols-3"
+          >
             {highlights.map((item) => (
-              <article
-                data-aos="fade-up"
+              <motion.article
                 key={item.title}
-                className="rounded-2xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-950"
+                variants={cardReveal}
+                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow dark:border-neutral-800 dark:bg-neutral-950"
               >
                 <h4 className="text-base font-semibold text-neutral-900 dark:text-white">{item.title}</h4>
                 <p className="mt-3 text-sm leading-7 text-neutral-600 dark:text-neutral-300">
                   {item.text}
                 </p>
-              </article>
+              </motion.article>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* IN FRAME - bento gallery */}
-      <section className="mx-auto max-w-6xl px-6 py-14 sm:py-16 lg:py-20">
-        <div className="max-w-2xl">
-          <p data-aos="fade-up" className="text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
+      <section className="mx-auto max-w-6xl px-6 py-14 sm:py-16 lg:py-20 overflow-hidden">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="max-w-2xl"
+        >
+          <p className="text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
             In frame
           </p>
-          <h3 data-aos="fade-up" className="mt-3 text-2xl font-semibold text-neutral-900 dark:text-white sm:text-3xl">
+          <h3 className="mt-3 text-2xl font-semibold text-neutral-900 dark:text-white sm:text-3xl">
             Moments from the campus
           </h3>
-          <p data-aos="fade-up" className="mt-4 text-base leading-8 text-neutral-600 dark:text-neutral-300">
+          <p className="mt-4 text-base leading-8 text-neutral-600 dark:text-neutral-300">
             A closer look at the founder's day-to-day presence on campus - from
             morning rounds to convocation, always close to the students he set out
             to serve.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-5  w-3/4 mx-auto">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-5 w-3/4 mx-auto"
+        >
           {founderMoments.map((moment) => (
-            <figure
-              data-aos="fade-up"
+            <motion.figure
               key={moment.src}
+              variants={imageReveal}
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
               className={`group relative overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900 ${moment.span}`}
             >
               <img
@@ -324,22 +398,37 @@ export default function AboutFounderPage() {
               <figcaption className="absolute bottom-0 left-0 right-0 px-5 py-4 text-sm font-medium text-white">
                 {moment.caption}
               </figcaption>
-            </figure>
+            </motion.figure>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* MILESTONES + VALUES */}
-      <section className="mx-auto max-w-6xl px-6 py-14 sm:py-16 lg:py-20">
-        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <div data-aos="fade-up" className="rounded-2xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-900">
-            <p data-aos="fade-up" className="text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
+      <section className="mx-auto max-w-6xl px-6 py-14 sm:py-16 lg:py-20 overflow-hidden">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]"
+        >
+          <motion.div
+            variants={cardReveal}
+            className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-neutral-900"
+          >
+            <p className="text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
               Milestones
             </p>
-            <div className="mt-6 space-y-5">
+            <motion.div variants={staggerContainer} className="mt-6 space-y-5">
               {milestones.map((item) => (
-                <div data-aos="fade-up" key={item.year} className="flex gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-xs font-medium text-blue-700 dark:bg-blue-500/10 dark:text-blue-400">
+                <motion.div
+                  key={item.year}
+                  variants={fadeUp}
+                  whileHover={{ x: 4 }}
+                  transition={{ duration: 0.2 }}
+                  className="flex gap-4"
+                >
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-xs font-bold text-blue-700 dark:bg-blue-500/10 dark:text-blue-400">
                     {item.year}
                   </div>
                   <div>
@@ -348,14 +437,17 @@ export default function AboutFounderPage() {
                       {item.text}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
-          <div data-aos="fade-up" className="relative overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900 p-6 text-white">
+          <motion.div
+            variants={cardReveal}
+            className="relative overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900 p-6 text-white shadow-sm"
+          >
             <AbstractBg position="bottom-left" />
-            <div data-aos="fade-up" className="relative z-10">
+            <div className="relative z-10">
               <p className="text-xs font-medium uppercase tracking-[0.25em] text-blue-400">
                 What the founder stands for
               </p>
@@ -367,21 +459,22 @@ export default function AboutFounderPage() {
                 life skills, sports, leadership, creativity, discipline, emotional
                 well-being, and social responsibility.
               </p>
-              <div className="mt-8 flex flex-wrap gap-2">
+              <motion.div variants={staggerContainer} className="mt-8 flex flex-wrap gap-2">
                 {values.map((value) => (
-                  <span
-                    data-aos="fade-up"
+                  <motion.span
                     key={value}
-                    className="rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-sm text-white/85"
+                    variants={fadeUp}
+                    whileHover={{ scale: 1.05 }}
+                    className="rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-sm text-white/85 cursor-default"
                   >
                     {value}
-                  </span>
+                  </motion.span>
                 ))}
-              </div>
+              </motion.div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
-    </main>
+    </motion.main>
   );
 }

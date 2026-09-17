@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   Award,
@@ -28,6 +29,15 @@ import {
 } from "lucide-react";
 import { RouteLink } from "../router/BrowserRouter";
 import { EVENT_FEATURED_CARDS, EVENT_GALLERY_IMAGES, EVENT_ALBUMS } from "../data/eventGalleryData";
+import {
+  fadeUp,
+  fadeIn,
+  staggerContainer,
+  staggerItem,
+  cardReveal,
+  defaultViewport,
+  scaleIn,
+} from "../animations/variants";
 
 /* ─────────────────────────── DATA ─────────────────────────── */
 
@@ -243,28 +253,39 @@ function Lightbox({ image, onClose }) {
   }, [onClose]);
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4"
-      onClick={onClose}>
-      <div
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        transition={{ type: "spring", stiffness: 300, damping: 25 }}
         className="relative max-w-3xl w-full rounded-2xl overflow-hidden shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <button
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
           type="button"
           onClick={onClose}
           className="absolute right-3 top-3 z-10 grid h-9 w-9 place-items-center rounded-full bg-black/60 text-white backdrop-blur-sm transition hover:bg-white hover:text-neutral-950"
           aria-label="Close image"
         >
           <X size={16} />
-        </button>
+        </motion.button>
         <img src={image.src} alt={image.label} className="w-full object-cover" />
         <div className="bg-neutral-950 px-5 py-4">
           <p className="font-extrabold text-white">{image.label}</p>
           <p className="mt-0.5 text-sm text-neutral-400">{image.event}</p>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -283,8 +304,11 @@ function EventHero() {
   }, [isPaused]);
 
   return (
-    <section className="px-4 pb-10 pt-5 sm:px-6 sm:pt-8">
-      <div
+    <section className="px-4 pb-10 pt-5 sm:px-6 sm:pt-8 overflow-hidden">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-neutral-950 shadow-[0_24px_80px_rgba(42,25,86,0.25)]"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
@@ -304,46 +328,61 @@ function EventHero() {
           <div className="absolute inset-0 flex flex-col justify-end p-7 sm:p-12 lg:p-16">
             <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
               {/* Left */}
-              <div className="max-w-2xl">
-                <div className="flex flex-wrap items-center gap-3">
-                  <span className={`rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-widest ${tagColorMap[ev.tagColor]}`}>
-                    {ev.tag}
-                  </span>
-                  <span className="text-xs font-bold uppercase tracking-widest text-white/60">{ev.eyebrow}</span>
-                </div>
-                <h1 className="mt-5 text-2xl font-extrabold leading-[1.05] text-white sm:text-3xl lg:text-4xl">
-                  {ev.title}
-                </h1>
-                <p className="mt-4 max-w-xl text-sm leading-7 text-white/75 sm:text-base">{ev.description}</p>
-                <div className="mt-5 flex flex-wrap gap-5 text-xs font-semibold text-white/60">
-                  <span className="flex items-center gap-1.5"><CalendarDays size={13} />{ev.date}</span>
-                  <span className="flex items-center gap-1.5"><MapPin size={13} />{ev.venue}</span>
-                  <span className="flex items-center gap-1.5"><Users size={13} />{ev.attendees} attendees</span>
-                </div>
-                <div className="mt-7 flex flex-wrap gap-3">
-                  <RouteLink
-                    to='/gallery/photos'
-                    className="inline-flex items-center gap-3 rounded-full bg-blue-600 px-6 py-3.5 text-sm font-black text-white shadow-lg shadow-blue-900/40 transition hover:bg-blue-500 hover:gap-4"
-                  >
-                    <Camera size={15} />
-                    View Photo Gallery
-                  </RouteLink>
-                  <RouteLink
-                    to="/gallery/videos"
-                    className="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-6 py-3.5 text-sm font-black text-white transition hover:bg-white hover:text-neutral-950"
-                  >
-                    <Play size={15} />
-                    More Videos
-                  </RouteLink>
-                </div>
-              </div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={ev.id}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  className="max-w-2xl"
+                >
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span className={`rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-widest ${tagColorMap[ev.tagColor]}`}>
+                      {ev.tag}
+                    </span>
+                    <span className="text-xs font-bold uppercase tracking-widest text-white/60">{ev.eyebrow}</span>
+                  </div>
+                  <h1 className="mt-5 text-2xl font-extrabold leading-[1.05] text-white sm:text-3xl lg:text-4xl">
+                    {ev.title}
+                  </h1>
+                  <p className="mt-4 max-w-xl text-sm leading-7 text-white/75 sm:text-base">{ev.description}</p>
+                  <div className="mt-5 flex flex-wrap gap-5 text-xs font-semibold text-white/60">
+                    <span className="flex items-center gap-1.5"><CalendarDays size={13} />{ev.date}</span>
+                    <span className="flex items-center gap-1.5"><MapPin size={13} />{ev.venue}</span>
+                    <span className="flex items-center gap-1.5"><Users size={13} />{ev.attendees} attendees</span>
+                  </div>
+                  <div className="mt-7 flex flex-wrap gap-3">
+                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}>
+                      <RouteLink
+                        to='/gallery/photos'
+                        className="inline-flex items-center gap-3 rounded-full bg-blue-600 px-6 py-3.5 text-sm font-black text-white shadow-lg shadow-blue-900/40 transition hover:bg-blue-500 hover:gap-4"
+                      >
+                        <Camera size={15} />
+                        View Photo Gallery
+                      </RouteLink>
+                    </motion.div>
+                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}>
+                      <RouteLink
+                        to="/gallery/videos"
+                        className="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-6 py-3.5 text-sm font-black text-white transition hover:bg-white hover:text-neutral-950"
+                      >
+                        <Play size={15} />
+                        More Videos
+                      </RouteLink>
+                    </motion.div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
 
               {/* Right - event strip */}
               <div className="hidden shrink-0 flex-col gap-3 lg:flex">
                 {heroEvents.map((e, i) => (
-                  <button
+                  <motion.button
                     key={e.id}
                     type="button"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     onClick={() => setActive(i)}
                     className={`flex items-center gap-3 rounded-xl p-2.5 pr-4 text-left transition ${
                       i === active ? "bg-white/15 ring-1 ring-white/30" : "bg-black/30 hover:bg-white/10"
@@ -357,7 +396,7 @@ function EventHero() {
                       <p className="max-w-[160px] truncate text-xs font-extrabold text-white">{e.title}</p>
                       <p className="mt-0.5 text-[10px] text-white/55">{e.date}</p>
                     </div>
-                  </button>
+                  </motion.button>
                 ))}
               </div>
             </div>
@@ -376,7 +415,7 @@ function EventHero() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
@@ -385,33 +424,47 @@ function EventHero() {
 
 function EventTypes() {
   return (
-    <section className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
+    <section className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40 overflow-hidden">
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between"
+        >
           <div>
-            <div className="flex items-center gap-3">
+            <motion.div variants={fadeUp} className="flex items-center gap-3">
               <span className="h-px w-10 bg-blue-500" />
               <span className="text-xs font-black uppercase tracking-[0.2em] text-blue-700 dark:text-blue-400">
                 What We Celebrate
               </span>
-            </div>
-            <h2 className="mt-4 text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+            </motion.div>
+            <motion.h2 variants={fadeUp} className="mt-4 text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
               Every event, every student
-            </h2>
-            <p className="mt-2 max-w-xl text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+            </motion.h2>
+            <motion.p variants={fadeUp} className="mt-2 max-w-xl text-sm leading-6 text-neutral-600 dark:text-neutral-400">
               From grand award nights to quiet afternoon workshops - Ignite builds a calendar around every interest.
-            </p>
+            </motion.p>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {eventTypes.map((et) => {
             const Icon = et.icon;
             const c = colorMap[et.color];
             return (
-              <div
+              <motion.div
                 key={et.label}
-                className="group overflow-hidden rounded-3xl bg-white ring-1 ring-neutral-100 shadow-sm transition hover:-translate-y-1 hover:shadow-xl dark:bg-neutral-900 dark:ring-neutral-800"
+                variants={cardReveal}
+                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                className="group overflow-hidden rounded-3xl bg-white ring-1 ring-neutral-100 shadow-sm transition hover:shadow-xl dark:bg-neutral-900 dark:ring-neutral-800"
               >
                 <div className="relative h-60 overflow-hidden">
                   <img
@@ -431,15 +484,11 @@ function EventTypes() {
                   </span>
                   <h3 className="mt-3 text-base font-extrabold text-neutral-950 dark:text-white">{et.label}</h3>
                   <p className="mt-1.5 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{et.description}</p>
-                  {/* <div className="mt-4 flex gap-2">
-                    <RouteLink to={"/gallery/photos"} className="inline-flex items-center gap-1 rounded-full bg-blue-600 px-3 py-1.5 text-xs font-bold text-white">Photos</RouteLink>
-                    <RouteLink to="/gallery/videos" className="inline-flex items-center gap-1 rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-xs font-bold text-neutral-700 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-300">Videos</RouteLink>
-                  </div> */}
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -457,44 +506,56 @@ function EventGallery() {
 
   return (
     <>
-      {lightbox && <Lightbox image={lightbox} onClose={() => setLightbox(null)} />}
+      <AnimatePresence>
+        {lightbox && <Lightbox image={lightbox} onClose={() => setLightbox(null)} />}
+      </AnimatePresence>
 
-      <section className="bg-neutral-950 py-20">
+      <section className="bg-neutral-950 py-20 overflow-hidden">
         <div className="px-6 lg:px-10">
-          <div className="mx-auto flex max-w-7xl items-end justify-between gap-6">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={defaultViewport}
+            className="mx-auto flex max-w-7xl items-end justify-between gap-6"
+          >
             <div>
-              <div className="flex items-center gap-3">
+              <motion.div variants={fadeUp} className="flex items-center gap-3">
                 <span className="h-px w-10 bg-blue-500" />
                 <span className="text-xs font-black uppercase tracking-[0.2em] text-blue-400">
                   Captured Moments
                 </span>
-              </div>
-              <h2 className="mt-4 text-3xl font-extrabold text-white sm:text-4xl">
+              </motion.div>
+              <motion.h2 variants={fadeUp} className="mt-4 text-3xl font-extrabold text-white sm:text-4xl">
                 Snapshots from our events
-              </h2>
-              <p className="mt-2 max-w-lg text-sm leading-6 text-neutral-400">
+              </motion.h2>
+              <motion.p variants={fadeUp} className="mt-2 max-w-lg text-sm leading-6 text-neutral-400">
                 Every event tells a story. Scroll through the moments that made our campus come alive.
-              </p>
+              </motion.p>
             </div>
             <div className="hidden shrink-0 items-center gap-2 sm:flex">
-              <button
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 type="button"
                 onClick={() => scroll(-1)}
                 aria-label="Scroll left"
                 className="grid h-11 w-11 place-items-center rounded-full border border-neutral-700 text-neutral-400 transition hover:border-blue-500 hover:bg-blue-600 hover:text-white"
               >
                 <ChevronLeft size={19} />
-              </button>
-              <button
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 type="button"
                 onClick={() => scroll(1)}
                 aria-label="Scroll right"
                 className="grid h-11 w-11 place-items-center rounded-full border border-neutral-700 text-neutral-400 transition hover:border-blue-500 hover:bg-blue-600 hover:text-white"
               >
                 <ChevronRight size={19} />
-              </button>
+              </motion.button>
             </div>
-          </div>
+          </motion.div>
 
           {/* Track */}
           <div
@@ -503,11 +564,13 @@ function EventGallery() {
             style={{ scrollbarWidth: "none" }}
           >
             {galleryImages.map((img) => (
-              <button
+              <motion.button
                 key={img.id}
                 type="button"
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.2 }}
                 onClick={() => setLightbox(img)}
-                className="group relative shrink-0 w-56 sm:w-64 overflow-hidden rounded-2xl bg-neutral-800 ring-1 ring-neutral-700 transition hover:-translate-y-1 hover:shadow-xl focus:outline-none"
+                className="group relative shrink-0 w-56 sm:w-64 overflow-hidden rounded-2xl bg-neutral-800 ring-1 ring-neutral-700 transition hover:shadow-xl focus:outline-none"
               >
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <img
@@ -527,7 +590,7 @@ function EventGallery() {
                   <p className="truncate text-sm font-extrabold text-white">{img.label}</p>
                   <p className="mt-0.5 text-[11px] text-neutral-500">{img.event}</p>
                 </div>
-              </button>
+              </motion.button>
             ))}
           </div>
 
@@ -542,9 +605,15 @@ function EventGallery() {
 
 function StatsStrip() {
   return (
-    <section className="bg-linear-to-r from-blue-700 via-blue-600 to-indigo-600 px-6 py-14">
+    <section className="bg-linear-to-r from-blue-700 via-blue-600 to-indigo-600 px-6 py-14 overflow-hidden">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-10 text-center">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mb-10 text-center"
+        >
           <span className="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-white">
             <Zap size={13} fill="white" />
             Events by the Numbers
@@ -552,25 +621,34 @@ function StatsStrip() {
           <h2 className="mt-4 text-2xl font-extrabold text-white sm:text-3xl">
             500+ successful events and counting
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6"
+        >
           {statsData.map((stat) => {
             const Icon = stat.icon;
             return (
-              <div
+              <motion.div
                 key={stat.label}
-                className="flex flex-col items-center gap-3 rounded-2xl bg-white/15 p-5 text-center backdrop-blur-sm ring-1 ring-white/20 transition hover:bg-white/20"
+                variants={cardReveal}
+                whileHover={{ y: -4, backgroundColor: "rgba(255,255,255,0.22)" }}
+                transition={{ duration: 0.2 }}
+                className="flex flex-col items-center gap-3 rounded-2xl bg-white/15 p-5 text-center backdrop-blur-sm ring-1 ring-white/20"
               >
                 <span className="grid h-10 w-10 place-items-center rounded-full bg-white/20">
                   <Icon size={18} className="text-white" />
                 </span>
                 <span className="text-2xl font-black text-white">{stat.value}</span>
                 <span className="text-xs font-semibold text-white/70">{stat.label}</span>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -590,7 +668,11 @@ function StarRating({ count }) {
 
 function ReactionCard({ person, accent }) {
   return (
-    <div className={`relative flex flex-col gap-5 rounded-3xl bg-white p-6 ring-1 ring-neutral-100 shadow-sm dark:bg-neutral-900 border-2 border-neutral-100 hover:shadow-2xl dark:ring-neutral-800`}>
+    <motion.div
+      variants={cardReveal}
+      whileHover={{ y: -6, transition: { duration: 0.25 } }}
+      className="relative flex flex-col gap-5 rounded-3xl bg-white p-6 ring-1 ring-neutral-100 shadow-sm dark:bg-neutral-900 border-2 border-neutral-100 hover:shadow-2xl dark:ring-neutral-800"
+    >
       {/* Quote icon */}
       <Quote size={28} className={`shrink-0 ${accent}`} />
       <p className="flex-1 text-sm leading-7 text-neutral-700 dark:text-neutral-300">
@@ -613,7 +695,7 @@ function ReactionCard({ person, accent }) {
           <p className="mt-1 text-[10px] font-semibold text-neutral-400">{person.event}</p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -624,27 +706,33 @@ function Reactions() {
   const accentClass = tab === "parents" ? "text-rose-400" : "text-blue-400";
 
   return (
-    <section className="bg-white px-6 py-20 dark:bg-neutral-950">
+    <section className="bg-white px-6 py-20 dark:bg-neutral-950 overflow-hidden">
       <div className="mx-auto max-w-7xl">
         {/* Header */}
-        <div className="flex flex-col items-center gap-5 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-blue-700 dark:bg-blue-950/40 dark:text-blue-400">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="flex flex-col items-center gap-5 text-center"
+        >
+          <motion.span variants={fadeUp} className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-blue-700 dark:bg-blue-950/40 dark:text-blue-400">
             <Heart size={12} />
             What People Say
-          </span>
-          <h2 className="max-w-2xl text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+          </motion.span>
+          <motion.h2 variants={fadeUp} className="max-w-2xl text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             Reactions that warm our hearts
-          </h2>
-          <p className="max-w-xl text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+          </motion.h2>
+          <motion.p variants={fadeUp} className="max-w-xl text-sm leading-6 text-neutral-600 dark:text-neutral-400">
             From parents who cheered from the gallery to students who found themselves on the stage - the events at Ignite leave a lasting impression.
-          </p>
+          </motion.p>
 
           {/* Toggle */}
-          <div className="flex rounded-full bg-neutral-100 p-1 dark:bg-neutral-800">
+          <motion.div variants={fadeUp} className="flex rounded-full bg-neutral-100 p-1 dark:bg-neutral-800">
             <button
               type="button"
               onClick={() => setTab("parents")}
-              className={`rounded-full px-5 py-2 text-sm font-bold transition ${
+              className={`rounded-full px-5 py-2 text-sm font-bold transition duration-200 ${
                 tab === "parents"
                   ? "bg-white text-neutral-950 shadow-sm dark:bg-neutral-950 dark:text-white"
                   : "text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300"
@@ -655,7 +743,7 @@ function Reactions() {
             <button
               type="button"
               onClick={() => setTab("students")}
-              className={`rounded-full px-5 py-2 text-sm font-bold transition ${
+              className={`rounded-full px-5 py-2 text-sm font-bold transition duration-200 ${
                 tab === "students"
                   ? "bg-white text-neutral-950 shadow-sm dark:bg-neutral-950 dark:text-white"
                   : "text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300"
@@ -663,24 +751,40 @@ function Reactions() {
             >
               🎓 Student Reactions
             </button>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Cards */}
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {reactions.map((p) => (
-            <ReactionCard key={p.id} person={p} accent={accentClass} />
-          ))}
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={tab}
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            viewport={defaultViewport}
+            className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
+          >
+            {reactions.map((p) => (
+              <ReactionCard key={p.id} person={p} accent={accentClass} />
+            ))}
+          </motion.div>
+        </AnimatePresence>
 
         {/* Divider quote */}
-        <div className="mt-14 flex flex-col items-center gap-4 rounded-3xl bg-linear-to-br from-blue-600 to-indigo-700 px-8 py-10 text-center">
+        <motion.div
+          variants={scaleIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mt-14 flex flex-col items-center gap-4 rounded-3xl bg-linear-to-br from-blue-600 to-indigo-700 px-8 py-10 text-center shadow-lg"
+        >
           <Quote size={32} className="text-blue-200 opacity-50" />
           <p className="max-w-2xl text-xl font-extrabold italic leading-snug text-white sm:text-2xl">
             "Every event at Ignite is designed with one purpose - to give students a memory they will build upon for the rest of their lives."
           </p>
           <p className="text-sm font-bold text-blue-200">- The Ignite Faculty</p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -717,44 +821,64 @@ function AboutIgnite() {
   ];
 
   return (
-    <section className="bg-neutral-50 px-6 py-24 dark:bg-neutral-900/40">
+    <section className="bg-neutral-50 px-6 py-24 dark:bg-neutral-900/40 overflow-hidden">
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col items-center gap-5 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-blue-700 dark:bg-blue-950/40 dark:text-blue-400">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="flex flex-col items-center gap-5 text-center"
+        >
+          <motion.span variants={fadeUp} className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-blue-700 dark:bg-blue-950/40 dark:text-blue-400">
             <Sparkles size={13} />
             About Ignite
-          </span>
-          <h2 className="max-w-3xl text-4xl font-extrabold leading-tight text-neutral-950 sm:text-5xl dark:text-white">
+          </motion.span>
+          <motion.h2 variants={fadeUp} className="max-w-3xl text-4xl font-extrabold leading-tight text-neutral-950 sm:text-5xl dark:text-white">
             Building India's next generation of scholars and leaders
-          </h2>
-          <p className="max-w-2xl text-base leading-7 text-neutral-600 dark:text-neutral-400">
+          </motion.h2>
+          <motion.p variants={fadeUp} className="max-w-2xl text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Ignite Academy, Hyderabad, is a premium Junior College & School that has shaped over
             12 000 students across 18 years. Our campus combines rigorous academics with a vibrant
             co-curricular life, residential facilities, and a faculty of experienced educators
             dedicated to making every student succeed.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+        >
           {pillars.map((p) => {
             const Icon = p.icon;
             const c = colorMap[p.color];
             return (
-              <div
+              <motion.div
                 key={p.title}
-                className="flex flex-col gap-4 rounded-3xl border border-neutral-200 bg-white p-6 hover:border-blue-500 hover:shadow-2xl dark:border-neutral-800 dark:bg-neutral-900"
+                variants={cardReveal}
+                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                className="flex flex-col gap-4 rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm hover:border-blue-500 hover:shadow-2xl dark:border-neutral-800 dark:bg-neutral-900 transition"
               >
                 <span className={`grid h-11 w-11 place-items-center rounded-2xl ${c.icon}`}>
                   <Icon size={20} />
                 </span>
                 <h3 className="text-base font-extrabold text-neutral-950 dark:text-white">{p.title}</h3>
                 <p className="text-sm leading-6 text-neutral-600 dark:text-neutral-400">{p.text}</p>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-8 rounded-3xl bg-linear-to-br from-blue-600 to-indigo-700 p-8 text-center sm:flex-row sm:rounded-full sm:px-10 sm:text-left">
+        <motion.div
+          variants={scaleIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mt-14 flex flex-col items-center justify-between gap-8 rounded-3xl bg-linear-to-br from-blue-600 to-indigo-700 p-8 text-center sm:flex-row sm:rounded-full sm:px-10 sm:text-left shadow-lg"
+        >
           <div>
             <p className="text-xs font-black uppercase tracking-widest text-blue-200">Come visit us</p>
             <h3 className="mt-2 text-xl font-extrabold text-white">
@@ -762,33 +886,38 @@ function AboutIgnite() {
             </h3>
           </div>
           <div className="flex shrink-0 flex-wrap justify-center gap-3">
-            <RouteLink
-              to="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-black text-blue-700 transition hover:bg-blue-50"
-            >
-              Contact Us <ArrowRight size={14} />
-            </RouteLink>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <RouteLink
+                to="/contact"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-black text-blue-700 transition hover:bg-blue-50"
+              >
+                Contact Us <ArrowRight size={14} />
+              </RouteLink>
+            </motion.div>
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-5 py-3 text-sm font-bold text-white ring-1 ring-white/20">
               <MapPin size={13} /> Hyderabad
             </span>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 }
 
-/* ──────────────── PAGE ──────────────────────────────────────── */
-
 export default function EventsPage() {
   return (
-    <div className="min-h-screen pt-16 bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.35 }}
+      className="min-h-screen pt-16 bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white"
+    >
       <EventHero />
       <EventTypes />
       <EventGallery />
       <StatsStrip />
       <Reactions />
       <AboutIgnite />
-    </div>
+    </motion.div>
   );
 }

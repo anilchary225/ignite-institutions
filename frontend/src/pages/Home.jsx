@@ -122,7 +122,7 @@ const Home = () => {
 
         <HomeApply  />
 
-        <section data-aos="fade-up"  className="bg-blue-50 px-4 py-12 transition-colors dark:bg-neutral-900 sm:px-8 sm:py-14">
+        <section className="bg-blue-50 px-4 py-12 transition-colors dark:bg-neutral-900 sm:px-8 sm:py-14">
           <div className="mx-auto max-w-7xl">
             <CardsWithContent />
           </div>

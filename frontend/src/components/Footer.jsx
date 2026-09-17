@@ -1,6 +1,8 @@
 import { MapPin, Phone, Mail, Heart } from "lucide-react";
+import { motion } from "framer-motion";
 import { RouteLink } from "../router/BrowserRouter";
 import { useTheme } from "../context/ThemeContext";
+import { staggerContainer, staggerItem, defaultViewport, fadeUp, cardReveal } from "../animations/variants";
 
 function FacebookIcon(props) {
   return (
@@ -74,21 +76,21 @@ const socialLinks = [
 
 function FooterColumn({ heading, links, accentColor = "text-orange-400" }) {
   return (
-    <div>
+    <motion.div variants={fadeUp}>
       <h3 className={`text-xs font-bold uppercase tracking-widest ${accentColor} mb-5`}>{heading}</h3>
       <ul className="space-y-3">
         {links.map((link) => (
           <li key={link.label}>
             <RouteLink
               to={link.href}
-              className="text-xs text-neutral-400 transition-colors hover:text-white"
+              className="inline-block text-xs text-neutral-400 transition-colors duration-200 hover:text-white hover:translate-x-1"
             >
               {link.label}
             </RouteLink>
           </li>
         ))}
       </ul>
-    </div>
+    </motion.div>
   );
 }
 
@@ -96,18 +98,26 @@ export default function Footer() {
   const { darkMode } = useTheme();
 
   return (
-    <footer className="bg-neutral-950 border-t border-white/5">
+    <footer className="bg-neutral-950 border-t border-white/5 overflow-hidden">
       {/* Top accent bar */}
       <div className="h-1 w-full bg-linear-to-r from-orange-500 via-green-600 to-blue-500" />
 
-      <div className="mx-auto max-w-7xl px-6 pt-14 pb-10 sm:px-8">
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        className="mx-auto max-w-7xl px-6 pt-14 pb-10 sm:px-8"
+      >
         <div className="grid gap-10 lg:grid-cols-[1.35fr_1fr_1fr_1fr_1fr_1fr] lg:items-start">
 
           {/* Brand */}
-          <div className="lg:justify-self-start lg:text-left">
+          <motion.div variants={fadeUp} className="lg:justify-self-start lg:text-left">
             {/* Logo */}
             <RouteLink to="/" className="inline-flex">
-              <img
+              <motion.img
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
                 src="/favicon_io (1)/android-chrome-512x512.png"
                 alt="Ignite Junior College & Schools"
                 className="h-16 w-auto object-contain"
@@ -121,27 +131,30 @@ export default function Footer() {
             {/* Social */}
             <div className="mt-6 flex gap-2.5">
               {socialLinks.map(({ icon: Icon, label, href, color }) => (
-                <a
+                <motion.a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noreferrer"
                   aria-label={label}
+                  whileHover={{ scale: 1.15, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
                   className={`grid h-9 w-9 place-items-center rounded-xl border border-white/10 text-neutral-400 transition-all ${color} hover:text-white`}
                 >
                   <Icon className="h-4 w-4" />
-                </a>
+                </motion.a>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Contact */}
-          <div className="lg:order-2 lg:text-left">
+          <motion.div variants={fadeUp} className="lg:order-2 lg:text-left">
             <h3 className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-5">Contact</h3>
             <div className="space-y-3">
               <div className="flex items-start gap-3">
                 <MapPin className="mt-0.5 shrink-0 text-orange-500" size={16} />
-                <a href="" className="text-[11px] text-neutral-400 leading-snug">Pillar No : A-708, NH -9, Plot No : 14, Sri Sai Nagar Colony, opp. Metro Station Jntu College, beside JNTU, Kukatpally, Hyderabad, Telangana 500085</a>
+                <a href="" className="text-[11px] text-neutral-400 leading-snug hover:text-white transition-colors">Pillar No : A-708, NH -9, Plot No : 14, Sri Sai Nagar Colony, opp. Metro Station Jntu College, beside JNTU, Kukatpally, Hyderabad, Telangana 500085</a>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="shrink-0 text-green-500" size={16} />
@@ -152,7 +165,7 @@ export default function Footer() {
                 <p className="text-[11px] text-neutral-400">Info@ignite.academy</p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           <FooterColumn heading="Campus Life" links={campusLifeLinks} accentColor="text-orange-400" />
           <FooterColumn heading="Courses" links={courseLinks} accentColor="text-green-500" />
@@ -161,19 +174,21 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="mt-12 border-t border-white/5 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <motion.div
+          variants={fadeUp}
+          className="mt-12 border-t border-white/5 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3"
+        >
           <p className="text-[11px] text-neutral-600">
             © {new Date().getFullYear()} IGNITE Junior College & Schools. All rights reserved.
           </p>
           <p className="flex items-center gap-2">
-  
              <span className="font-semibold text-xs text-neutral-600">Built by<span> </span>
               <span className=" h-5 w-5 items-center justify-center rounded-md bg-black italic text-white text-[10px] font-bold">
                 AS KREATIV
             </span></span>
           </p>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </footer>
   );
 }

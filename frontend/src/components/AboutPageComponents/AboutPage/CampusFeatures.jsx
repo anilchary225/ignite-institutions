@@ -1,4 +1,6 @@
 import { GraduationCap, Building2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeUp, defaultViewport } from "../../../animations/variants";
 
 const defaultFeatures = [
   {
@@ -25,25 +27,35 @@ export default function CampusFeatures({ features = defaultFeatures }) {
   return (
     <section className="px-4 py-14 sm:px-8 sm:py-16">
       <div className="mx-auto max-w-6xl">
-        <div className="text-center mb-10">
-          <span data-aos="fade-up" className="inline-block text-xs font-bold tracking-[0.25em] text-green-700 uppercase mb-2">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={defaultViewport}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-10"
+        >
+          <span className="inline-block text-xs font-bold tracking-[0.25em] text-green-700 uppercase mb-2">
             Campus Life
           </span>
-          <h2 data-aos="fade-up" className="text-2xl font-extrabold text-neutral-900 dark:text-white sm:text-3xl">
+          <h2 className="text-2xl font-extrabold text-neutral-900 dark:text-white sm:text-3xl">
             Life at IGNITE
           </h2>
-        </div>
+        </motion.div>
 
         <div className="flex flex-col gap-6">
           {features.map(({ icon: Icon, color, textColor, heading, description, image }, idx) => (
-            <div
-              data-aos="fade-up"
+            <motion.div
               key={heading}
-              className={`grid gap-6 rounded-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 overflow-hidden  md:grid-cols-2 md:items-stretch ${idx % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""}`}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={defaultViewport}
+              whileHover={{ y: -3, transition: { duration: 0.25 } }}
+              className={`grid gap-6 rounded-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 overflow-hidden md:grid-cols-2 md:items-stretch transition-shadow duration-300 hover:shadow-lg ${idx % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""}`}
             >
               <div className="flex flex-col justify-center gap-4 p-6 sm:p-8">
                 <div className="flex items-center gap-3">
-                  <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl ${color} text-white`}>
+                  <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl ${color} text-white shadow-sm`}>
                     <Icon size={20} />
                   </span>
                   <h3 className={`text-lg font-bold ${textColor} dark:text-white`}>
@@ -55,17 +67,20 @@ export default function CampusFeatures({ features = defaultFeatures }) {
                 </p>
               </div>
 
-              <div data-aos="fade-up" className="overflow-hidden min-h-48 md:min-h-0">
-                <img
+              <div className="overflow-hidden min-h-48 md:min-h-0">
+                <motion.img
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
                   src={image}
                   alt={heading}
                   className="w-full h-70 object-cover"
                 />
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
     </section>
   );
 }
+

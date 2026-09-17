@@ -8,7 +8,9 @@ import {
   Smile,
   Activity,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import Hero from "./AboutPage/Hero";
+import { fadeUp, scaleIn, staggerContainer, defaultViewport } from "../../animations/variants";
 
 /* -------------------------------------------------------------------------- */
 /*  Placeholder art — inline base64 SVG data URIs (no external image calls)   */
@@ -219,15 +221,21 @@ function FitnessWellness() {
   const [active, setActive] = useState(false);
 
   return (
-    <section data-aos="fade-up" className="mx-auto max-w-6xl px-6 py-16 md:py-24">
-      <SectionEyebrow data-aos="fade-up" icon="🏃" label="Fitness & Wellness" tone="green" />
+    <motion.section
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={defaultViewport}
+      className="mx-auto max-w-6xl px-6 py-16 md:py-24"
+    >
+      <SectionEyebrow icon="🏃" label="Fitness & Wellness" tone="green" />
 
       <div
         onMouseEnter={() => setActive(true)}
         onMouseLeave={() => setActive(false)}
         className="group relative mt-8 grid overflow-hidden rounded-[28px] border border-emerald-900/10 bg-white shadow-[0_1px_0_rgba(0,0,0,0.04)] dark:border-emerald-400/10 dark:bg-neutral-900 md:grid-cols-2"
       >
-        <div data-aos="fade-in" className="relative h-64 overflow-hidden md:h-full">
+        <div className="relative h-64 overflow-hidden md:h-full">
           <img
             src={FITNESS.img}
             alt={FITNESS.title}
@@ -266,7 +274,7 @@ function FitnessWellness() {
           )}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
@@ -279,14 +287,20 @@ function OutdoorSports() {
   const current = OUTDOOR[active];
 
   return (
-    <section data-aos="fade-in" className="border-y border-sky-900/5 bg-sky-50/60 dark:border-sky-400/10 dark:bg-sky-950/20">
-      <div data-aos="fade-up" className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+    <motion.section
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={defaultViewport}
+      className="border-y border-sky-900/5 bg-sky-50/60 dark:border-sky-400/10 dark:bg-sky-950/20"
+    >
+      <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
         <SectionEyebrow icon="🏏" label="Outdoor Sports" tone="blue" />
 
         <div className="mt-8 grid gap-8 md:grid-cols-[1fr_1.3fr] md:gap-4">
           <ul className="flex flex-col divide-y divide-sky-900/10 overflow-hidden rounded-2xl border border-sky-900/10 bg-white dark:divide-sky-400/10 dark:border-sky-400/10 dark:bg-neutral-900">
             {OUTDOOR.map((item, i) => (
-              <li data-aos="fade-up" key={item.title}>
+              <li key={item.title}>
                 <button
                   onMouseEnter={() => setActive(i)}
                   onFocus={() => setActive(i)}
@@ -332,17 +346,17 @@ function OutdoorSports() {
               />
             </div>
             <div className="flex-1 overflow-hidden p-6">
-              <h4 data-aos="fade-up" className="font-display text-xl font-semibold text-neutral-900 dark:text-neutral-50">
+              <h4 className="font-display text-xl font-semibold text-neutral-900 dark:text-neutral-50">
                 {current.title}
               </h4>
-              <p data-aos="fade-up" className="mt-2 line-clamp-3 text-[15px] leading-relaxed text-neutral-600 dark:text-neutral-400">
+              <p className="mt-2 line-clamp-3 text-[15px] leading-relaxed text-neutral-600 dark:text-neutral-400">
                 {current.copy}
               </p>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
@@ -353,8 +367,10 @@ function OutdoorSports() {
 function IndoorGameCard({ item }) {
   const [active, setActive] = useState(false);
   return (
-    <div
-      data-aos="fade-up"
+    <motion.div
+      variants={scaleIn}
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.25 }}
       onMouseEnter={() => setActive(true)}
       onMouseLeave={() => setActive(false)}
       className="group flex flex-col overflow-hidden rounded-2xl border border-emerald-900/10 bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg dark:border-emerald-400/10 dark:bg-neutral-900"
@@ -386,19 +402,25 @@ function IndoorGameCard({ item }) {
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 function IndoorGames() {
   return (
-    <section data-aos="fade-up" className="mx-auto  max-w-6xl px-6 py-16 md:py-24">
+    <section className="mx-auto max-w-6xl px-6 py-16 md:py-24">
       <SectionEyebrow icon="♟️" label="Indoor Games" tone="teal" />
-      <div className="mt-8 grid grid-cols-2 items-start gap-4 md:grid-cols-4">
+      <motion.div
+        variants={staggerContainer(0.06, 0.1)}
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        className="mt-8 grid grid-cols-2 items-start gap-4 md:grid-cols-4"
+      >
         {INDOOR.map((item) => (
-          <IndoorGameCard  key={item.title} item={item} />
+          <IndoorGameCard key={item.title} item={item} />
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
@@ -410,9 +432,10 @@ function IndoorGames() {
 function TechPanel({ item }) {
   const [active, setActive] = useState(false);
   return (
-    <div
-      
-      data-aos="fade-up"
+    <motion.div
+      variants={scaleIn}
+      whileHover={{ scale: 1.02 }}
+      transition={{ duration: 0.3 }}
       onMouseEnter={() => setActive(true)}
       onMouseLeave={() => setActive(false)}
       className="relative h-72 overflow-hidden rounded-2xl border border-indigo-900/10 dark:border-indigo-400/10"
@@ -429,7 +452,7 @@ function TechPanel({ item }) {
           active ? "from-indigo-950/95" : ""
         }`}
       >
-        <h4 data-aos="fade-up" className="font-display text-xl font-semibold text-white">
+        <h4 className="font-display text-xl font-semibold text-white">
           {item.title}
         </h4>
         <div
@@ -437,45 +460,69 @@ function TechPanel({ item }) {
             active ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
           }`}
         >
-          <p data-aos="fade-up" className="overflow-hidden pt-2 text-sm leading-relaxed text-indigo-100">
+          <p className="overflow-hidden pt-2 text-sm leading-relaxed text-indigo-100">
             {item.copy}
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 function TechRecreation() {
   return (
-    <section data-aos="fade-in" className="border-y border-indigo-900/5 bg-indigo-50/50 dark:border-indigo-400/10 dark:bg-indigo-950/20">
-      <div data-aos="fade-up" className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+    <motion.section
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={defaultViewport}
+      className="border-y border-indigo-900/5 bg-indigo-50/50 dark:border-indigo-400/10 dark:bg-indigo-950/20"
+    >
+      <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
         <SectionEyebrow icon="🎮" label="Technology & Recreation" tone="indigo" />
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
+        <motion.div
+          variants={staggerContainer(0.08, 0.1)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mt-8 grid gap-4 md:grid-cols-2"
+        >
           {TECH.map((item) => (
             <TechPanel key={item.title} item={item} />
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
 function ChildrenGames() {
   return (
-    <section data-aos="fade-in" className="border-y border-amber-900/5 bg-amber-50/50 dark:border-amber-400/10 dark:bg-amber-950/20">
-      <div data-aos="fade-up" className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+    <motion.section
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={defaultViewport}
+      className="border-y border-amber-900/5 bg-amber-50/50 dark:border-amber-400/10 dark:bg-amber-950/20"
+    >
+      <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
         <SectionEyebrow icon="🧒" label="Children Games" tone="teal" />
-        <div data-aos="fade-up" className="mt-3 max-w-2xl text-sm leading-7 text-neutral-600 dark:text-neutral-300">
+        <div className="mt-3 max-w-2xl text-sm leading-7 text-neutral-600 dark:text-neutral-300">
           A child-focused game area using images from the Outdoor exhibits folder, designed with the same card UI.
         </div>
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
+        <motion.div
+          variants={staggerContainer(0.08, 0.1)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mt-8 grid gap-4 md:grid-cols-2"
+        >
           {CHILDREN_GAMES.map((item) => (
             <TechPanel key={item.title} item={item} />
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
@@ -492,10 +539,10 @@ function SectionEyebrow({ icon, label, tone }) {
   }[tone];
 
   return (
-    <span data-aos="fade-right"
+    <span
       className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm font-medium ${tones}`}
     >
-      <span data-aos="zoom-in" className="text-base leading-none">{icon}</span>
+      <span className="text-base leading-none">{icon}</span>
       {label}
     </span>
   );
@@ -548,27 +595,32 @@ function SectionEyebrow({ icon, label, tone }) {
 export default function ExtraCurricularPage() {
   return (
     <div className="bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-50">
-      {/* <ActivitiesHero /> */}
       <Hero
-      title = "Extra Curricular Activities"
-      eyebrow = "Ignite Beyond the Classroom"
-      backgroundImage = "/assets/images/events/Sports Meet/SPORTS MEET ASSEMBLE (2).webp"
-      subtitle={'Sports, fitness, indoor games & recreation for a well-rounded campus life.'}
+        title="Extra Curricular Activities"
+        eyebrow="Ignite Beyond the Classroom"
+        backgroundImage="/assets/images/events/Sports Meet/SPORTS MEET ASSEMBLE (2).webp"
+        subtitle="Sports, fitness, indoor games & recreation for a well-rounded campus life."
       />
 
       {/* Beyond Academics intro */}
-      <section className="mx-auto max-w-6xl px-6 pt-16 md:pb-4">
-        <span data-aos="fade-up" className="mb-3 inline-block text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
+      <motion.section
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        className="mx-auto max-w-6xl px-6 pt-16 md:pb-4"
+      >
+        <span className="mb-3 inline-block text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
           Campus Life
         </span>
-        <h1 data-aos="fade-up" className="text-4xl font-semibold tracking-tight text-neutral-900 dark:text-white md:text-5xl">
+        <h1 className="text-4xl font-semibold tracking-tight text-neutral-900 dark:text-white md:text-5xl">
           Beyond academics
         </h1>
-        <p data-aos="fade-up" className="mt-3 text-lg font-medium text-neutral-500 dark:text-neutral-400 md:text-xl">
+        <p className="mt-3 text-lg font-medium text-neutral-500 dark:text-neutral-400 md:text-xl">
           Learn. Play. Connect. Grow.
         </p>
 
-        <p data-aos="fade-up" className="mt-6 text-[17px] leading-relaxed text-neutral-600 dark:text-neutral-300">
+        <p className="mt-6 text-[17px] leading-relaxed text-neutral-600 dark:text-neutral-300">
           We believe education is about more than academics. A healthy and engaging
           campus environment helps students{" "}
           <span className="font-medium text-neutral-900 dark:text-white">
@@ -577,7 +629,7 @@ export default function ExtraCurricularPage() {
           </span>
           .
         </p>
-        <p data-aos="fade-up" className="mt-4 text-[17px] leading-relaxed text-neutral-600 dark:text-neutral-300">
+        <p className="mt-4 text-[17px] leading-relaxed text-neutral-600 dark:text-neutral-300">
           Our institution provides a wide range of{" "}
           <span className="font-medium text-neutral-900 dark:text-white">
             sports, fitness, indoor games, and recreational activities
@@ -585,56 +637,77 @@ export default function ExtraCurricularPage() {
           , giving students plenty of opportunities to refresh their minds and stay
           active.
         </p>
-      </section>
+      </motion.section>
 
       <FitnessWellness />
       <OutdoorSports />
       <section className="mx-auto max-w-6xl px-6 py-16 md:py-24">
-      <IndoorGames />
+        <IndoorGames />
       </section>
       <TechRecreation />
       <ChildrenGames />
 
       {/* Thrive summary */}
-      <section data-aos="fade-in" className="mx-auto max-w-6xl px-6 py-16 md:py-24">
-        <h2 data-aos="fade-up" className="font-display text-center text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 md:text-4xl">
-          🌟 A Campus Where Students Can Thrive
-        </h2>
-        <p data-aos="fade-up" className="mx-auto mt-4 max-w-2xl text-center text-[17px] leading-relaxed text-neutral-600 dark:text-neutral-400">
-          From{" "}
-          <strong className="font-semibold text-neutral-900 dark:text-neutral-100">
-            cricket and badminton to chess and carroms, from Zumba and
-            pickleball to VR cricket and arcade games
-          </strong>
-          , our extracurricular facilities offer something for everyone.
-        </p>
+      <section className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+        >
+          <h2 className="font-display text-center text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 md:text-4xl">
+            🌟 A Campus Where Students Can Thrive
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-center text-[17px] leading-relaxed text-neutral-600 dark:text-neutral-400">
+            From{" "}
+            <strong className="font-semibold text-neutral-900 dark:text-neutral-100">
+              cricket and badminton to chess and carroms, from Zumba and
+              pickleball to VR cricket and arcade games
+            </strong>
+            , our extracurricular facilities offer something for everyone.
+          </p>
+        </motion.div>
 
-        <div className="mx-auto mt-10 grid max-w-4xl grid-cols-1 gap-3 sm:grid-cols-2">
+        <motion.div
+          variants={staggerContainer(0.06, 0.1)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mx-auto mt-10 grid max-w-4xl grid-cols-1 gap-3 sm:grid-cols-2"
+        >
           {BENEFITS.map(({ icon: Icon, text }) => (
-            <div
-              data-aos="fade-up"
+            <motion.div
               key={text}
-              className="flex items-center gap-3 rounded-xl border border-neutral-900/5 bg-linear-to-r from-emerald-600/5 to-blue-600/5 px-4 py-3 dark:border-white/5"
+              variants={scaleIn}
+              whileHover={{ scale: 1.02, y: -2 }}
+              transition={{ duration: 0.2 }}
+              className="flex items-center gap-3 rounded-xl border border-neutral-900/5 bg-linear-to-r from-emerald-600/5 to-blue-600/5 px-4 py-3 dark:border-white/5 transition-shadow hover:shadow-sm"
             >
-              <span data-aos="zoom-in" className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-linear-to-br from-blue-200 to-blue-600 text-white">
+              <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-linear-to-br from-blue-200 to-blue-600 text-white">
                 <Icon size={16} strokeWidth={2.25} />
               </span>
-              <span data-aos="zoom-in" className="text-[15px] text-neutral-700 dark:text-neutral-300">
+              <span className="text-[15px] text-neutral-700 dark:text-neutral-300">
                 {text}
               </span>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* Closing banner */}
-      <section data-aos="fade-in" className="relative overflow-hidden bg-linear-to-br from-blue-400 to-blue-700 px-6 py-16 text-center md:py-20">
+      <motion.section
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        className="relative overflow-hidden bg-linear-to-br from-blue-400 to-blue-700 px-6 py-16 text-center md:py-20"
+      >
         <div className="pointer-events-none absolute -left-10 -top-10 h-56 w-56 rounded-full bg-white/10 blur-2xl" />
         <div className="pointer-events-none absolute -bottom-16 -right-10 h-64 w-64 rounded-full bg-white/10 blur-2xl" />
-        <h2 data-aos="fade-up" className="font-display relative text-2xl font-bold text-white md:text-4xl">
+        <h2 className="font-display relative text-2xl font-bold text-white md:text-4xl">
           Balance Your Studies With Life
         </h2>
-        <p data-aos="fade-up" className="relative mx-auto mt-4 max-w-2xl text-[17px] leading-relaxed text-emerald-50">
+        <p className="relative mx-auto mt-4 max-w-2xl text-[17px] leading-relaxed text-emerald-50">
           Study hard. Play hard. Stay active. Stay connected. Our
           extracurricular facilities are designed to create a vibrant campus
           experience where students can{" "}
@@ -642,7 +715,7 @@ export default function ExtraCurricularPage() {
             learn, relax, compete, have fun, and grow beyond the classroom.
           </strong>
         </p>
-      </section>
+      </motion.section>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   Atom,
@@ -14,6 +15,15 @@ import {
   Users,
 } from "lucide-react";
 import { submitEnquiry } from "../lib/enquiryApi";
+import {
+  fadeUp,
+  fadeIn,
+  staggerContainer,
+  staggerItem,
+  cardReveal,
+  defaultViewport,
+  scaleIn,
+} from "../animations/variants";
 
 const highlights = [
   { icon: "⚛️", label: "Physics & Chemistry" },
@@ -148,18 +158,23 @@ const colorStyles = {
 
 function FoundationHero() {
   return (
-    <section className="bg-white px-6 py-20 dark:bg-neutral-950">
+    <section className="bg-white px-6 py-20 dark:bg-neutral-950 overflow-hidden">
       <div className="mx-auto max-w-7xl">
         <div className="grid items-center gap-12 lg:grid-cols-2">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-2 dark:bg-blue-950/40">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={defaultViewport}
+          >
+            <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-2 dark:bg-blue-950/40">
               <span className="text-lg">🚀</span>
               <span className="text-xs font-black uppercase tracking-widest text-blue-700 dark:text-blue-400">
                 Ignite Foundation
               </span>
-            </div>
+            </motion.div>
 
-            <h1 className="mt-5 text-4xl font-extrabold leading-tight text-neutral-950 sm:text-5xl dark:text-white">
+            <motion.h1 variants={fadeUp} className="mt-5 text-4xl font-extrabold leading-tight text-neutral-950 sm:text-5xl dark:text-white">
               Foundation Course for{" "}
               <span className="relative inline-block">
                 <span className="relative z-10 text-blue-600 dark:text-blue-400">
@@ -168,35 +183,37 @@ function FoundationHero() {
                 <span className="absolute inset-x-0 bottom-1 -z-0 h-3 rounded bg-blue-100 dark:bg-blue-900/40" />
               </span>{" "}
               Success
-            </h1>
+            </motion.h1>
 
-            <p className="mt-5 text-base leading-7 text-neutral-600 dark:text-neutral-400">
+            <motion.p variants={fadeUp} className="mt-5 text-base leading-7 text-neutral-600 dark:text-neutral-400">
               Looking for the best NEET & IIT foundation coaching in Hyderabad?
               Ignite Academy offers a specialized IIT Foundation Course and the
               Best Foundation Course for NEET designed to prepare students from
               an early stage.
-            </p>
-            <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
+            </motion.p>
+            <motion.p variants={fadeUp} className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
               Our foundation coaching classes build strong basics in Physics,
               Chemistry, Biology, and Mathematics, helping students stay ahead
               for IIT JEE, NEET, and other competitive exams.
-            </p>
+            </motion.p>
 
-            <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
+            <motion.div variants={staggerContainer} className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
               {highlights.map(({ icon, label }) => (
-                <div
+                <motion.div
                   key={label}
-                  className="flex flex-col items-center gap-1.5 rounded-2xl bg-neutral-50 py-4 text-center dark:bg-neutral-900"
+                  variants={cardReveal}
+                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                  className="flex flex-col items-center gap-1.5 rounded-2xl bg-neutral-50 py-4 text-center dark:bg-neutral-900 shadow-xs"
                 >
                   <span className="text-2xl">{icon}</span>
                   <span className="text-xs font-semibold text-neutral-600 dark:text-neutral-400">
                     {label}
                   </span>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
-            <div className="mt-8 flex flex-wrap gap-6">
+            <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-6">
               {[
                 { value: "Class 8+", extra: "Early start" },
                 { value: "4", extra: "Core subjects" },
@@ -209,10 +226,16 @@ function FoundationHero() {
                   <p className="text-xs font-semibold text-neutral-500">{extra}</p>
                 </div>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
-          <div className="relative min-h-[460px] overflow-hidden rounded-3xl bg-linear-to-br from-blue-700 via-indigo-800 to-neutral-950 p-8 shadow-md">
+          <motion.div
+            variants={scaleIn}
+            initial="hidden"
+            whileInView="visible"
+            viewport={defaultViewport}
+            className="relative min-h-[460px] overflow-hidden rounded-3xl bg-linear-to-br from-blue-700 via-indigo-800 to-neutral-950 p-8 shadow-md"
+          >
             <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-blue-400/20 blur-2xl" />
             <div className="absolute -bottom-20 -left-16 h-64 w-64 rounded-full bg-cyan-400/20 blur-2xl" />
             <div className="relative flex h-full flex-col justify-between">
@@ -235,15 +258,17 @@ function FoundationHero() {
                   { icon: BookOpen, label: "School academics + competitive preparation" },
                   { icon: Target, label: "Guidance, testing, and personal mentoring" },
                 ].map(({ icon: Icon, label }) => (
-                  <div
+                  <motion.div
                     key={label}
+                    whileHover={{ x: 4 }}
+                    transition={{ duration: 0.2 }}
                     className="flex items-center gap-3 rounded-2xl bg-white/10 px-4 py-3 backdrop-blur-sm"
                   >
                     <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/15">
                       <Icon size={17} className="text-cyan-200" />
                     </span>
                     <span className="text-sm font-semibold text-white">{label}</span>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
 
@@ -254,7 +279,7 @@ function FoundationHero() {
                 </span>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
@@ -263,34 +288,49 @@ function FoundationHero() {
 
 function LearningApproach() {
   return (
-    <section className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
+    <section className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40 overflow-hidden">
       <div className="mx-auto max-w-7xl">
-        <div className="flex items-center gap-3">
-          <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-          <span className="rounded-full bg-blue-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">
-            Our approach
-          </span>
-          <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-        </div>
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+        >
+          <div className="flex items-center gap-3">
+            <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
+            <motion.span variants={fadeUp} className="rounded-full bg-blue-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">
+              Our approach
+            </motion.span>
+            <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
+          </div>
 
-        <div className="mt-8 max-w-3xl">
-          <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
-            Building Strong Foundations for{" "}
-            <span className="text-blue-600 dark:text-blue-400">Your Future</span>
-          </h2>
-          <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
-            At Ignite Academy, we believe that the right start leads to the
-            right destination. Our NEET & IIT foundation classes in Hyderabad
-            help students learn with clarity, consistency, and confidence.
-          </p>
-        </div>
+          <div className="mt-8 max-w-3xl">
+            <motion.h2 variants={fadeUp} className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+              Building Strong Foundations for{" "}
+              <span className="text-blue-600 dark:text-blue-400">Your Future</span>
+            </motion.h2>
+            <motion.p variants={fadeUp} className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
+              At Ignite Academy, we believe that the right start leads to the
+              right destination. Our NEET & IIT foundation classes in Hyderabad
+              help students learn with clarity, consistency, and confidence.
+            </motion.p>
+          </div>
+        </motion.div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mt-10 grid gap-5 md:grid-cols-3"
+        >
           {learningApproach.map(({ icon: Icon, number, title, description, color }) => {
             const styles = colorStyles[color];
             return (
-              <div
+              <motion.div
                 key={title}
+                variants={cardReveal}
+                whileHover={{ y: -6, transition: { duration: 0.25 } }}
                 className="relative overflow-hidden rounded-3xl bg-white p-7 shadow-sm ring-1 ring-neutral-100 dark:bg-neutral-900 dark:ring-neutral-800"
               >
                 <span className={`absolute right-5 top-2 text-7xl font-black ${styles.number}`}>
@@ -305,12 +345,18 @@ function LearningApproach() {
                 <p className="mt-3 text-sm leading-7 text-neutral-600 dark:text-neutral-400">
                   {description}
                 </p>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
-        <div className="mt-8 rounded-3xl bg-linear-to-r from-blue-600 to-indigo-700 p-7 sm:p-9">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mt-8 rounded-3xl bg-linear-to-r from-blue-600 to-indigo-700 p-7 sm:p-9 shadow-md"
+        >
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-xs font-black uppercase tracking-widest text-blue-200">
@@ -328,7 +374,7 @@ function LearningApproach() {
               <span>🔢</span>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -336,28 +382,43 @@ function LearningApproach() {
 
 function WhyChooseIgnite() {
   return (
-    <section className="bg-white px-6 py-20 dark:bg-neutral-950">
+    <section className="bg-white px-6 py-20 dark:bg-neutral-950 overflow-hidden">
       <div className="mx-auto max-w-7xl">
-        <div className="flex items-center gap-3">
-          <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
-          <span className="rounded-full bg-amber-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-amber-700 dark:bg-amber-950/40 dark:text-amber-400">
-            Why Ignite Academy
-          </span>
-          <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
-        </div>
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+        >
+          <div className="flex items-center gap-3">
+            <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
+            <motion.span variants={fadeUp} className="rounded-full bg-amber-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-amber-700 dark:bg-amber-950/40 dark:text-amber-400">
+              Why Ignite Academy
+            </motion.span>
+            <span className="h-px flex-1 bg-neutral-100 dark:bg-neutral-800" />
+          </div>
 
-        <div className="mt-8 max-w-3xl">
-          <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
-            Why Choose Ignite Academy for{" "}
-            <span className="text-amber-500">NEET & IIT Foundation classes?</span>
-          </h2>
-        </div>
+          <div className="mt-8 max-w-3xl">
+            <motion.h2 variants={fadeUp} className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+              Why Choose Ignite Academy for{" "}
+              <span className="text-amber-500">NEET & IIT Foundation classes?</span>
+            </motion.h2>
+          </div>
+        </motion.div>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {benefits.map(({ icon: Icon, title, description }) => (
-            <div
+            <motion.div
               key={title}
-              className="rounded-3xl border border-neutral-100 bg-neutral-50 p-6 transition hover:-translate-y-1 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900"
+              variants={cardReveal}
+              whileHover={{ y: -6, transition: { duration: 0.25 } }}
+              className="rounded-3xl border border-neutral-100 bg-neutral-50 p-6 shadow-xs hover:shadow-md transition-shadow dark:border-neutral-800 dark:bg-neutral-900"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 dark:bg-amber-950/40">
                 <Icon size={22} className="text-amber-600 dark:text-amber-400" />
@@ -366,9 +427,9 @@ function WhyChooseIgnite() {
               <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
                 {description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -378,23 +439,36 @@ function FoundationFaq() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
+    <section className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40 overflow-hidden">
       <div className="mx-auto max-w-4xl">
-        <div className="text-center">
-          <span className="rounded-full bg-indigo-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="text-center"
+        >
+          <motion.span variants={fadeUp} className="rounded-full bg-indigo-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300">
             Frequently Asked Questions
-          </span>
-          <h2 className="mt-6 text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+          </motion.span>
+          <motion.h2 variants={fadeUp} className="mt-6 text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             Answers for parents and students
-          </h2>
-        </div>
+          </motion.h2>
+        </motion.div>
 
-        <div className="mt-10 space-y-3">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mt-10 space-y-3"
+        >
           {faqs.map(({ question, answer }, index) => {
             const isOpen = openIndex === index;
             return (
-              <div
+              <motion.div
                 key={question}
+                variants={fadeUp}
                 className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-neutral-100 dark:bg-neutral-900 dark:ring-neutral-800"
               >
                 <button
@@ -408,20 +482,30 @@ function FoundationFaq() {
                   </span>
                   <ChevronDown
                     size={18}
-                    className={`shrink-0 text-blue-600 transition-transform dark:text-blue-400 ${
+                    className={`shrink-0 text-blue-600 transition-transform duration-300 dark:text-blue-400 ${
                       isOpen ? "rotate-180" : ""
                     }`}
                   />
                 </button>
-                {isOpen ? (
-                  <p className="border-t border-neutral-100 px-5 pb-5 pt-4 text-sm leading-7 text-neutral-600 dark:border-neutral-800 dark:text-neutral-400">
-                    {answer}
-                  </p>
-                ) : null}
-              </div>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <p className="border-t border-neutral-100 px-5 pb-5 pt-4 text-sm leading-7 text-neutral-600 dark:border-neutral-800 dark:text-neutral-400">
+                        {answer}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -446,9 +530,15 @@ function FoundationEnquiry() {
   }
 
   return (
-    <section className="bg-white px-6 py-20 dark:bg-neutral-950">
+    <section className="bg-white px-6 py-20 dark:bg-neutral-950 overflow-hidden">
       <div className="mx-auto max-w-7xl">
-        <div className="overflow-hidden rounded-3xl bg-linear-to-br from-neutral-900 to-blue-950 px-8 py-12 text-center">
+        <motion.div
+          variants={scaleIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="overflow-hidden rounded-3xl bg-linear-to-br from-neutral-900 to-blue-950 px-8 py-12 text-center shadow-lg"
+        >
           <p className="text-xs font-black uppercase tracking-widest text-blue-300">
             Enroll Today
           </p>
@@ -460,9 +550,15 @@ function FoundationEnquiry() {
             Hyderabad, Ignite Academy is the right choice. Start your child&apos;s
             journey with us today.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mt-10 overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-neutral-100 dark:bg-neutral-900 dark:ring-neutral-800 border-4 border-blue-600">
+        <motion.div
+          variants={cardReveal}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mt-10 overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-neutral-100 dark:bg-neutral-900 dark:ring-neutral-800 border-4 border-blue-600"
+        >
           <div className="grid lg:grid-cols-[0.8fr_1.2fr]">
             <div className="bg-blue-600 px-8 py-10">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20">
@@ -491,7 +587,11 @@ function FoundationEnquiry() {
 
             <div className="px-8 py-10">
               {submitted ? (
-                <div className="flex h-full flex-col items-center justify-center gap-4 py-8 text-center">
+                <motion.div
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  className="flex h-full flex-col items-center justify-center gap-4 py-8 text-center"
+                >
                   <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-950/40">
                     <CheckCircle2 size={32} className="text-emerald-600 dark:text-emerald-400" />
                   </div>
@@ -502,7 +602,7 @@ function FoundationEnquiry() {
                     Our admissions team will contact you soon with details about
                     the right foundation course.
                   </p>
-                </div>
+                </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <h3 className="text-xl font-extrabold text-neutral-950 dark:text-white">
@@ -552,18 +652,20 @@ function FoundationEnquiry() {
                     <option>NEET Foundation</option>
                     <option>IIT JEE & NEET Foundation</option>
                   </select>
-                  <button
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={submitting}
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-black text-white transition hover:bg-blue-700 active:scale-[0.98] disabled:cursor-wait disabled:opacity-60"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-black text-white transition hover:bg-blue-700 disabled:cursor-wait disabled:opacity-60"
                   >
                     {submitting ? "Submitting..." : <>Request a Call Back <ArrowRight size={16} /></>}
-                  </button>
+                  </motion.button>
                 </form>
               )}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -571,12 +673,17 @@ function FoundationEnquiry() {
 
 export default function FoundationPage() {
   return (
-    <div className="min-h-screen pt-5 bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.35 }}
+      className="min-h-screen pt-5 bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white"
+    >
       <FoundationHero />
       <LearningApproach />
       <WhyChooseIgnite />
       <FoundationFaq />
       <FoundationEnquiry />
-    </div>
+    </motion.div>
   );
 }

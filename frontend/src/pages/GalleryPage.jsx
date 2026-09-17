@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   Award,
@@ -21,6 +22,16 @@ import {
   Users,
 } from "lucide-react";
 import { RouteLink } from "../router/BrowserRouter";
+import {
+  fadeUp,
+  fadeIn,
+  staggerContainer,
+  staggerItem,
+  cardReveal,
+  imageReveal,
+  defaultViewport,
+  scaleIn,
+} from "../animations/variants";
 
 const heroSlides = [
   {
@@ -188,8 +199,11 @@ function GalleryHero() {
   }
 
   return (
-    <section className="px-4 pb-10 pt-5 sm:px-6 sm:pt-8">
-      <div
+    <section className="px-4 pb-10 pt-5 sm:px-6 sm:pt-8 overflow-hidden">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         className="group relative mx-auto h-[620px] max-w-7xl overflow-hidden rounded-[2rem] bg-neutral-900 shadow-[0_24px_80px_rgba(42,25,86,0.2)] sm:h-[680px]"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
@@ -212,42 +226,61 @@ function GalleryHero() {
         </div>
 
         <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-8 p-7 sm:p-12 lg:p-16">
-          <div className="max-w-2xl text-white">
-            <p className="text-xs font-black uppercase tracking-[0.24em] text-blue-200">
-              {heroSlides[current].eyebrow}
-            </p>
-            <h1 className="mt-4 max-w-2xl text-xl font-extrabold leading-[1.05] sm:text-3xl lg:text-4xl">
-              {heroSlides[current].title}
-            </h1>
-            <p className="mt-5 max-w-xl text-sm leading-7 text-white/80 sm:text-base">
-              {heroSlides[current].description}
-            </p>
-            <RouteLink
-              to="/gallery/events"
-              className="my-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-[10px] font-black text-neutral-950 transition hover:bg-blue-100"
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="max-w-2xl text-white"
             >
-              Explore our events
-              <ArrowRight size={16} />
-            </RouteLink>
-          </div>
+              <p className="text-xs font-black uppercase tracking-[0.24em] text-blue-200">
+                {heroSlides[current].eyebrow}
+              </p>
+              <h1 className="mt-4 max-w-2xl text-xl font-extrabold leading-[1.05] sm:text-3xl lg:text-4xl">
+                {heroSlides[current].title}
+              </h1>
+              <p className="mt-5 max-w-xl text-sm leading-7 text-white/80 sm:text-base">
+                {heroSlides[current].description}
+              </p>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.96 }}
+                className="inline-block"
+              >
+                <RouteLink
+                  to="/gallery/events"
+                  className="my-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-[10px] font-black text-neutral-950 transition hover:bg-blue-100"
+                >
+                  Explore our events
+                  <ArrowRight size={16} />
+                </RouteLink>
+              </motion.div>
+            </motion.div>
+          </AnimatePresence>
 
           <div className="hidden shrink-0 items-center gap-2 sm:flex">
-            <button
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               type="button"
               onClick={() => moveSlide(-1)}
               aria-label="Previous gallery slide"
               className="grid h-11 w-11 place-items-center rounded-full border border-white/30 bg-black/20 text-white backdrop-blur-md transition hover:bg-white hover:text-neutral-950"
             >
               <ChevronLeft size={19} />
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               type="button"
               onClick={() => moveSlide(1)}
               aria-label="Next gallery slide"
               className="grid h-11 w-11 place-items-center rounded-full border border-white/30 bg-black/20 text-white backdrop-blur-md transition hover:bg-white hover:text-neutral-950"
             >
               <ChevronRight size={19} />
-            </button>
+            </motion.button>
           </div>
         </div>
 
@@ -258,13 +291,13 @@ function GalleryHero() {
               type="button"
               onClick={() => setCurrent(index)}
               aria-label={`Show gallery slide ${index + 1}`}
-              className={`h-1.5 rounded-full transition-all ${
+              className={`h-1.5 rounded-full transition-all duration-300 ${
                 current === index ? "w-9 bg-white" : "w-2 bg-white/45"
               }`}
             />
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
@@ -278,7 +311,13 @@ function GalleryStrap() {
 
   return (
     <section className="relative z-10 -mt-1 px-6 pb-16">
-      <div className="mx-auto flex max-w-4xl flex-col items-center justify-between gap-5 rounded-3xl border border-neutral-200 bg-white p-3 shadow-[0_20px_60px_rgba(15,23,42,0.12)] sm:flex-row sm:rounded-full sm:pl-6 dark:border-neutral-800 dark:bg-neutral-900">
+      <motion.div
+        variants={scaleIn}
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        className="mx-auto flex max-w-4xl flex-col items-center justify-between gap-5 rounded-3xl border border-neutral-200 bg-white p-3 shadow-[0_20px_60px_rgba(15,23,42,0.12)] sm:flex-row sm:rounded-full sm:pl-6 dark:border-neutral-800 dark:bg-neutral-900"
+      >
         <div className="flex items-center gap-3 px-3 text-center sm:text-left">
           <span className="hidden h-9 w-9 place-items-center rounded-full bg-blue-100 text-blue-700 sm:grid dark:bg-blue-950/50 dark:text-blue-300">
             <Images size={17} />
@@ -292,17 +331,23 @@ function GalleryStrap() {
         </div>
         <div className="flex w-full gap-2 sm:w-auto">
           {links.map(({ label, href, icon: Icon }) => (
-            <RouteLink
+            <motion.div
               key={label}
-              to={href}
-              className="flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-bold text-neutral-600 transition hover:bg-blue-600 hover:text-white sm:flex-none dark:text-neutral-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.96 }}
+              className="flex-1 sm:flex-none"
             >
-              <Icon size={15} />
-              {label}
-            </RouteLink>
+              <RouteLink
+                to={href}
+                className="flex w-full items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-bold text-neutral-600 transition hover:bg-blue-600 hover:text-white dark:text-neutral-300"
+              >
+                <Icon size={15} />
+                {label}
+              </RouteLink>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
@@ -310,7 +355,11 @@ function GalleryStrap() {
 function ProgramCard({ program }) {
   const Icon = program.icon;
   return (
-    <article className="group overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-neutral-100 transition duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-neutral-900 dark:ring-neutral-800">
+    <motion.article
+      variants={cardReveal}
+      whileHover={{ y: -6, transition: { duration: 0.25 } }}
+      className="group overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-neutral-100 transition duration-300 hover:shadow-xl dark:bg-neutral-900 dark:ring-neutral-800"
+    >
       <div className="relative aspect-[16/10] overflow-hidden bg-neutral-100 dark:bg-neutral-800">
         <img
           src={program.image}
@@ -340,56 +389,81 @@ function ProgramCard({ program }) {
           </span>
           <RouteLink
             to={program.path}
-            className="inline-flex  items-center gap-1.5 text-sm font-extrabold text-blue-700 transition hover:gap-2.5 dark:text-blue-400"
+            className="inline-flex items-center gap-1.5 text-sm font-extrabold text-blue-700 transition hover:gap-2.5 dark:text-blue-400"
           >
             View images
             <ArrowRight size={15} />
           </RouteLink>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }
 
 function RecentPrograms() {
   return (
-    <section className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
+    <section className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40 overflow-hidden">
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end"
+        >
           <div>
-            <div className="flex items-center gap-3">
+            <motion.div variants={fadeUp} className="flex items-center gap-3">
               <span className="h-px w-12 bg-blue-500" />
               <span className="text-xs font-black uppercase tracking-[0.2em] text-blue-700 dark:text-blue-400">
                 From the campus
               </span>
-            </div>
-            <h2 className="mt-5 text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+            </motion.div>
+            <motion.h2 variants={fadeUp} className="mt-5 text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
               Recent programs & moments
-            </h2>
-            <p className="mt-3 max-w-2xl text-base leading-7 text-neutral-600 dark:text-neutral-400">
+            </motion.h2>
+            <motion.p variants={fadeUp} className="mt-3 max-w-2xl text-base leading-7 text-neutral-600 dark:text-neutral-400">
               A closer look at the fests, activities, events, and programs that
               keep Ignite growing beyond the classroom.
-            </p>
+            </motion.p>
           </div>
-          <RouteLink
-            to="/gallery/photos"
-            className="inline-flex shrink-0 items-center gap-2 text-sm font-extrabold text-neutral-950 transition hover:text-blue-700 dark:text-white dark:hover:text-blue-400"
-          >
-            View all photos
-            <ArrowRight size={16} />
-          </RouteLink>
-        </div>
+          <motion.div variants={fadeUp}>
+            <RouteLink
+              to="/gallery/photos"
+              className="inline-flex shrink-0 items-center gap-2 text-sm font-extrabold text-neutral-950 transition hover:text-blue-700 dark:text-white dark:hover:text-blue-400"
+            >
+              View all photos
+              <ArrowRight size={16} />
+            </RouteLink>
+          </motion.div>
+        </motion.div>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {recentPrograms.map((program) => (
             <ProgramCard key={program.title} program={program} />
           ))}
-        </div>
-        <div className="flex justify-center">
-        <RouteLink to='/gallery/photos' className=" mt-10 inline-flex items-center gap-2 text-sm font-extrabold text-neutral-950 border-2 border-blue-500 hover:bg-blue-600 hover:text-white rounded-4xl px-5 py-3 transition dark:text-white dark:hover:bg-blue-600 dark:hover:text-white">
-          View more
-        </RouteLink>
-        </div>
+        </motion.div>
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="flex justify-center"
+        >
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.96 }}
+          >
+            <RouteLink to='/gallery/photos' className="mt-10 inline-flex items-center gap-2 text-sm font-extrabold text-neutral-950 border-2 border-blue-500 hover:bg-blue-600 hover:text-white rounded-4xl px-5 py-3 transition dark:text-white dark:hover:bg-blue-600 dark:hover:text-white">
+              View more
+            </RouteLink>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
@@ -397,8 +471,14 @@ function RecentPrograms() {
 
 function GalleryNote() {
   return (
-    <section className="bg-white px-6 py-20 dark:bg-neutral-950">
-      <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 rounded-3xl bg-blue-50 p-8 sm:flex-row sm:items-center sm:p-10 dark:bg-blue-950/20">
+    <section className="bg-white px-6 py-20 dark:bg-neutral-950 overflow-hidden">
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 rounded-3xl bg-blue-50 p-8 sm:flex-row sm:items-center sm:p-10 dark:bg-blue-950/20"
+      >
         <div>
           <p className="text-xs font-black uppercase tracking-[0.2em] text-blue-700 dark:text-blue-400">
             Keep exploring
@@ -411,25 +491,36 @@ function GalleryNote() {
           </p>
         </div>
         <div className="flex shrink-0 flex-wrap gap-3 text-xs font-bold text-blue-700 dark:text-blue-300">
-          <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 dark:bg-neutral-900">
+          <motion.span
+            whileHover={{ scale: 1.05 }}
+            className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 dark:bg-neutral-900 cursor-default shadow-xs"
+          >
             <Clock3 size={14} /> Always something new
-          </span>
-          <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 dark:bg-neutral-900">
+          </motion.span>
+          <motion.span
+            whileHover={{ scale: 1.05 }}
+            className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 dark:bg-neutral-900 cursor-default shadow-xs"
+          >
             <MapPin size={14} /> Hyderabad
-          </span>
+          </motion.span>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
 
 export default function GalleryPage() {
   return (
-    <div className="min-h-screen pt-16 bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.35 }}
+      className="min-h-screen pt-16 bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white"
+    >
       <GalleryHero />
       <GalleryStrap />
       <RecentPrograms />
       <GalleryNote />
-    </div>
+    </motion.div>
   );
 }

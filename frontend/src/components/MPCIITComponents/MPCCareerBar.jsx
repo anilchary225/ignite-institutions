@@ -1,13 +1,25 @@
 import { ArrowRight, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations/variants";
 
 export default function MPCCareerBar() {
   return (
-    <section data-aos="fade-up" className="overflow-hidden bg-linear-to-r from-blue-700 via-blue-600 to-indigo-700 px-6 py-14">
-      <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 text-center md:flex-row md:justify-between md:text-left">
-        <div data-aos="fade-up" className="flex items-center gap-4">
-          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/20">
+    <section className="overflow-hidden bg-linear-to-r from-blue-700 via-blue-600 to-indigo-700 px-6 py-14">
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="mx-auto flex max-w-7xl flex-col items-center gap-6 text-center md:flex-row md:justify-between md:text-left"
+      >
+        <div className="flex items-center gap-4">
+          <motion.div
+            animate={{ rotate: [0, 10, -10, 0], scale: [1, 1.05, 1] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm"
+          >
             <Sparkles size={26} className="text-white" />
-          </div>
+          </motion.div>
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-200">
               Your journey starts here
@@ -19,24 +31,28 @@ export default function MPCCareerBar() {
         </div>
 
         <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
-          <a data-aos="fade-up"
+          <motion.a
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.96 }}
             href="#contact"
             className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-4 text-sm font-black text-blue-700 shadow-lg transition hover:bg-amber-400 hover:text-white"
           >
             Apply Now <ArrowRight size={16} />
-          </a>
-          <a data-aos="fade-up"
+          </motion.a>
+          <motion.a
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.96 }}
             href="tel:+919876543210"
             className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-7 py-4 text-sm font-bold text-white backdrop-blur-sm transition hover:bg-white/20"
           >
             Call Us: +91 98765 43210
-          </a>
+          </motion.a>
         </div>
-      </div>
+      </motion.div>
 
       {/* scrolling ticker below */}
-      <div data-aos="fade-up" className="mt-10 overflow-hidden border-t border-white/20 pt-6">
-        <div data-aos="fade-up" className="flex animate-[ticker_18s_linear_infinite] gap-10 whitespace-nowrap">
+      <div className="mt-10 overflow-hidden border-t border-white/20 pt-6">
+        <div className="flex animate-[ticker_18s_linear_infinite] gap-10 whitespace-nowrap">
           {Array(3).fill([
             "🎯 IIT JEE Main & Advanced",
             "📚 Integrated Board + JEE",
@@ -46,7 +62,7 @@ export default function MPCCareerBar() {
             "📊 Small Batch Sizes",
             "🌟 20+ Years of Excellence",
           ]).flat().map((item, i) => (
-            <span  key={i} className="text-sm font-semibold text-white/80">
+            <span key={i} className="text-sm font-semibold text-white/80">
               {item}
               <span className="ml-10 text-white/30">·</span>
             </span>

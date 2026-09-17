@@ -1,4 +1,6 @@
-import { GraduationCap, BookMarked, Atom, Microscope, Star, Users } from "lucide-react";
+import { motion } from "framer-motion";
+import { Atom } from "lucide-react";
+import { fadeUp, staggerContainer, staggerItem, cardReveal, defaultViewport } from "../../animations/variants";
 
 const programs = [
   {
@@ -37,29 +39,40 @@ const colorMap = {
 };
 
 function GradeRow({ range, note, color }) {
-  const c = colorMap[color];
+  const c = colorMap[color] || colorMap.amber;
   return (
-    <div className={`flex items-center justify-between rounded-xl border px-4 py-3 ${c.gradeBorder} bg-white dark:bg-neutral-900`}>
+    <motion.div
+      variants={staggerItem}
+      className={`flex items-center justify-between rounded-xl border px-4 py-3 ${c.gradeBorder} bg-white dark:bg-neutral-900`}
+    >
       <span className={`text-sm font-bold ${c.gradeLabel}`}>{range}</span>
       <span className="text-xs text-neutral-500 dark:text-neutral-500">{note}</span>
-    </div>
+    </motion.div>
   );
 }
 
 function ProgramCard({ program }) {
-  const c = colorMap[program.color];
+  const c = colorMap[program.color] || colorMap.amber;
   const Icon = program.icon;
 
   return (
-    <div data-aos="fade-up" className={`rounded-3xl p-8 ${c.section} `}>
+    <motion.div
+      variants={cardReveal}
+      whileHover={{ y: -4 }}
+      className={`rounded-3xl p-8 ${c.section}`}
+    >
       <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide ${c.badge}`}>
         {program.eyebrow}
       </span>
 
       <div className="mt-6 flex items-center gap-4">
-        <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${c.iconBg}`}>
+        <motion.div
+          whileHover={{ scale: 1.1, rotate: 6 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${c.iconBg}`}
+        >
           <Icon size={22} className="text-white" />
-        </div>
+        </motion.div>
         <h3 className="text-xl font-extrabold text-neutral-950 dark:text-white">
           {program.title}
         </h3>
@@ -74,9 +87,11 @@ function ProgramCard({ program }) {
         <p className="mb-3 text-xs font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-600">
           Classes covered
         </p>
-        {program.grades.map((g) => (
-          <GradeRow key={g.range} {...g} color={program.color} />
-        ))}
+        <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-2">
+          {program.grades.map((g) => (
+            <GradeRow key={g.range} {...g} color={program.color} />
+          ))}
+        </motion.div>
       </div>
 
       {/* feature pills for foundation */}
@@ -93,45 +108,65 @@ function ProgramCard({ program }) {
         </div>
       )}
 
-      <a
+      <motion.a
         href="/contact"
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
         className={`mt-8 inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-bold text-white transition ${c.cta}`}
       >
         Enquire Now
-      </a>
-    </div>
+      </motion.a>
+    </motion.div>
   );
 }
 
 export default function SchoolStream() {
   return (
-    <section data-aos="fade-in" id="school" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/50">
+    <section id="school" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/50 overflow-hidden">
       <div className="mx-auto max-w-7xl">
         {/* section header */}
-        <div data-aos="zoom-in" className="flex items-center gap-3">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={fadeUp}
+          className="flex items-center gap-3"
+        >
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
           <span className="rounded-full bg-sky-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-sky-700 dark:bg-sky-950/50 dark:text-sky-300">
             School Programs
           </span>
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-        </div>
+        </motion.div>
 
-        <div className="mt-8 max-w-full items-center text-left">
-          <h2 data-aos="fade-up" className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={fadeUp}
+          className="mt-8 max-w-full items-center text-left"
+        >
+          <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             School - 6 to Class 10
           </h2>
-          <p data-aos="fade-up" className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
+          <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Build the right habits early. Our school programs give students a
             competitive edge from day one - with a foundation track that grooms
             future IIT & NEET aspirants from Class 6 itself.
           </p>
-        </div>
+        </motion.div>
 
-        <div data-aos="fade-in" className="mt-10 mx-auto border-2 rounded-3xl border-amber-500">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={staggerContainer}
+          className="mt-10 mx-auto border-2 rounded-3xl border-amber-500"
+        >
           {programs.map((p) => (
             <ProgramCard key={p.id} program={p} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

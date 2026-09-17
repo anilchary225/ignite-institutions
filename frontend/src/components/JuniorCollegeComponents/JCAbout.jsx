@@ -1,4 +1,6 @@
-import { Atom, FlaskConical, BookOpen, Target, Zap, GraduationCap } from "lucide-react";
+import { motion } from "framer-motion";
+import { Atom, FlaskConical, BookOpen, Target, Zap } from "lucide-react";
+import { fadeUp, staggerContainer, staggerItem, cardReveal, defaultViewport } from "../../animations/variants";
 
 const tracks = [
   {
@@ -67,12 +69,6 @@ const colorMap = {
     pill: "border-sky-200 text-sky-700 dark:border-sky-800 dark:text-sky-400",
     border: "border-sky-100 dark:border-sky-900/60",
   },
-  orange: {
-    iconBg: "bg-orange-500",
-    badge: "bg-orange-100 text-orange-700 dark:bg-orange-950/50 dark:text-orange-300",
-    pill: "border-orange-200 text-orange-700 dark:border-orange-800 dark:text-orange-400",
-    border: "border-orange-100 dark:border-orange-900/60",
-  },
   rose: {
     iconBg: "bg-rose-600",
     badge: "bg-rose-100 text-rose-700 dark:bg-rose-950/50 dark:text-rose-300",
@@ -82,14 +78,19 @@ const colorMap = {
 };
 
 function TrackCard({ track }) {
-  const c = colorMap[track.color];
+  const c = colorMap[track.color] || colorMap.orange;
   const Icon = track.icon;
   return (
-    <div data-aos="fade-up"
-      className={`flex flex-col rounded-3xl border bg-white p-7 shadow-sm transition hover:shadow-md dark:bg-neutral-900 ${c.border}`}>
-      <div className={`flex h-11 w-11 items-center justify-center rounded-2xl ${c.iconBg}`}>
+    <motion.div
+      variants={cardReveal}
+      whileHover={{ y: -6, transition: { duration: 0.25 } }}
+      className={`flex flex-col rounded-3xl border bg-white p-7 shadow-sm transition hover:shadow-lg dark:bg-neutral-900 ${c.border}`}>
+      <motion.div
+        whileHover={{ scale: 1.1, rotate: 4 }}
+        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        className={`flex h-11 w-11 items-center justify-center rounded-2xl ${c.iconBg}`}>
         <Icon size={20} className="text-white" />
-      </div>
+      </motion.div>
       <span className={`mt-5 self-start rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide ${c.badge}`}>
         {track.label}
       </span>
@@ -109,57 +110,75 @@ function TrackCard({ track }) {
           </span>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 export default function JCAbout() {
   return (
-    <section id="about" className="bg-white px-6 py-20 dark:bg-neutral-950">
+    <section id="about" className="bg-white px-6 py-20 dark:bg-neutral-950 overflow-hidden">
       <div className="mx-auto max-w-7xl">
         {/* header */}
-        <div data-aos="fade-up" className="max-w-2xl">
-          <p data-aos="fade-up" className="text-sm font-bold uppercase tracking-[0.2em] text-orange-600 dark:text-orange-400">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={staggerContainer}
+          className="max-w-2xl"
+        >
+          <motion.p variants={fadeUp} className="text-sm font-bold uppercase tracking-[0.2em] text-orange-600 dark:text-orange-400">
             Ignite Junior College
-          </p>
-          <h2 data-aos="fade-up" className="mt-3 text-4xl font-extrabold leading-tight text-neutral-950 sm:text-5xl dark:text-white">
+          </motion.p>
+          <motion.h2 variants={fadeUp} className="mt-3 text-4xl font-extrabold leading-tight text-neutral-950 sm:text-5xl dark:text-white">
             Two years that define{" "}
             <span className="text-orange-600 dark:text-orange-400">your future.</span>
-          </h2>
-          <p data-aos="fade-up" className="mt-4 text-base leading-7 text-neutral-600 dark:text-neutral-400">
+          </motion.h2>
+          <motion.p variants={fadeUp} className="mt-4 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Ignite Junior College offers Class 11 & 12 (Intermediate) with
             fully integrated coaching for India's most competitive entrance
             exams IIT-JEE, NEET, EAPCET, and BITSAT. Board excellence and
             top ranks, together.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* stat strip */}
-        <div data-aos="fade-in" className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={staggerContainer}
+          className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4"
+        >
           {[
-            { value: "20+", label: "Years of Excellence", datadelay: 150 },
-            { value: "6000+", label: "Students Trained",datadelay: 300 },
-            { value: "500+", label: "IIT / NEET Selections",datadelay: 450 },
-            { value: "8+", label: "Branches",datadelay:600 },
-          ].map(({ value, label,datadelay }) => (
-            <div
-              data-aos="fade-up"
-              data-aos-delay={datadelay}
+            { value: "20+", label: "Years of Excellence" },
+            { value: "6000+", label: "Students Trained" },
+            { value: "500+", label: "IIT / NEET Selections" },
+            { value: "8+", label: "Branches" },
+          ].map(({ value, label }) => (
+            <motion.div
               key={label}
+              variants={staggerItem}
+              whileHover={{ y: -4 }}
               className="rounded-2xl bg-orange-50 px-5 py-5 text-center dark:bg-orange-950/20"
             >
               <p className="text-3xl font-black text-orange-700 dark:text-orange-400">{value}</p>
               <p className="mt-1 text-xs font-semibold text-neutral-600 dark:text-neutral-400">{label}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* tracks grid - 2+3 layout */}
-        <div data-aos = "fade-up" data-aos-delay="650" className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {/* tracks grid */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={staggerContainer}
+          className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {tracks.map((t) => (
             <TrackCard key={t.id} track={t} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

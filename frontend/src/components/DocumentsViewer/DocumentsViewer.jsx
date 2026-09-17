@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import DocumentsSidebar from "./DocumentsSidebar";
 import PDFViewerPanel from "./PDFViewerPanel";
 import { documents as defaultDocuments } from "../../data/documents";
+import { fadeUp } from "../../animations/variants";
 
 /**
  * DocumentsViewer
@@ -23,7 +25,12 @@ export default function DocumentsViewer({ documents = defaultDocuments }) {
       className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-20 text-slate-900 dark:text-slate-100"
     >
       {/* Header */}
-      <header className="mb-8 sm:mb-10 max-w-2xl">
+      <motion.header
+        variants={fadeUp}
+        initial="hidden"
+        animate="visible"
+        className="mb-8 sm:mb-10 max-w-2xl"
+      >
         <span className="inline-block text-xs font-semibold tracking-widest text-orange-600 uppercase mb-2">
           Documents
         </span>
@@ -37,7 +44,7 @@ export default function DocumentsViewer({ documents = defaultDocuments }) {
           Browse and read academic calendars, brochures, program details, and
           institutional policies — right here, without leaving the page.
         </p>
-      </header>
+      </motion.header>
 
       {/* Body */}
       <div className="flex flex-col lg:flex-row gap-5 lg:gap-6">
@@ -51,3 +58,4 @@ export default function DocumentsViewer({ documents = defaultDocuments }) {
     </section>
   );
 }
+

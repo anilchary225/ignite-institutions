@@ -1,6 +1,7 @@
 import { useState, useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion, AnimatePresence } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,7 +15,6 @@ const RoadmapCard = ({ phase, position, expanded, onToggle, colors }) => {
   return (
     <div className="relative">
       <div
-      data-aos="zoom-in"
         className={`
 relative z-20
 h-40
@@ -147,10 +147,14 @@ ${isTop ? "-bottom-[14px]" : "-top-[14px]"}
         </div>
 
         {/* EXPANDED CONTENT */}
-
-        {expanded && (
-          <div
-            className={`
+        <AnimatePresence>
+          {expanded && (
+            <motion.div
+              initial={{ opacity: 0, y: isTop ? -10 : 10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: isTop ? -10 : 10, scale: 0.95 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className={`
 absolute
 left-1/2
 z-50
@@ -163,51 +167,50 @@ bg-white
 p-5
 shadow-2xl
 
-
 ${isTop ? "top-[calc(50%+25px)]" : "bottom-[calc(100%+25px)]"}
-
 `}
-          >
-            <p
-              className={`
+            >
+              <p
+                className={`
 mb-3
 text-xs
 font-black
 uppercase
 ${color.text}
 `}
-            >
-              What you'll achieve
-            </p>
+              >
+                What you'll achieve
+              </p>
 
-            <ul className="space-y-2">
-              {phase.items.map((item, i) => (
-                <li
-                  key={i}
-                  className="
+              <ul className="space-y-2">
+                {phase.items.map((item, i) => (
+                  <li
+                    key={i}
+                    className="
 flex
 gap-2
 text-xs
 leading-5
 text-neutral-600
 "
-                >
-                  <span
-                    className={`
+                  >
+                    <span
+                      className={`
 mt-1.5
 h-1.5
 w-1.5
 rounded-full
 ${color.bg}
 `}
-                  />
+                    />
 
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
@@ -276,7 +279,6 @@ const IITRoadmap = ({ phases, title, course, colors, heading, subheading }) => {
       {/* HEADER */}
 
       <div
-      data-aos="fade-up"
         className="
   mx-auto
   mb-8
@@ -286,7 +288,6 @@ const IITRoadmap = ({ phases, title, course, colors, heading, subheading }) => {
   "
       >
         <p
-        data-aos="fade-up"
           className="
   text-sm
   font-black
@@ -299,7 +300,6 @@ const IITRoadmap = ({ phases, title, course, colors, heading, subheading }) => {
         </p>
 
         <h2
-        data-aos="fade-up"
           className="
   mt-3
   text-3xl
@@ -312,7 +312,6 @@ const IITRoadmap = ({ phases, title, course, colors, heading, subheading }) => {
         </h2>
 
         <p
-        data-aos="fade-up"
           className="
   mx-auto
   mt-4

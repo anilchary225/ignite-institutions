@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Award } from "lucide-react";
+import { motion } from "framer-motion";
 import { RouteLink } from "../../router/BrowserRouter";
+import { fadeUp, defaultViewport } from "../../animations/variants";
 
 const placeholderPhoto = (bg) => {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="360"><rect width="300" height="360" fill="${bg}"/><circle cx="150" cy="140" r="52" fill="#94a3b8"/><path d="M150 200c-55 0-95 35-95 90v70h190v-70c0-55-40-90-95-90z" fill="#94a3b8"/></svg>`;
@@ -143,7 +145,7 @@ function AchievementCarousel({ students, accent, renderDetails, speed = 40 }) {
   const resume = () => (pausedRef.current = false);
 
   return (
-    <div data-aos="fade-up" className="relative" onMouseEnter={pause} onMouseLeave={resume}>
+    <div className="relative" onMouseEnter={pause} onMouseLeave={resume}>
       <button
         type="button"
         onClick={() => trackRef.current?.scrollBy({ left: -260, behavior: "smooth" })}
@@ -212,13 +214,19 @@ export default function Achievements() {
       <div className="max-w-7xl mx-auto">
         {/* JEE */}
         <div className="mb-10">
-          <div className="flex items-center gap-3 mb-6">
-            <span data-aos="fade-up" className="h-8 w-1.5 rounded-full bg-red-500" />
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={defaultViewport}
+            className="flex items-center gap-3 mb-6"
+          >
+            <span className="h-8 w-1.5 rounded-full bg-red-500" />
             <div>
-              <span data-aos="fade-up" className="text-xs font-bold tracking-widest text-red-500 uppercase">Top Rankers</span>
-              <h2 data-aos="fade-up" className="text-xl font-extrabold text-neutral-900 dark:text-white sm:text-2xl">IIT-JEE Achievements</h2>
+              <span className="text-xs font-bold tracking-widest text-red-500 uppercase">Top Rankers</span>
+              <h2 className="text-xl font-extrabold text-neutral-900 dark:text-white sm:text-2xl">IIT-JEE Achievements</h2>
             </div>
-          </div>
+          </motion.div>
           <AchievementCarousel
             students={jeeStudents}
             accent={{ glow: "ring-2 ring-red-500/40", badge: "bg-red-600", line: "bg-red-500" }}
@@ -233,13 +241,19 @@ export default function Achievements() {
 
         {/* NEET */}
         <div className="mt-12">
-          <div className="flex items-center gap-3 mb-6">
-            <span data-aos="fade-up" className="h-8 w-1.5 rounded-full bg-orange-500" />
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={defaultViewport}
+            className="flex items-center gap-3 mb-6"
+          >
+            <span className="h-8 w-1.5 rounded-full bg-orange-500" />
             <div>
-              <span data-aos="fade-up" className="text-xs font-bold tracking-widest text-orange-500 uppercase">Top Rankers</span>
-              <h2 data-aos="fade-up" className="text-xl font-extrabold text-neutral-900 dark:text-white sm:text-2xl">NEET Achievements</h2>
+              <span className="text-xs font-bold tracking-widest text-orange-500 uppercase">Top Rankers</span>
+              <h2 className="text-xl font-extrabold text-neutral-900 dark:text-white sm:text-2xl">NEET Achievements</h2>
             </div>
-          </div>
+          </motion.div>
           <AchievementCarousel
             students={neetStudents}
             accent={{ glow: "ring-2 ring-orange-500/40", badge: "bg-orange-500", line: "bg-orange-400" }}
@@ -249,11 +263,20 @@ export default function Achievements() {
           />
         </div>
 
-        <div data-aos="fade-up" className="mt-10 text-center">
-          <RouteLink to='/results' className="inline-flex items-center gap-2 bg-neutral-900 dark:bg-white hover:bg-neutral-700 dark:hover:bg-neutral-200 text-white dark:text-neutral-900 font-semibold px-6 py-2.5 rounded-full shadow-sm transition-all text-sm">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="mt-10 text-center"
+        >
+          <RouteLink
+            to="/results"
+            className="inline-flex items-center gap-2 bg-neutral-900 dark:bg-white hover:bg-neutral-700 dark:hover:bg-neutral-200 text-white dark:text-neutral-900 font-semibold px-6 py-2.5 rounded-full shadow-sm transition-all hover:scale-105 active:scale-95 text-sm"
+          >
             View All Results
           </RouteLink>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,4 +1,6 @@
 import { ShieldCheck, GraduationCap, User, Building2, Award } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeUp, staggerContainer } from "../../animations/variants";
 
 const reasons = [
   {
@@ -45,30 +47,52 @@ export default function MPCWhyIgnite() {
   return (
     <section id="why" className="bg-neutral-50 px-6 py-20 dark:bg-neutral-900/40">
       <div className="mx-auto max-w-7xl">
-        <div data-aos="fade-up" className="flex items-center gap-3">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-3"
+        >
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
           <span className="rounded-full bg-amber-100 px-4 py-1 text-xs font-bold uppercase tracking-widest text-amber-700 dark:bg-amber-950/40 dark:text-amber-400">
             Why Choose Ignite
           </span>
           <span className="h-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
-        </div>
+        </motion.div>
 
-        <div className="mt-8 max-w-2xl">
-          <h2 data-aos="fade-up" className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-8 max-w-2xl"
+        >
+          <h2 className="text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
             Why Choose Ignite for{" "}
             <span className="text-blue-600 dark:text-blue-400">MPC IIT Coaching?</span>
           </h2>
-          <p data-aos="fade-up" className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
+          <p className="mt-3 text-base leading-7 text-neutral-600 dark:text-neutral-400">
             Five reasons thousands of Hyderabad families trust Ignite to prepare their children for IIT JEE.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <motion.div
+          variants={staggerContainer(0.1, 0.15)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3"
+        >
           {reasons.map((r, i) => {
             const c = colorMap[r.color];
             const Icon = r.icon;
             return (
-              <div data-aos="fade-up" key={r.title} className={`flex flex-col gap-4 rounded-3xl border-2 p-7 ${c.light} ${c.border}`}>
+              <motion.div
+                key={r.title}
+                variants={fadeUp}
+                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                className={`flex flex-col gap-4 rounded-3xl border-2 p-7 transition-all ${c.light} ${c.border}`}
+              >
                 <div className="flex items-center gap-3">
                   <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${c.bg}`}>
                     <Icon size={20} className="text-white" />
@@ -77,10 +101,10 @@ export default function MPCWhyIgnite() {
                 </div>
                 <h3 className="text-lg font-extrabold text-neutral-950 dark:text-white">{r.title}</h3>
                 <p className="text-sm leading-7 text-neutral-600 dark:text-neutral-400">{r.desc}</p>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

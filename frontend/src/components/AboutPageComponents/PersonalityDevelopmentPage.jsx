@@ -9,7 +9,9 @@ import {
   Check,
   Quote,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import Hero from "./AboutPage/Hero";
+import { fadeUp, fadeLeft, fadeRight, scaleIn, staggerContainer, defaultViewport } from "../../animations/variants";
 
 /* ============================================================
    ABSTRACT BACKGROUNDS — a distinct pattern per section
@@ -103,9 +105,16 @@ function IntroSplit({
           reverse ? "md:[&>*:first-child]:order-2" : ""
         }`}
       >
-        <div className={`relative ${imageSrcSecondary ? "grid grid-cols-2 gap-3" : ""}`}>
-          <img
-          data-aos="zoom-in"
+        <motion.div
+          variants={reverse ? fadeLeft : fadeRight}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className={`relative ${imageSrcSecondary ? "grid grid-cols-2 gap-3" : ""}`}
+        >
+          <motion.img
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.35 }}
             src={imageSrc}
             alt={imageAlt}
             className={`rounded-2xl border border-neutral-200 object-cover dark:border-neutral-800 ${
@@ -113,30 +122,37 @@ function IntroSplit({
             }`}
           />
           {imageSrcSecondary && (
-            <img
-              data-aos="zoom-in"
+            <motion.img
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.35 }}
               src={imageSrcSecondary}
               alt={imageAlt}
               className="mt-8 aspect-[3/4] h-full w-full rounded-2xl border border-neutral-200 object-cover dark:border-neutral-800"
             />
           )}
-        </div>
+        </motion.div>
 
-        <div className="relative overflow-hidden rounded-2xl">
+        <motion.div
+          variants={reverse ? fadeRight : fadeLeft}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="relative overflow-hidden rounded-2xl"
+        >
           <AbstractRings position={reverse ? "bottom-left" : "top-right"} />
-          <div data-aos="fade-up" className="relative z-10">
+          <div className="relative z-10">
             {heading && (
               <h2 className="mb-4 text-2xl font-semibold text-blue-600 dark:text-blue-400 sm:text-3xl">
                 {heading}
               </h2>
             )}
             {paragraphs.map((p, i) => (
-              <p data-aos="fade-up" key={i} className="mb-4 leading-relaxed text-neutral-600 last:mb-0 dark:text-neutral-300">
+              <p key={i} className="mb-4 leading-relaxed text-neutral-600 last:mb-0 dark:text-neutral-300">
                 {p}
               </p>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -181,21 +197,35 @@ const approaches = [
 function ApproachGrid() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-14 sm:py-16 lg:py-20">
-      <div className="max-w-2xl">
-        <p data-aos="fade-up" className="text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        className="max-w-2xl"
+      >
+        <p className="text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
           Our approach
         </p>
-        <h2 data-aos="fade-up" className="mt-3 text-2xl font-semibold text-neutral-900 dark:text-white sm:text-3xl">
+        <h2 className="mt-3 text-2xl font-semibold text-neutral-900 dark:text-white sm:text-3xl">
           Six areas we build every day
         </h2>
-      </div>
+      </motion.div>
 
-      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <motion.div
+        variants={staggerContainer(0.08, 0.1)}
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+      >
         {approaches.map(({ icon: Icon, title, text }) => (
-          <article
-            data-aos="fade-up"
+          <motion.article
             key={title}
-            className="relative overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-900"
+            variants={scaleIn}
+            whileHover={{ y: -4 }}
+            transition={{ duration: 0.25 }}
+            className="relative overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-900 shadow-sm hover:shadow-md transition-shadow"
           >
             <AbstractDots />
             <div className="relative z-10">
@@ -205,9 +235,9 @@ function ApproachGrid() {
               <h3 className="text-base font-semibold text-neutral-900 dark:text-white">{title}</h3>
               <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-300">{text}</p>
             </div>
-          </article>
+          </motion.article>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
@@ -227,25 +257,40 @@ const gains = [
 function GainList({ imageSrc, imageAlt = "" }) {
   return (
     <section className="mx-auto max-w-6xl px-6 py-14 sm:py-16 lg:py-20">
-      <div data-aos="fade-up" className="grid items-center gap-12 md:grid-cols-2">
-        <img
-          src={imageSrc}
-          alt={imageAlt}
-          className="w-full rounded-2xl border border-neutral-200 object-cover dark:border-neutral-800"
-        />
+      <div className="grid items-center gap-12 md:grid-cols-2">
+        <motion.div
+          variants={fadeRight}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+        >
+          <motion.img
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.35 }}
+            src={imageSrc}
+            alt={imageAlt}
+            className="w-full rounded-2xl border border-neutral-200 object-cover dark:border-neutral-800"
+          />
+        </motion.div>
 
-        <div className="relative overflow-hidden rounded-2xl">
+        <motion.div
+          variants={fadeLeft}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="relative overflow-hidden rounded-2xl"
+        >
           <AbstractWaves />
           <div className="relative z-10">
-            <p data-aos="fade-up" className="text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
+            <p className="text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
               What students gain
             </p>
-            <h2 data-aos="fade-up" className="mt-3 mb-6 text-2xl font-semibold text-neutral-900 dark:text-white sm:text-3xl">
+            <h2 className="mt-3 mb-6 text-2xl font-semibold text-neutral-900 dark:text-white sm:text-3xl">
               Skills that carry beyond the classroom
             </h2>
             <ul className="space-y-3">
               {gains.map((gain) => (
-                <li data-aos="fade-up" key={gain} className="flex items-start gap-3">
+                <li key={gain} className="flex items-start gap-3">
                   <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 dark:bg-blue-500/10">
                     <Check size={12} className="text-blue-700 dark:text-blue-400" strokeWidth={2.5} />
                   </span>
@@ -254,7 +299,7 @@ function GainList({ imageSrc, imageAlt = "" }) {
               ))}
             </ul>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -267,17 +312,23 @@ function QuoteBanner({ bgColor = "bg-blue-700" }) {
   return (
     <section className={`relative overflow-hidden px-6 py-20 text-center ${bgColor}`}>
       <AbstractBlob />
-      <div className="relative z-10 mx-auto max-w-2xl">
-        <div data-aos="zoom-in" className="mb-6 flex justify-center">
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        className="relative z-10 mx-auto max-w-2xl"
+      >
+        <div className="mb-6 flex justify-center">
           <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10">
             <Quote size={20} className="text-white" strokeWidth={1.75} />
           </div>
         </div>
-        <p data-aos="zoom-in" className="text-xl font-medium leading-relaxed text-white sm:text-2xl">
+        <p className="text-xl font-medium leading-relaxed text-white sm:text-2xl">
           Every student who walks out of IGNITE should carry not just marks, but the
           character and confidence to lead their own life.
         </p>
-      </div>
+      </motion.div>
     </section>
   );
 }

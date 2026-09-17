@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
+import { motion } from "framer-motion";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 import {
@@ -15,6 +16,7 @@ import {
   FileWarning,
   FileX,
 } from "lucide-react";
+import { fadeUp } from "../../animations/variants";
 
 // PDF.js worker — served from a CDN matching the installed pdfjs-dist version.
 // For a fully offline build, copy `pdf.worker.min.mjs` into `public/` instead
@@ -118,8 +120,11 @@ export default function PDFViewerPanel({ document: activeDocument }) {
   const pageWidth = fitWidth && containerWidth > 0 ? containerWidth - 48 : undefined;
 
   return (
-    <div
+    <motion.div
       ref={wrapperRef}
+      variants={fadeUp}
+      initial="hidden"
+      animate="visible"
       className="
         flex flex-col flex-1 min-w-0
         bg-white border border-slate-200 rounded-2xl shadow-sm dark:bg-slate-900 dark:border-slate-800
@@ -242,13 +247,14 @@ export default function PDFViewerPanel({ document: activeDocument }) {
           </Document>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 function ToolbarButton({ onClick, disabled, active, label, icon, className = "" }) {
   return (
-    <button
+    <motion.button
+      whileTap={{ scale: 0.93 }}
       type="button"
       onClick={onClick}
       disabled={disabled}
@@ -266,7 +272,7 @@ function ToolbarButton({ onClick, disabled, active, label, icon, className = "" 
       ].join(" ")}
     >
       {icon}
-    </button>
+    </motion.button>
   );
 }
 

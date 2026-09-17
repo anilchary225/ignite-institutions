@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import { motion } from "framer-motion";
 
 function Hero({
   title,
@@ -53,15 +54,25 @@ function Hero({
 
       {/* Title centered on the image */}
       <div className="relative flex h-full flex-col items-center justify-center px-6 text-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-xl sm:text-sm">
+        <motion.span
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-xl sm:text-sm"
+        >
           {eyebrow}
-        </span>
+        </motion.span>
         <h1 className="font-display mt-5 text-4xl font-black tracking-tight text-white drop-shadow-sm sm:text-6xl overflow-hidden">
           <span className="ach-title block">{title}</span>
         </h1>
-        <p className="mt-4 max-w-xl text-base text-white/80 sm:text-lg">
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-4 max-w-xl text-base text-white/80 sm:text-lg"
+        >
           {subtitle}
-        </p>
+        </motion.p>
       </div>
     </section>
   );

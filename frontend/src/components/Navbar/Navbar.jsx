@@ -8,6 +8,7 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../../context/ThemeContext";
 import { RouteLink, useLocation } from "../../router/BrowserRouter";
 
@@ -402,17 +403,26 @@ function DesktopMenuItem({
           setOpenMenu(null);
           setHoverPreviewHref(null);
         }}
-        className={`flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition  ${
+        style={{ isolation: "isolate" }}
+        className={`relative flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition ${
           active
-            ? "bg-blue-600 text-white shadow-[0_10px_24px_rgba(37,99,235,0.24)]"
+            ? "text-white"
             : "text-neutral-700 hover:bg-blue-50 hover:text-blue-700 dark:text-neutral-200 dark:hover:bg-blue-500/10 dark:hover:text-blue-300"
         }`}
       >
-        <span>{item.label}</span>
+        {active && (
+          <motion.div
+            layoutId="navActiveIndicator"
+            className="absolute inset-0 rounded-full bg-blue-600 shadow-[0_8px_24px_rgba(37,99,235,0.30)]"
+            style={{ zIndex: -1 }}
+            transition={{ type: "spring", stiffness: 420, damping: 34 }}
+          />
+        )}
+        <span className="relative z-10">{item.label}</span>
         {hasChildren ? (
           <ChevronDown
             size={14}
-            className={`transition-transform duration-200 ${
+            className={`relative z-10 transition-transform duration-200 ${
               openMenu === item.href ? "rotate-180" : ""
             }`}
           />
@@ -550,16 +560,24 @@ function MobileMenuItem({ item, pathname, level = 0 }) {
       </div>
 
       {item.children && open ? (
-        <ul className="mt-1 space-y-1 border-l border-neutral-200 pl-3 dark:border-neutral-700">
-          {item.children.map((child) => (
-            <MobileMenuItem
-              key={child.label}
-              item={child}
-              pathname={pathname}
-              level={level + 1}
-            />
-          ))}
-        </ul>
+        <AnimatePresence>
+          <motion.ul
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.22, ease: "easeInOut" }}
+            className="mt-1 space-y-1 overflow-hidden border-l border-neutral-200 pl-3 dark:border-neutral-700"
+          >
+            {item.children.map((child) => (
+              <MobileMenuItem
+                key={child.label}
+                item={child}
+                pathname={pathname}
+                level={level + 1}
+              />
+            ))}
+          </motion.ul>
+        </AnimatePresence>
       ) : null}
     </li>
   );
@@ -642,7 +660,7 @@ export default function Navbar() {
         >
           <RouteLink
             to="/"
-            className="flex shrink-0 items-center"
+            className="flex shrink-0 items-center transition-transform duration-200 hover:scale-105 active:scale-95"
             onClick={() => {
               setOpen(false);
               setOpenMenu(null);
@@ -673,17 +691,20 @@ export default function Navbar() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <button
+            <motion.button
               type="button"
+              whileTap={{ scale: 0.92 }}
+              whileHover={{ scale: 1.05 }}
               onClick={toggleDarkMode}
               aria-label="Toggle dark mode"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-blue-50 text-blue-600 transition-all duration-200 hover:bg-blue-600 hover:text-white dark:bg-blue-500/10 dark:text-blue-300 dark:hover:bg-blue-600 dark:hover:text-white"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-blue-50 text-blue-600 transition-colors duration-200 hover:bg-blue-600 hover:text-white dark:bg-blue-500/10 dark:text-blue-300 dark:hover:bg-blue-600 dark:hover:text-white cursor-pointer"
             >
               {darkMode ? <Sun size={16} /> : <Moon size={16} />}
-            </button>
+            </motion.button>
 
-            <button
+            <motion.button
               type="button"
+              whileTap={{ scale: 0.92 }}
               onClick={() => {
                 setOpen((value) => !value);
                 setOpenMenu(null);
@@ -691,95 +712,111 @@ export default function Navbar() {
               }}
               aria-label="Toggle menu"
               aria-expanded={open}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-blue-50 text-blue-600 transition-all duration-200 hover:bg-blue-600 hover:text-white md:hidden dark:bg-blue-500/10 dark:text-blue-300"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-blue-50 text-blue-600 transition-colors duration-200 hover:bg-blue-600 hover:text-white md:hidden dark:bg-blue-500/10 dark:text-blue-300 cursor-pointer"
             >
               {open ? <X size={18} /> : <Menu size={18} />}
-            </button>
+            </motion.button>
           </div>
         </div>
 
-        {openMenu ? (
-          <div className="absolute left-0 top-full z-30 w-full">
-            <div
-              className="relative overflow-hidden rounded-3xl border border-blue-100 bg-white  dark:border-blue-900/30 dark:bg-black"
-              onMouseEnter={() => {
-                setOpenMenu(openMenu);
-                if (!hoverPreviewHref) {
-                  setHoverPreviewHref(defaultPreviewHref);
-                }
-              }}
-              onMouseLeave={() => {
-                setOpenMenu(null);
-                setHoverPreviewHref(null);
-              }}
+        <AnimatePresence>
+          {openMenu ? (
+            <motion.div
+              key={openMenu}
+              initial={{ opacity: 0, y: 12, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 8, scale: 0.98 }}
+              transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute left-0 top-full z-30 w-full"
             >
-              <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-3xl">
-                <div className="absolute -left-20 top-[-40px] h-56 w-56 rounded-full bg-blue-200/60 blur-3xl dark:bg-blue-500/15" />
-                <div className="absolute right-[-10px] top-10 h-44 w-44 rounded-full bg-cyan-200/60 blur-3xl dark:bg-cyan-500/10" />
-                <div className="absolute bottom-[-30px] left-24 h-52 w-52 rounded-[40%] bg-sky-200/50 blur-3xl dark:bg-sky-500/10" />
-                <img
-                  src="/assets/images/navbar_dropdown.webp"
-                  alt=""
-                  aria-hidden="true"
-                  className="absolute bottom-3 left-4 h-24 w-44 object-contain object-left-bottom drop-shadow-[0_18px_20px_rgba(15,23,42,0.28)]"
-                />
-              </div>
-              <div className="relative grid min-h-[420px] gap-6 p-6 md:grid-cols-3 md:items-start">
-                <div className="relative z-10 overflow-hidden rounded-[24px] bg-gradient-to-br from-blue-50 via-white to-sky-100 p-4 dark:from-blue-950/20 dark:via-neutral-900 dark:to-sky-950/20">
+              <div
+                className="relative overflow-hidden rounded-3xl border border-blue-100 bg-white shadow-[0_25px_60px_rgba(15,23,42,0.14)] dark:border-blue-900/30 dark:bg-black"
+                onMouseEnter={() => {
+                  setOpenMenu(openMenu);
+                  if (!hoverPreviewHref) {
+                    setHoverPreviewHref(defaultPreviewHref);
+                  }
+                }}
+                onMouseLeave={() => {
+                  setOpenMenu(null);
+                  setHoverPreviewHref(null);
+                }}
+              >
+                <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-3xl">
+                  <div className="absolute -left-20 top-[-40px] h-56 w-56 rounded-full bg-blue-200/60 blur-3xl dark:bg-blue-500/15" />
+                  <div className="absolute right-[-10px] top-10 h-44 w-44 rounded-full bg-cyan-200/60 blur-3xl dark:bg-cyan-500/10" />
+                  <div className="absolute bottom-[-30px] left-24 h-52 w-52 rounded-[40%] bg-sky-200/50 blur-3xl dark:bg-sky-500/10" />
                   <img
-                    src={previewData.image}
-                    alt={previewData.title}
-                    className="h-56 w-full rounded-[20px] object-cover"
+                    src="/assets/images/navbar_dropdown.webp"
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute bottom-3 left-4 h-24 w-44 object-contain object-left-bottom drop-shadow-[0_18px_20px_rgba(15,23,42,0.28)]"
                   />
                 </div>
-
-                <div className="relative z-30 space-y-2 pb-8">
-                  {activeMenu?.children?.map((child) => (
-                    <DesktopSubMenuItem
-                      key={child.label}
-                      item={child}
-                      pathname={pathname}
-                      setOpenMenu={setOpenMenu}
-                      menuHref={openMenu}
-                      setHoverPreviewHref={setHoverPreviewHref}
-                      setSelectedPreviewByMenu={setSelectedPreviewByMenu}
+                <div className="relative grid min-h-[420px] gap-6 p-6 md:grid-cols-3 md:items-start">
+                  <div className="relative z-10 overflow-hidden rounded-[24px] bg-gradient-to-br from-blue-50 via-white to-sky-100 p-4 dark:from-blue-950/20 dark:via-neutral-900 dark:to-sky-950/20">
+                    <img
+                      src={previewData.image}
+                      alt={previewData.title}
+                      className="h-56 w-full rounded-[20px] object-cover"
                     />
-                  ))}
-                </div>
+                  </div>
 
-                <div className="relative z-10 space-y-4 rounded-[24px] bg-gradient-to-br from-white via-blue-50 to-white p-2 dark:from-black dark:via-blue-950/10 dark:to-black">
-                  <img
-                    src={previewData.secondaryImage}
-                    alt={`${previewData.title} preview`}
-                    className="h-32 w-full rounded-[18px] object-cover"
-                  />
-                  <div className="space-y-3">
-                    <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue-600 dark:text-blue-300">
-                      {previewData.title}
-                    </p>
-                    <p className="text-sm leading-7 text-neutral-700 dark:text-neutral-300">
-                      {previewData.description}
-                    </p>
+                  <div className="relative z-30 space-y-2 pb-8">
+                    {activeMenu?.children?.map((child) => (
+                      <DesktopSubMenuItem
+                        key={child.label}
+                        item={child}
+                        pathname={pathname}
+                        setOpenMenu={setOpenMenu}
+                        menuHref={openMenu}
+                        setHoverPreviewHref={setHoverPreviewHref}
+                        setSelectedPreviewByMenu={setSelectedPreviewByMenu}
+                      />
+                    ))}
+                  </div>
+
+                  <div className="relative z-10 space-y-4 rounded-[24px] bg-gradient-to-br from-white via-blue-50 to-white p-2 dark:from-black dark:via-blue-950/10 dark:to-black">
+                    <img
+                      src={previewData.secondaryImage}
+                      alt={`${previewData.title} preview`}
+                      className="h-32 w-full rounded-[18px] object-cover"
+                    />
+                    <div className="space-y-3">
+                      <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue-600 dark:text-blue-300">
+                        {previewData.title}
+                      </p>
+                      <p className="text-sm leading-7 text-neutral-700 dark:text-neutral-300">
+                        {previewData.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        ) : null}
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
       </div>
 
-      {open ? (
-        <nav
-          aria-label="Mobile primary"
-        className="mx-auto mt-3 max-w-310 rounded-[28px] border border-blue-100 bg-white p-4  dark:border-blue-900/30 dark:bg-neutral-950 md:hidden"
-      >
-          <ul className="space-y-1">
-            {navItems.map((item) => (
-              <MobileMenuItem key={item.label} item={item} pathname={pathname} />
-            ))}
-          </ul>
-        </nav>
-      ) : null}
+      <AnimatePresence>
+        {open ? (
+          <motion.nav
+            key="mobile-primary-nav"
+            initial={{ opacity: 0, y: -14, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.98 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            aria-label="Mobile primary"
+            className="mx-auto mt-3 max-w-310 rounded-[28px] border border-blue-100 bg-white p-4 shadow-2xl dark:border-blue-900/30 dark:bg-neutral-950 md:hidden"
+          >
+            <ul className="space-y-1">
+              {navItems.map((item) => (
+                <MobileMenuItem key={item.label} item={item} pathname={pathname} />
+              ))}
+            </ul>
+          </motion.nav>
+        ) : null}
+      </AnimatePresence>
     </header>
   );
 }

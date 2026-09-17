@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   Award,
@@ -30,6 +31,10 @@ import CampusFeatures from "../components/AboutPageComponents/AboutPage/CampusFe
 import OurOfferings from "../components/AboutPageComponents/AboutPage/OurOfferings";
 import VisionMission from "../components/AboutPageComponents/AboutPage/VisionMission";
 import WhyChooseUs from "../components/AboutPageComponents/AboutPage/WhyChooseUs";
+import {
+  fadeUp, fadeRight, slideInLeft, imageReveal, staggerContainer, staggerItem,
+  cardReveal, defaultViewport, scaleIn, tabContent,
+} from "../animations/variants";
 
 /* ============================================================
    ABSTRACT BACKGROUNDS — one motif per section, all one palette
@@ -82,7 +87,6 @@ function AbstractCluster({ position = "bottom-right" }) {
   const pos = position === "bottom-right" ? "-bottom-10 -right-10" : "-top-10 -left-10";
   return (
     <svg
-    data-aos="fade-up"
       viewBox="0 0 200 200"
       className={`pointer-events-none absolute h-48 w-48 opacity-40 dark:opacity-70 ${pos}`}
       aria-hidden="true"
@@ -212,74 +216,85 @@ function WelcomeSection({
   return (
     <section className="bg-white px-4 py-16 dark:bg-neutral-950 sm:px-8 sm:py-20">
       <div className="mx-auto grid max-w-6xl gap-16 md:grid-cols-2 md:items-center md:gap-12">
-        <div className="relative">
+        <motion.div
+          variants={imageReveal}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="relative"
+        >
           <div className="overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800">
-            <img
+            <motion.img
               src={image}
               alt="Students at IGNITE Junior College"
-              className="h-full w-full object-cover "
+              whileHover={{ scale: 1.04, transition: { duration: 0.5 } }}
+              className="h-full w-full object-cover"
             />
           </div>
 
           {heroStat ? (
-            <div data-aos="zoom-in" className="absolute -bottom-5 -right-4 flex w-40 items-center gap-3 rounded-xl border border-neutral-200 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900 sm:-right-6 sm:w-44">
+            <motion.div
+              initial={{ opacity: 0, y: 16, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={defaultViewport}
+              transition={{ delay: 0.4, duration: 0.5, ease: [0.22,1,0.36,1] }}
+              className="absolute -bottom-5 -right-4 flex w-40 items-center gap-3 rounded-xl border border-neutral-200 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900 sm:-right-6 sm:w-44"
+            >
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-500/10">
                 <Award size={18} className="text-blue-700 dark:text-blue-400" strokeWidth={1.75} />
               </div>
               <div className="leading-tight">
                 <p className="text-lg font-semibold text-neutral-900 dark:text-white">{heroStat}</p>
-                <p className="text-[11px] font-medium uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
-                  of results
-                </p>
+                <p className="text-[11px] font-medium uppercase tracking-wide text-neutral-500 dark:text-neutral-400">of results</p>
               </div>
-            </div>
+            </motion.div>
           ) : null}
-        </div>
+        </motion.div>
 
-        <div className="relative overflow-hidden rounded-2xl md:pt-2">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          className="relative overflow-hidden rounded-2xl md:pt-2"
+        >
           <AbstractRings />
           <div className="relative z-10">
-            <span data-aos="fade-up" className="mb-4 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
-              <span data-aos="fade-up" className="h-px w-6 bg-blue-500" aria-hidden="true" />
+            <motion.span variants={staggerItem} className="mb-4 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
+              <span className="h-px w-6 bg-blue-500" aria-hidden="true" />
               About us
-            </span>
+            </motion.span>
 
-            <h2 data-aos="fade-up" className="text-3xl font-semibold leading-tight text-neutral-900 dark:text-white sm:text-4xl">
+            <motion.h2 variants={staggerItem} className="text-3xl font-semibold leading-tight text-neutral-900 dark:text-white sm:text-4xl">
               {heading}
-            </h2>
+            </motion.h2>
 
             <div className="mt-5 space-y-4 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
               {paragraphs.map((p, i) => (
-                <p data-aos="fade-up" key={i}>{p}</p>
+                <motion.p variants={staggerItem} key={i}>{p}</motion.p>
               ))}
             </div>
 
             {credentials.length > 0 ? (
-              <div className="mt-8 border-t border-neutral-200 pt-5 dark:border-neutral-800">
-                <p data-aos="fade-up" className="mb-3 text-[11px] font-medium uppercase tracking-wide text-neutral-400 dark:text-neutral-500">
+              <motion.div variants={staggerItem} className="mt-8 border-t border-neutral-200 pt-5 dark:border-neutral-800">
+                <p className="mb-3 text-[11px] font-medium uppercase tracking-wide text-neutral-400 dark:text-neutral-500">
                   Programs we coach for
                 </p>
                 <div className="flex flex-wrap">
                   {credentials.map((tag, index) => {
                     const Icon = getTagIcon(tag);
                     return (
-                      <div
-                      data-aos="zoom-in"
-                        key={tag}
-                        className={`flex items-center gap-2 py-1.5 pr-5 text-sm font-medium text-neutral-800 dark:text-neutral-100 ${
-                          index > 0 ? "border-l border-neutral-200 pl-5 dark:border-neutral-800" : ""
-                        }`}
-                      >
+                      <div key={tag} className={`flex items-center gap-2 py-1.5 pr-5 text-sm font-medium text-neutral-800 dark:text-neutral-100 ${index > 0 ? "border-l border-neutral-200 pl-5 dark:border-neutral-800" : ""}` }>
                         <Icon size={16} className="text-blue-600 dark:text-blue-400" />
                         {tag}
                       </div>
                     );
                   })}
                 </div>
-              </div>
+              </motion.div>
             ) : null}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -300,43 +315,74 @@ function FounderCard({
 }) {
   return (
     <section className="bg-white px-4 py-16 dark:bg-neutral-950 sm:px-8 sm:py-20">
-      <div data-aos="fade-up" className="relative mx-auto max-w-5xl overflow-hidden rounded-2xl border border-neutral-200 p-8 dark:border-neutral-800 sm:p-10">
+      <motion.div
+        variants={scaleIn}
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        className="relative mx-auto max-w-5xl overflow-hidden rounded-2xl border border-neutral-200 p-8 dark:border-neutral-800 sm:p-10"
+      >
         <AbstractCluster />
         <div className="relative z-10">
-          <span data-aos="fade-up" className="mb-4 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
-            <span data-aos="fade-up" className="h-px w-6 bg-blue-500" aria-hidden="true" />
+          <motion.span
+            initial={{ opacity: 0, x: -16 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={defaultViewport}
+            transition={{ duration: 0.5, ease: [0.22,1,0.36,1] }}
+            className="mb-4 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400"
+          >
+            <span className="h-px w-6 bg-blue-500" aria-hidden="true" />
             Leadership
-          </span>
+          </motion.span>
 
           <div className="grid gap-10 sm:grid-cols-[220px_1fr] sm:items-center sm:gap-12">
-            <div data-aos="fade-up" className="overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800">
-              <img src={photo} alt={name} className="h-64 w-full object-cover sm:h-72" />
-            </div>
+            <motion.div
+              variants={imageReveal}
+              initial="hidden"
+              whileInView="visible"
+              viewport={defaultViewport}
+              className="overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800"
+            >
+              <motion.img
+                src={photo}
+                alt={name}
+                whileHover={{ scale: 1.05, transition: { duration: 0.4 } }}
+                className="h-64 w-full object-cover sm:h-72"
+              />
+            </motion.div>
 
-            <div>
-              <h2 data-aos="fade-up" className="text-2xl font-semibold leading-tight text-neutral-900 dark:text-white sm:text-3xl">
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={defaultViewport}
+            >
+              <motion.h2 variants={staggerItem} className="text-2xl font-semibold leading-tight text-neutral-900 dark:text-white sm:text-3xl">
                 {name}
-              </h2>
-              <p data-aos="fade-up" className="mt-1 text-sm font-medium text-blue-600 dark:text-blue-400">{role}</p>
+              </motion.h2>
+              <motion.p variants={staggerItem} className="mt-1 text-sm font-medium text-blue-600 dark:text-blue-400">{role}</motion.p>
 
               <div className="mt-5 space-y-4 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
                 {paragraphs.map((p, i) => (
-                  <p data-aos="fade-up" key={i}>{p}</p>
+                  <motion.p variants={staggerItem} key={i}>{p}</motion.p>
                 ))}
               </div>
 
-              <RouteLink
-                data-aos="fade-up"
-                to={founderPath}
-                className="mt-6 inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700"
-              >
-                Explore more about founder
-                <ArrowRight size={16} />
-              </RouteLink>
-            </div>
+              <motion.div variants={staggerItem}>
+                <motion.span whileHover={{ x: 4 }} className="inline-block">
+                  <RouteLink
+                    to={founderPath}
+                    className="mt-6 inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700"
+                  >
+                    Explore more about founder
+                    <ArrowRight size={16} />
+                  </RouteLink>
+                </motion.span>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
@@ -354,15 +400,14 @@ function TeachingInspires({
   return (
     <section className="px-4 py-14 dark:bg-neutral-950 sm:px-8 sm:py-16">
       <div className="mx-auto max-w-4xl text-center">
-        <span data-aos="fade-up" className="mb-3 inline-block text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
+        <span className="mb-3 inline-block text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
           Our philosophy
         </span>
-        <h2 data-aos="fade-up" className="text-2xl font-semibold text-neutral-900 dark:text-white sm:text-3xl">{heading}</h2>
+        <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white sm:text-3xl">{heading}</h2>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2">
           {quotes.map((quote, index) => (
             <div
-              data-aos="fade-up"
               key={index}
               className="relative overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 text-left dark:border-neutral-800 dark:bg-neutral-900"
             >
@@ -393,14 +438,14 @@ function OurTeam({
 }) {
   return (
     <section className="px-4 py-14 dark:bg-neutral-950 sm:px-8 sm:py-16">
-      <div data-aos="fade-up" className="relative mx-auto max-w-5xl overflow-hidden rounded-2xl text-center">
+      <div className="relative mx-auto max-w-5xl overflow-hidden rounded-2xl text-center">
         <AbstractWaves />
         <div className="relative z-10">
-          <span data-aos="fade-up" className="mb-2 inline-block text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
+          <span className="mb-2 inline-block text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
             The people behind IGNITE
           </span>
-          <h2 data-aos="fade-up" className="text-2xl font-semibold text-neutral-900 dark:text-white sm:text-3xl">{heading}</h2>
-          <p data-aos="fade-up" className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+          <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white sm:text-3xl">{heading}</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
             {description}
           </p>
 
@@ -506,7 +551,7 @@ function WhyIgnite({
       <AbstractDots position="top-right" />
       <div className="relative z-10 mx-auto max-w-6xl">
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div data-aos="fade-up" className="overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800">
+          <div className="overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800">
             <img
               src={image}
               alt="Students learning at Ignite Junior College"
@@ -515,14 +560,14 @@ function WhyIgnite({
           </div>
 
           <div>
-            <span data-aos="fade-up" className="mb-4 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
+            <span className="mb-4 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
               <span className="h-px w-6 bg-blue-500" aria-hidden="true" />
               What sets us apart
             </span>
-            <h2 data-aos="fade-up" className="text-3xl font-semibold leading-tight text-neutral-900 dark:text-white sm:text-4xl">
+            <h2 className="text-3xl font-semibold leading-tight text-neutral-900 dark:text-white sm:text-4xl">
               {heading}
             </h2>
-            <p data-aos="fade-up" className="mt-5 max-w-2xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
+            <p className="mt-5 max-w-2xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
               {intro}
             </p>
           </div>
@@ -533,7 +578,6 @@ function WhyIgnite({
             const Icon = feature.icon;
             return (
               <div
-                data-aos="fade-up"
                 key={feature.title}
                 className="rounded-2xl border border-neutral-200 bg-white p-5 transition hover:border-blue-200 hover:shadow-sm dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-blue-900"
               >
@@ -552,8 +596,8 @@ function WhyIgnite({
         </div>
 
         {/* Personal supervision highlight */}
-        <div data-aos="zoom-in" className="mt-6 flex flex-col items-center gap-4 rounded-2xl border border-blue-100 bg-blue-50/60 p-6 dark:border-blue-900/40 dark:bg-blue-500/5 sm:flex-row sm:justify-center">
-          <div data-aos="zoom-in" className="h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-blue-600">
+        <div className="mt-6 flex flex-col items-center gap-4 rounded-2xl border border-blue-100 bg-blue-50/60 p-6 dark:border-blue-900/40 dark:bg-blue-500/5 sm:flex-row sm:justify-center">
+          <div className="h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-blue-600">
             <img
               src="/assets/images/Ramesh sir/VIJ06254.webp"
               alt="Mr. K. Ramesh Garu, Founder and Chairman"
@@ -561,13 +605,13 @@ function WhyIgnite({
             />
           </div>
           <div className="text-center sm:text-left">
-            <p data-aos="fade-left" className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+            <p className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
               Personal Supervision by
             </p>
-            <p data-aos="fade-left" className="text-base font-semibold text-neutral-900 dark:text-white">
+            <p className="text-base font-semibold text-neutral-900 dark:text-white">
               Mr. K. Ramesh Garu
             </p>
-            <p data-aos="fade-left" className="text-xs text-blue-600 dark:text-blue-400">Founder &amp; Chairman</p>
+            <p className="text-xs text-blue-600 dark:text-blue-400">Founder &amp; Chairman</p>
           </div>
         </div>
       </div>
@@ -592,7 +636,12 @@ export default function AboutPage() {
   const activeComponent = sections.find((section) => section.id === activeSection);
 
   return (
-    <main className="bg-white text-neutral-900 dark:bg-neutral-950 dark:text-white lg:h-1/2">
+    <motion.main
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      className="bg-white text-neutral-900 dark:bg-neutral-950 dark:text-white lg:h-1/2"
+    >
       {/* Hero */}
       <Hero
         title="About IGNITE"
@@ -627,46 +676,60 @@ export default function AboutPage() {
         <WhyIgnite />
       </div>
 
-            {/* =========================================
-          DYNAMIC SECTION TABS
-          ========================================= */}
-      <div className="border-y border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-950">
+      {/* DYNAMIC SECTION TABS */}
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        className="border-y border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-950"
+      >
         <div className="mx-auto max-w-7xl px-4 py-5">
           <div className="flex flex-wrap justify-center gap-2">
             {sections.map((section) => (
-              <button
-              data-aos="zoom-in"
+              <motion.button
                 key={section.id}
                 onClick={() => setActiveSection(section.id)}
-                className={`
-                  rounded-full px-5 py-2.5
-                  text-sm font-medium
-                  transition-colors duration-200
-
-                  ${
-                    activeSection === section.id
-                      ? "bg-blue-600 text-white"
-                      : "bg-neutral-100 text-neutral-600 hover:bg-blue-50 hover:text-blue-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-blue-500/10 dark:hover:text-blue-400"
-                  }
-                `}
+                whileTap={{ scale: 0.95 }}
+                style={{ isolation: "isolate" }}
+                className={`relative rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-200 ${
+                  activeSection === section.id
+                    ? "bg-blue-600 text-white"
+                    : "bg-neutral-100 text-neutral-600 hover:bg-blue-50 hover:text-blue-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-blue-500/10 dark:hover:text-blue-400"
+                }`}
               >
-                {section.label}
-              </button>
+                {activeSection === section.id && (
+                  <motion.div
+                    layoutId="aboutActiveTab"
+                    className="absolute inset-0 rounded-full bg-blue-600"
+                    style={{ zIndex: -1 }}
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{section.label}</span>
+              </motion.button>
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* =========================================
-          ACTIVE SECTION
-          Only ONE section is rendered at a time
-          ========================================= */}
+      {/* ACTIVE SECTION — AnimatePresence for smooth transitions */}
       <div className="relative overflow-hidden bg-white dark:bg-neutral-950">
         <AbstractCircles />
         <div className="relative z-10 min-h-[500px]">
-          {activeComponent?.component}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeSection}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {activeComponent?.component}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
-    </main>
+    </motion.main>
   );
 }
