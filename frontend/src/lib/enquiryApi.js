@@ -5,6 +5,7 @@ const API_BASE_URL = "https://api.ignite.academy/api";
 const api = axios.create({
   baseURL: API_BASE_URL,
   withCredentials: true,
+  timeout: 15000,
   headers: {
     "Content-Type": "application/json",
   },

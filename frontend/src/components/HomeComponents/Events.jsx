@@ -23,7 +23,7 @@ const eventsData = [
       "A vibrant evening of performances, felicitations, and cultural showcases celebrating the achievements of our students over the year.",
     images: [
       "/assets/images/events/Udbhava/3X7A3707.webp",
-      "/assets/images/events/Vybhava/al29471_DSC03685.webp",
+      "/assets/images/events/Udbhava/BF6C8691.webp",
       "/assets/images/events/Vybhava/ARM02900.webp",
       "/assets/images/events/ADVAITHA/VIJ01873.webp",
     ],
@@ -54,7 +54,7 @@ const eventsData = [
     images: [
       "/assets/images/events/falicitates_with_awards/iphone 2025/M Jagan Mohan Reddy3.webp",
       "/assets/images/events/falicitates_with_awards/iphone 2025/Neetu Abhishek.webp",
-      "/assets/images/events/Vybhava/Copy of DSC01917.webp",
+      "/assets/images/events/Vybhava/DSC01917.webp",
       "/assets/images/events/ADVAITHA/PRA00835.webp",
     ],
   },

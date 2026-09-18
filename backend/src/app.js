@@ -4,6 +4,7 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import adminRoutes from "./routes/adminRoutes.js";
 import enquiryRoutes from "./routes/enquiryRoutes.js";
+import { isDatabaseReady } from "./config/db.js";
 
 export function createApp() {
   const app = express();
@@ -34,8 +35,20 @@ export function createApp() {
   );
   app.use(express.json({ limit: "1mb" }));
   app.use(cookieParser());
+
+  // Return a useful response if MongoDB disconnects after the service has
+  // started. Without this, Mongoose can leave admin requests pending.
+  app.use("/api", (req, res, next) => {
+    if (req.path === "/health" || isDatabaseReady()) return next();
+    return res.status(503).json({ message: "Service is temporarily unavailable. Please try again shortly." });
+  });
   app.use("/api/admin", adminRoutes);
   app.use("/api/enquiries", enquiryRoutes);
-  app.get("/api/health", (_req, res) => res.json({ ok: true }));
+  app.get("/api/health", (_req, res) => res.status(isDatabaseReady() ? 200 : 503).json({ ok: isDatabaseReady() }));
+  app.use((error, _req, res, _next) => {
+    console.error("Unhandled API error:", error);
+    if (res.headersSent) return;
+    res.status(500).json({ message: "An unexpected server error occurred." });
+  });
   return app;
 }
