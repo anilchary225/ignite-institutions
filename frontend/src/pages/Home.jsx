@@ -21,7 +21,17 @@ const Home = () => {
   const introWrapRef = useRef(null);
   const introVideoRef = useRef(null);
   const introFadeTimerRef = useRef(null);
+  const introSafetyTimerRef = useRef(null);
   const introEndedRef = useRef(false);
+
+  const dismissIntro = () => {
+    if (introEndedRef.current) return;
+    introEndedRef.current = true;
+    window.clearTimeout(introFadeTimerRef.current);
+    window.clearTimeout(introSafetyTimerRef.current);
+    window.sessionStorage.setItem("ignite_intro_played", "1");
+    setIntroDone(true);
+  };
 
   const startIntroFade = () => {
     const video = introVideoRef.current;
@@ -39,11 +49,7 @@ const Home = () => {
           opacity: 0,
           duration: 0.7,
           ease: "power2.out",
-          onComplete: () => {
-            introEndedRef.current = true;
-            window.sessionStorage.setItem("ignite_intro_played", "1");
-            setIntroDone(true);
-          },
+          onComplete: dismissIntro,
         });
     }, fadeDelay);
   };
@@ -52,8 +58,12 @@ const Home = () => {
     const video = introVideoRef.current;
     video?.addEventListener("loadedmetadata", startIntroFade);
     video?.addEventListener("canplay", startIntroFade);
+    // A failed or blocked autoplay must never leave the entire website under
+    // a permanent black overlay. This also protects visitors on slow networks.
+    introSafetyTimerRef.current = window.setTimeout(dismissIntro, 6000);
     return () => {
       window.clearTimeout(introFadeTimerRef.current);
+      window.clearTimeout(introSafetyTimerRef.current);
       video?.removeEventListener("loadedmetadata", startIntroFade);
       video?.removeEventListener("canplay", startIntroFade);
     };
@@ -74,12 +84,9 @@ const Home = () => {
             onLoadedMetadata={startIntroFade}
             onCanPlay={startIntroFade}
             onEnded={() => {
-              if (!introEndedRef.current) {
-                introEndedRef.current = true;
-                window.sessionStorage.setItem("ignite_intro_played", "1");
-                setIntroDone(true);
-              }
+              dismissIntro();
             }}
+            onError={dismissIntro}
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent" />
         </div>
