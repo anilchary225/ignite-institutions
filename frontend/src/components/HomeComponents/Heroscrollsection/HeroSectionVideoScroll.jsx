@@ -62,7 +62,6 @@ export default function HeroSectionVideoScroll({
   const scrollHintRef = useRef(null);
 
   const [isReady, setIsReady] = useState(false);
-  const [mediaFailed, setMediaFailed] = useState(false);
   const rafIdRef = useRef(null);
   const smoothedTimeRef = useRef(0);
   const lastTimestampRef = useRef(null);
@@ -78,12 +77,6 @@ export default function HeroSectionVideoScroll({
       delete root.dataset.heroComplete;
     };
   }, []);
-
-  const handleVideoError = () => {
-    setMediaFailed(true);
-    // Reveal the hero copy even when a browser cannot decode the video.
-    setIsReady(true);
-  };
 
   // ---- Prime the video so seeks actually paint (Safari/Chrome quirk) --
   useEffect(() => {
@@ -265,7 +258,6 @@ export default function HeroSectionVideoScroll({
         style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100vh" }}
         aria-label="Cinematic product story"
       >
-        {mediaFailed && <div className="hero-cinematic__fallback" aria-hidden="true" />}
         <video
           ref={videoRef}
           className="hero-cinematic__canvas"
@@ -275,7 +267,6 @@ export default function HeroSectionVideoScroll({
           muted
           playsInline
           preload="auto"
-          onError={handleVideoError}
         />
 
         <div className="hero-cinematic__vignette" />
@@ -317,7 +308,7 @@ export default function HeroSectionVideoScroll({
           <div ref={progressBarRef} className="hero-cinematic__progress-bar" />
         </div>
 
-        {!isReady && !mediaFailed && (
+        {!isReady && (
           <div className="hero-cinematic__loader">
             <div className="hero-cinematic__loader-bar">
               <div className="hero-cinematic__loader-fill" style={{ width: "60%" }} />
