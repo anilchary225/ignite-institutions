@@ -84,7 +84,7 @@ function AbstractBackdrop() {
       </svg>
 
       {/* Fade to the page background so it never fights with the sidebar/viewer */}
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-slate-50 dark:to-slate-950" />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-b from-transparent to-slate-50 dark:to-slate-950" />
     </div>
   );
 }

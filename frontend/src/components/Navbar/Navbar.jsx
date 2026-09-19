@@ -674,7 +674,7 @@ export default function Navbar() {
             />
           </RouteLink>
 
-          <nav className="hidden flex-1 justify-center md:flex" aria-label="Primary">
+          <nav className="hidden flex-1 justify-center xl:flex" aria-label="Primary">
             <ul className="flex items-center gap-0.5">
               {navItems.map((item) => (
                 <DesktopMenuItem
@@ -712,7 +712,7 @@ export default function Navbar() {
               }}
               aria-label="Toggle menu"
               aria-expanded={open}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-blue-50 text-blue-600 transition-colors duration-200 hover:bg-blue-600 hover:text-white md:hidden dark:bg-blue-500/10 dark:text-blue-300 cursor-pointer"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-blue-50 text-blue-600 transition-colors duration-200 hover:bg-blue-600 hover:text-white xl:hidden dark:bg-blue-500/10 dark:text-blue-300 cursor-pointer"
             >
               {open ? <X size={18} /> : <Menu size={18} />}
             </motion.button>
@@ -807,7 +807,7 @@ export default function Navbar() {
             exit={{ opacity: 0, y: -10, scale: 0.98 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
             aria-label="Mobile primary"
-            className="mx-auto mt-3 max-w-310 rounded-[28px] border border-blue-100 bg-white p-4 shadow-2xl dark:border-blue-900/30 dark:bg-neutral-950 md:hidden"
+            className="mx-auto mt-3 max-w-310 rounded-[28px] border border-blue-100 bg-white p-4 shadow-2xl dark:border-blue-900/30 dark:bg-neutral-950 xl:hidden"
           >
             <ul className="space-y-1">
               {navItems.map((item) => (

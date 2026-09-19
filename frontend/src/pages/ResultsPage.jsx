@@ -678,7 +678,7 @@ function AllResults() {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.05 }}
-                    className="grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-8"
+                    className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-8 xl:grid-cols-8"
                   >
                     {selectedStudents.map((student, index) => (
                       <ProfileCard key={index} student={student} color={currentColor} />

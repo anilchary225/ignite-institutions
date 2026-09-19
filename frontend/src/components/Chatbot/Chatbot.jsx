@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { MessageCircle, Send, X } from "lucide-react";
+import { MessageCircle, RotateCcw, Send, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { submitEnquiry } from "../../lib/enquiryApi";
 
@@ -18,15 +18,15 @@ function WhatsAppIcon() {
 }
 
 function BotMessage({ children }) {
-  return <div className="max-w-[88%] self-start rounded-2xl rounded-tl-sm bg-emerald-50 px-3.5 py-2.5 text-sm leading-relaxed text-slate-700 dark:bg-emerald-500/10 dark:text-slate-200">{children}</div>;
+  return <div className="max-w-[88%] self-start rounded-2xl rounded-tl-md border border-slate-200/80 bg-white px-3.5 py-2.5 text-sm leading-relaxed text-slate-700 shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200">{children}</div>;
 }
 
 function UserMessage({ children }) {
-  return <div className="max-w-[88%] self-end rounded-2xl rounded-tr-sm bg-blue-600 px-3.5 py-2.5 text-sm leading-relaxed text-white">{children}</div>;
+  return <div className="max-w-[88%] self-end rounded-2xl rounded-tr-md bg-gradient-to-br from-blue-600 to-blue-700 px-3.5 py-2.5 text-sm leading-relaxed text-white shadow-sm">{children}</div>;
 }
 
 function QuickReplies({ options, onSelect }) {
-  return <div className="flex flex-wrap gap-2">{options.map((option) => <button key={option} type="button" onClick={() => onSelect(option)} className="rounded-full border border-blue-200 bg-white px-3 py-2 text-left text-xs font-semibold text-blue-700 transition hover:border-blue-500 hover:bg-blue-50 dark:border-blue-500/30 dark:bg-slate-900 dark:text-blue-300 dark:hover:bg-blue-500/10">{option}</button>)}</div>;
+  return <div className="flex flex-wrap gap-2">{options.map((option) => <button key={option} type="button" onClick={() => onSelect(option)} className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-left text-xs font-semibold text-slate-700 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700 hover:shadow-md active:translate-y-0 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-blue-500/50 dark:hover:bg-blue-500/10">{option}</button>)}</div>;
 }
 
 export default function Chatbot() {
@@ -142,17 +142,17 @@ export default function Chatbot() {
   return (
     <>
       <motion.a
-        whileHover={{ scale: 1.08 }}
-        whileTap={{ scale: 0.94 }}
+        whileHover={{ y: -3, scale: 1.05 }}
+        whileTap={{ scale: 0.92 }}
         href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello Ignite Institutions, I would like to know more about your courses.")}`}
         target="_blank"
         rel="noreferrer"
         aria-label="Chat on WhatsApp"
-        className="ignite-floating-control fixed bottom-[5rem] right-5 z-[9998] grid h-12 w-12 place-items-center rounded-full bg-[#087f5b] text-white shadow-lg transition-colors hover:bg-[#076d4e] sm:right-6"
+        className="ignite-floating-control fixed bottom-[4.5rem] right-4 z-[9998] grid h-11 w-11 place-items-center rounded-2xl border border-white/60 bg-gradient-to-br from-emerald-500 to-emerald-700 text-white shadow-[0_12px_28px_rgba(4,120,87,0.32)] ring-1 ring-emerald-950/10 transition-shadow hover:shadow-[0_16px_32px_rgba(4,120,87,0.42)] sm:bottom-[5rem] sm:right-6 sm:h-12 sm:w-12"
       >
         <WhatsAppIcon />
       </motion.a>
-      <div className="ignite-floating-control fixed bottom-[8.5rem] right-5 z-[9997] sm:right-6">
+      <div className="ignite-floating-control fixed bottom-[7.75rem] right-4 z-[9997] sm:bottom-[8.5rem] sm:right-6">
         <AnimatePresence>
           {open && (
             <motion.div
@@ -161,26 +161,43 @@ export default function Chatbot() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 16 }}
               transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute bottom-16 right-0 flex h-[min(520px,calc(100vh-8rem))] w-[min(330px,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl dark:border-slate-700 dark:bg-slate-950"
+              className="absolute bottom-14 right-0 flex h-[min(480px,calc(100vh-8.5rem))] w-[min(320px,calc(100vw-2rem))] flex-col overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-[0_24px_70px_rgba(15,23,42,0.2)] sm:bottom-16 sm:h-[min(560px,calc(100vh-7rem))] sm:w-[min(360px,calc(100vw-2rem))] dark:border-slate-700 dark:bg-slate-950"
             >
-              <div className="flex items-center justify-between bg-[#006b4f] px-4 py-3 text-white">
-                <div>
-                  <p className="font-bold">Ignite Institutions</p>
-                  <p className="text-xs text-white/75">How can we help you?</p>
+              <div className="relative flex items-center justify-between overflow-hidden bg-gradient-to-r from-blue-700 via-blue-600 to-cyan-600 px-5 py-4 text-white">
+                <div className="absolute -right-8 -top-10 h-28 w-28 rounded-full bg-white/10 blur-2xl" />
+                <div className="relative flex items-center gap-3">
+                  <div className="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/15 shadow-inner backdrop-blur-sm"><MessageCircle size={19} /></div>
+                  <div>
+                    <p className="font-bold tracking-tight">Ignite Assistant</p>
+                    <p className="mt-0.5 flex items-center gap-1.5 text-xs text-white/80"><span className="h-1.5 w-1.5 rounded-full bg-emerald-300" />Usually replies instantly</p>
+                  </div>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => setOpen(false)}
-                  aria-label="Close chat"
-                  className="rounded-full p-1 hover:bg-white/15"
-                >
-                  <X size={18} />
-                </button>
+                <div className="relative flex items-center gap-1">
+                  <button
+                    type="button"
+                    onClick={reset}
+                    aria-label="Start a new chat"
+                    title="Start a new chat"
+                    className="inline-flex items-center gap-1.5 rounded-xl px-2 py-2 text-xs font-semibold text-white/90 transition-colors hover:bg-white/15 hover:text-white"
+                  >
+                    <RotateCcw size={15} />
+                    {/* <span>New chat</span> */}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setOpen(false)}
+                    aria-label="Close chat"
+                    className="rounded-xl p-2 transition-colors hover:bg-white/15"
+                  >
+                    <X size={18} />
+                  </button>
+                </div>
               </div>
               <div
                 ref={messagesRef}
-                className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto bg-slate-50 p-3 dark:bg-slate-900/60"
+                className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto bg-gradient-to-b from-slate-50 via-white to-slate-50 p-4 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
               >
+                <p className="self-center rounded-full border border-slate-200 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-400 shadow-sm dark:border-slate-700 dark:bg-slate-900">Ignite Admissions</p>
                 {messages.map((message, index) =>
                   message.from === "bot" ? (
                     <BotMessage key={index}>
@@ -227,7 +244,7 @@ export default function Chatbot() {
                 {step === "contact" && (
                   <form
                     onSubmit={review}
-                    className="space-y-2 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-950"
+                    className="space-y-3 rounded-2xl border border-slate-200 bg-white p-3.5 shadow-sm dark:border-slate-700 dark:bg-slate-950"
                   >
                     <p className="text-xs font-semibold text-slate-600 dark:text-slate-300">
                       Contact details
@@ -270,14 +287,14 @@ export default function Chatbot() {
                     </p>
                     <button
                       disabled={submitting}
-                      className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-3 py-2.5 text-sm font-semibold text-white disabled:opacity-60"
+                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 px-3 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition hover:from-blue-500 hover:to-blue-700 disabled:opacity-60"
                     >
                       Review Enquiry <Send size={15} />
                     </button>
                   </form>
                 )}
                 {step === "summary" && (
-                  <div className="space-y-2 rounded-xl border border-slate-200 bg-white p-3 text-xs dark:border-slate-700 dark:bg-slate-950">
+                  <div className="space-y-2 rounded-2xl border border-slate-200 bg-white p-3.5 text-xs shadow-sm dark:border-slate-700 dark:bg-slate-950">
                     <p className="font-semibold text-slate-700 dark:text-slate-200">
                       Please confirm your details:
                     </p>
@@ -301,7 +318,7 @@ export default function Chatbot() {
                       <button
                         type="button"
                         onClick={() => setStep("contact")}
-                        className="flex-1 rounded-lg border border-slate-200 px-3 py-2 font-semibold text-slate-600 dark:border-slate-700 dark:text-slate-300"
+                        className="flex-1 rounded-xl border border-slate-200 px-3 py-2 font-semibold text-slate-600 transition hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300"
                       >
                         Edit Details
                       </button>
@@ -309,7 +326,7 @@ export default function Chatbot() {
                         type="button"
                         onClick={submit}
                         disabled={submitting}
-                        className="flex-1 rounded-lg bg-blue-600 px-3 py-2 font-semibold text-white disabled:opacity-60"
+                        className="flex-1 rounded-xl bg-blue-600 px-3 py-2 font-semibold text-white shadow-md shadow-blue-500/20 transition hover:bg-blue-500 disabled:opacity-60"
                       >
                         {submitting ? "Sending…" : "Submit Enquiry"}
                       </button>
@@ -320,7 +337,7 @@ export default function Chatbot() {
                   <button
                     type="button"
                     onClick={reset}
-                    className="self-start rounded-full bg-blue-600 px-3 py-2 text-xs font-semibold text-white"
+                    className="self-start rounded-xl bg-blue-600 px-3 py-2 text-xs font-semibold text-white shadow-md shadow-blue-500/20"
                   >
                     Start New Chat
                   </button>
@@ -352,7 +369,7 @@ export default function Chatbot() {
                   <button
                     type="submit"
                     aria-label="Send answer"
-                    className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-blue-600 text-white"
+                    className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-blue-600 text-white shadow-md shadow-blue-500/20 transition hover:bg-blue-500"
                   >
                     <Send size={16} />
                   </button>
@@ -362,13 +379,15 @@ export default function Chatbot() {
           )}
         </AnimatePresence>
         <motion.button
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.94 }}
+        whileHover={{ y: -3, scale: 1.05 }}
+        whileTap={{ scale: 0.92 }}
+        animate={{ rotate: open ? 90 : 0 }}
+        transition={{ type: "spring", stiffness: 360, damping: 22 }}
           type="button"
           onClick={() => setOpen((value) => !value)}
           aria-expanded={open}
           aria-label={open ? "Close chatbot" : "Chat with Ignite"}
-          className="grid h-12 w-12 place-items-center rounded-full bg-[#006b4f] text-white shadow-lg transition-colors hover:bg-[#076d4e]"
+          className="grid h-11 w-11 place-items-center rounded-2xl border border-white/60 bg-gradient-to-br from-teal-600 to-emerald-800 text-white shadow-[0_12px_28px_rgba(4,120,87,0.32)] ring-1 ring-emerald-950/10 transition-shadow hover:shadow-[0_16px_32px_rgba(4,120,87,0.42)] sm:h-12 sm:w-12"
         >
           {open ? <X size={22} /> : <MessageCircle size={22} />}
         </motion.button>

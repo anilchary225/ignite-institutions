@@ -80,11 +80,13 @@ function BackToTopButton() {
           exit={{ opacity: 0, y: 16, scale: 0.85 }}
           transition={{ duration: 0.25, ease: "easeOut" }}
           aria-label="Back to top"
-          className="ignite-floating-control group fixed bottom-5 right-5 z-[9999] flex h-[50px] w-[50px] items-center justify-center overflow-hidden rounded-[15px] border-4 border-double border-neutral-200 bg-blue-800 text-[#e9e9e9] shadow-[0_10px_25px_rgba(0,0,0,0.18)] transition-all duration-300 hover:w-[140px] hover:justify-start sm:right-6"
+          whileHover={{ y: -3, scale: 1.05 }}
+          whileTap={{ scale: 0.92 }}
+          className="ignite-floating-control group fixed bottom-4 right-4 z-[9999] flex h-11 w-11 items-center justify-center overflow-hidden rounded-2xl border border-white/70 bg-gradient-to-br from-blue-600 to-blue-800 text-white shadow-[0_12px_28px_rgba(30,64,175,0.35)] ring-1 ring-blue-950/10 transition-[width,box-shadow] duration-300 sm:bottom-5 sm:right-6 sm:h-12 sm:w-12 sm:hover:w-36 sm:hover:justify-start sm:hover:shadow-[0_16px_32px_rgba(30,64,175,0.42)]"
         >
           <svg
             viewBox="0 0 384 512"
-            className="h-3 w-3 shrink-0 transition-transform duration-300 group-hover:-translate-y-[200%]"
+            className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:-translate-y-[180%]"
             aria-hidden="true"
           >
             <path
@@ -92,7 +94,7 @@ function BackToTopButton() {
               d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
             />
           </svg>
-          <span className="pointer-events-none absolute inset-y-0 left-0 flex w-full items-center justify-center whitespace-nowrap pl-1 text-[0px] font-medium text-[#e9e9e9] opacity-0 transition-all duration-300 group-hover:text-[15px] group-hover:opacity-100">
+          <span className="pointer-events-none absolute inset-y-0 left-0 flex w-full items-center justify-center whitespace-nowrap pl-1 text-[0px] font-semibold text-white opacity-0 transition-all duration-300 group-hover:text-sm group-hover:opacity-100">
             Back to Top
           </span>
         </motion.button>

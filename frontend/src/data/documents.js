@@ -5,7 +5,7 @@ export const documents = [
         id: "handbook",
         title: "Ignite Institutions Handbook",
         category: "Documents",
-        file: "/assets/pdfs/Hand Book.pdf",
+        file: "/assets/pdfs/HAND BOOK.pdf",
         updated: "2026-01-05"
       },
       {

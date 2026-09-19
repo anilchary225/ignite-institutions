@@ -148,9 +148,16 @@ export default function HeroSectionVideoScroll({
       const stage = stageRef.current;
       if (stage) {
         let nextState;
+        // Keep the released state through a small upward bounce. Without
+        // this hysteresis, trackpad momentum can make `rect.bottom` cross
+        // the viewport edge on consecutive frames and flicker between fixed
+        // and absolute positioning at the end of the cinematic.
+        const remainReleased =
+          pinStateRef.current === "after" && rect.bottom <= viewportH + 24;
+
         if (rect.top > 0) {
           nextState = "before";
-        } else if (rect.bottom <= viewportH) {
+        } else if (rect.bottom <= viewportH || remainReleased) {
           nextState = "after";
         } else {
           nextState = "pinned";
@@ -179,7 +186,10 @@ export default function HeroSectionVideoScroll({
       const raw = window.scrollY - start;
       const clamped = Math.max(0, Math.min(raw, spacerHeight));
       const fraction = spacerHeight > 0 ? clamped / spacerHeight : 0;
-      const targetTime = fraction * duration;
+      // Avoid seeking to the exact media duration. At EOF, browsers may
+      // briefly clear the decoded frame while the pinned stage releases.
+      const safeDuration = Math.max(0, duration - 0.05);
+      const targetTime = fraction * safeDuration;
 
       if (smoothingMs <= 0) {
         smoothedTimeRef.current = targetTime;

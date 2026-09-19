@@ -195,10 +195,13 @@
   @media (max-width: 768px) {
     .hero-cinematic__text-stage {
       padding-top: clamp(56px, 7vh, 90px);
+      /* margin:auto auto !important; */
+      /* border: red 1px solid; */
     }
 
     .hero-cinematic__sentence {
-      width: 92vw;
+      width: 100vw;
+      /* border: red 1px solid; */
     }
 
     .hero-cinematic__logo {
