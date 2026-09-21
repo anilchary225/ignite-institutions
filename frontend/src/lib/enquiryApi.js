@@ -17,6 +17,11 @@ api.interceptors.request.use((config) => {
 
 export async function submitEnquiry({ category, source, payload }) {
   const response = await api.post("/enquiries", { category, source, payload });
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "form_submit",
+    form_name: "..."
+  });
   return response.data;
 }
 

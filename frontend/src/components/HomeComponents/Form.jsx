@@ -191,6 +191,14 @@ export default function Form() {
         return;
       }
       await submitEnquiry({ category: "contact", source: "home-form", payload: formData });
+      // Send successful enquiry event to Google Tag Manager
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "enquiry_submit",
+        form_name: "home_contact_form",
+        form_source: "home-form"
+      });
+
       setSubmitted(true);
       setSubmitStatus("Form submitted successfully.");
       setFormData({ firstName: "", lastName: "", email: "", phone: "", interests: [], message: "" });
