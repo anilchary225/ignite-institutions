@@ -49,6 +49,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 import Footer from "./components/Footer";
 import Chatbot from "./components/Chatbot/Chatbot";
+import Seo from "./components/Seo";
 import { useLocation } from "./router/BrowserRouter";
 import { motion, AnimatePresence } from "framer-motion";
 import "./App.css";
@@ -111,6 +112,7 @@ export default function App() {
 
   return (
     <div ref={motionRootRef} className="min-h-screen bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white">
+      <Seo />
       {showNavbar && pathname !== "/" && (
         <div className="relative z-100 w-full px-4">
           <Navbar />
