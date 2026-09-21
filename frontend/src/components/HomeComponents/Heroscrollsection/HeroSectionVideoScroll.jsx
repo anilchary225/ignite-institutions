@@ -301,7 +301,11 @@ export default function HeroSectionVideoScroll({
                       <span className="hero-cinematic__eyebrow-dot" />
                       {sentence.eyebrow}
                     </span>
-                    <h2 className="hero-cinematic__heading">{sentence.heading}</h2>
+                    {i === 0 ? (
+                      <h1 className="hero-cinematic__heading">{sentence.heading}</h1>
+                    ) : (
+                      <h2 className="hero-cinematic__heading">{sentence.heading}</h2>
+                    )}
                   </>
                 )}
               </div>
