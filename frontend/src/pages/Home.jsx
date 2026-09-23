@@ -90,27 +90,32 @@ const Home = () => {
        
         {/* <IgniteHero /> */}
         <HeroSectionVideoScroll
-          videoSrc="/hero.mp4"
-          pxPerSecond={1000}
-          sentences={[
-            {
-              logo: "/favicon_io (1)/android-chrome-512x512.png",
-              eyebrow: "Welcome to Ignite",
-              heading: "IGNITE Junior Colleges and School",
-              paragraph: "A trusted name in IIT-JEE and NEET coaching in Hyderabad - built to shape confident, capable, and compassionate students.",
-            },
-            {
-              eyebrow: "Structured for Success",
-              heading: "Every detail, considered.",
-              paragraph: "Structured academic planning, daily assessments, and expert faculty guidance keep every student's progress consistent and on track.",
-            },
-            {
-              eyebrow: "Beyond the Classroom",
-              heading: "This is more than coaching. It's a complete environment.",
-              paragraph: "From premium infrastructure to personal mentorship, Ignite is built to carry students from ambition to achievement.",
-            },
-          ]}
-        />
+  videoSrc="/hero-web.mp4"
+  mobileVideoSrc="/hero-mobile.mp4"
+  pxPerSecond={1000}
+  sentences={[
+    {
+      logo: "/favicon_io (1)/android-chrome-512x512.png",
+      eyebrow: "Welcome to Ignite",
+      heading: "IGNITE Junior Colleges and School",
+      paragraph:
+        "A trusted name in IIT-JEE and NEET coaching in Hyderabad - built to shape confident, capable, and compassionate students.",
+    },
+    {
+      eyebrow: "Structured for Success",
+      heading: "Every detail, considered.",
+      paragraph:
+        "Structured academic planning, daily assessments, and expert faculty guidance keep every student's progress consistent and on track.",
+    },
+    {
+      eyebrow: "Beyond the Classroom",
+      heading:
+        "This is more than coaching. It's a complete environment.",
+      paragraph:
+        "From premium infrastructure to personal mentorship, Ignite is built to carry students from ambition to achievement.",
+    },
+  ]}
+/>
 
         <section className=" bg-white px-4 pb-10 pt-28 dark:bg-neutral-950  sm:px-8 sm:pb-12 ">
           <div className="mx-auto max-w-7xl">

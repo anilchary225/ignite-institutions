@@ -13,3 +13,23 @@ html[data-hero-experience="true"]:not([data-hero-complete="true"]) .ignite-float
     transition: none;
   }
 }
+
+.route-transition {
+  animation: ignite-route-in 220ms ease-in-out;
+}
+
+@keyframes ignite-route-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-transition {
+    animation: none;
+  }
+}
