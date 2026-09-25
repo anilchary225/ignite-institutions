@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Atom, FlaskConical, BookOpen, Target, Star, Trophy } from "lucide-react";
 import { fadeUp, staggerContainer, staggerItem, cardReveal, defaultViewport } from "../../animations/variants";
+import { CourseDetailsButton } from "../CourseDialog";
 
 const subjects = [
   { icon: "🔢", name: "Mathematics", note: "Problem solving & aptitude" },
@@ -147,6 +148,10 @@ function TrackCard({ track }) {
             </div>
           ))}
         </div>
+        <CourseDetailsButton
+          courseId={track.id === "iit" ? "iit-foundation" : "neet-foundation"}
+          className={`mt-6 inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-sm font-bold text-white transition ${c.cta}`}
+        />
       </div>
     </motion.div>
   );

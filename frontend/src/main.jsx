@@ -4,6 +4,7 @@ import App from "./App";
 
 import { ThemeProvider } from "./context/ThemeContext";
 import { BrowserRouter } from "./router/BrowserRouter";
+import { CourseDialogProvider } from "./components/CourseDialog";
 
 
 import "./index.css";
@@ -13,7 +14,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider>
       <BrowserRouter>
-        <App />
+        <CourseDialogProvider>
+          <App />
+        </CourseDialogProvider>
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>

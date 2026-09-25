@@ -2,10 +2,12 @@ import { motion } from "framer-motion";
 import { Zap, CalendarDays, Target, CheckCircle2 } from "lucide-react";
 import { RouteLink } from "../../router/BrowserRouter";
 import { fadeUp, staggerContainer, cardReveal, defaultViewport } from "../../animations/variants";
+import { CourseDetailsButton } from "../CourseDialog";
 
 const exams = [
   {
     id: "jee",
+    courseId: "mpc-iit",
     name: "IIT JEE",
     subname: "Main & Advanced",
     color: "blue",
@@ -28,6 +30,7 @@ const exams = [
   },
   {
     id: "neet",
+    courseId: "bipc-neet",
     name: "NEET",
     subname: "UG (MBBS / BDS)",
     color: "emerald",
@@ -50,6 +53,7 @@ const exams = [
   },
   {
     id: "bitsat",
+    courseId: "bitsat",
     name: "BITSAT",
     subname: "BITS Pilani / Goa / Hyderabad",
     color: "rose",
@@ -65,6 +69,7 @@ const exams = [
   },
   {
     id: "eapcet",
+    courseId: "mpc-eapcet",
     name: "EAPCET",
     subname: "AP & Telangana State Entrance",
     color: "orange",
@@ -164,14 +169,12 @@ function ExamBlock({ exam }) {
         ))}
       </div>
 
-      <motion.a
-        href="/contact"
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        className={`mt-6 inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-bold text-white transition ${c.nameBg} hover:opacity-90`}
-      >
-        Enquire about {exam.name}
-      </motion.a>
+      <div className="mt-6 grid gap-3 sm:grid-cols-2">
+        <CourseDetailsButton courseId={exam.courseId} className="inline-flex items-center justify-center rounded-xl border border-neutral-200 px-5 py-3 text-sm font-bold text-neutral-800 transition hover:bg-neutral-100 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" />
+        <motion.a href="/contact" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className={`inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-bold text-white transition ${c.nameBg} hover:opacity-90`}>
+          Enquire now
+        </motion.a>
+      </div>
     </motion.div>
   );
 }

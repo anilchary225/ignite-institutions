@@ -41,7 +41,7 @@ import {
 
 /* ─────────────────────────── DATA ─────────────────────────── */
 
-const heroEvents = [
+let heroEvents = [
   {
     id: "h1",
     image:
@@ -84,6 +84,20 @@ const heroEvents = [
     attendees: "800+",
   }
 ];
+
+// The first cards are the most recently added albums, so keep the hero current too.
+heroEvents = EVENT_FEATURED_CARDS.slice(0, 3).map((event, index) => ({
+  id: event.id,
+  image: event.image,
+  eyebrow: `${event.title} · Latest event`,
+  title: event.title,
+  description: event.description,
+  tag: event.title,
+  tagColor: ["blue", "amber", "sky"][index],
+  date: "Latest gallery",
+  venue: "Ignite campus",
+  attendees: event.count,
+}));
 
 const eventTypes = EVENT_FEATURED_CARDS.map((card, index) => {
   const iconList = [Trophy, Music, FlaskConical, Dumbbell, Mic2, Lightbulb];

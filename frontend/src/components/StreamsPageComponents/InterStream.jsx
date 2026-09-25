@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { BookOpen, FlaskConical, Trophy, Users, Clock, Star } from "lucide-react";
 import { fadeUp, staggerContainer, cardReveal, defaultViewport } from "../../animations/variants";
+import { CourseDetailsButton } from "../CourseDialog";
 
 const courses = [
   {
@@ -109,14 +110,12 @@ function CourseCard({ course }) {
         ))}
       </ul>
 
-      <motion.a
-        href="/contact"
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        className={`mt-8 inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-bold text-white transition ${a.cta}`}
-      >
-        Enquire about {course.title}
-      </motion.a>
+      <div className="mt-8 grid gap-3 sm:grid-cols-2">
+        <CourseDetailsButton courseId={course.id} className="inline-flex items-center justify-center rounded-xl border border-neutral-200 px-5 py-3 text-sm font-bold text-neutral-800 transition hover:bg-neutral-100 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" />
+        <motion.a href="/contact" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className={`inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-bold text-white transition ${a.cta}`}>
+          Enquire now
+        </motion.a>
+      </div>
     </motion.div>
   );
 }

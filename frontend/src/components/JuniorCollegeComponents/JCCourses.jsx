@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import { fadeUp, staggerContainer, cardReveal, defaultViewport } from "../../animations/variants";
+import { CourseDetailsButton } from "../CourseDialog";
 
 const courses = [
   {
@@ -151,14 +152,12 @@ function CourseCard({ course }) {
       </div>
 
       <div className="mt-auto border-t px-7 py-5 dark:border-neutral-800">
-        <motion.a
-          href="#contact"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className={`inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold transition ${c.cta}`}
-        >
-          Apply Now <ArrowRight size={15} />
-        </motion.a>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <CourseDetailsButton courseId={course.id} className="inline-flex w-full items-center justify-center rounded-xl border border-neutral-200 px-5 py-3 text-sm font-bold text-neutral-800 transition hover:bg-neutral-100 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" />
+          <motion.a href="#contact" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className={`inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold transition ${c.cta}`}>
+            Apply now <ArrowRight size={15} />
+          </motion.a>
+        </div>
       </div>
     </motion.div>
   );

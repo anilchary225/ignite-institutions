@@ -723,6 +723,16 @@ const folderAlbums = [
       "/assets/images/events/Sports Meet/DSC04890.webp",
       "/assets/images/events/Sports Meet/DSC05170.webp",
       "/assets/images/events/Sports Meet/DSC05297.webp",
+      "/assets/images/events/Sports Meet/DSC09930.webp",
+      "/assets/images/events/Sports Meet/DSC09935.webp",
+      "/assets/images/events/Sports Meet/DSC09943.webp",
+      "/assets/images/events/Sports Meet/DSC09947.webp",
+      "/assets/images/events/Sports Meet/DSC09953.webp",
+      "/assets/images/events/Sports Meet/DSC09954.webp",
+      "/assets/images/events/Sports Meet/DSC09957.webp",
+      "/assets/images/events/Sports Meet/DSC09966.webp",
+      "/assets/images/events/Sports Meet/DSC09967.webp",
+      "/assets/images/events/Sports Meet/DSC09971.webp",
       "/assets/images/events/Sports Meet/SPORTS MEET ASSEMBLE (2).webp"
     ]
   },
@@ -964,6 +974,79 @@ const folderAlbums = [
       "/assets/images/events/Zumba/DSC09425.webp",
       "/assets/images/events/Zumba/IMG_0561.webp"
     ]
+  },
+];
+
+const numberedPhotos = (folder, prefix, count) =>
+  Array.from(
+    { length: count },
+    (_, index) => `${eventBase}/${folder}/${prefix}_${index + 1}.webp`,
+  );
+
+// Newest uploads are kept first so they are surfaced first across every gallery view.
+const newestAlbums = [
+  {
+    id: "teachers-day",
+    folder: "Teachers Day",
+    title: "Teachers' Day",
+    description: "A warm celebration of the mentors who guide and inspire our students.",
+    paragraph: "Students celebrated their teachers with gratitude, performances, and memorable campus moments.",
+    hero: `${eventBase}/Teachers Day/teachers_day_1.webp`,
+    photos: numberedPhotos("Teachers Day", "teachers_day", 6),
+  },
+  {
+    id: "sids-farm",
+    folder: "SIDs FARM",
+    title: "SIDs Farm Visit",
+    description: "Students learning through a hands-on visit to SIDs Farm.",
+    paragraph: "This field visit gave students an opportunity to explore, learn, and connect with the world beyond the classroom.",
+    hero: `${eventBase}/SIDs FARM/sid's_farm_1.webp`,
+    photos: numberedPhotos("SIDs FARM", "sid's_farm", 19),
+  },
+  {
+    id: "plantation-drive",
+    folder: "PLANTATION DRIVE",
+    title: "Plantation Drive",
+    description: "Students coming together to nurture a greener campus.",
+    paragraph: "Our plantation drive encouraged students to take meaningful action for a greener, healthier future.",
+    hero: `${eventBase}/PLANTATION DRIVE/plantation_drive_1.webp`,
+    photos: numberedPhotos("PLANTATION DRIVE", "plantation_drive", 31),
+  },
+  {
+    id: "krishna-ashtami",
+    folder: "KRISHNA ASTAMI",
+    title: "Krishna Ashtami",
+    description: "A colourful campus celebration of Krishna Ashtami.",
+    paragraph: "Students brought the spirit of Krishna Ashtami to life through traditional dress, performances, and joyful celebrations.",
+    hero: `${eventBase}/KRISHNA ASTAMI/krishnastamai_1.webp`,
+    photos: numberedPhotos("KRISHNA ASTAMI", "krishnastamai", 13),
+  },
+  {
+    id: "investiture-ceremony",
+    folder: "Investiture Ceremony",
+    title: "Investiture Ceremony",
+    description: "Celebrating student leadership and responsibility.",
+    paragraph: "The investiture ceremony honoured student leaders as they stepped into their roles with confidence and commitment.",
+    hero: `${eventBase}/Investiture Ceremony/investiture_ceremony_1.webp`,
+    photos: numberedPhotos("Investiture Ceremony", "investiture_ceremony", 14),
+  },
+  {
+    id: "independence-day",
+    folder: "INDEPENDENCE DAY",
+    title: "Independence Day",
+    description: "A proud celebration of India’s freedom and shared values.",
+    paragraph: "Students and staff came together to mark Independence Day with patriotism, performances, and community spirit.",
+    hero: `${eventBase}/INDEPENDENCE DAY/independence_day_1.webp`,
+    photos: numberedPhotos("INDEPENDENCE DAY", "independence_day", 8),
+  },
+  {
+    id: "birla-planetarium",
+    folder: "BIRLA PLANETARIUM ",
+    title: "Birla Planetarium Visit",
+    description: "A journey of discovery through science and the cosmos.",
+    paragraph: "Students explored the wonders of space during an inspiring educational visit to the Birla Planetarium.",
+    hero: `${eventBase}/BIRLA PLANETARIUM /birla_planetarium_1.webp`,
+    photos: numberedPhotos("BIRLA PLANETARIUM ", "birla_planetarium", 10),
   },
 ];
 
@@ -3940,11 +4023,139 @@ export const EVENT_PAGE_CONTENT = {
 ]
 };
 
-export const EVENT_ALBUMS = folderAlbums;
-export const EVENT_FEATURED_CARDS = featuredCards;
-export const EVENT_PHOTO_SECTIONS = photoSections;
-export const EVENT_GALLERY_IMAGES = galleryImages;
+const newestFeaturedCards = newestAlbums.map((album) => ({
+  id: album.id,
+  title: album.title,
+  count: `${album.photos.length} images`,
+  image: album.hero,
+  description: album.description,
+}));
+
+const newestPhotoCopy = {
+  "teachers-day": [
+    ["A Tribute to Teachers", "Teachers' Day"],
+    ["Celebration on Campus", "Teachers' Day"],
+    ["Smiles and Gratitude", "Teachers' Day"],
+  ],
+  "sids-farm": [
+    ["Learning Beyond the Classroom", "SIDs Farm Visit"],
+    ["Exploring the Farm", "SIDs Farm Visit"],
+    ["A Day in Nature", "SIDs Farm Visit"],
+  ],
+  "plantation-drive": [
+    ["Planting the Future", "Plantation Drive"],
+    ["Hands in the Soil", "Plantation Drive"],
+    ["Growing Green Together", "Plantation Drive"],
+  ],
+  "krishna-ashtami": [
+    ["Colours of Tradition", "Krishna Ashtami"],
+    ["Little Krishnas", "Krishna Ashtami"],
+    ["A Joyful Celebration", "Krishna Ashtami"],
+  ],
+  "investiture-ceremony": [
+    ["Student Leaders", "Investiture Ceremony"],
+    ["Council of Achievers", "Investiture Ceremony"],
+    ["Taking the Oath", "Investiture Ceremony"],
+  ],
+  "independence-day": [
+    ["Saluting the Nation", "Independence Day"],
+    ["Proud to Be Indian", "Independence Day"],
+    ["Unity and Freedom", "Independence Day"],
+  ],
+  "birla-planetarium": [
+    ["A Journey Through Space", "Birla Planetarium"],
+    ["Curiosity in Orbit", "Birla Planetarium"],
+    ["Learning Beyond Earth", "Birla Planetarium"],
+  ],
+};
+
+const newestPhotoSections = newestAlbums.map((album, albumIndex) => ({
+  id: album.id,
+  label: album.title,
+  title: album.title,
+  description: album.description,
+  experience: album.paragraph,
+  icon: null,
+  accent: ["green", "emerald", "rose", "amber", "blue", "indigo"][albumIndex % 6],
+  photos: album.photos.slice(0, 3).map((image, imageIndex) => ({
+    id: `${album.id}-${imageIndex}`,
+    title: newestPhotoCopy[album.id]?.[imageIndex]?.[0] ?? album.title,
+    caption: newestPhotoCopy[album.id]?.[imageIndex]?.[1] ?? album.title,
+    image,
+    size: imageIndex === 0 ? "large" : "small",
+  })),
+}));
+
+const newestGalleryImages = newestAlbums.map((album) => ({
+  id: `${album.id}-0`,
+  src: album.hero,
+  label: album.title,
+  event: album.title,
+}));
+
+const newestBonaluPhotos = numberedPhotos("Bonalu", "bonalu", 10);
+const bonaluPreviewCopy = [
+  ["Festive Traditions", "Bonalu Celebration"],
+  ["Devotion in Colour", "Bonalu Celebration"],
+  ["Community Celebration", "Bonalu Celebration"],
+];
+const bonaluPreviewPhotos = newestBonaluPhotos.slice(0, 3).map((image, index) => ({
+  id: `bonalu-new-${index}`,
+  title: bonaluPreviewCopy[index][0],
+  caption: bonaluPreviewCopy[index][1],
+  image,
+  size: index === 0 ? "large" : "small",
+}));
+
+const newestGaneshPhotos = numberedPhotos("ganesh festival", "ganesh_chathurthi", 10);
+const ganeshPreviewCopy = [
+  ["Auspicious Beginnings", "Ganesh Festival"],
+  ["Faith and Celebration", "Ganesh Festival"],
+  ["Campus Festivities", "Ganesh Festival"],
+];
+const ganeshPreviewPhotos = newestGaneshPhotos.slice(0, 3).map((image, index) => ({
+  id: `ganesh-new-${index}`,
+  title: ganeshPreviewCopy[index][0],
+  caption: ganeshPreviewCopy[index][1],
+  image,
+  size: index === 0 ? "large" : "small",
+}));
+
+export const EVENT_ALBUMS = [...newestAlbums, ...folderAlbums].map((album) =>
+  album.id === "bonalu"
+    ? { ...album, hero: newestBonaluPhotos[0], photos: [...newestBonaluPhotos, ...album.photos] }
+    : album.id === "ganesh-festival"
+      ? { ...album, hero: newestGaneshPhotos[0], photos: [...newestGaneshPhotos, ...album.photos] }
+    : album,
+);
+export const EVENT_FEATURED_CARDS = [...newestFeaturedCards, ...featuredCards].map((card) =>
+  card.id === "bonalu"
+    ? { ...card, image: newestBonaluPhotos[0], count: `${newestBonaluPhotos.length + 7} images` }
+    : card.id === "ganesh-festival"
+      ? { ...card, image: newestGaneshPhotos[0], count: `${newestGaneshPhotos.length + 5} images` }
+    : card,
+);
+export const EVENT_PHOTO_SECTIONS = [
+  ...newestPhotoSections,
+  ...photoSections.map((section) =>
+    section.id === "bonalu"
+      ? { ...section, photos: bonaluPreviewPhotos }
+      : section.id === "ganesh-festival"
+        ? { ...section, photos: ganeshPreviewPhotos }
+        : section,
+  ),
+];
+export const EVENT_GALLERY_IMAGES = [
+  ...newestGalleryImages,
+  ...galleryImages.map((image) =>
+    image.id === "bonalu-0"
+      ? { ...image, src: newestBonaluPhotos[0] }
+      : image.id === "ganesh-festival-0"
+        ? { ...image, src: newestGaneshPhotos[0] }
+        : image,
+  ),
+];
 
 export function getEventAlbum(eventId) {
-  return folderAlbums.find((album) => album.id === eventId);
+  return EVENT_ALBUMS.find((album) => album.id === eventId);
 }
