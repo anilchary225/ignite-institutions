@@ -123,92 +123,6 @@ const statsData = [
   { value: "18 yrs", label: "Of Excellence", icon: Star, color: "indigo" },
 ];
 
-const parentReactions = [
-  {
-    id: "p1",
-    name: "Mrs. Lakshmi Ravi",
-    role: "Parent of JC-2 Student",
-    avatar: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=120&q=80",
-    quote:
-      "The Annual Day was absolutely breathtaking. Watching my son perform on that grand stage filled with 2000 people was something I'll cherish forever. Ignite doesn't just teach - it transforms.",
-    event: "Annual Day 2025",
-    rating: 5,
-  },
-  {
-    id: "p2",
-    name: "Mr. Suresh Kumar",
-    role: "Parent of Class-10 Student",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=120&q=80",
-    quote:
-      "I attended the Science Expo with very high expectations - and Ignite still managed to exceed them. My daughter's project on renewable energy showed a depth of thinking I didn't realise she had.",
-    event: "Science Expo 2025",
-    rating: 5,
-  },
-  {
-    id: "p3",
-    name: "Mrs. Anitha Reddy",
-    role: "Parent of Foundation Batch",
-    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80",
-    quote:
-      "The Parent Orientation Day gave us such a clear picture of how well Ignite plans every aspect of a student's growth. The faculty's passion is genuinely visible.",
-    event: "Parent Orientation",
-    rating: 5,
-  },
-  {
-    id: "p4",
-    name: "Mr. Venkat Narayana",
-    role: "Parent of Two Ignite Students",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80",
-    quote:
-      "Both my children have been shaped by events at Ignite - from the sports day discipline to the cultural fest confidence. No other institution invests so deeply in the whole child.",
-    event: "Sports Day 2025",
-    rating: 5,
-  },
-];
-
-const studentReactions = [
-  {
-    id: "s1",
-    name: "Priya Sharma",
-    role: "JC-2, MPC · IIT Aspirant",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=120&q=80",
-    quote:
-      "Utsav was the night I stopped being shy. I'd never performed on stage before. My friends pushed me, the teachers believed in me - and the crowd gave me a standing ovation. That moment rewired me.",
-    event: "Utsav Cultural Fest",
-    rating: 5,
-  },
-  {
-    id: "s2",
-    name: "Arjun Mehta",
-    role: "Class-11, BIPC · NEET Aspirant",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80",
-    quote:
-      "The guest lecture by last year's NEET AIR-12 ranker was a turning point for me. He broke down exactly how he studied, what mistakes to avoid - real, honest advice that no coaching book gives you.",
-    event: "Guest Lecture Series",
-    rating: 5,
-  },
-  {
-    id: "s3",
-    name: "Deepika Nair",
-    role: "Class-9, Foundation",
-    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b47c?auto=format&fit=crop&w=120&q=80",
-    quote:
-      "Sports Day is my favourite day of the year. I won the 400m sprint and got the trophy on the main stage. My parents were in the crowd. I still have that photo on my desk.",
-    event: "Sports Day 2025",
-    rating: 5,
-  },
-  {
-    id: "s4",
-    name: "Karthik Rao",
-    role: "JC-1, MPC",
-    avatar: "https://images.unsplash.com/photo-1463453091185-61582044d556?auto=format&fit=crop&w=120&q=80",
-    quote:
-      "The robotics workshop at the Science Expo opened my eyes to engineering in a completely different way. We built a working line-follower in one afternoon. I'm now certain I want to do CSE at IIT.",
-    event: "Science Expo 2025",
-    rating: 5,
-  },
-];
-
 const colorMap = {
   blue: {
     icon: "bg-blue-100 text-blue-600 dark:bg-blue-950/50 dark:text-blue-300",
@@ -330,7 +244,7 @@ function EventHero() {
         <div
           className="relative h-[620px] sm:h-[680px] transition-all duration-1000"
           style={{
-            backgroundImage: `url(${ev.image})`,
+            backgroundImage: `url("${encodeURI(ev.image)}")`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -668,143 +582,7 @@ function StatsStrip() {
   );
 }
 
-/* ──────────────── SECTION 5 - REACTIONS ────────────────────── */
-
-function StarRating({ count }) {
-  return (
-    <div className="flex gap-0.5">
-      {Array.from({ length: count }).map((_, i) => (
-        <Star key={i} size={13} className="fill-amber-400 text-amber-400" />
-      ))}
-    </div>
-  );
-}
-
-function ReactionCard({ person, accent }) {
-  return (
-    <motion.div
-      variants={cardReveal}
-      whileHover={{ y: -6, transition: { duration: 0.25 } }}
-      className="relative flex flex-col gap-5 rounded-3xl bg-white p-6 ring-1 ring-neutral-100 shadow-sm dark:bg-neutral-900 border-2 border-neutral-100 hover:shadow-2xl dark:ring-neutral-800"
-    >
-      {/* Quote icon */}
-      <Quote size={28} className={`shrink-0 ${accent}`} />
-      <p className="flex-1 text-sm leading-7 text-neutral-700 dark:text-neutral-300">
-        "{person.quote}"
-      </p>
-      <div className="flex items-center justify-between gap-4 border-t border-neutral-100 pt-4 dark:border-neutral-800">
-        <div className="flex items-center gap-3">
-          <img
-            src={person.avatar}
-            alt={person.name}
-            className="h-10 w-10 rounded-full object-cover ring-2 ring-blue-100 dark:ring-blue-950/50"
-          />
-          <div>
-            <p className="text-sm font-extrabold text-neutral-950 dark:text-white">{person.name}</p>
-            <p className="text-[11px] text-neutral-500">{person.role}</p>
-          </div>
-        </div>
-        <div className="text-right shrink-0">
-          <StarRating count={person.rating} />
-          <p className="mt-1 text-[10px] font-semibold text-neutral-400">{person.event}</p>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-function Reactions() {
-  const [tab, setTab] = useState("parents");
-
-  const reactions = tab === "parents" ? parentReactions : studentReactions;
-  const accentClass = tab === "parents" ? "text-rose-400" : "text-blue-400";
-
-  return (
-    <section className="bg-white px-6 py-20 dark:bg-neutral-950 overflow-hidden">
-      <div className="mx-auto max-w-7xl">
-        {/* Header */}
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={defaultViewport}
-          className="flex flex-col items-center gap-5 text-center"
-        >
-          <motion.span variants={fadeUp} className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-blue-700 dark:bg-blue-950/40 dark:text-blue-400">
-            <Heart size={12} />
-            What People Say
-          </motion.span>
-          <motion.h2 variants={fadeUp} className="max-w-2xl text-3xl font-extrabold text-neutral-950 sm:text-4xl dark:text-white">
-            Reactions that warm our hearts
-          </motion.h2>
-          <motion.p variants={fadeUp} className="max-w-xl text-sm leading-6 text-neutral-600 dark:text-neutral-400">
-            From parents who cheered from the gallery to students who found themselves on the stage - the events at Ignite leave a lasting impression.
-          </motion.p>
-
-          {/* Toggle */}
-          <motion.div variants={fadeUp} className="flex rounded-full bg-neutral-100 p-1 dark:bg-neutral-800">
-            <button
-              type="button"
-              onClick={() => setTab("parents")}
-              className={`rounded-full px-5 py-2 text-sm font-bold transition duration-200 ${
-                tab === "parents"
-                  ? "bg-white text-neutral-950 shadow-sm dark:bg-neutral-950 dark:text-white"
-                  : "text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300"
-              }`}
-            >
-              👨‍👩‍👧 Parent Reactions
-            </button>
-            <button
-              type="button"
-              onClick={() => setTab("students")}
-              className={`rounded-full px-5 py-2 text-sm font-bold transition duration-200 ${
-                tab === "students"
-                  ? "bg-white text-neutral-950 shadow-sm dark:bg-neutral-950 dark:text-white"
-                  : "text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300"
-              }`}
-            >
-              🎓 Student Reactions
-            </button>
-          </motion.div>
-        </motion.div>
-
-        {/* Cards */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={tab}
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            viewport={defaultViewport}
-            className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
-          >
-            {reactions.map((p) => (
-              <ReactionCard key={p.id} person={p} accent={accentClass} />
-            ))}
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Divider quote */}
-        <motion.div
-          variants={scaleIn}
-          initial="hidden"
-          whileInView="visible"
-          viewport={defaultViewport}
-          className="mt-14 flex flex-col items-center gap-4 rounded-3xl bg-linear-to-br from-blue-600 to-indigo-700 px-8 py-10 text-center shadow-lg"
-        >
-          <Quote size={32} className="text-blue-200 opacity-50" />
-          <p className="max-w-2xl text-xl font-extrabold italic leading-snug text-white sm:text-2xl">
-            "Every event at Ignite is designed with one purpose - to give students a memory they will build upon for the rest of their lives."
-          </p>
-          <p className="text-sm font-bold text-blue-200">- The Ignite Faculty</p>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-/* ──────────────── SECTION 6 - ABOUT IGNITE ─────────────────── */
+/* ──────────────── SECTION 5 - ABOUT IGNITE ─────────────────── */
 
 function AboutIgnite() {
   const pillars = [
@@ -930,7 +708,6 @@ export default function EventsPage() {
       <EventTypes />
       <EventGallery />
       <StatsStrip />
-      <Reactions />
       <AboutIgnite />
     </motion.div>
   );

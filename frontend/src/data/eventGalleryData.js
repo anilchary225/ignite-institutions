@@ -1048,6 +1048,18 @@ const newestAlbums = [
     hero: `${eventBase}/BIRLA PLANETARIUM /birla_planetarium_1.webp`,
     photos: numberedPhotos("BIRLA PLANETARIUM ", "birla_planetarium", 10),
   },
+  {
+    id: "iphone-ipad",
+    folder: "I-phone & I-pad",
+    title: "iPhone & iPad Initiative",
+    description: "Recognising academic excellence through digital-learning support.",
+    paragraph: "This initiative celebrates student achievement while supporting learning with digital tools for the next stage of their academic journey.",
+    hero: `${eventBase}/I-phone & I-pad/DSC03857.webp`,
+    photos: [
+      `${eventBase}/I-phone & I-pad/DSC03857.webp`,
+      `${eventBase}/I-phone & I-pad/ARM02955.webp`,
+    ],
+  },
 ];
 
 const featuredCards = [
@@ -4067,6 +4079,10 @@ const newestPhotoCopy = {
     ["Curiosity in Orbit", "Birla Planetarium"],
     ["Learning Beyond Earth", "Birla Planetarium"],
   ],
+  "iphone-ipad": [
+    ["Digital Learning Recognition", "iPhone & iPad Initiative"],
+    ["Celebrating Achievement", "iPhone & iPad Initiative"],
+  ],
 };
 
 const newestPhotoSections = newestAlbums.map((album, albumIndex) => ({
@@ -4092,6 +4108,17 @@ const newestGalleryImages = newestAlbums.map((album) => ({
   label: album.title,
   event: album.title,
 }));
+
+export const optimizedEventImage = (src) => {
+  if (!src?.startsWith(`${eventBase}/`)) return src;
+  return src.replace(`${eventBase}/`, "/assets/images/optimized-events/");
+};
+
+const withOptimizedImages = (album) => ({
+  ...album,
+  hero: optimizedEventImage(album.hero),
+  photos: album.photos.map(optimizedEventImage),
+});
 
 const newestBonaluPhotos = numberedPhotos("Bonalu", "bonalu", 10);
 const bonaluPreviewCopy = [
@@ -4127,14 +4154,14 @@ export const EVENT_ALBUMS = [...newestAlbums, ...folderAlbums].map((album) =>
     : album.id === "ganesh-festival"
       ? { ...album, hero: newestGaneshPhotos[0], photos: [...newestGaneshPhotos, ...album.photos] }
     : album,
-);
+).map(withOptimizedImages);
 export const EVENT_FEATURED_CARDS = [...newestFeaturedCards, ...featuredCards].map((card) =>
   card.id === "bonalu"
     ? { ...card, image: newestBonaluPhotos[0], count: `${newestBonaluPhotos.length + 7} images` }
     : card.id === "ganesh-festival"
       ? { ...card, image: newestGaneshPhotos[0], count: `${newestGaneshPhotos.length + 5} images` }
     : card,
-);
+).map((card) => ({ ...card, image: optimizedEventImage(card.image) }));
 export const EVENT_PHOTO_SECTIONS = [
   ...newestPhotoSections,
   ...photoSections.map((section) =>
@@ -4144,7 +4171,7 @@ export const EVENT_PHOTO_SECTIONS = [
         ? { ...section, photos: ganeshPreviewPhotos }
         : section,
   ),
-];
+].map((section) => ({ ...section, photos: section.photos.map((photo) => ({ ...photo, image: optimizedEventImage(photo.image) })) }));
 export const EVENT_GALLERY_IMAGES = [
   ...newestGalleryImages,
   ...galleryImages.map((image) =>
@@ -4154,7 +4181,7 @@ export const EVENT_GALLERY_IMAGES = [
         ? { ...image, src: newestGaneshPhotos[0] }
         : image,
   ),
-];
+].map((image) => ({ ...image, src: optimizedEventImage(image.src) }));
 
 export function getEventAlbum(eventId) {
   return EVENT_ALBUMS.find((album) => album.id === eventId);

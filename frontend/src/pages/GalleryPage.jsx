@@ -22,6 +22,7 @@ import {
   Users,
 } from "lucide-react";
 import { RouteLink } from "../router/BrowserRouter";
+import { optimizedEventImage } from "../data/eventGalleryData";
 import {
   fadeUp,
   fadeIn,
@@ -36,7 +37,7 @@ import {
 const heroSlides = [
   {
     image:
-      "/assets/images/events/Udbhava/BF6C8691.webp",
+      optimizedEventImage("/assets/images/events/Udbhava/BF6C8691.webp"),
     eyebrow: "Udbhava Fest · 2025",
     title: "A campus full of energy, ideas, and unforgettable moments.",
     description:
@@ -44,7 +45,7 @@ const heroSlides = [
     tone: "from-blue-950/95 via-blue-950/55 to-transparent",
   },
   {
-    image: "/assets/images/events/Yoga/yoga12.webp",
+    image: optimizedEventImage("/assets/images/events/Yoga/yoga12.webp"),
     eyebrow: "Wellness · Balance · Focus",
     title: "Yoga helps students build calm minds and strong bodies.",
     description:
@@ -53,7 +54,7 @@ const heroSlides = [
   },
   {
     image:
-      "/assets/images/events/Plantationrun/plantation1.webp",
+      optimizedEventImage("/assets/images/events/Plantationrun/plantation1.webp"),
     eyebrow: "Ignite Green Initiative · Together",
     title: "Hands-on experiences that grow responsible young citizens.",
     description:
@@ -65,7 +66,7 @@ const heroSlides = [
 const recentPrograms = [
   {
     image:
-      "/assets/images/events/Plantationrun/plantation7.webp",
+      optimizedEventImage("/assets/images/events/Plantationrun/plantation7.webp"),
     category: "Plantation Run",
     date: "April 11, 2025",
     title: "Plantation Run: Run for a Greener Tomorrow",
@@ -77,7 +78,7 @@ const recentPrograms = [
   },
   {
     image:
-      "/assets/images/events/buttermik/ButterMilk2.webp",
+      optimizedEventImage("/assets/images/events/buttermik/ButterMilk2.webp"),
     category: "Buttermilk Distribution",
     date: "April 11, 2025",
     title: "Refreshing Initiative: Buttermilk Distribution Drive",
@@ -89,7 +90,7 @@ const recentPrograms = [
   },
   {
     image:
-      "/assets/images/events/Yoga/yoga10.webp",
+      optimizedEventImage("/assets/images/events/Yoga/yoga10.webp"),
     category: "Yoga Day",
     date: "June 7, 2025",
     title: "Yoga Day: Embracing Balance and Well-being",
@@ -101,7 +102,7 @@ const recentPrograms = [
   },
   {
     image:
-      "/assets/images/events/falicitates_with_awards/facilities4.webp",
+      optimizedEventImage("/assets/images/events/falicitates_with_awards/facilities4.webp"),
     category: "Awards Ceremony",
     date: "2025",
     title: "Honouring Excellence: Felicitation with Awards",
@@ -113,7 +114,7 @@ const recentPrograms = [
   },
   {
     image:
-      "/assets/images/events/orphanage/orphanage1.webp",
+      optimizedEventImage("/assets/images/events/orphanage/orphanage1.webp"),
     category: "Orphanage Visit",
     date: "2025",
     title: "Sharing Happiness: Food Donation to Orphanage",
@@ -125,7 +126,7 @@ const recentPrograms = [
   },
   {
     image:
-      "/assets/images/events/sanitizer distribution/Sanitization_bottles_stood_side_…_202608181602.webp",
+      optimizedEventImage("/assets/images/events/sanitizer distribution/Sanitization_bottles_stood_side_…_202608181602.webp"),
     category: "Sanitization Drive",
     date: "2025",
     title: "Clean & Safe Campus: Sanitization Initiative",
@@ -137,7 +138,7 @@ const recentPrograms = [
   },
   {
     image:
-      "/assets/images/events/swatch_run/swatchrun1.webp",
+      optimizedEventImage("/assets/images/events/swatch_run/swatchrun1.webp"),
     category: "Swachh Run",
     date: "2025",
     title: "Swachh Run: Running Towards a Cleaner Future",
@@ -149,7 +150,7 @@ const recentPrograms = [
   },
   {
     image:
-      "/assets/images/events/Summer camp/C0095T01.webp",
+      optimizedEventImage("/assets/images/events/Summer camp/C0095T01.webp"),
     category: "Summer Camp",
     date: "2025",
     title: "Summer Camp: Learning, Creativity & Fun",
@@ -161,7 +162,7 @@ const recentPrograms = [
   },
   {
     image:
-      "/assets/images/events/Sports Meet/SPORTS MEET ASSEMBLE (2).webp",
+      optimizedEventImage("/assets/images/events/Sports Meet/SPORTS MEET ASSEMBLE (2).webp"),
     category: "Sports Meet",
     date: "2025",
     title: "Sports Meet: Celebrating Team Spirit & Excellence",

@@ -1,224 +1,132 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
-import { MapPin, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { MapPin } from "lucide-react";
+
 import { fadeUp, defaultViewport } from "../../animations/variants";
 
 export const campusData = {
   Colleges: [
-    { name: "Aditya Campus", location: "Kukatpally, Hyderabad", tag: "College", image: "/assets/images/college campuses/Aditya.webp" },
-    { name: "Bharathi Bhavan Campus", location: "Kukatpally, Hyderabad", tag: "College", image: "/assets/images/college campuses/Bharathi_Bhavan_block.webp" },
-    { name: "Newton Campus", location: "Kukatpally, Hyderabad", tag: "College", image: "/assets/images/college campuses/Newton_block.webp" },
-    { name: "Patanjali Campus", location: "Kukatpally, Hyderabad", tag: "College", image: "/assets/images/college campuses/Patanjali_block.webp" },
-    { name: "Saraswathi Campus", location: "Kukatpally, Hyderabad", tag: "College", image: "/assets/images/college campuses/Saraswathi_Block.webp" },
-    { name: "Sindhura Campus", location: "Kukatpally, Hyderabad", tag: "College", image: "/assets/images/college campuses/Sindhura_block.webp" },
-    { name: "Vagdevi Campus", location: "Kukatpally, Hyderabad", tag: "College", image: "/assets/images/college campuses/Vagdevi_block.webp" },
-    { name: "Kalam Campus", location: "Kukatpally, Hyderabad", tag: "College", image: "/assets/images/college campuses/kalam_block.webp" },
+    {
+      name: "Aditya Campus",
+      location: "Kukatpally, Hyderabad",
+      tag: "College",
+      image: "/assets/images/college campuses/Aditya.webp",
+    },
+    {
+      name: "Bharathi Bhavan Campus",
+      location: "Kukatpally, Hyderabad",
+      tag: "College",
+      image: "/assets/images/college campuses/Bharathi_Bhavan_block.webp",
+    },
+    {
+      name: "Newton Campus",
+      location: "Kukatpally, Hyderabad",
+      tag: "College",
+      image: "/assets/images/college campuses/Newton_block.webp",
+    },
+    {
+      name: "Patanjali Campus",
+      location: "Kukatpally, Hyderabad",
+      tag: "College",
+      image: "/assets/images/college campuses/Patanjali_block.webp",
+    },
+    {
+      name: "Saraswathi Campus",
+      location: "Kukatpally, Hyderabad",
+      tag: "College",
+      image: "/assets/images/college campuses/Saraswathi_Block.webp",
+    },
+    {
+      name: "Sindhura Campus",
+      location: "Kukatpally, Hyderabad",
+      tag: "College",
+      image: "/assets/images/college campuses/Sindhura_block.webp",
+    },
+    {
+      name: "Vagdevi Campus",
+      location: "Kukatpally, Hyderabad",
+      tag: "College",
+      image: "/assets/images/college campuses/Vagdevi_block.webp",
+    },
+    {
+      name: "Kalam Campus",
+      location: "Kukatpally, Hyderabad",
+      tag: "College",
+      image: "/assets/images/college campuses/kalam_block.webp",
+    },
   ],
+
   Schools: [
-    { name: "Ignite High School", location: "Kukatpally, Hyderabad", tag: "School", image: "/assets/images/school campus/Ignite School.webp" },
+    {
+      name: "Ignite High School",
+      location: "Kukatpally, Hyderabad",
+      tag: "School",
+      image: "/assets/images/school campus/Ignite School.webp",
+    },
   ],
 };
 
-function FocusCarousel({ items }) {
-  const [active, setActive] = useState(0);
-  const trackRef = useRef(null);
-  const cardRefs = useRef([]);
+// Stagger container for the branch cards
+const container = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.06 },
+  },
+};
 
-  const scrollToIndex = useCallback((index) => {
-    const clamped = Math.max(0, Math.min(index, items.length - 1));
-    const card = cardRefs.current[clamped];
-    if (!card) return;
-    card.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
-    setActive(clamped);
-  }, [items.length]);
-
-  useEffect(() => {
-    setActive(0);
-    const track = trackRef.current;
-    if (track) track.scrollTo({ left: 0 });
-  }, [items]);
-
-  // Still track which card is nearest center, just for the dot indicator —
-  // no scale/opacity changes are applied anymore.
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    let raf;
-
-    const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const trackCenter = track.scrollLeft + track.clientWidth / 2;
-        let closest = 0;
-        let closestDist = Infinity;
-        cardRefs.current.forEach((card, i) => {
-          if (!card) return;
-          const cardCenter = card.offsetLeft + card.clientWidth / 2;
-          const dist = Math.abs(cardCenter - trackCenter);
-          if (dist < closestDist) {
-            closestDist = dist;
-            closest = i;
-          }
-        });
-        setActive(closest);
-      });
-    };
-
-    track.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => {
-      track.removeEventListener("scroll", onScroll);
-      cancelAnimationFrame(raf);
-    };
-  }, [items]);
-
-  return (
-    <div className="relative">
-      <div
-        ref={trackRef}
-        onWheel={(event) => {
-          if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
-            event.preventDefault();
-            event.currentTarget.scrollLeft += event.deltaY;
-          }
-        }}
-        className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-4 pl-[2%] pr-[10%] [-ms-overflow-style:none] [scrollbar-width:none] sm:pl-[4%] sm:pr-[10%] lg:pl-[6%] [&::-webkit-scrollbar]:hidden"
-      >
-        {items.map((campus, i) => (
-          <div
-            key={i}
-            ref={(el) => (cardRefs.current[i] = el)}
-            onClick={() => i !== active && scrollToIndex(i)}
-            className="group relative flex h-96 w-[78%] shrink-0 cursor-pointer snap-center flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white text-left dark:border-neutral-800 dark:bg-neutral-900 sm:w-[46%] lg:w-[28%]"
-          >
-            {/* Photo — always shrunk on mobile, shrinks on hover for sm+ */}
-            <div className="relative h-[70%] w-full shrink-0 overflow-hidden transition-[height] duration-500 ease-out sm:h-full sm:group-hover:h-[70%]">
-              <img
-                src={campus.image}
-                alt={campus.name}
-                className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-              />
-              {/* Overlay text — only shown on desktop's resting (non-hover) state */}
-              <div className="absolute inset-0 hidden bg-gradient-to-t from-black/80 via-black/20 to-transparent sm:block sm:opacity-100 sm:transition-opacity sm:duration-300 sm:group-hover:opacity-0" />
-              <div className="absolute bottom-0 left-0 right-0 hidden p-4 sm:block sm:opacity-100 sm:transition-opacity sm:duration-200 sm:group-hover:opacity-0">
-                <p className="text-sm font-semibold text-white">{campus.name}</p>
-                <div className="mt-1 flex items-center gap-1.5 text-xs text-white/80">
-                  <MapPin size={12} />
-                  <span>{campus.location}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Info panel — always visible on mobile, revealed on hover for sm+ */}
-            <div className="flex flex-1 flex-col justify-between overflow-hidden px-5 py-4 opacity-100 transition-opacity duration-300 sm:opacity-0 sm:delay-0 sm:group-hover:opacity-100 sm:group-hover:delay-150">
-              <div>
-                <p className="text-base font-semibold text-neutral-900 dark:text-white">
-                  {campus.name}
-                </p>
-                <div className="mt-1.5 flex items-center gap-1.5 text-sm text-neutral-500 dark:text-neutral-400">
-                  <MapPin size={13} />
-                  <span>{campus.location}</span>
-                </div>
-              </div>
-
-              <div className="mt-4 flex items-center justify-between">
-                <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 dark:bg-blue-500/10 dark:text-blue-400">
-                  {campus.tag}
-                </span>
-                {/* <button
-                  type="button"
-                  className="inline-flex items-center gap-1.5 rounded-full bg-neutral-900 px-4 py-2 text-xs font-medium text-white transition-colors hover:bg-blue-600 dark:bg-white dark:text-neutral-900"
-                >
-                  View campus
-                  <ArrowRight size={13} />
-                </button> */}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {items.length > 1 && (
-        <>
-          <button
-            type="button"
-            onClick={() => scrollToIndex(active - 1)}
-            disabled={active === 0}
-            aria-label="Previous campus"
-            className="absolute left-1 top-1/2 z-20 flex -translate-y-1/2 items-center justify-center rounded-full border border-neutral-200 bg-white p-2 disabled:opacity-30 dark:border-neutral-800 dark:bg-neutral-900 sm:flex"
-          >
-            <ChevronLeft size={16} className="text-neutral-600 dark:text-neutral-300" />
-          </button>
-          <button
-            type="button"
-            onClick={() => scrollToIndex(active + 1)}
-            disabled={active === items.length - 1}
-            aria-label="Next campus"
-            className="absolute right-1 top-1/2 z-20 flex -translate-y-1/2 items-center justify-center rounded-full border border-neutral-200 bg-white p-2 disabled:opacity-30 dark:border-neutral-800 dark:bg-neutral-900 sm:flex"
-          >
-            <ChevronRight size={16} className="text-neutral-600 dark:text-neutral-300" />
-          </button>
-
-          <div className="mt-5 flex justify-center gap-1.5">
-            {items.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => scrollToIndex(i)}
-                aria-label={`Go to campus ${i + 1}`}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === active ? "w-6 bg-blue-600" : "w-1.5 bg-neutral-300 dark:bg-neutral-700"
-                }`}
-              />
-            ))}
-          </div>
-        </>
-      )}
-    </div>
-  );
-}
+// Individual card entrance animation
+const item = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: "easeOut" } },
+};
 
 export default function Campuses() {
   const [activeTab, setActiveTab] = useState("Colleges");
+
   const tabs = Object.keys(campusData);
 
   return (
-    <section className="py-14 px-4 sm:px-8 sm:py-16 transition-colors">
-      <div className="max-w-7xl mx-auto">
+    <section className="px-4 py-14 transition-colors sm:px-8 sm:py-16">
+      <div className="mx-auto max-w-7xl">
+
+        {/* Heading */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={defaultViewport}
-          className="text-center mb-8"
+          className="mb-8 text-center"
         >
-          <span className="inline-block text-xs font-medium tracking-[0.25em] text-blue-600 dark:text-blue-400 uppercase mb-2">
+          <span className="mb-2 inline-block text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">
             Campuses
           </span>
+
           <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white sm:text-3xl">
             Our Branches
           </h2>
+
           <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
             Explore Ignite branches across Hyderabad
           </p>
         </motion.div>
 
+        {/* Tabs */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={defaultViewport}
-          className="flex justify-center gap-2 mb-10"
+          className="mb-10 flex justify-center gap-2"
         >
           {tabs.map((tab) => (
             <motion.button
               key={tab}
               whileTap={{ scale: 0.95 }}
               onClick={() => setActiveTab(tab)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer ${
+              className={`cursor-pointer rounded-full px-5 py-2 text-sm font-medium transition-colors ${
                 activeTab === tab
                   ? "bg-blue-600 text-white shadow-[0_4px_14px_rgba(37,99,235,0.3)]"
-                  : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-blue-50 dark:hover:bg-blue-500/10 hover:text-blue-600"
+                  : "bg-neutral-100 text-neutral-600 hover:bg-blue-50 hover:text-blue-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-blue-500/10"
               }`}
             >
               {tab}
@@ -226,7 +134,48 @@ export default function Campuses() {
           ))}
         </motion.div>
 
-        <FocusCarousel key={activeTab} items={campusData[activeTab]} />
+        {/* =====================================================
+            CARDS / CAROUSEL COMMENTED OUT
+            =====================================================
+
+        <FocusCarousel
+          key={activeTab}
+          items={campusData[activeTab]}
+        />
+
+        ===================================================== */}
+
+        {/* Branch Cards */}
+        <motion.div
+          key={activeTab}
+          variants={container}
+          initial="hidden"
+          animate="visible"
+          className="flex flex-wrap justify-center gap-3"
+        >
+          {campusData[activeTab].map((campus) => (
+            <motion.div
+              key={campus.name}
+              variants={item}
+              whileHover={{ y: -3 }}
+              className="group flex w-full items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3.5 shadow-sm transition-all hover:border-blue-200 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-blue-500/30 sm:w-[calc(50%-0.375rem)] lg:w-[calc(33.333%-0.5rem)]"
+            >
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white dark:bg-blue-500/10 dark:text-blue-400">
+                <MapPin size={16} strokeWidth={2.25} />
+              </span>
+
+              <div className="min-w-0">
+                <p className="truncate text-sm font-semibold text-neutral-900 transition-colors group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
+                  {campus.name}
+                </p>
+                <p className="truncate text-xs text-neutral-500 dark:text-neutral-400">
+                  {campus.location}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
       </div>
     </section>
   );
