@@ -22,10 +22,10 @@ const eventsData = [
     description:
       "A vibrant evening of performances, felicitations, and cultural showcases celebrating the achievements of our students over the year.",
     images: [
-      "/assets/images/optimized/3X7A3707.webp",
+      "/assets/images/events/Udbhava/3X7A3707.webp",
       "/assets/images/events/Udbhava/BF6C8691.webp",
       "/assets/images/events/Vybhava/ARM02900.webp",
-      "/assets/images/optimized/VIJ01873.webp",
+      "/assets/images/events/ADVAITHA/VIJ01873.webp",
     ],
   },
   {
@@ -37,9 +37,9 @@ const eventsData = [
     description:
       "Students competed across athletics, cricket, and volleyball in a day full of energy, teamwork, and school spirit.",
     images: [
-      "/assets/images/optimized/sports4.webp",
-      "/assets/images/optimized/DSC08103.webp",
-      "/assets/images/optimized/sports2.webp",
+      "/assets/images/events/sports/sports4.webp",
+      "/assets/images/events/Sports Prize/DSC08103.webp",
+      "/assets/images/events/sports/sports2.webp",
       "/assets/images/events/sports/sports5.webp",
     ],
   },
@@ -53,9 +53,9 @@ const eventsData = [
       "Newly elected student council members were sworn in, marking the start of a year of leadership and responsibility.",
     images: [
       "/assets/images/events/falicitates_with_awards/iphone 2025/M Jagan Mohan Reddy3.webp",
-      "/assets/images/optimized/Neetu-Abhishek.webp",
+      "/assets/images/events/falicitates_with_awards/iphone 2025/Neetu Abhishek.webp",
       "/assets/images/events/Vybhava/DSC01917.webp",
-      "/assets/images/optimized/PRA00835.webp",
+      "/assets/images/events/ADVAITHA/PRA00835.webp",
     ],
   },
 ];

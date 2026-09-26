@@ -4110,8 +4110,7 @@ const newestGalleryImages = newestAlbums.map((album) => ({
 }));
 
 export const optimizedEventImage = (src) => {
-  if (!src?.startsWith(`${eventBase}/`)) return src;
-  return src.replace(`${eventBase}/`, "/assets/images/optimized-events/");
+  return src;
 };
 
 const withOptimizedImages = (album) => ({

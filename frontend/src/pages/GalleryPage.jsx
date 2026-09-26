@@ -9,10 +9,12 @@ import {
   Clock3,
   Footprints,
   GlassWater,
+  GraduationCap,
   Heart,
   Images,
   Leaf,
   MapPin,
+  Music,
   Play,
   ShieldCheck,
   Sparkles,
@@ -66,6 +68,138 @@ const heroSlides = [
 const recentPrograms = [
   {
     image:
+      optimizedEventImage("/assets/images/events/Teachers Day/teachers_day_1.webp"),
+    category: "Teachers' Day",
+    date: "September 5, 2025",
+    title: "Teachers' Day: Honoring Our Mentors & Guides",
+    description:
+      "Students celebrated their educators with heartfelt gratitude, joyful performances, and memorable moments honoring those who inspire everyday excellence.",
+    icon: GraduationCap,
+    color: "indigo",
+    path: "/gallery/photos/teachers-day",
+  },
+  {
+    image:
+      optimizedEventImage("/assets/images/events/ganesh festival/ganesh_chathurthi_1.webp"),
+    category: "Ganesh Festival",
+    date: "September 2025",
+    title: "Ganesh Festival: Devotion, Unity & Festivities",
+    description:
+      "Grand campus celebration bringing students and faculty together in auspicious rituals, creative decorations, and vibrant community festivity.",
+    icon: Sparkles,
+    color: "yellow",
+    path: "/gallery/photos/ganesh-festival",
+  },
+  {
+    image:
+      optimizedEventImage("/assets/images/events/INDEPENDENCE DAY/independence_day_1.webp"),
+    category: "Independence Day",
+    date: "August 15, 2025",
+    title: "Independence Day: Saluting the Nation with Pride",
+    description:
+      "Students and staff gathered to mark India's Independence Day with ceremonial flag hoisting, patriotic songs, and cultural presentations.",
+    icon: Award,
+    color: "orange",
+    path: "/gallery/photos/independence-day",
+  },
+  {
+    image:
+      optimizedEventImage("/assets/images/events/KRISHNA ASTAMI/krishnastamai_1.webp"),
+    category: "Krishna Ashtami",
+    date: "August 2025",
+    title: "Krishna Ashtami: A Joyful Cultural Celebration",
+    description:
+      "A colorful celebration with traditional attire, lively cultural enactments, and devotional music celebrating the spirit of Janmashtami.",
+    icon: Sparkles,
+    color: "gold",
+    path: "/gallery/photos/krishna-ashtami",
+  },
+  {
+    image:
+      optimizedEventImage("/assets/images/events/Investiture Ceremony/investiture_ceremony_1.webp"),
+    category: "Leadership",
+    date: "July 2025",
+    title: "Investiture Ceremony: Empowering Future Leaders",
+    description:
+      "The student council was formally inducted, taking their solemn pledge of leadership, discipline, and dedicated service to the school community.",
+    icon: Trophy,
+    color: "blue",
+    path: "/gallery/photos/investiture-ceremony",
+  },
+  {
+    image:
+      optimizedEventImage("/assets/images/events/Bonalu/bonalu_1.webp"),
+    category: "Bonalu Festival",
+    date: "July 2025",
+    title: "Bonalu Celebration: Colors of Tradition & Culture",
+    description:
+      "An exuberant cultural festival honoring Telangana's rich heritage with traditional dress, music, and enthusiastic community participation.",
+    icon: Heart,
+    color: "rose",
+    path: "/gallery/photos/bonalu",
+  },
+  {
+    image:
+      optimizedEventImage("/assets/images/events/SIDs FARM/sid's_farm_1.webp"),
+    category: "Field Visit",
+    date: "2025",
+    title: "SIDs Farm Visit: Experiential Learning in Nature",
+    description:
+      "An enriching educational excursion where students explored sustainable agriculture, dairy production, and environmental harmony firsthand.",
+    icon: Leaf,
+    color: "green",
+    path: "/gallery/photos/sids-farm",
+  },
+  {
+    image:
+      optimizedEventImage("/assets/images/events/BIRLA PLANETARIUM /birla_planetarium_1.webp"),
+    category: "Science Excursion",
+    date: "2025",
+    title: "Birla Planetarium: Exploring Science & the Cosmos",
+    description:
+      "Students embarked on an immersive cosmic journey, discovering astronomy, celestial science, and planetary wonders at the planetarium.",
+    icon: Sun,
+    color: "purple",
+    path: "/gallery/photos/birla-planetarium",
+  },
+  {
+    image:
+      optimizedEventImage("/assets/images/events/Udbhava/3X7A3494.webp"),
+    category: "Cultural Fest",
+    date: "March 20, 2025",
+    title: "Udbhava 2025: A Celebration of Beginnings",
+    description:
+      "A vibrant gathering filled with energy, artistic expression, and student performances marking a memorable showcase of culture and community.",
+    icon: Sparkles,
+    color: "blue",
+    path: "/gallery/photos/udbhava",
+  },
+  {
+    image:
+      optimizedEventImage("/assets/images/events/Ullaas/_NNR7439.webp"),
+    category: "Youth Festival",
+    date: "February 14, 2025",
+    title: "Ullas 2025: Joy in Every Moment",
+    description:
+      "An evening of music, dance, and celebration where students came together to showcase creative talent and shared school spirit.",
+    icon: Music,
+    color: "amber",
+    path: "/gallery/photos/ullaas",
+  },
+  {
+    image:
+      optimizedEventImage("/assets/images/events/Vybhava/ARM02891.webp"),
+    category: "Cultural Showcase",
+    date: "January 28, 2025",
+    title: "Vybhava 2025: A Celebration of Expression",
+    description:
+      "A lively celebration of creativity, culture, and student talent, bringing together theatrical performances and artistic expression.",
+    icon: Award,
+    color: "sky",
+    path: "/gallery/photos/vybhava",
+  },
+  {
+    image:
       optimizedEventImage("/assets/images/events/Plantationrun/plantation7.webp"),
     category: "Plantation Run",
     date: "April 11, 2025",
@@ -74,19 +208,19 @@ const recentPrograms = [
       "Students came together for an energetic plantation run, combining fitness, teamwork, and a shared commitment to creating a greener and healthier environment.",
     icon: Leaf,
     color: "green",
-    path:'gallery/photos/plantationrun',
+    path: "/gallery/photos/plantationrun",
   },
   {
     image:
       optimizedEventImage("/assets/images/events/buttermik/ButterMilk2.webp"),
-    category: "Buttermilk Distribution",
+    category: "Community Outreach",
     date: "April 11, 2025",
     title: "Refreshing Initiative: Buttermilk Distribution Drive",
     description:
       "A special buttermilk distribution drive was organized to provide refreshment and hydration, spreading care and positivity among students and the community.",
     icon: GlassWater,
     color: "yellow",
-    path:'gallery/photos/buttermilk',
+    path: "/gallery/photos/buttermilk",
   },
   {
     image:
@@ -98,7 +232,7 @@ const recentPrograms = [
       "Students and faculty came together for a rejuvenating yoga session, promoting mindfulness, flexibility, inner peace, and a healthy lifestyle.",
     icon: Heart,
     color: "purple",
-    path:'gallery/photos/yoga',
+    path: "/gallery/photos/yoga",
   },
   {
     image:
@@ -110,19 +244,19 @@ const recentPrograms = [
       "Outstanding achievements were celebrated through an award felicitation ceremony, recognizing the dedication, talent, and accomplishments of students and achievers.",
     icon: Award,
     color: "gold",
-    path:'gallery/photos/falicitates-with-awards',
+    path: "/gallery/photos/falicitates-with-awards",
   },
   {
     image:
       optimizedEventImage("/assets/images/events/orphanage/orphanage1.webp"),
-    category: "Orphanage Visit",
+    category: "Community Care",
     date: "2025",
     title: "Sharing Happiness: Food Donation to Orphanage",
     description:
       "Students came together to donate food and essentials to an orphanage, spreading kindness, care, and compassion while supporting those in need.",
     icon: Heart,
     color: "orange",
-    path:'gallery/photos/orphanage',
+    path: "/gallery/photos/orphanage",
   },
   {
     image:
@@ -134,7 +268,7 @@ const recentPrograms = [
       "A sanitization drive was conducted to promote hygiene, cleanliness, and a healthy environment, encouraging everyone to follow safe and responsible practices.",
     icon: ShieldCheck,
     color: "green",
-    path:'gallery/photos/sanitizer-distribution',
+    path: "/gallery/photos/sanitizer-distribution",
   },
   {
     image:
@@ -146,7 +280,7 @@ const recentPrograms = [
       "Students participated in the Swachh Run, spreading awareness about cleanliness, environmental responsibility, and the importance of building a healthier and cleaner society.",
     icon: Footprints,
     color: "green",
-    path:'gallery/photos/swatch-run',
+    path: "/gallery/photos/swatch-run",
   },
   {
     image:
@@ -158,7 +292,7 @@ const recentPrograms = [
       "Students participated in an engaging summer camp filled with creative activities, skill development, teamwork, and memorable learning experiences.",
     icon: Sun,
     color: "yellow",
-    path:'gallery/photos/summer-camp',
+    path: "/gallery/photos/summer-camp",
   },
   {
     image:
@@ -170,7 +304,7 @@ const recentPrograms = [
       "Students showcased their athletic skills and competitive spirit through various sports events, promoting teamwork, discipline, fitness, and sportsmanship.",
     icon: Trophy,
     color: "blue",
-    path:'gallery/photos/sports-meet',
+    path: "/gallery/photos/sports-meet",
   },
 ];
 
@@ -179,8 +313,13 @@ const colorStyles = {
   amber: "bg-amber-100 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300",
   sky: "bg-sky-100 text-sky-700 dark:bg-sky-950/40 dark:text-sky-300",
   emerald: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300",
+  green: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300",
   rose: "bg-rose-100 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300",
   indigo: "bg-indigo-100 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300",
+  purple: "bg-purple-100 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300",
+  yellow: "bg-amber-100 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300",
+  gold: "bg-amber-100 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300",
+  orange: "bg-orange-100 text-orange-700 dark:bg-orange-950/40 dark:text-orange-300",
 };
 
 function GalleryHero() {

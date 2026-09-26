@@ -29,7 +29,7 @@ const defaultCards = [
     category: "Voices",
     title: "Testimonials",
     subtitle: "From students & parents",
-    image: "/assets/images/optimized/Neetu-Abhishek.webp",
+    image: "/assets/images/events/falicitates_with_awards/iphone 2025/Neetu Abhishek.webp",
     href: "/about/testimonials",
   },
 ];
