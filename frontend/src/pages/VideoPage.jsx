@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { RouteLink } from "../router/BrowserRouter";
 import { ArrowLeft, Play, X } from "lucide-react";
 
@@ -27,17 +27,22 @@ const allVideos = [
 ];
 
 function VideoModal({ video, onClose }) {
+  const videoRef = useRef(null);
+
   useEffect(() => {
     function onKeyDown(event) {
       if (event.key === "Escape") onClose();
     }
     document.addEventListener("keydown", onKeyDown);
     document.body.style.overflow = "hidden";
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
     return () => {
       document.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = "";
     };
-  }, [onClose]);
+  }, [onClose, video]);
 
   return (
     <div className="fixed inset-0 z-150 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm" onClick={onClose}>
@@ -51,7 +56,15 @@ function VideoModal({ video, onClose }) {
           <X size={16} />
         </button>
         <div className="aspect-video w-full bg-black">
-          <video src={video.src} className="h-full w-full object-contain" controls autoPlay playsInline preload="auto" />
+          <video
+            ref={videoRef}
+            src={encodeURI(video.src)}
+            className="h-full w-full object-contain"
+            controls
+            autoPlay
+            playsInline
+            preload="auto"
+          />
         </div>
         <div className="p-5 text-white">
           <p className="text-xs font-black uppercase tracking-[0.2em] text-orange-400">Video Preview</p>
@@ -71,7 +84,7 @@ function VideoCard({ video, onOpen }) {
     >
       <div className="relative aspect-video">
         <video
-          src={video.src}
+          src={`${encodeURI(video.src)}#t=0.001`}
           className="h-full w-full object-cover"
           muted
           loop

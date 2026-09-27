@@ -1,9 +1,9 @@
 import { eases, transitions } from "./transitions";
 
 // ─── Viewport defaults ───────────────────────────────────────────────────────
-export const defaultViewport = { once: true, amount: 0.12 };
-export const lazyViewport = { once: true, amount: 0.08 };
-export const earlyViewport = { once: true, amount: 0.05 };
+export const defaultViewport = { once: true, amount: "some" };
+export const lazyViewport = { once: true, amount: "some" };
+export const earlyViewport = { once: true, amount: "some" };
 
 // ─── Fade variants ───────────────────────────────────────────────────────────
 export const fadeIn = {

@@ -7,7 +7,7 @@ import {
   Sun,
   X,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../../context/ThemeContext";
 import { RouteLink, useLocation } from "../../router/BrowserRouter";
@@ -377,6 +377,8 @@ function DesktopMenuItem({
   setOpenMenu,
   setHoverPreviewHref,
   selectedPreviewByMenu,
+  onClose,
+  suppressHoverRef,
 }) {
   const active = isActivePath(pathname, item.href);
   const hasChildren = Boolean(item.children?.length);
@@ -386,6 +388,9 @@ function DesktopMenuItem({
     <li
       className="relative"
       onMouseEnter={() => {
+        if (suppressHoverRef?.current && Date.now() < suppressHoverRef.current) {
+          return;
+        }
         if (hasChildren) {
           setOpenMenu(item.href);
           setHoverPreviewHref(
@@ -400,8 +405,12 @@ function DesktopMenuItem({
       <RouteLink
         to={item.href}
         onClick={() => {
+          if (suppressHoverRef) {
+            suppressHoverRef.current = Date.now() + 600;
+          }
           setOpenMenu(null);
           setHoverPreviewHref(null);
+          onClose?.();
         }}
         style={{ isolation: "isolate" }}
         className={`relative flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition ${
@@ -439,10 +448,22 @@ function DesktopSubMenuItem({
   menuHref,
   setHoverPreviewHref,
   setSelectedPreviewByMenu,
+  onClose,
+  suppressHoverRef,
 }) {
   const [subOpen, setSubOpen] = useState(false);
   const active = isActivePath(pathname, item.href);
   const hasChildren = Boolean(item.children?.length);
+
+  const handleClick = () => {
+    if (suppressHoverRef) {
+      suppressHoverRef.current = Date.now() + 600;
+    }
+    setOpenMenu(null);
+    setHoverPreviewHref(null);
+    setSubOpen(false);
+    onClose?.();
+  };
 
   return (
     <div
@@ -457,22 +478,14 @@ function DesktopSubMenuItem({
     >
       <RouteLink
         to={item.href}
-        onClick={() => {
-          setOpenMenu(null);
-          setHoverPreviewHref(item.href);
-          setSelectedPreviewByMenu((current) => ({
-            ...current,
-            [menuHref]: item.href,
-          }));
-          setSubOpen(false);
-        }}
+        onClick={handleClick}
         className={`flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-semibold transition ${
           active
             ? "bg-blue-600 text-white shadow-[0_10px_24px_rgba(37,99,235,0.24)]"
             : "text-neutral-800 hover:text-blue-700 dark:text-white dark:hover:text-blue-300"
         }`}
       >
-        <span>{item.label} </span>
+        <span>{item.label}</span>
 
         {hasChildren ? (
           <ChevronDown
@@ -511,6 +524,8 @@ function DesktopSubMenuItem({
                   menuHref={menuHref}
                   setHoverPreviewHref={setHoverPreviewHref}
                   setSelectedPreviewByMenu={setSelectedPreviewByMenu}
+                  onClose={onClose}
+                  suppressHoverRef={suppressHoverRef}
                 />
               ))}
             </div>
@@ -521,20 +536,28 @@ function DesktopSubMenuItem({
   );
 }
 
-function MobileMenuItem({ item, pathname, level = 0 }) {
+function MobileMenuItem({ item, pathname, level = 0, onClose }) {
   const active = isActivePath(pathname, item.href);
   const [open, setOpen] = useState(false);
+
+  const handleLinkClick = () => {
+    onClose?.();
+  };
 
   return (
     <li>
       <div
-      className={`flex items-center justify-between rounded-2xl px-4 py-2.5 text-sm font-medium transition ${
+        className={`flex items-center justify-between rounded-2xl px-4 py-2.5 text-sm font-medium transition ${
           active
             ? "bg-blue-600 text-white"
             : "text-neutral-700 hover:bg-blue-50 hover:text-blue-700 dark:text-neutral-200 dark:hover:bg-blue-500/10 dark:hover:text-blue-300"
         } ${level === 1 ? "pl-6" : level >= 2 ? "pl-8" : ""}`}
       >
-        <RouteLink to={item.href} className="flex-1">
+        <RouteLink
+          to={item.href}
+          onClick={handleLinkClick}
+          className="flex-1 py-1"
+        >
           <span>{item.label}</span>
         </RouteLink>
 
@@ -546,7 +569,7 @@ function MobileMenuItem({ item, pathname, level = 0 }) {
               event.stopPropagation();
               setOpen((value) => !value);
             }}
-            className="ml-3 inline-flex h-7 w-7 items-center justify-center rounded-full bg-blue-100 text-blue-700 dark:bg-blue-500/10 dark:text-blue-300"
+            className="ml-3 inline-flex h-7 w-7 items-center justify-center rounded-full bg-blue-100 text-blue-700 dark:bg-blue-500/10 dark:text-blue-300 cursor-pointer"
             aria-label={open ? `Collapse ${item.label}` : `Expand ${item.label}`}
           >
             <ChevronRight
@@ -574,6 +597,7 @@ function MobileMenuItem({ item, pathname, level = 0 }) {
                 item={child}
                 pathname={pathname}
                 level={level + 1}
+                onClose={onClose}
               />
             ))}
           </motion.ul>
@@ -590,6 +614,43 @@ export default function Navbar() {
   const [hoverPreviewHref, setHoverPreviewHref] = useState(null);
   const [selectedPreviewByMenu, setSelectedPreviewByMenu] = useState({});
   const { pathname } = useLocation();
+  const navRef = useRef(null);
+  const suppressHoverRef = useRef(0);
+
+  const closeAllMenus = () => {
+    setOpen(false);
+    setOpenMenu(null);
+    setHoverPreviewHref(null);
+  };
+
+  // Close menus when route/pathname changes
+  useEffect(() => {
+    closeAllMenus();
+  }, [pathname]);
+
+  // Click outside to close menus, and Escape key
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        closeAllMenus();
+      }
+    };
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        closeAllMenus();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside, { passive: true });
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   // Scroll-driven resize state only — no other behavior is affected.
   // false = at top of page: full width, square corners, flush to top.
@@ -614,6 +675,7 @@ export default function Navbar() {
 
   return (
     <header
+      ref={navRef}
       className={`fixed z-50 transition-all duration-300 ease-out ${
         scrolled
           ? "inset-x-4 top-3 md:inset-x-6 lg:inset-x-10"
@@ -661,11 +723,7 @@ export default function Navbar() {
           <RouteLink
             to="/"
             className="flex shrink-0 items-center transition-transform duration-200 hover:scale-105 active:scale-95"
-            onClick={() => {
-              setOpen(false);
-              setOpenMenu(null);
-              setHoverPreviewHref(null);
-            }}
+            onClick={closeAllMenus}
           >
             <img
               src="/favicon_io (1)/android-chrome-512x512.png"
@@ -685,6 +743,8 @@ export default function Navbar() {
                   setOpenMenu={setOpenMenu}
                   setHoverPreviewHref={setHoverPreviewHref}
                   selectedPreviewByMenu={selectedPreviewByMenu}
+                  onClose={closeAllMenus}
+                  suppressHoverRef={suppressHoverRef}
                 />
               ))}
             </ul>
@@ -772,6 +832,8 @@ export default function Navbar() {
                         menuHref={openMenu}
                         setHoverPreviewHref={setHoverPreviewHref}
                         setSelectedPreviewByMenu={setSelectedPreviewByMenu}
+                        onClose={closeAllMenus}
+                        suppressHoverRef={suppressHoverRef}
                       />
                     ))}
                   </div>
@@ -811,7 +873,12 @@ export default function Navbar() {
           >
             <ul className="space-y-1">
               {navItems.map((item) => (
-                <MobileMenuItem key={item.label} item={item} pathname={pathname} />
+                <MobileMenuItem
+                  key={item.label}
+                  item={item}
+                  pathname={pathname}
+                  onClose={closeAllMenus}
+                />
               ))}
             </ul>
           </motion.nav>

@@ -497,6 +497,9 @@ function ProgramCard({ program }) {
   return (
     <motion.article
       variants={cardReveal}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: "some" }}
       whileHover={{ y: -6, transition: { duration: 0.25 } }}
       className="group overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-neutral-100 transition duration-300 hover:shadow-xl dark:bg-neutral-900 dark:ring-neutral-800"
     >
@@ -548,7 +551,7 @@ function RecentPrograms() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={defaultViewport}
+          viewport={{ once: true, amount: "some" }}
           className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end"
         >
           <div>
@@ -581,7 +584,7 @@ function RecentPrograms() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={defaultViewport}
+          viewport={{ once: true, amount: "some" }}
           className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
           {recentPrograms.map((program) => (

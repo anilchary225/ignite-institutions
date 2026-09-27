@@ -381,7 +381,7 @@ function EventTypes() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={defaultViewport}
+          viewport={{ once: true, amount: "some" }}
           className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
         >
           {eventTypes.map((et) => {
@@ -391,6 +391,9 @@ function EventTypes() {
               <motion.div
                 key={et.label}
                 variants={cardReveal}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: "some" }}
                 whileHover={{ y: -6, transition: { duration: 0.25 } }}
                 className="group overflow-hidden rounded-3xl bg-white ring-1 ring-neutral-100 shadow-sm transition hover:shadow-xl dark:bg-neutral-900 dark:ring-neutral-800"
               >
@@ -641,7 +644,7 @@ function AboutIgnite() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={defaultViewport}
+          viewport={{ once: true, amount: "some" }}
           className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
         >
           {pillars.map((p) => {
@@ -651,6 +654,9 @@ function AboutIgnite() {
               <motion.div
                 key={p.title}
                 variants={cardReveal}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: "some" }}
                 whileHover={{ y: -6, transition: { duration: 0.25 } }}
                 className="flex flex-col gap-4 rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm hover:border-blue-500 hover:shadow-2xl dark:border-neutral-800 dark:bg-neutral-900 transition"
               >

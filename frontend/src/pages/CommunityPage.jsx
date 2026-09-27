@@ -8,7 +8,7 @@ export default function CommunityPageRoute() {
       initial="hidden"
       animate="visible"
       variants={pageVariants}
-      className="min-h-screen pt-14 bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white"
+      className="min-h-screen pt-20 sm:pt-24 bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white"
     >
       <CommunityPage />
     </motion.div>

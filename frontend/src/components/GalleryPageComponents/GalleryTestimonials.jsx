@@ -129,12 +129,13 @@ function StoryPanel({ story, onPrevious, onNext, sectionLabel }) {
         <div className="relative overflow-hidden rounded-b-[2rem] rounded-t-[0] bg-neutral-50 p-6 dark:bg-neutral-800 lg:rounded-l-none lg:rounded-r-[2rem] lg:p-8">
           <video
             key={story.video}
+            src={story.video}
             className="mb-6 aspect-video w-full rounded-2xl bg-neutral-950 object-cover shadow-lg"
             controls
             preload="metadata"
             playsInline
           >
-            <source src={story.video} type="video/webm" />
+            <source src={story.video} type={story.video.endsWith(".webm") ? "video/webm" : "video/mp4"} />
             Your browser does not support video playback.
           </video>
           <div className="flex items-start gap-3 text-neutral-300 dark:text-neutral-600">
@@ -183,13 +184,14 @@ function VideoTile({ story }) {
     <article className="group overflow-hidden rounded-[1.75rem] bg-white shadow-sm ring-1 ring-neutral-100 transition hover:-translate-y-1 hover:shadow-xl dark:bg-neutral-900 dark:ring-white/10">
       <div className="relative aspect-[4/3] overflow-hidden">
         <video
+          src={story.video}
           className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
           controls
           preload="metadata"
           playsInline
           aria-label={`${story.name} testimonial`}
         >
-          <source src={story.video} type="video/webm" />
+          <source src={story.video} type={story.video.endsWith(".webm") ? "video/webm" : "video/mp4"} />
           Your browser does not support video playback.
         </video>
         <div className="absolute inset-0 bg-linear-to-t from-neutral-950/85 via-neutral-950/15 to-transparent" />

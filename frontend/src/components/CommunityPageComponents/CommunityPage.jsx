@@ -231,109 +231,146 @@ function TopicSection({ topic, index, total }) {
       initial="hidden"
       whileInView="visible"
       viewport={defaultViewport}
-      className="scroll-mt-24 rounded-4xl border border-neutral-100 bg-white p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)] dark:border-neutral-700 dark:bg-neutral-900 sm:p-8 lg:p-10"
+      className="scroll-mt-24 rounded-3xl border border-neutral-200/80 bg-white p-4.5 shadow-[0_12px_40px_rgba(15,23,42,0.06)] dark:border-neutral-800 dark:bg-neutral-900 sm:rounded-4xl sm:p-7 lg:p-9"
     >
-      <div className="flex justify-between gap-6 sm:flex-col lg:flex-row sm:items-start">
-        <div className="max-w-1/2">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-orange-500 text-white shadow-sm shadow-orange-500/20">
-              <Icon size={18} />
-            </span>
-            <span className="rounded-full bg-orange-50 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-orange-600 dark:bg-orange-500/10 dark:text-orange-300">
-              {topic.eyebrow}
-            </span>
-            <span className="text-xs font-semibold uppercase tracking-[0.22em] text-neutral-400">
-              {index + 1} / {total}
-            </span>
+      {/* Top Header Badge */}
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex items-center gap-2.5 sm:gap-3">
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-orange-500 to-amber-500 text-white shadow-sm shadow-orange-500/25 sm:h-11 sm:w-11">
+            <Icon size={18} />
+          </span>
+          <span className="rounded-full bg-orange-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-orange-600 dark:bg-orange-500/10 dark:text-orange-300 sm:text-xs">
+            {topic.eyebrow}
+          </span>
+        </div>
+        <span className="rounded-full bg-neutral-100 px-2.5 py-1 text-xs font-bold text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400">
+          {index + 1} of {total}
+        </span>
+      </div>
+
+      {/* Main Title & Lead */}
+      <div className="mt-4 sm:mt-5">
+        <h2 className="text-xl font-black tracking-tight text-neutral-900 dark:text-white sm:text-3xl lg:text-4xl leading-tight">
+          {topic.title}
+        </h2>
+        <p className="mt-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300 sm:text-base sm:leading-7 max-w-3xl">
+          {topic.summary}
+        </p>
+      </div>
+
+      {/* Main Content Layout */}
+      <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-8 lg:items-start">
+        {/* Left Side: Images on Mobile, Narrative & Highlights on all devices */}
+        <div className="flex flex-col gap-4 lg:col-span-7">
+          {/* Mobile Image Placement: Shown directly below title for instant engagement */}
+          <div className="block lg:hidden">
+            <motion.div
+              whileHover={{ scale: 1.01 }}
+              className="overflow-hidden rounded-2xl border border-neutral-200/80 shadow-xs dark:border-neutral-800"
+            >
+              <img
+                src={mainImage}
+                alt={topic.title}
+                className="h-52 w-full object-cover sm:h-72"
+                loading="lazy"
+              />
+            </motion.div>
+            {restImages.length > 0 && (
+              <div className="mt-2.5 grid grid-cols-2 gap-2.5">
+                {restImages.map((src, i) => (
+                  <div
+                    key={src}
+                    className="overflow-hidden rounded-xl border border-neutral-200/70 shadow-xs dark:border-neutral-800"
+                  >
+                    <img
+                      src={src}
+                      alt={`${topic.title} ${i + 2}`}
+                      className="h-28 w-full object-cover sm:h-36"
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
-          <h2 className="mt-5 max-w-2xl text-3xl font-extrabold tracking-tight text-neutral-900 dark:text-white sm:text-4xl">
-            {topic.title}
-          </h2>
-          <p className="mt-4 max-w-2xl text-base leading-8 text-neutral-600 dark:text-neutral-300">
-            {topic.summary}
-          </p>
-          <div className="mt-8 grid gap-4 sm:grid-cols-1">
+          {/* Narrative Paragraphs */}
+          <div className="space-y-3">
             {topic.paragraphs.map((paragraph) => (
-              <p
+              <div
                 key={paragraph}
-                className="rounded-[1.25rem] bg-neutral-50 p-4 text-sm leading-7 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-200"
+                className="rounded-2xl border border-neutral-100 bg-neutral-50/80 p-3.5 text-xs leading-relaxed text-neutral-700 dark:border-neutral-800/80 dark:bg-neutral-800/60 dark:text-neutral-200 sm:p-4 sm:text-sm sm:leading-7"
               >
                 {paragraph}
-              </p>
+              </div>
             ))}
           </div>
 
-          <div className="mt-8 grid gap-3 sm:grid-cols-3">
+          {/* Highlights */}
+          <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
             {topic.highlights.map((highlight) => (
-              <motion.div
+              <div
                 key={highlight}
-                whileHover={{ y: -2 }}
-                transition={{ duration: 0.2 }}
-                className="rounded-[1.25rem] border border-neutral-100 bg-neutral-50 p-4 text-sm leading-6 text-neutral-700 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 transition-shadow hover:shadow-sm"
+                className="flex items-center gap-2.5 rounded-xl border border-neutral-200/70 bg-white p-3 text-xs font-semibold leading-snug text-neutral-800 shadow-2xs dark:border-neutral-800 dark:bg-neutral-850 dark:text-neutral-200 sm:rounded-2xl sm:p-3.5 sm:text-sm"
               >
-                {highlight}
-              </motion.div>
+                <span className="h-2 w-2 shrink-0 rounded-full bg-orange-500" />
+                <span>{highlight}</span>
+              </div>
             ))}
           </div>
         </div>
 
-        <div className="mt-6">
+        {/* Right Side: Desktop Images */}
+        <div className="hidden lg:col-span-5 lg:block lg:sticky lg:top-28">
           <motion.div
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
-            className="overflow-hidden rounded-[1.25rem]"
+            whileHover={{ scale: 1.01 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden rounded-2xl border border-neutral-200/80 shadow-md dark:border-neutral-800"
           >
             <img
               src={mainImage}
               alt={topic.title}
-              className="h-66 w-full object-cover sm:h-90 transition-transform duration-500 hover:scale-105"
+              className="h-72 w-full object-cover transition-transform duration-500 hover:scale-105"
               loading="lazy"
             />
           </motion.div>
           {restImages.length > 0 && (
             <div className="mt-3 grid grid-cols-2 gap-3">
-              {restImages.map((src, i) => {
-                const label = topic.title + " " + (i + 2);
-                return (
-                  <motion.div
-                    key={src}
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.35, ease: "easeOut" }}
-                    className="overflow-hidden rounded-[1.25rem]"
-                  >
-                    <img
-                      src={src}
-                      alt={label}
-                      className="h-32 w-full object-cover sm:h-54 transition-transform duration-500 hover:scale-105"
-                      loading="lazy"
-                    />
-                  </motion.div>
-                );
-              })}
+              {restImages.map((src, i) => (
+                <motion.div
+                  key={src}
+                  whileHover={{ scale: 1.02 }}
+                  className="overflow-hidden rounded-xl border border-neutral-200/80 shadow-xs dark:border-neutral-800"
+                >
+                  <img
+                    src={src}
+                    alt={`${topic.title} ${i + 2}`}
+                    className="h-36 w-full object-cover transition-transform duration-500 hover:scale-105"
+                    loading="lazy"
+                  />
+                </motion.div>
+              ))}
             </div>
           )}
         </div>
       </div>
 
-      <p className="mt-8 border-l-2 border-orange-500 pl-4 text-sm italic text-neutral-500 dark:text-neutral-400">
-        &ldquo;{topic.quote}&rdquo;
-      </p>
+      {/* Quote Banner */}
+      <div className="mt-5 rounded-2xl border-l-4 border-orange-500 bg-orange-50/60 p-3.5 dark:bg-orange-950/20 sm:p-4">
+        <p className="text-xs italic text-neutral-700 dark:text-neutral-300 sm:text-sm">
+          &ldquo;{topic.quote}&rdquo;
+        </p>
+      </div>
 
-      <div className="mt-8">
-        <motion.div
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          className="inline-block"
+      {/* Action / Explore Link */}
+      <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <RouteLink
+          to={"/gallery?topic=" + topic.id}
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-neutral-950 px-5 py-3 text-xs font-bold text-white transition hover:bg-orange-500 dark:bg-white dark:text-neutral-950 dark:hover:bg-orange-400 sm:w-auto sm:text-sm"
         >
-          <RouteLink
-            to={"/gallery?topic=" + topic.id}
-            className="inline-flex items-center gap-2 rounded-full bg-neutral-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-orange-500 dark:bg-white dark:text-neutral-950 dark:hover:bg-orange-400 shadow-sm"
-          >
-            Explore Gallery
-            <ArrowRight size={16} />
-          </RouteLink>
-        </motion.div>
+          Explore Gallery
+          <ArrowRight size={15} />
+        </RouteLink>
       </div>
     </motion.section>
   );
@@ -341,22 +378,22 @@ function TopicSection({ topic, index, total }) {
 
 export default function CommunityPage() {
   return (
-    <section className="min-h-screen bg-white px-4 py-8 text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white sm:px-6 lg:px-8">
+    <section className="min-h-screen bg-white px-3.5 py-6 pb-28 text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-white sm:px-6 sm:py-8 sm:pb-20 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-8 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+        <div className="mb-6 grid gap-5 lg:grid-cols-[1.1fr_0.9fr] lg:items-end sm:mb-8 sm:gap-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="max-w-3xl"
           >
-            <p className="text-xs font-black uppercase tracking-[0.28em] text-orange-500">
+            <span className="inline-flex items-center rounded-full bg-orange-50 px-3 py-1 text-[11px] font-black uppercase tracking-[0.24em] text-orange-600 dark:bg-orange-500/10 dark:text-orange-300">
               Community
-            </p>
-            <h1 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
+            </span>
+            <h1 className="mt-3 text-2xl font-black tracking-tight sm:text-4xl lg:text-5xl leading-tight">
               Community initiatives that create real impact.
             </h1>
-            <p className="mt-4 max-w-2xl text-sm leading-7 text-neutral-600 dark:text-neutral-300 sm:text-base">
+            <p className="mt-2.5 max-w-2xl text-xs leading-relaxed text-neutral-600 dark:text-neutral-300 sm:text-sm sm:leading-7">
               A full overview of plantation runs, summer buttermilk drives, Swach Hyderabad efforts, sanitization support, orphan food donations, summer camp, sports meet, and experienced learning.
             </p>
           </motion.div>
@@ -365,50 +402,51 @@ export default function CommunityPage() {
             variants={staggerContainer(0.08, 0.1)}
             initial="hidden"
             animate="visible"
-            className="grid gap-3 sm:grid-cols-3 lg:justify-self-end"
+            className="grid grid-cols-3 gap-2 sm:gap-3 lg:justify-self-end w-full lg:w-auto"
           >
             <motion.div
               variants={scaleIn}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className="rounded-[1.25rem] bg-neutral-100 p-4 dark:bg-neutral-900 border border-neutral-200/50 dark:border-neutral-800"
+              whileHover={{ y: -3, transition: { duration: 0.2 } }}
+              className="rounded-2xl bg-neutral-100/80 p-3 text-center border border-neutral-200/60 dark:border-neutral-800 dark:bg-neutral-900 sm:p-4 sm:text-left"
             >
-              <p className="text-2xl font-extrabold text-neutral-900 dark:text-white">8</p>
-              <p className="mt-1 text-xs uppercase tracking-[0.2em] text-neutral-500">Programs</p>
+              <p className="text-xl font-extrabold text-orange-600 dark:text-orange-400 sm:text-2xl">8</p>
+              <p className="mt-0.5 text-[10px] font-bold uppercase tracking-wider text-neutral-500 sm:text-xs">Programs</p>
             </motion.div>
             <motion.div
               variants={scaleIn}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className="rounded-[1.25rem] bg-neutral-100 p-4 dark:bg-neutral-900 border border-neutral-200/50 dark:border-neutral-800"
+              whileHover={{ y: -3, transition: { duration: 0.2 } }}
+              className="rounded-2xl bg-neutral-100/80 p-3 text-center border border-neutral-200/60 dark:border-neutral-800 dark:bg-neutral-900 sm:p-4 sm:text-left"
             >
-              <p className="text-2xl font-extrabold text-neutral-900 dark:text-white">Gallery</p>
-              <p className="mt-1 text-xs uppercase tracking-[0.2em] text-neutral-500">Per section</p>
+              <p className="text-xl font-extrabold text-orange-600 dark:text-orange-400 sm:text-2xl">Gallery</p>
+              <p className="mt-0.5 text-[10px] font-bold uppercase tracking-wider text-neutral-500 sm:text-xs">Per section</p>
             </motion.div>
             <motion.div
               variants={scaleIn}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className="rounded-[1.25rem] bg-neutral-100 p-4 dark:bg-neutral-900 border border-neutral-200/50 dark:border-neutral-800"
+              whileHover={{ y: -3, transition: { duration: 0.2 } }}
+              className="rounded-2xl bg-neutral-100/80 p-3 text-center border border-neutral-200/60 dark:border-neutral-800 dark:bg-neutral-900 sm:p-4 sm:text-left"
             >
-              <p className="text-2xl font-extrabold text-neutral-900 dark:text-white">Real</p>
-              <p className="mt-1 text-xs uppercase tracking-[0.2em] text-neutral-500">Stories</p>
+              <p className="text-xl font-extrabold text-orange-600 dark:text-orange-400 sm:text-2xl">Real</p>
+              <p className="mt-0.5 text-[10px] font-bold uppercase tracking-wider text-neutral-500 sm:text-xs">Stories</p>
             </motion.div>
           </motion.div>
         </div>
 
+        {/* Swipeable Filter Nav on Mobile */}
         <motion.div
           variants={staggerContainer(0.03, 0.1)}
           initial="hidden"
           animate="visible"
-          className="mb-8 flex flex-wrap gap-2"
+          className="mb-6 flex gap-2 overflow-x-auto pb-2 -mx-3.5 px-3.5 sm:mx-0 sm:px-0 sm:flex-wrap sm:mb-8"
         >
           {communityTopics.map((topic) => {
             return (
               <motion.a
                 key={topic.id}
                 variants={fadeUp}
-                whileHover={{ scale: 1.05, y: -1 }}
+                whileHover={{ scale: 1.04, y: -1 }}
                 whileTap={{ scale: 0.96 }}
                 href={"#" + topic.id}
-                className="rounded-full border border-neutral-200 px-4 py-2 text-xs font-semibold text-neutral-600 transition hover:border-orange-300 hover:text-orange-600 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-orange-400 dark:hover:text-orange-300"
+                className="shrink-0 rounded-full border border-neutral-200/90 bg-neutral-50/70 px-3.5 py-1.5 text-xs font-bold text-neutral-700 transition hover:border-orange-400 hover:bg-orange-50 hover:text-orange-600 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:border-orange-400 dark:hover:text-orange-300"
               >
                 {topic.label}
               </motion.a>
@@ -416,7 +454,7 @@ export default function CommunityPage() {
           })}
         </motion.div>
 
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 sm:gap-8">
           {communityTopics.map((topic, index) => {
             return (
               <TopicSection

@@ -325,7 +325,7 @@ function HoverVideo({ src, className = "", onClick, poster }) {
   return (
     <video
       ref={videoRef}
-      src={src}
+      src={`${encodeURI(src)}#t=0.001`}
       poster={poster}
       className={className}
       muted
@@ -352,7 +352,7 @@ function AutoPlayVideo({ src, className = "", onClick }) {
   return (
     <video
       ref={videoRef}
-      src={src}
+      src={encodeURI(src)}
       className={className}
       muted
       loop
@@ -366,20 +366,25 @@ function AutoPlayVideo({ src, className = "", onClick }) {
 
 /* ─────────────────────────── MODAL ─────────────────────────── */
 
-/* ─────────────────────────── MODAL ─────────────────────────── */
-
 function VideoModal({ video, onClose }) {
+  const videoRef = useRef(null);
+
   useEffect(() => {
     function onKey(e) {
       if (e.key === "Escape") onClose();
     }
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
-  }, [onClose]);
+  }, [onClose, video]);
+
+  const videoSrc = video.thumb || video.src || "";
 
   return (
     <motion.div
@@ -410,9 +415,10 @@ function VideoModal({ video, onClose }) {
         </motion.button>
         <div className="relative aspect-video w-full bg-neutral-900">
           <video
+            ref={videoRef}
             key={video.id}
-            src={video.thumb}
-            className="h-full w-full object-cover"
+            src={encodeURI(videoSrc)}
+            className="h-full w-full object-contain"
             autoPlay
             controls
             playsInline
@@ -428,9 +434,9 @@ function VideoModal({ video, onClose }) {
             <p className="mt-2 text-sm leading-6 text-neutral-400">{video.description}</p>
           )}
           <div className="mt-4 flex flex-wrap gap-4 text-xs font-semibold text-neutral-500">
-            <span className="flex items-center gap-1.5"><Clock3 size={13} />{video.duration}</span>
-            <span className="flex items-center gap-1.5"><Eye size={13} />{video.views} views</span>
-            <span className="flex items-center gap-1.5"><CalendarDays size={13} />{video.date}</span>
+            {video.duration && <span className="flex items-center gap-1.5"><Clock3 size={13} />{video.duration}</span>}
+            {video.views && <span className="flex items-center gap-1.5"><Eye size={13} />{video.views} views</span>}
+            {video.date && <span className="flex items-center gap-1.5"><CalendarDays size={13} />{video.date}</span>}
           </div>
         </div>
       </motion.div>

@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, Check, MessageCircle, Phone, X } from "lucide-react";
+import { ArrowLeft, Check, ChevronRight, MessageCircle, Phone, X } from "lucide-react";
 import { useLocation } from "../router/BrowserRouter";
 import { RouteLink } from "../router/BrowserRouter";
 import { CONTACT_PHONE, COURSE_CATALOG, getCourse } from "../data/courseCatalog";
@@ -75,17 +75,124 @@ function CourseDialog({ dialog, onClose, onSelectCourse, onBackToChooser }) {
   return createPortal(
     <AnimatePresence>
       {dialog && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[10000] flex items-center justify-center bg-neutral-950/70 p-4 backdrop-blur-sm" onMouseDown={(event) => event.target === event.currentTarget && onClose()}>
-          <motion.section initial={{ opacity: 0, scale: 0.94, y: 16 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.94, y: 16 }} transition={{ type: "spring", stiffness: 320, damping: 27 }} role="dialog" aria-modal="true" aria-label="Course details" className={`w-full rounded-3xl bg-white p-5 shadow-2xl dark:bg-neutral-900 sm:p-7 ${isCourseChooser ? "max-w-3xl" : "max-h-[88vh] max-w-2xl overflow-y-auto"}`}>
-            <div className="flex items-start justify-between gap-4">
-              <div className="flex items-center gap-3"><img src="/logo-dark.webp" alt="Ignite" className="h-11 w-11 rounded-xl bg-neutral-950 object-contain p-1.5" /><div><p className="text-xs font-black uppercase tracking-[0.18em] text-blue-600">Ignite programmes</p><h2 className="mt-1 text-xl font-extrabold text-neutral-950 dark:text-white sm:text-2xl">{isCourseChooser ? "Available courses" : "Course details"}</h2></div></div>
-              <div className="flex shrink-0 gap-2">{canGoBack && <button type="button" onClick={onBackToChooser} className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-3 py-2 text-xs font-bold text-blue-700 transition hover:bg-blue-100 dark:bg-blue-950/40 dark:text-blue-300"><ArrowLeft size={15} /> Back</button>}<button type="button" onClick={onClose} aria-label="Close course details" className="grid h-10 w-10 place-items-center rounded-full bg-neutral-100 text-neutral-700 transition hover:bg-neutral-950 hover:text-white dark:bg-neutral-800 dark:text-neutral-200"><X size={19} /></button></div>
-            </div>
-            {isCourseChooser ? (
-              <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3">
-                {courses.map((course) => <div key={course.id} className="flex min-w-0 items-center justify-between gap-2 rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2.5 dark:border-neutral-700 dark:bg-neutral-800"><span className="text-sm font-bold text-neutral-800 dark:text-white">{course.title}</span><button type="button" onClick={() => onSelectCourse(course.id, dialog.courseIds)} className="shrink-0 rounded-lg bg-blue-600 px-2.5 py-1.5 text-xs font-bold text-white transition hover:bg-blue-700">More details</button></div>)}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[10000] flex items-center justify-center bg-neutral-950/70 p-3 sm:p-4 backdrop-blur-sm"
+          onMouseDown={(event) => event.target === event.currentTarget && onClose()}
+        >
+          <motion.section
+            initial={{ opacity: 0, scale: 0.94, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.94, y: 16 }}
+            transition={{ type: "spring", stiffness: 320, damping: 27 }}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Course details"
+            className={`flex max-h-[85vh] w-full flex-col overflow-hidden rounded-3xl bg-white p-4 shadow-2xl dark:bg-neutral-900 sm:p-6 ${
+              isCourseChooser ? "max-w-3xl" : "max-w-2xl"
+            }`}
+          >
+            {/* Header */}
+            <div className="flex shrink-0 items-center justify-between gap-3 border-b border-neutral-100 pb-3 dark:border-neutral-800">
+              <div className="flex items-center gap-2.5 sm:gap-3">
+                <img
+                  src="/logo-dark.webp"
+                  alt="Ignite"
+                  className="h-10 w-10 shrink-0 rounded-xl bg-neutral-950 object-contain p-1.5"
+                />
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-blue-600 sm:text-xs">
+                    Ignite programmes
+                  </p>
+                  <h2 className="text-lg font-extrabold text-neutral-950 dark:text-white sm:text-2xl">
+                    {isCourseChooser ? "Available courses" : "Course details"}
+                  </h2>
+                </div>
               </div>
-            ) : <><div className="mt-6"><CourseContent course={courses[0]} /></div>{courses[0].page && <RouteLink to={courses[0].page} onClick={onClose} className="mt-4 inline-flex w-full items-center justify-center rounded-xl border border-blue-200 bg-blue-50 px-5 py-3 text-sm font-bold text-blue-700 transition hover:bg-blue-100 dark:border-blue-900/60 dark:bg-blue-950/30 dark:text-blue-300">Explore course page</RouteLink>}<div className="mt-4 flex flex-col gap-3 sm:flex-row"><a href={`tel:${CONTACT_PHONE}`} className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-blue-700"><Phone size={17} /> Call admissions</a><a href={whatsappUrl} target="_blank" rel="noreferrer" className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-emerald-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-emerald-700"><MessageCircle size={18} /> WhatsApp us</a></div></>}
+              <div className="flex shrink-0 items-center gap-2">
+                {canGoBack && (
+                  <button
+                    type="button"
+                    onClick={onBackToChooser}
+                    className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-3 py-1.5 text-xs font-bold text-blue-700 transition hover:bg-blue-100 dark:bg-blue-950/40 dark:text-blue-300 cursor-pointer"
+                  >
+                    <ArrowLeft size={14} /> Back
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={onClose}
+                  aria-label="Close course details"
+                  className="grid h-9 w-9 place-items-center rounded-full bg-neutral-100 text-neutral-700 transition hover:bg-neutral-950 hover:text-white dark:bg-neutral-800 dark:text-neutral-200 cursor-pointer"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+            </div>
+
+            {/* Scrollable Content */}
+            <div className="mt-3 flex-1 overflow-y-auto overscroll-contain pr-1">
+              {isCourseChooser ? (
+                <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+                  {courses.map((course) => (
+                    <button
+                      key={course.id}
+                      type="button"
+                      onClick={() => onSelectCourse(course.id, dialog.courseIds)}
+                      className="group flex w-full items-center justify-between gap-3 rounded-2xl border border-neutral-200/90 bg-neutral-50/80 p-3 text-left transition hover:border-blue-500 hover:bg-blue-50/40 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-800/60 dark:hover:border-blue-500 dark:hover:bg-blue-950/20 cursor-pointer"
+                    >
+                      <div className="min-w-0 flex-1">
+                        <span className="block text-sm font-bold leading-snug text-neutral-900 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
+                          {course.title}
+                        </span>
+                        {course.duration && (
+                          <span className="mt-0.5 block truncate text-xs text-neutral-500 dark:text-neutral-400">
+                            {course.duration}
+                          </span>
+                        )}
+                      </div>
+                      <span className="inline-flex shrink-0 items-center gap-1 rounded-xl bg-blue-600 px-2.5 py-1.5 text-xs font-bold text-white shadow-xs transition group-hover:bg-blue-700">
+                        More details
+                        <ChevronRight size={13} className="transition-transform group-hover:translate-x-0.5" />
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <>
+                  <div className="mt-1">
+                    <CourseContent course={courses[0]} />
+                  </div>
+                  {courses[0].page && (
+                    <RouteLink
+                      to={courses[0].page}
+                      onClick={onClose}
+                      className="mt-4 inline-flex w-full items-center justify-center rounded-xl border border-blue-200 bg-blue-50 px-5 py-3 text-sm font-bold text-blue-700 transition hover:bg-blue-100 dark:border-blue-900/60 dark:bg-blue-950/30 dark:text-blue-300"
+                    >
+                      Explore course page
+                    </RouteLink>
+                  )}
+                  <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+                    <a
+                      href={`tel:${CONTACT_PHONE}`}
+                      className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-blue-700"
+                    >
+                      <Phone size={17} /> Call admissions
+                    </a>
+                    <a
+                      href={whatsappUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-emerald-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-emerald-700"
+                    >
+                      <MessageCircle size={18} /> WhatsApp us
+                    </a>
+                  </div>
+                </>
+              )}
+            </div>
           </motion.section>
         </motion.div>
       )}
