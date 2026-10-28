@@ -23,7 +23,10 @@ for (const path of paths) {
   const schema = getPageSchema(seo);
   if (schema) assert.equal(JSON.parse(JSON.stringify(schema))["@context"], "https://schema.org");
   if (path.startsWith("/admin")) assert(seo.robots.startsWith("noindex"));
-  if (path.startsWith("/gallery/photos/")) assert.equal(seo.canonicalPath, path.replace("/photos/", "/events/"));
+  if (path.startsWith("/gallery/photos/")) {
+    const canonical = path.replace("/photos/", "/events/").replace(/\/cricket-outdoor-sports$/, "/sports");
+    assert.equal(seo.canonicalPath, canonical);
+  }
   if (sitemapPaths.includes(path)) {
     assert(seo.indexable && seo.canonicalPath === path, `Non-canonical sitemap URL: ${path}`);
     assert(!titles.has(seo.title), `Duplicate title: ${seo.title}`);

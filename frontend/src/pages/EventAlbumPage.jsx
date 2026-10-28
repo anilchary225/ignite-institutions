@@ -1,5 +1,5 @@
 import { RouteLink, useParams, Navigate } from "../router/BrowserRouter";
-import { ArrowLeft, Camera, Play } from "lucide-react";
+import { Camera, Play } from "lucide-react";
 import { getEventAlbum } from "../data/galleryMedia";
 
 export default function EventAlbumPage() {
@@ -7,15 +7,13 @@ export default function EventAlbumPage() {
   const event = getEventAlbum(eventId);
 
   if (!event) return <Navigate to="/gallery/events" replace />;
+  if (eventId !== event.id) return <Navigate to={`/gallery/events/${event.id}`} replace />;
 
   return (
     <div className="min-h-screen bg-white text-neutral-950 dark:bg-neutral-950 dark:text-white">
-      <section className="px-4 pb-10 pt-10 sm:px-6 sm:pt-14">
+      <section className="px-4 pb-10 pt-28 sm:px-6 sm:pt-32">
         <div className="mx-auto max-w-7xl">
-          <RouteLink to="/gallery/events" className="inline-flex items-center gap-2 text-sm font-bold text-blue-700 dark:text-blue-400">
-            <ArrowLeft size={14} /> Back to Events
-          </RouteLink>
-          <div className="mt-5 grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+          <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.2em] text-blue-700 dark:text-blue-400">Event Album</p>
               <h1 className="mt-2 text-3xl font-extrabold sm:text-5xl">{event.title}</h1>
@@ -34,7 +32,7 @@ export default function EventAlbumPage() {
             </div>
           </div>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {event.photos.map((src, index) => (
+            {event.photos.filter((src) => src !== event.hero).map((src, index) => (
               <div key={index} className="overflow-hidden rounded-2xl bg-neutral-100 dark:bg-neutral-900">
                 <img src={src} alt={`${event.title} ${index + 1}`} loading="lazy" decoding="async" className="h-full w-full object-cover" />
               </div>
@@ -46,7 +44,7 @@ export default function EventAlbumPage() {
               <div className="mt-5 grid gap-6 sm:grid-cols-2">
                 {event.videoClips.map((clip) => (
                   <figure key={clip.src}>
-                    <video src={clip.src} controls playsInline preload="none" poster={event.hero} aria-label={clip.title} className="aspect-video w-full rounded-2xl bg-black object-contain" />
+                    <video src={clip.src} controls playsInline preload="none" poster={clip.poster} width={clip.width} height={clip.height} aria-label={clip.title} className="mx-auto block h-auto w-auto max-h-[75dvh] max-w-full rounded-2xl object-contain" />
                     <figcaption className="mt-2 text-sm font-semibold">{clip.title}</figcaption>
                   </figure>
                 ))}

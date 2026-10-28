@@ -208,7 +208,7 @@ export function getPageSeo(input = "/") {
 export function getBuildPaths() {
   return [...Object.keys(pageMetadata), ...Object.keys(adminPages), ...EVENT_ALBUMS.flatMap((album) => [
     `/gallery/events/${album.id}`, `/gallery/photos/${album.id}`,
-  ])];
+  ]), "/gallery/events/cricket-outdoor-sports", "/gallery/photos/cricket-outdoor-sports"];
 }
 
 export function getSitemapPaths() {

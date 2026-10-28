@@ -222,6 +222,7 @@ function SmallPhoto({ photo, href }) {
 }
 
 function PhotoSection({ section }) {
+  const albumId = section.albumId || section.id;
   const Icon = section.icon ?? Camera;
   const styles = accentStyles[section.accent] ?? accentStyles.green;
   const visiblePhotos = section.photos.slice(0, 3);
@@ -268,15 +269,15 @@ function PhotoSection({ section }) {
 
         <div className="grid min-h-[520px] gap-4 sm:grid-cols-2">
           <div className="sm:row-span-2">
-            <FeaturedPhoto photo={featured} href={`/gallery/photos/${section.id}`} />
+            <FeaturedPhoto photo={featured} href={`/gallery/photos/${albumId}`} />
           </div>
           {supporting.map((photo) => (
-            <SmallPhoto key={photo.title} photo={photo} href={`/gallery/photos/${section.id}`} />
+            <SmallPhoto key={photo.title} photo={photo} href={`/gallery/photos/${albumId}`} />
           ))}
           <div className="sm:col-span-2">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block">
               <RouteLink
-                to={`/gallery/photos/${section.id}`}
+                to={`/gallery/photos/${albumId}`}
                 className="inline-flex items-center gap-2 rounded-full bg-neutral-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-green-600 dark:bg-white dark:text-neutral-950 dark:hover:bg-green-200"
               >
                 Show more

@@ -5,6 +5,8 @@ import { ArrowLeft, ArrowUpRight, BookOpen, Check, ChevronRight, Clock3, Graduat
 import { useLocation, RouteLink } from "../router/BrowserRouter";
 import { CONTACT_PHONE, COURSE_CATALOG, getCourse } from "../data/courseCatalog";
 
+import { readSessionValue, writeSessionValue } from "../lib/sessionStorage.js";
+
 const CourseDialogContext = createContext(null);
 const FIRST_PROMPT_DELAY = 8000;
 const REPEAT_PROMPT_DELAY = 4 * 60 * 1000;
@@ -186,19 +188,24 @@ function CourseDialog({ dialog, onClose, onSelectCourse, onBackToChooser }) {
 export function CourseDialogProvider({ children }) {
   const { pathname } = useLocation();
   const [dialog, setDialog] = useState(null);
-  const [lastActivity, setLastActivity] = useState(Date.now());
+  const lastActivityRef = useRef(Date.now());
   const allowAutomaticPrompt = pathname.startsWith("/streams");
 
   const openCourse = (courseId) => setDialog({ courseIds: [courseId], automatic: false });
-  const selectCourse = (courseId, chooserCourseIds) => setDialog({ courseIds: [courseId], automatic: false, chooserCourseIds });
+  const selectCourse = (courseId, chooserCourseIds) => setDialog({ courseIds: [courseId], automatic: Boolean(dialog?.automatic), chooserCourseIds });
   const backToChooser = () => setDialog({ courseIds: dialog.chooserCourseIds, automatic: true, chooser: true });
   const closeDialog = () => {
-    if (dialog?.automatic) sessionStorage.setItem(SESSION_DISMISS_KEY, String(Date.now()));
+    if (dialog?.automatic) writeSessionValue(SESSION_DISMISS_KEY, String(Date.now()));
     setDialog(null);
   };
 
   useEffect(() => {
-    const recordActivity = () => setLastActivity(Date.now());
+    setDialog(null);
+    lastActivityRef.current = Date.now();
+  }, [pathname]);
+
+  useEffect(() => {
+    const recordActivity = () => { lastActivityRef.current = Date.now(); };
     window.addEventListener("scroll", recordActivity, { passive: true });
     window.addEventListener("pointerdown", recordActivity, { passive: true });
     window.addEventListener("keydown", recordActivity);
@@ -208,19 +215,19 @@ export function CourseDialogProvider({ children }) {
   useEffect(() => {
     if (!allowAutomaticPrompt) return undefined;
     const tryAutomaticPrompt = () => {
-      if (dialog || Date.now() - lastActivity > 60_000) return;
+      if (dialog || Date.now() - lastActivityRef.current > 60_000) return;
       if (document.querySelector('dialog[open], [role="dialog"]') || document.activeElement?.matches('input, textarea, select, [contenteditable="true"]')) return;
-      const count = Number(sessionStorage.getItem(SESSION_SHOWS_KEY) || 0);
-      const dismissedAt = Number(sessionStorage.getItem(SESSION_DISMISS_KEY) || 0);
+      const count = Number(readSessionValue(SESSION_SHOWS_KEY) || 0);
+      const dismissedAt = Number(readSessionValue(SESSION_DISMISS_KEY) || 0);
       if (count >= MAX_AUTOMATIC_PROMPTS || Date.now() - dismissedAt < DISMISS_COOLDOWN) return;
       const courseIds = getRelevantCourses(pathname).map((course) => course.id);
       setDialog({ courseIds, automatic: true, chooser: courseIds.length > 1 });
-      sessionStorage.setItem(SESSION_SHOWS_KEY, String(count + 1));
+      writeSessionValue(SESSION_SHOWS_KEY, String(count + 1));
     };
     const firstTimer = window.setTimeout(tryAutomaticPrompt, FIRST_PROMPT_DELAY);
     const repeatTimer = window.setInterval(tryAutomaticPrompt, REPEAT_PROMPT_DELAY);
     return () => { window.clearTimeout(firstTimer); window.clearInterval(repeatTimer); };
-  }, [dialog, allowAutomaticPrompt, lastActivity, pathname]);
+  }, [dialog, allowAutomaticPrompt, pathname]);
 
   const value = useMemo(() => ({ openCourse }), []);
   return <CourseDialogContext.Provider value={value}>{children}<CourseDialog dialog={dialog} onClose={closeDialog} onSelectCourse={selectCourse} onBackToChooser={backToChooser} /></CourseDialogContext.Provider>;

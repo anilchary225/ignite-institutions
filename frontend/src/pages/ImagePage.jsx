@@ -73,6 +73,7 @@ export default function ImagePage() {
   const [selectedIndex, setSelectedIndex] = useState(null);
 
   if (!album) return <Navigate to="/gallery/photos" replace />;
+  if (albumId !== album.id) return <Navigate to={`/gallery/photos/${album.id}`} replace />;
 
   function showNext() {
     setSelectedIndex((prev) => (prev + 1) % album.photos.length);

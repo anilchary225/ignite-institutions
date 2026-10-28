@@ -9,7 +9,7 @@ const BRAND = {
   bg: "#F4F6F9",
   text: "#1F2937",
   muted: "#6B7280",
-  website: process.env.SITE_URL || "https://igniteacademy.co.in",
+  website: process.env.SITE_URL || "https://www.ignite.academy",
 };
 BRAND.logo = "cid:ignite-logo";
 const logoPath = fileURLToPath(new URL("../../assets/Ignite_logo_main.png", import.meta.url));

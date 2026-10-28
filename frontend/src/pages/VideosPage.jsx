@@ -370,6 +370,7 @@ function AutoPlayVideo({ src, className = "", onClick }) {
 
 function VideoModal({ video, onClose }) {
   const videoRef = useRef(null);
+  const [aspectRatio, setAspectRatio] = useState((video.width || 16) / (video.height || 9));
 
   useEffect(() => {
     function onKey(e) {
@@ -402,7 +403,8 @@ function VideoModal({ video, onClose }) {
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
         transition={{ type: "spring", stiffness: 300, damping: 25 }}
-        className="relative w-full max-w-3xl rounded-2xl overflow-hidden bg-neutral-950 shadow-2xl"
+        style={{ maxWidth: aspectRatio < 1 ? `${68 * aspectRatio}dvh` : undefined }}
+        className="relative w-full max-w-3xl max-h-[95dvh] overflow-y-auto rounded-2xl bg-neutral-950 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <motion.button
@@ -415,9 +417,14 @@ function VideoModal({ video, onClose }) {
         >
           <X size={16} />
         </motion.button>
-        <div className="relative aspect-video w-full bg-neutral-900">
+        <div className="relative w-full" style={{ aspectRatio }}>
           <video
             ref={videoRef}
+            poster={video.poster}
+            onLoadedMetadata={(event) => {
+              const player = event.currentTarget;
+              if (player.videoWidth && player.videoHeight) setAspectRatio(player.videoWidth / player.videoHeight);
+            }}
             key={video.id}
             src={encodeURI(videoSrc)}
             className="h-full w-full object-contain"
@@ -784,14 +791,15 @@ function CategoryVideoCard({ video, onPlay }) {
       variants={cardReveal}
       whileHover={{ y: -6, transition: { duration: 0.25 } }}
       type="button"
+      style={{ maxWidth: video.height > video.width ? "220px" : undefined }}
       aria-label={`Play ${video.title || "video"}`}
       onClick={() => onPlay(video)}
       className="group block text-left w-full overflow-hidden rounded-2xl bg-white ring-1 ring-neutral-100 shadow-sm transition hover:shadow-lg focus:outline-none dark:bg-neutral-900 dark:ring-neutral-800"
     >
-      <div className="relative aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-800">
-        {video.poster ? <img src={video.poster} alt="" loading="lazy" decoding="async" width="640" height="360" className="h-full w-full object-cover" /> : <HoverVideo
+      <div className="relative overflow-hidden bg-neutral-100 dark:bg-neutral-800" style={{ aspectRatio: `${video.width || 16} / ${video.height || 9}` }}>
+        {video.poster ? <img src={video.poster} alt="" loading="lazy" decoding="async" width="640" height="360" className="absolute inset-0 h-full w-full object-cover" /> : <HoverVideo
           src={video.thumb}
-          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+          className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
         />}
         <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/15 to-transparent" />
         <div className="absolute inset-0 flex items-center justify-center opacity-0 transition group-hover:opacity-100">
@@ -881,7 +889,7 @@ function CategoryVideos() {
               animate="visible"
               exit="hidden"
               viewport={defaultViewport}
-              className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+              className={`mt-8 grid items-start gap-5 ${activeVideos.length && activeVideos.every((video) => video.height > video.width) ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" : "sm:grid-cols-2 lg:grid-cols-3"}`}
             >
               {activeVideos.map((v) => (
                 <CategoryVideoCard key={v.id} video={v} onPlay={setModal} />

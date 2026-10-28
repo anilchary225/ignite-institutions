@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { enableSingleVideoPlayback } from "./lib/videoPlayback.js";
 
 const Home = lazy(() => import("./pages/Home"));
 
@@ -178,6 +179,7 @@ function BackToTopButton() {
 
 export default function App() {
   const { pathname } = useLocation();
+  useEffect(() => enableSingleVideoPlayback(), []);
 
   const showNavbar = !pathname.startsWith("/admin");
 

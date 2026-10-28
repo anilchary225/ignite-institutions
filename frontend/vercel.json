@@ -28,5 +28,17 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/gallery/events/cricket-outdoor-sports",
+      "destination": "/gallery/events/sports",
+      "permanent": true
+    },
+    {
+      "source": "/gallery/photos/cricket-outdoor-sports",
+      "destination": "/gallery/photos/sports",
+      "permanent": true
+    }
   ]
 }

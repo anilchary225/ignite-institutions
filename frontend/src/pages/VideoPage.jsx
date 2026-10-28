@@ -30,6 +30,7 @@ const allVideos = [
 
 function VideoModal({ video, onClose }) {
   const videoRef = useRef(null);
+  const [aspectRatio, setAspectRatio] = useState((video.width || 16) / (video.height || 9));
 
   useEffect(() => {
     function onKeyDown(event) {
@@ -48,7 +49,7 @@ function VideoModal({ video, onClose }) {
 
   return (
     <div className="fixed inset-0 z-150 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm" onClick={onClose}>
-      <div className="relative w-full max-w-5xl overflow-hidden rounded-3xl bg-neutral-950 shadow-2xl" onClick={(event) => event.stopPropagation()}>
+      <div style={{ maxWidth: aspectRatio < 1 ? `${68 * aspectRatio}dvh` : undefined }} className="relative w-full max-w-5xl max-h-[95dvh] overflow-y-auto rounded-3xl bg-neutral-950 shadow-2xl" onClick={(event) => event.stopPropagation()}>
         <button
           type="button"
           onClick={onClose}
@@ -57,9 +58,14 @@ function VideoModal({ video, onClose }) {
         >
           <X size={16} />
         </button>
-        <div className="aspect-video w-full bg-black">
+        <div className="w-full" style={{ aspectRatio }}>
           <video
             ref={videoRef}
+            poster={video.poster}
+            onLoadedMetadata={(event) => {
+              const player = event.currentTarget;
+              if (player.videoWidth && player.videoHeight) setAspectRatio(player.videoWidth / player.videoHeight);
+            }}
             src={encodeURI(video.src)}
             className="h-full w-full object-contain"
             controls
@@ -82,12 +88,13 @@ function VideoCard({ video, onOpen }) {
     <button
       type="button"
       onClick={() => onOpen(video)}
+      style={{ maxWidth: video.height > video.width ? "220px" : undefined }}
       className="group overflow-hidden rounded-2xl bg-neutral-900 text-left shadow-sm ring-1 ring-neutral-800 transition hover:-translate-y-1 hover:shadow-lg"
     >
-      <div className="relative aspect-video">
-        {video.poster ? <img src={video.poster} alt="" loading="lazy" decoding="async" width="640" height="360" className="h-full w-full object-cover" /> : <video
+      <div className="relative" style={{ aspectRatio: `${video.width || 16} / ${video.height || 9}` }}>
+        {video.poster ? <img src={video.poster} alt="" loading="lazy" decoding="async" width="640" height="360" className="absolute inset-0 h-full w-full object-cover" /> : <video
           src={`${encodeURI(video.src)}#t=0.001`}
-          className="h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover"
           muted
           loop
           playsInline
@@ -130,7 +137,7 @@ export default function VideoPage() {
             </div>
           </div>
 
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="mt-8 grid items-start gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {allVideos.map((video) => (
               <VideoCard key={video.id} video={video} onOpen={setSelectedVideo} />
             ))}

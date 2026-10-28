@@ -1,3 +1,6 @@
+import { PHOTO_PREVIEW_COPY } from "./photoPreviewCopy.js";
+import { recentVideoGroups } from "./recentVideos.js";
+
 const eventBase = '/assets/images/events';
 
 const folderAlbums = [
@@ -8,6 +11,9 @@ const folderAlbums = [
     "description": "A showcase of student talent through music, dance, and stage performances.",
     "paragraph": "Advaitha brings the whole campus together for an evening of performances, where students take the stage to sing, dance, and act. The gallery captures the energy backstage and the applause front-of-house that make this one of the most anticipated events of the year.",
     "hero": "/assets/images/events/ADVAITHA/PRA00158.webp",
+    previewPhotos: ["VIJ02825.webp", "VIJ04864.webp", "VIJ06228.webp"].map((file) =>
+      `${eventBase}/ADVAITHA/${file}`,
+    ),
     "photos": [
       "/assets/images/events/ADVAITHA/PRA00158.webp",
       "/assets/images/events/ADVAITHA/PRA00163.webp",
@@ -699,11 +705,6 @@ const folderAlbums = [
       "/assets/images/events/sports/SS_09489.webp",
       "/assets/images/events/sports/SS_09493.webp",
       "/assets/images/events/sports/SS_09670.webp",
-      "/assets/images/events/sports/SS_09734.webp",
-      "/assets/images/events/sports/VIJ02504.webp",
-      "/assets/images/events/sports/VIJ02506.webp",
-      "/assets/images/events/sports/VIJ02527.webp",
-      "/assets/images/events/sports/VIJ02853.webp"
     ]
   },
   {
@@ -864,7 +865,6 @@ const folderAlbums = [
     "hero": "/assets/images/events/Vybhava/al29471_DSC03258.webp",
     "photos": [
       "/assets/images/events/Vybhava/al29471_DSC03258.webp",
-      "/assets/images/events/Vybhava/al29471_DSC03685.webp",
       "/assets/images/events/Vybhava/ARM02727.webp",
       "/assets/images/events/Vybhava/ARM02727.webp",
       "/assets/images/events/Vybhava/ARM02855.webp",
@@ -889,7 +889,6 @@ const folderAlbums = [
       "/assets/images/events/Vybhava/ARM03607.webp",
       "/assets/images/events/Vybhava/ARM03654.webp",
       "/assets/images/events/Vybhava/ARM03705.webp",
-      "/assets/images/events/Vybhava/Copy of DSC01917.webp",
       "/assets/images/events/Vybhava/DSC01572.webp",
       "/assets/images/events/Vybhava/DSC01640.webp",
       "/assets/images/events/Vybhava/DSC01789.webp",
@@ -1005,6 +1004,7 @@ const newestAlbums = [
     id: "sankalpa-2026",
     folder: "sankalpa_2026",
     title: "Sankalpa 2026",
+    dateLabel: "4–5 October 2026",
     description: "Explore the latest photographs from Sankalpa 2026 at Ignite.",
     paragraph: "Browse the Sankalpa 2026 photo collection and moments captured during the event.",
     hero: `${eventBase}/sankalpa_2026/sankalpa_2026_01.webp`,
@@ -1016,13 +1016,20 @@ const newestAlbums = [
     title: "Bathikamma 2026",
     description: "Browse photographs from the Bathikamma 2026 celebration at Ignite.",
     paragraph: "Explore the newly added Bathikamma 2026 photographs in this event gallery.",
-    hero: `${eventBase}/bathikamma_2026/bathikamma_2026_01.webp`,
-    photos: paddedPhotos("bathikamma_2026", "bathikamma_2026", 37),
+    hero: `${eventBase}/bathikamma_2026/bathikamma_2026_19.webp`,
+    previewPhotos: [19, 7, 22].map((number) =>
+      `${eventBase}/bathikamma_2026/bathikamma_2026_${String(number).padStart(2, "0")}.webp`,
+    ),
+    // Exclude the Ganesh-focused uploads from the Bathukamma collection.
+    photos: paddedPhotos("bathikamma_2026", "bathikamma_2026", 37).filter(
+      (_, index) => ![0, 2, 3].includes(index),
+    ),
   },
   {
     id: "investiture-ceremony",
     folder: "investiture-ceremony_webp",
     title: "Investiture Ceremony",
+    dateLabel: "31 August 2026",
     description: "Celebrating student leadership and responsibility, with newly added ceremony photographs.",
     paragraph: "Explore the latest investiture ceremony photographs alongside the earlier student leadership collection.",
     hero: `${eventBase}/investiture-ceremony_webp/investiture-ceremony_01.webp`,
@@ -1038,6 +1045,9 @@ const newestAlbums = [
     description: "A warm celebration of the mentors who guide and inspire our students.",
     paragraph: "Students celebrated their teachers with gratitude, performances, and memorable campus moments.",
     hero: `${eventBase}/Teachers Day/teachers_day_1.webp`,
+    previewPhotos: [3, 4, 6].map((number) =>
+      `${eventBase}/Teachers Day/teachers_day_${number}.webp`,
+    ),
     photos: numberedPhotos("Teachers Day", "teachers_day", 6),
   },
   {
@@ -3125,7 +3135,7 @@ const photoSections = [
         "id": "vybhava-1",
         "title": "Cultural Showcase",
         "caption": "Vybhava",
-        "image": "/assets/images/events/Vybhava/al29471_DSC03685.webp",
+        "image": "/assets/images/events/Vybhava/ARM02855.webp",
         "size": "small"
       },
       {
@@ -3300,7 +3310,7 @@ const photoSections = [
         "id": "vybhava-26",
         "title": "Memories in the Making",
         "caption": "Vybhava",
-        "image": "/assets/images/events/Vybhava/Copy of DSC01917.webp",
+        "image": "/assets/images/events/Vybhava/DSC01917.webp",
         "size": "small"
       },
       {
@@ -4081,6 +4091,21 @@ const newestFeaturedCards = [...newestAlbums, folderAlbums.find((album) => album
 }));
 
 const newestPhotoCopy = {
+  "sports-fest-2026": [
+    ["Celebrating Sporting Success", "Sports Fest 2026"],
+    ["Team Spirit on Campus", "Together on the field"],
+    ["Moments from the Sports Fest", "A day to remember"],
+  ],
+  "sankalpa-2026": [
+    ["Sankalpa in the Spotlight", "Sankalpa 2026"],
+    ["Celebrating Campus Life", "Shared celebrations"],
+    ["Memories from Sankalpa", "4–5 October 2026"],
+  ],
+  "bathikamma-2026": [
+    ["Together Around Bathukamma", "Flowers, colours & tradition"],
+    ["Creating Floral Arrangements", "Preparing for the celebration"],
+    ["Dancing in Celebration", "Campus comes together"],
+  ],
   "teachers-day": [
     ["A Tribute to Teachers", "Teachers' Day"],
     ["Celebration on Campus", "Teachers' Day"],
@@ -4130,9 +4155,9 @@ const newestPhotoSections = newestAlbums.map((album, albumIndex) => ({
   experience: album.paragraph,
   icon: null,
   accent: ["green", "emerald", "rose", "amber", "blue", "indigo"][albumIndex % 6],
-  photos: album.photos.slice(0, 3).map((image, imageIndex) => ({
+  photos: (album.previewPhotos || album.photos).slice(0, 3).map((image, imageIndex) => ({
     id: `${album.id}-${imageIndex}`,
-    title: newestPhotoCopy[album.id]?.[imageIndex]?.[0] ?? album.title,
+    title: newestPhotoCopy[album.id]?.[imageIndex]?.[0] ?? `${album.title} — Moment ${imageIndex + 1}`,
     caption: newestPhotoCopy[album.id]?.[imageIndex]?.[1] ?? album.title,
     image,
     size: imageIndex === 0 ? "large" : "small",
@@ -4152,10 +4177,10 @@ export const optimizedEventImage = (src) => {
 
 const withOptimizedImages = (album) => ({
   ...album,
-  videoClips: album.id === "cricket-outdoor-sports"
-    ? Array.from({ length: 7 }, (_, index) => ({
+  videoClips: album.id === "sports"
+    ? recentVideoGroups.Cricket.map((clip, index) => ({
+        ...clip,
         title: `Cricket highlights ${index + 1}`,
-        src: `/assets/videos/cricket videos_compressed/cricket_${String(index + 1).padStart(2, "0")}.webm`,
       }))
     : [],
   hero: optimizedEventImage(album.hero || album.photos[0]),
@@ -4190,20 +4215,86 @@ const ganeshPreviewPhotos = newestGaneshPhotos.slice(0, 3).map((image, index) =>
   size: index === 0 ? "large" : "small",
 }));
 
-export const EVENT_ALBUMS = [...newestAlbums, ...folderAlbums].map((album) =>
+const mergedSportsAlbum = {
+  ...folderAlbums.find((album) => album.id === "sports"),
+  title: "Sports & Outdoor Games",
+  description: "Cricket, court games and teamwork from IGNITE’s sports facilities and outdoor activities.",
+  paragraph: "Explore cricket practice, volleyball, badminton, table tennis and other campus games, alongside photographs of our grounds and cricket highlights.",
+  previewPhotos: ["sports10.webp", "sports7.webp", "sports4.webp"].map((file) => `${eventBase}/sports/${file}`),
+  photos: [...new Set([
+    ...folderAlbums.find((album) => album.id === "sports").photos,
+    ...folderAlbums.find((album) => album.id === "cricket-outdoor-sports").photos,
+  ])],
+};
+
+export const EVENT_ALBUMS = [...newestAlbums, ...folderAlbums]
+.filter((album) => album.id !== "cricket-outdoor-sports")
+.map((album) => album.id === "sports" ? mergedSportsAlbum : album).map((album) =>
   album.id === "bonalu"
     ? { ...album, hero: newestBonaluPhotos[0], photos: [...newestBonaluPhotos, ...album.photos] }
     : album.id === "ganesh-festival"
       ? { ...album, hero: newestGaneshPhotos[0], photos: [...newestGaneshPhotos, ...album.photos] }
     : album,
 ).map(withOptimizedImages);
+
+// Reserve separate images for each gallery placement before rendering any page.
+const albumPresentations = new Map(EVENT_ALBUMS.map((album) => {
+  // The cover is already featured elsewhere. Show other moments from this album.
+  const available = [...new Set(album.photos)].filter((image) => image !== album.hero);
+  const candidates = available.length ? available : [album.hero];
+  const selected = [];
+  for (let index = 0; index < Math.min(3, candidates.length); index += 1) {
+    const position = Math.round(index * (candidates.length - 1) / 2);
+    const image = candidates[position];
+    if (!selected.includes(image)) selected.push(image);
+  }
+  // Retain the hand-picked Bathukamma celebration previews.
+  if (album.previewPhotos) {
+    selected.splice(0, selected.length, ...album.previewPhotos.filter((image) =>
+      image !== album.hero && candidates.includes(image),
+    ));
+    for (const image of candidates) {
+      if (selected.length >= Math.min(3, candidates.length)) break;
+      if (!selected.includes(image)) selected.push(image);
+    }
+  }
+  const remaining = [...new Set(album.photos)].filter((image) =>
+    image !== album.hero && !selected.includes(image),
+  );
+  const roles = ["galleryHero", "galleryCard", "eventsHero", "eventsCard", "eventsGallery"];
+  const images = { previews: selected };
+  const pool = [...remaining];
+  roles.forEach((role, index) => {
+    if (pool.length) {
+      const position = Math.round(index * (pool.length - 1) / (roles.length - 1));
+      images[role] = pool.splice(position, 1)[0];
+    } else {
+      images[role] = album.photos[index % album.photos.length] || album.hero;
+    }
+  });
+  return [album.id, images];
+}));
+
+export function getEventImage(albumOrId, placement) {
+  const album = typeof albumOrId === "string" ? getEventAlbum(albumOrId) : albumOrId;
+  return albumPresentations.get(album?.id)?.[placement] || album?.hero;
+}
+
 export const EVENT_FEATURED_CARDS = [...newestFeaturedCards, ...featuredCards.filter((card) => card.id !== "cricket-outdoor-sports")].map((card) =>
   card.id === "bonalu"
     ? { ...card, image: newestBonaluPhotos[0], count: `${newestBonaluPhotos.length + 7} images` }
     : card.id === "ganesh-festival"
       ? { ...card, image: newestGaneshPhotos[0], count: `${newestGaneshPhotos.length + 5} images` }
     : card,
-).map((card) => ({ ...card, image: optimizedEventImage(card.image) }));
+).filter((card) => card.id !== "cricket-outdoor-sports").map((card) => ({
+  ...card,
+  ...(card.id === "sports" ? {
+    title: mergedSportsAlbum.title,
+    description: mergedSportsAlbum.description,
+    count: `${mergedSportsAlbum.photos.length} images · 7 videos`,
+  } : {}),
+  image: getEventImage(card.id, "eventsCard") || optimizedEventImage(card.image),
+}));
 export const EVENT_PHOTO_SECTIONS = [
   ...newestPhotoSections,
   ...photoSections.map((section) =>
@@ -4213,7 +4304,32 @@ export const EVENT_PHOTO_SECTIONS = [
         ? { ...section, photos: ganeshPreviewPhotos }
         : section,
   ),
-].map((section) => ({ ...section, photos: section.photos.map((photo) => ({ ...photo, image: optimizedEventImage(photo.image) })) }));
+].filter((section) => section.id !== "cricket-outdoor-sports").map((section) => {
+  const albumId = section.id;
+  const album = EVENT_ALBUMS.find((item) => item.id === albumId);
+  if (!album) return section;
+
+  const selected = albumPresentations.get(album.id).previews;
+  return {
+    ...section,
+    ...(album.id === "sports" ? {
+      label: album.title, title: album.title,
+      description: album.description, experience: album.paragraph,
+    } : {}),
+    albumId,
+    photos: selected.map((image, index) => {
+      const copy = PHOTO_PREVIEW_COPY[image];
+      return {
+        id: `${album.id}-preview-${index}`,
+        title: copy?.title || album.title,
+        caption: copy?.caption || "Explore this album",
+        image: optimizedEventImage(image),
+        size: index === 0 ? "large" : "small",
+      };
+    }),
+  };
+});
+const usedEventGalleryImages = new Set();
 export const EVENT_GALLERY_IMAGES = [
   ...newestGalleryImages,
   ...galleryImages.map((image) =>
@@ -4223,8 +4339,22 @@ export const EVENT_GALLERY_IMAGES = [
         ? { ...image, src: newestGaneshPhotos[0] }
         : image,
   ),
-].map((image) => ({ ...image, src: optimizedEventImage(image.src) }));
+].filter((image) => !image.id.startsWith("cricket-outdoor-sports-")).map((image) => {
+  const album = EVENT_ALBUMS.find((item) => item.photos.includes(image.src));
+  const preferred = getEventImage(album, "eventsGallery") || optimizedEventImage(image.src);
+  const presentation = albumPresentations.get(album?.id);
+  const reserved = new Set([album?.hero, ...(presentation?.previews || []),
+    ...["galleryHero", "galleryCard", "eventsHero", "eventsCard"].map((role) => presentation?.[role]),
+  ]);
+  const alternatives = (album?.photos || []).filter((src) => !usedEventGalleryImages.has(src));
+  const src = usedEventGalleryImages.has(preferred)
+    ? alternatives.find((src) => !reserved.has(src)) || alternatives[0] || preferred
+    : preferred;
+  usedEventGalleryImages.add(src);
+  return { ...image, src };
+});
 
 export function getEventAlbum(eventId) {
-  return EVENT_ALBUMS.find((album) => album.id === eventId);
+  const id = eventId === "cricket-outdoor-sports" ? "sports" : eventId;
+  return EVENT_ALBUMS.find((album) => album.id === id);
 }

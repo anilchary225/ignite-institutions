@@ -2,29 +2,16 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
-  Award,
   CalendarDays,
   ChevronLeft,
   ChevronRight,
   Clock3,
-  Footprints,
-  GlassWater,
-  GraduationCap,
-  Heart,
   Images,
-  Leaf,
   MapPin,
-  Music,
   Play,
-  ShieldCheck,
-  Sparkles,
-  Sun,
-  Trash2,
-  Trophy,
-  Users,
 } from "lucide-react";
 import { RouteLink } from "../router/BrowserRouter";
-import { optimizedEventImage } from "../data/eventGalleryData";
+import { EVENT_ALBUMS, getEventImage } from "../data/eventGalleryData";
 import {
   fadeUp,
   fadeIn,
@@ -36,277 +23,25 @@ import {
   scaleIn,
 } from "../animations/variants";
 
-const heroSlides = [
-  {
-    image:
-      optimizedEventImage("/assets/images/events/Udbhava/BF6C8691.webp"),
-    eyebrow: "Udbhava Fest · 2025",
-    title: "A campus full of energy, ideas, and unforgettable moments.",
-    description:
-      "From stage lights to cheering crowds, every Ignite celebration gives students a chance to find their voice.",
-    tone: "from-blue-950/95 via-blue-950/55 to-transparent",
-  },
-  {
-    image: optimizedEventImage("/assets/images/events/Yoga/yoga12.webp"),
-    eyebrow: "Wellness · Balance · Focus",
-    title: "Yoga helps students build calm minds and strong bodies.",
-    description:
-      "Discover how daily yoga sessions improve flexibility, concentration, breathing, and overall well-being at Ignite.",
-    tone: "from-sky-950/95 via-sky-950/55 to-transparent",
-  },
-  {
-    image:
-      optimizedEventImage("/assets/images/events/Plantationrun/plantation1.webp"),
-    eyebrow: "Ignite Green Initiative · Together",
-    title: "Hands-on experiences that grow responsible young citizens.",
-    description:
-      "Our plantation drives and eco-programs turn awareness into action, helping students connect with nature, build teamwork, and create a greener campus and community.",
-    tone: "from-amber-950/95 via-amber-950/55 to-transparent",
-  },
-];
+// Keep gallery highlights and album links in sync with the shared event collection.
+const heroSlides = EVENT_ALBUMS.slice(0, 3).map((album) => ({
+  image: getEventImage(album, "galleryHero"),
+  eyebrow: album.dateLabel ? `${album.title} · ${album.dateLabel}` : album.title,
+  title: album.title,
+  description: album.paragraph || album.description,
+  tone: "from-blue-950/95 via-blue-950/55 to-transparent",
+}));
 
-const recentPrograms = [
-  {
-    image:
-      optimizedEventImage("/assets/images/events/Teachers Day/teachers_day_1.webp"),
-    category: "Teachers' Day",
-    date: "September 5, 2025",
-    title: "Teachers' Day: Honoring Our Mentors & Guides",
-    description:
-      "Students celebrated their educators with heartfelt gratitude, joyful performances, and memorable moments honoring those who inspire everyday excellence.",
-    icon: GraduationCap,
-    color: "indigo",
-    path: "/gallery/photos/teachers-day",
-  },
-  {
-    image:
-      optimizedEventImage("/assets/images/events/ganesh festival/ganesh_chathurthi_1.webp"),
-    category: "Ganesh Festival",
-    date: "September 2025",
-    title: "Ganesh Festival: Devotion, Unity & Festivities",
-    description:
-      "Grand campus celebration bringing students and faculty together in auspicious rituals, creative decorations, and vibrant community festivity.",
-    icon: Sparkles,
-    color: "yellow",
-    path: "/gallery/photos/ganesh-festival",
-  },
-  {
-    image:
-      optimizedEventImage("/assets/images/events/INDEPENDENCE DAY/independence_day_1.webp"),
-    category: "Independence Day",
-    date: "August 15, 2025",
-    title: "Independence Day: Saluting the Nation with Pride",
-    description:
-      "Students and staff gathered to mark India's Independence Day with ceremonial flag hoisting, patriotic songs, and cultural presentations.",
-    icon: Award,
-    color: "orange",
-    path: "/gallery/photos/independence-day",
-  },
-  {
-    image:
-      optimizedEventImage("/assets/images/events/KRISHNA ASTAMI/krishnastamai_1.webp"),
-    category: "Krishna Ashtami",
-    date: "August 2025",
-    title: "Krishna Ashtami: A Joyful Cultural Celebration",
-    description:
-      "A colorful celebration with traditional attire, lively cultural enactments, and devotional music celebrating the spirit of Janmashtami.",
-    icon: Sparkles,
-    color: "gold",
-    path: "/gallery/photos/krishna-ashtami",
-  },
-  {
-    image:
-      optimizedEventImage("/assets/images/events/Investiture Ceremony/investiture_ceremony_1.webp"),
-    category: "Leadership",
-    date: "July 2025",
-    title: "Investiture Ceremony: Empowering Future Leaders",
-    description:
-      "The student council was formally inducted, taking their solemn pledge of leadership, discipline, and dedicated service to the school community.",
-    icon: Trophy,
-    color: "blue",
-    path: "/gallery/photos/investiture-ceremony",
-  },
-  {
-    image:
-      optimizedEventImage("/assets/images/events/Bonalu/bonalu_1.webp"),
-    category: "Bonalu Festival",
-    date: "July 2025",
-    title: "Bonalu Celebration: Colors of Tradition & Culture",
-    description:
-      "An exuberant cultural festival honoring Telangana's rich heritage with traditional dress, music, and enthusiastic community participation.",
-    icon: Heart,
-    color: "rose",
-    path: "/gallery/photos/bonalu",
-  },
-  {
-    image:
-      optimizedEventImage("/assets/images/events/SIDs FARM/sid's_farm_1.webp"),
-    category: "Field Visit",
-    date: "2025",
-    title: "SIDs Farm Visit: Experiential Learning in Nature",
-    description:
-      "An enriching educational excursion where students explored sustainable agriculture, dairy production, and environmental harmony firsthand.",
-    icon: Leaf,
-    color: "green",
-    path: "/gallery/photos/sids-farm",
-  },
-  {
-    image:
-      optimizedEventImage("/assets/images/events/BIRLA PLANETARIUM /birla_planetarium_1.webp"),
-    category: "Science Excursion",
-    date: "2025",
-    title: "Birla Planetarium: Exploring Science & the Cosmos",
-    description:
-      "Students embarked on an immersive cosmic journey, discovering astronomy, celestial science, and planetary wonders at the planetarium.",
-    icon: Sun,
-    color: "purple",
-    path: "/gallery/photos/birla-planetarium",
-  },
-  {
-    image:
-      optimizedEventImage("/assets/images/events/Udbhava/3X7A3494.webp"),
-    category: "Cultural Fest",
-    date: "March 20, 2025",
-    title: "Udbhava 2025: A Celebration of Beginnings",
-    description:
-      "A vibrant gathering filled with energy, artistic expression, and student performances marking a memorable showcase of culture and community.",
-    icon: Sparkles,
-    color: "blue",
-    path: "/gallery/photos/udbhava",
-  },
-  {
-    image:
-      optimizedEventImage("/assets/images/events/Ullaas/_NNR7439.webp"),
-    category: "Youth Festival",
-    date: "February 14, 2025",
-    title: "Ullas 2025: Joy in Every Moment",
-    description:
-      "An evening of music, dance, and celebration where students came together to showcase creative talent and shared school spirit.",
-    icon: Music,
-    color: "amber",
-    path: "/gallery/photos/ullaas",
-  },
-  {
-    image:
-      optimizedEventImage("/assets/images/events/Vybhava/ARM02891.webp"),
-    category: "Cultural Showcase",
-    date: "January 28, 2025",
-    title: "Vybhava 2025: A Celebration of Expression",
-    description:
-      "A lively celebration of creativity, culture, and student talent, bringing together theatrical performances and artistic expression.",
-    icon: Award,
-    color: "sky",
-    path: "/gallery/photos/vybhava",
-  },
-  {
-    image:
-      optimizedEventImage("/assets/images/events/Plantationrun/plantation7.webp"),
-    category: "Plantation Run",
-    date: "April 11, 2025",
-    title: "Plantation Run: Run for a Greener Tomorrow",
-    description:
-      "Students came together for an energetic plantation run, combining fitness, teamwork, and a shared commitment to creating a greener and healthier environment.",
-    icon: Leaf,
-    color: "green",
-    path: "/gallery/photos/plantationrun",
-  },
-  {
-    image:
-      optimizedEventImage("/assets/images/events/buttermik/ButterMilk2.webp"),
-    category: "Community Outreach",
-    date: "April 11, 2025",
-    title: "Refreshing Initiative: Buttermilk Distribution Drive",
-    description:
-      "A special buttermilk distribution drive was organized to provide refreshment and hydration, spreading care and positivity among students and the community.",
-    icon: GlassWater,
-    color: "yellow",
-    path: "/gallery/photos/buttermilk",
-  },
-  {
-    image:
-      optimizedEventImage("/assets/images/events/Yoga/yoga10.webp"),
-    category: "Yoga Day",
-    date: "June 7, 2025",
-    title: "Yoga Day: Embracing Balance and Well-being",
-    description:
-      "Students and faculty came together for a rejuvenating yoga session, promoting mindfulness, flexibility, inner peace, and a healthy lifestyle.",
-    icon: Heart,
-    color: "purple",
-    path: "/gallery/photos/yoga",
-  },
-  {
-    image:
-      optimizedEventImage("/assets/images/events/falicitates_with_awards/facilities4.webp"),
-    category: "Awards Ceremony",
-    date: "2025",
-    title: "Honouring Excellence: Felicitation with Awards",
-    description:
-      "Outstanding achievements were celebrated through an award felicitation ceremony, recognizing the dedication, talent, and accomplishments of students and achievers.",
-    icon: Award,
-    color: "gold",
-    path: "/gallery/photos/falicitates-with-awards",
-  },
-  {
-    image:
-      optimizedEventImage("/assets/images/events/orphanage/orphanage1.webp"),
-    category: "Community Care",
-    date: "2025",
-    title: "Sharing Happiness: Food Donation to Orphanage",
-    description:
-      "Students came together to donate food and essentials to an orphanage, spreading kindness, care, and compassion while supporting those in need.",
-    icon: Heart,
-    color: "orange",
-    path: "/gallery/photos/orphanage",
-  },
-  {
-    image:
-      optimizedEventImage("/assets/images/events/sanitizer distribution/Sanitization_bottles_stood_side_…_202608181602.webp"),
-    category: "Sanitization Drive",
-    date: "2025",
-    title: "Clean & Safe Campus: Sanitization Initiative",
-    description:
-      "A sanitization drive was conducted to promote hygiene, cleanliness, and a healthy environment, encouraging everyone to follow safe and responsible practices.",
-    icon: ShieldCheck,
-    color: "green",
-    path: "/gallery/photos/sanitizer-distribution",
-  },
-  {
-    image:
-      optimizedEventImage("/assets/images/events/swatch_run/swatchrun1.webp"),
-    category: "Swachh Run",
-    date: "2025",
-    title: "Swachh Run: Running Towards a Cleaner Future",
-    description:
-      "Students participated in the Swachh Run, spreading awareness about cleanliness, environmental responsibility, and the importance of building a healthier and cleaner society.",
-    icon: Footprints,
-    color: "green",
-    path: "/gallery/photos/swatch-run",
-  },
-  {
-    image:
-      optimizedEventImage("/assets/images/events/Summer camp/C0095T01.webp"),
-    category: "Summer Camp",
-    date: "2025",
-    title: "Summer Camp: Learning, Creativity & Fun",
-    description:
-      "Students participated in an engaging summer camp filled with creative activities, skill development, teamwork, and memorable learning experiences.",
-    icon: Sun,
-    color: "yellow",
-    path: "/gallery/photos/summer-camp",
-  },
-  {
-    image:
-      optimizedEventImage("/assets/images/events/Sports Meet/SPORTS MEET ASSEMBLE (2).webp"),
-    category: "Sports Meet",
-    date: "2025",
-    title: "Sports Meet: Celebrating Team Spirit & Excellence",
-    description:
-      "Students showcased their athletic skills and competitive spirit through various sports events, promoting teamwork, discipline, fitness, and sportsmanship.",
-    icon: Trophy,
-    color: "blue",
-    path: "/gallery/photos/sports-meet",
-  },
-];
+const recentPrograms = EVENT_ALBUMS.slice(0, 9).map((album) => ({
+  image: getEventImage(album, "galleryCard"),
+  category: album.title,
+  date: album.dateLabel || `${album.photos.length} photos`,
+  title: album.title,
+  description: album.description,
+  icon: Images,
+  color: "blue",
+  path: `/gallery/events/${album.id}`,
+}));
 
 const colorStyles = {
   blue: "bg-blue-100 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300",

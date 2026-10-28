@@ -28,7 +28,7 @@ import {
   Lightbulb,
 } from "lucide-react";
 import { RouteLink } from "../router/BrowserRouter";
-import { EVENT_FEATURED_CARDS, EVENT_GALLERY_IMAGES, EVENT_ALBUMS } from "../data/eventGalleryData";
+import { EVENT_FEATURED_CARDS, EVENT_GALLERY_IMAGES, EVENT_ALBUMS, getEventImage } from "../data/eventGalleryData";
 import {
   fadeUp,
   fadeIn,
@@ -88,7 +88,7 @@ let heroEvents = [
 // The first cards are the most recently added albums, so keep the hero current too.
 heroEvents = EVENT_FEATURED_CARDS.slice(0, 3).map((event, index) => ({
   id: event.id,
-  image: event.image,
+  image: getEventImage(event.id, "eventsHero"),
   eyebrow: `${event.title} · Latest event`,
   title: event.title,
   description: event.description,

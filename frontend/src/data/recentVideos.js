@@ -7,6 +7,8 @@ const collection = (folder, prefix, label, count) =>
       title: count > 1 ? `${label} ${number}` : label,
       category: label,
       src,
+      width: prefix === "cricket" ? 1080 : 1920,
+      height: prefix === "cricket" ? 1920 : 1080,
       thumb: src,
       poster: `/assets/videos/recent-posters/${prefix}_${number}.webp`,
     };

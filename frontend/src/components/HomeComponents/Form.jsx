@@ -77,13 +77,13 @@ const contactInfo = [
   {
     icon: Phone,
     label: "Call Us",
-    value: "+91 98765 43210",
+    value: "+91 70365 11111",
     color: "bg-green-700",
   },
   {
     icon: Mail,
     label: "Email",
-    value: "admissions@ignitejc.com",
+    value: "info@ignite.academy",
     color: "bg-blue-500",
   },
   {

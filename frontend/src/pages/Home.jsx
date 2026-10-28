@@ -15,9 +15,11 @@ import Form from "../components/HomeComponents/Form";
 import Navbar from "../components/Navbar/Navbar";
 import HeroSectionVideoScroll from "../components/HomeComponents/Heroscrollsection/HeroSectionVideoScroll";
 
+import { readSessionValue, writeSessionValue } from "../lib/sessionStorage.js";
+
 const Home = () => {
   const [introDone, setIntroDone] = useState(
-    () => window.sessionStorage.getItem("ignite_intro_played") === "1"
+    () => readSessionValue("ignite_intro_played") === "1"
   );
   const introWrapRef = useRef(null);
   const introVideoRef = useRef(null);
@@ -42,7 +44,7 @@ const Home = () => {
           ease: "power2.out",
           onComplete: () => {
             introEndedRef.current = true;
-            window.sessionStorage.setItem("ignite_intro_played", "1");
+            writeSessionValue("ignite_intro_played", "1");
             setIntroDone(true);
           },
         });
@@ -77,7 +79,7 @@ const Home = () => {
             onEnded={() => {
               if (!introEndedRef.current) {
                 introEndedRef.current = true;
-                window.sessionStorage.setItem("ignite_intro_played", "1");
+                writeSessionValue("ignite_intro_played", "1");
                 setIntroDone(true);
               }
             }}
