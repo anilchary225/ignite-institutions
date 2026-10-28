@@ -103,6 +103,7 @@ const eventTypes = EVENT_FEATURED_CARDS.map((card, index) => {
   const iconList = [Trophy, Music, FlaskConical, Dumbbell, Mic2, Lightbulb];
   const colorList = ["blue", "amber", "sky", "emerald", "rose", "indigo"];
   return {
+    id: card.id === "science-lab-photos" ? "science-lab" : card.id,
     icon: iconList[index] ?? Trophy,
     label: card.title,
     count: card.count,
@@ -278,16 +279,16 @@ function EventHero() {
                   <div className="mt-5 flex flex-wrap gap-5 text-xs font-semibold text-white/60">
                     <span className="flex items-center gap-1.5"><CalendarDays size={13} />{ev.date}</span>
                     <span className="flex items-center gap-1.5"><MapPin size={13} />{ev.venue}</span>
-                    <span className="flex items-center gap-1.5"><Users size={13} />{ev.attendees} attendees</span>
+                    <span className="flex items-center gap-1.5"><Camera size={13} />{ev.attendees}</span>
                   </div>
                   <div className="mt-7 flex flex-wrap gap-3">
                     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}>
                       <RouteLink
-                        to='/gallery/photos'
+                        to={`/gallery/events/${ev.id}`}
                         className="inline-flex items-center gap-3 rounded-full bg-blue-600 px-6 py-3.5 text-sm font-black text-white shadow-lg shadow-blue-900/40 transition hover:bg-blue-500 hover:gap-4"
                       >
                         <Camera size={15} />
-                        View Photo Gallery
+                        View Event Album
                       </RouteLink>
                     </motion.div>
                     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}>
@@ -415,6 +416,12 @@ function EventTypes() {
                   </span>
                   <h3 className="mt-3 text-base font-extrabold text-neutral-950 dark:text-white">{et.label}</h3>
                   <p className="mt-1.5 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{et.description}</p>
+                  <RouteLink
+                    to={`/gallery/events/${et.id}`}
+                    className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-blue-700 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 dark:text-blue-300"
+                  >
+                    View {et.label} album <ArrowRight size={14} aria-hidden="true" />
+                  </RouteLink>
                 </div>
               </motion.div>
             );

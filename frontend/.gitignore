@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Client configuration; commit only the documented example.
+.env
+.env.*
+!.env.example

@@ -54,11 +54,13 @@ export function BrowserRouter({ children }) {
 
   const value = useMemo(() => {
     const navigate = (nextPath, options = {}) => {
-      const normalized = normalizePath(nextPath);
+      const destination = new URL(nextPath, window.location.href);
+      const normalized = normalizePath(destination.pathname);
+      const historyPath = `${normalized}${destination.search}${destination.hash}`;
       if (options.replace) {
-        window.history.replaceState({}, "", normalized);
+        window.history.replaceState({}, "", historyPath);
       } else {
-        window.history.pushState({}, "", normalized);
+        window.history.pushState({}, "", historyPath);
       }
       setPathname(normalized);
       window.scrollTo({ top: 0, left: 0, behavior: "auto" });
@@ -108,7 +110,10 @@ export function RouteLink({ to, children, className, onClick, ...props }) {
           event.ctrlKey ||
           event.shiftKey ||
           event.altKey ||
-          event.button !== 0
+          event.button !== 0 ||
+          props.target === "_blank" ||
+          props.download !== undefined ||
+          new URL(to, window.location.href).origin !== window.location.origin
         ) {
           return;
         }

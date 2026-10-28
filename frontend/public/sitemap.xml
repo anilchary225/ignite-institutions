@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated from src/seo/siteSeo.js and eventGalleryData.js. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.ignite.academy/</loc></url>
   <url><loc>https://www.ignite.academy/about</loc></url>
@@ -12,8 +13,6 @@
   <url><loc>https://www.ignite.academy/streams/junior-college/mpc-iit-coaching</loc></url>
   <url><loc>https://www.ignite.academy/streams/junior-college/bipc-neet-coaching</loc></url>
   <url><loc>https://www.ignite.academy/streams/junior-college/after-college-program</loc></url>
-  <url><loc>https://www.ignite.academy/streams/junior-college/mec</loc></url>
-  <url><loc>https://www.ignite.academy/streams/junior-college/nda</loc></url>
   <url><loc>https://www.ignite.academy/streams/school</loc></url>
   <url><loc>https://www.ignite.academy/streams/school/after-school-program</loc></url>
   <url><loc>https://www.ignite.academy/streams/test-prep</loc></url>
@@ -28,42 +27,23 @@
   <url><loc>https://www.ignite.academy/gallery/all-videos</loc></url>
   <url><loc>https://www.ignite.academy/gallery/events</loc></url>
   <url><loc>https://www.ignite.academy/gallery/testimonials</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/advaitha</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/bathukamma</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/birthday-celebrations</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/bonalu</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/buttermik</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/children-s-day-photos</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/christmas-celebration</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/classrooms</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/cricket-outdoor-sports</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/dinning</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/falicitates-with-awards</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/felicitations-2023</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/felicitations-2024</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/felicitations-2025</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/ganesh-festival</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/holi-celebrations</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/miyapur-run</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/office</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/orphanage</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/outdoor-exhibits</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/phonebooth</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/plantationrun</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/ramesh-sir</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/sanitizer-distribution</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/school-kids-in-science-lab</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/science-lab</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/sports</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/sports-meet</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/sports-prize</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/summer-camp</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/swatch-run</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/udbhava</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/ullaas</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/vybhava</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/yoga</loc></url>
-  <url><loc>https://www.ignite.academy/gallery/photos/zumba</loc></url>
+  <url><loc>https://www.ignite.academy/community</loc></url>
+  <url><loc>https://www.ignite.academy/results</loc></url>
+  <url><loc>https://www.ignite.academy/documents</loc></url>
+  <url><loc>https://www.ignite.academy/contact</loc></url>
+  <url><loc>https://www.ignite.academy/terms-and-conditions</loc></url>
+  <url><loc>https://www.ignite.academy/privacy-policy</loc></url>
+  <url><loc>https://www.ignite.academy/gallery/events/sports-fest-2026</loc></url>
+  <url><loc>https://www.ignite.academy/gallery/events/sankalpa-2026</loc></url>
+  <url><loc>https://www.ignite.academy/gallery/events/bathikamma-2026</loc></url>
+  <url><loc>https://www.ignite.academy/gallery/events/investiture-ceremony</loc></url>
+  <url><loc>https://www.ignite.academy/gallery/events/teachers-day</loc></url>
+  <url><loc>https://www.ignite.academy/gallery/events/sids-farm</loc></url>
+  <url><loc>https://www.ignite.academy/gallery/events/plantation-drive</loc></url>
+  <url><loc>https://www.ignite.academy/gallery/events/krishna-ashtami</loc></url>
+  <url><loc>https://www.ignite.academy/gallery/events/independence-day</loc></url>
+  <url><loc>https://www.ignite.academy/gallery/events/birla-planetarium</loc></url>
+  <url><loc>https://www.ignite.academy/gallery/events/iphone-ipad</loc></url>
   <url><loc>https://www.ignite.academy/gallery/events/advaitha</loc></url>
   <url><loc>https://www.ignite.academy/gallery/events/bathukamma</loc></url>
   <url><loc>https://www.ignite.academy/gallery/events/birthday-celebrations</loc></url>
@@ -100,11 +80,4 @@
   <url><loc>https://www.ignite.academy/gallery/events/vybhava</loc></url>
   <url><loc>https://www.ignite.academy/gallery/events/yoga</loc></url>
   <url><loc>https://www.ignite.academy/gallery/events/zumba</loc></url>
-  <url><loc>https://www.ignite.academy/community</loc></url>
-  <url><loc>https://www.ignite.academy/blogs</loc></url>
-  <url><loc>https://www.ignite.academy/results</loc></url>
-  <url><loc>https://www.ignite.academy/documents</loc></url>
-  <url><loc>https://www.ignite.academy/contact</loc></url>
-  <url><loc>https://www.ignite.academy/terms-and-conditions</loc></url>
-  <url><loc>https://www.ignite.academy/privacy-policy</loc></url>
 </urlset>

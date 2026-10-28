@@ -17,7 +17,7 @@ import {
   UserRoundCheck,
   X,
 } from "lucide-react";
-import { adminRequest } from "../../lib/enquiryApi";
+import { adminRequest, API_BASE_URL } from "../../lib/enquiryApi";
 
 /* ─────────────────────────── TOKENS ─────────────────────────── */
 // Single source of truth for the visual system. Change values here, not
@@ -485,7 +485,7 @@ export default function AdminDashboardPage() {
             <IconButton icon={RefreshCcw} onClick={load} title="Refresh" />
 
             <a
-              href={`${import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api"}/enquiries/admin/export`}
+              href={`${API_BASE_URL}/enquiries/admin/export`}
               className={`hidden items-center gap-1.5 rounded-lg border ${T.border} px-3 py-1.5 text-sm font-medium ${T.textMuted} transition-colors hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400 sm:inline-flex`}
             >
               <Download size={14} /> Export

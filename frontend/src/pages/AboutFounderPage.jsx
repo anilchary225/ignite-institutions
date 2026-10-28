@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Hero from "../components/AboutPageComponents/AboutPage/Hero";
+import { founderVideo } from "../data/recentVideos";
 import {
   fadeUp,
   fadeIn,
@@ -401,6 +402,27 @@ export default function AboutFounderPage() {
             </motion.figure>
           ))}
         </motion.div>
+      </section>
+
+      <section aria-labelledby="founder-video-heading" className="mx-auto max-w-6xl px-6 py-14 sm:py-16 lg:py-20">
+        <div className="mb-8 max-w-2xl">
+          <p className="text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">Founder & Chairman</p>
+          <h2 id="founder-video-heading" className="mt-3 text-3xl font-semibold sm:text-4xl">Meet Our Founder</h2>
+          <p className="mt-4 text-base leading-8 text-neutral-600 dark:text-neutral-300">Mr. K. Ramesh, Founder and Chairman of IGNITE.</p>
+        </div>
+        <video
+          controls
+          playsInline
+          preload="none"
+          poster={founderVideo.poster}
+          aria-labelledby="founder-video-heading"
+          width="1920"
+          height="1080"
+          className="aspect-video w-full rounded-2xl bg-black shadow-sm"
+        >
+          <source src={founderVideo.src} type="video/webm" />
+          Your browser does not support embedded video. <a href={founderVideo.src}>Watch the founder video</a>.
+        </video>
       </section>
 
       {/* MILESTONES + VALUES */}

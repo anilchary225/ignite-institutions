@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Calendar, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 import { fadeUp, defaultViewport } from "../../animations/variants";
+import { RouteLink } from "../../router/BrowserRouter";
 
 const placeholderEventPhoto = (bg, label) => {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="500" height="380">
@@ -14,53 +15,55 @@ const placeholderEventPhoto = (bg, label) => {
 
 const eventsData = [
   {
-    title: "Annual Day Celebrations",
-    date: "15 Dec 2025",
-    location: "Main Auditorium, Ignite Campus",
+    title: "Sankalpa 2026",
+    date: "4–5 October 2026",
+    location: "IGNITE",
+    href: "/gallery/events/sankalpa-2026",
     tag: "Cultural",
     tagColor: "bg-red-100 dark:bg-red-500/10 text-red-700 dark:text-red-400",
     description:
-      "A vibrant evening of performances, felicitations, and cultural showcases celebrating the achievements of our students over the year.",
+      "Two days of celebration, bringing together lamp-lighting, student performances, and shared moments with the IGNITE community.",
     images: [
-      "/assets/images/events/Udbhava/3X7A3707.webp",
-      "/assets/images/events/Udbhava/BF6C8691.webp",
-      "/assets/images/events/Vybhava/ARM02900.webp",
-      "/assets/images/events/ADVAITHA/VIJ01873.webp",
+      "/assets/images/events/sankalpa_2026/sankalpa_2026_02.webp",
+      "/assets/images/events/sankalpa_2026/sankalpa_2026_45.webp",
+      "/assets/images/events/sankalpa_2026/sankalpa_2026_52.webp",
+      "/assets/images/events/sankalpa_2026/sankalpa_2026_57.webp",
     ],
   },
   {
-    title: "Inter-College Sports Meet",
-    date: "3 Jan 2026",
-    location: "Ignite Sports Complex",
-    tag: "Sports",
-    tagColor: "bg-green-100 dark:bg-green-700/10 text-green-700 dark:text-green-400",
-    description:
-      "Students competed across athletics, cricket, and volleyball in a day full of energy, teamwork, and school spirit.",
-    images: [
-      "/assets/images/events/sports/sports4.webp",
-      "/assets/images/events/Sports Prize/DSC08103.webp",
-      "/assets/images/events/sports/sports2.webp",
-      "/assets/images/events/sports/sports5.webp",
-    ],
-  },
-  {
-    title: "Investiture Ceremony",
-    date: "20 Jun 2026",
+    title: "Investiture Day 2026",
+    date: "31 August 2026",
     location: "Ignite Junior College",
+    href: "/gallery/events/investiture-ceremony",
     tag: "Leadership",
     tagColor: "bg-blue-100 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400",
     description:
-      "Newly elected student council members were sworn in, marking the start of a year of leadership and responsibility.",
+      "Celebrating student leadership and responsibility through the investiture ceremony, with student leaders, staff, and memorable moments from the day.",
     images: [
-      "/assets/images/events/falicitates_with_awards/iphone 2025/M Jagan Mohan Reddy3.webp",
-      "/assets/images/events/falicitates_with_awards/iphone 2025/Neetu Abhishek.webp",
-      "/assets/images/events/Vybhava/DSC01917.webp",
-      "/assets/images/events/ADVAITHA/PRA00835.webp",
+      "/assets/images/events/investiture-ceremony_webp/investiture-ceremony_01.webp",
+      "/assets/images/events/investiture-ceremony_webp/investiture-ceremony_09.webp",
+      "/assets/images/events/investiture-ceremony_webp/investiture-ceremony_12.webp",
+      "/assets/images/events/investiture-ceremony_webp/investiture-ceremony_15.webp",
+    ],
+  },
+  {
+    title: "Sports Fest 2026",
+    date: "2026",
+    location: "IGNITE",
+    href: "/gallery/events/sports-fest-2026",
+    tag: "Sports",
+    tagColor: "bg-green-100 dark:bg-green-700/10 text-green-700 dark:text-green-400",
+    description: "A celebration of sports and teamwork, featuring kabaddi, volleyball, chess, and prize-giving moments from Sports Fest 2026.",
+    images: [
+      "/assets/images/sports_2026/sports_2026_46.webp",
+      "/assets/images/sports_2026/sports_2026_68.webp",
+      "/assets/images/sports_2026/sports_2026_70.webp",
+      "/assets/images/sports_2026/sports_2026_73.webp",
     ],
   },
 ];
 
-function PhotoStack({ images, autoShuffleMs = 2200 }) {
+function PhotoStack({ images, eventTitle, autoShuffleMs = 2200 }) {
   const [order, setOrder] = useState(images.map((_, i) => i));
   const [paused, setPaused] = useState(false);
 
@@ -95,7 +98,9 @@ function PhotoStack({ images, autoShuffleMs = 2200 }) {
           <img
             key={imgIndex}
             src={src}
-            alt={`Event photo ${imgIndex + 1}`}
+            alt={`${eventTitle} — photo ${imgIndex + 1}`}
+            loading="lazy"
+            decoding="async"
             style={{ transform: style.transform, zIndex: style.zIndex, opacity: style.opacity }}
             className="absolute inset-0 h-full w-full rounded-xl border border-neutral-200 object-cover transition-all duration-700 ease-in-out dark:border-neutral-800"
           />
@@ -115,7 +120,7 @@ function EventCard({ event, reverse }) {
       className={`grid items-center gap-8 md:grid-cols-[0.8fr_1fr] md:gap-12`}
     >
       <div className={reverse ? "md:order-2" : ""}>
-        <PhotoStack images={event.images} />
+        <PhotoStack images={event.images} eventTitle={event.title} />
       </div>
 
       <div className={reverse ? "md:order-1" : ""}>
@@ -134,6 +139,9 @@ function EventCard({ event, reverse }) {
           <span>{event.location}</span>
         </div>
         <p className="mt-3 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">{event.description}</p>
+        <RouteLink to={event.href} className="mt-4 inline-flex text-sm font-semibold text-blue-700 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 dark:text-blue-300">
+          View {event.title} album →
+        </RouteLink>
       </div>
     </motion.div>
   );

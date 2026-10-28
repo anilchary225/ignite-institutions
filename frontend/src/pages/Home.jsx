@@ -8,6 +8,7 @@ import CardsHover from "../components/HomeComponents/CardsHover";
 import Campuses from "../components/HomeComponents/Campuses";
 import Achievements from "../components/HomeComponents/Achievements";
 import Events from "../components/HomeComponents/Events";
+import RecentEventsPopup from "../components/HomeComponents/RecentEventsPopup";
 import VideoPlayer from "../components/HomeComponents/VideoPlayer";
 import Testimonials from "../components/HomeComponents/Testimonials";
 import Form from "../components/HomeComponents/Form";
@@ -152,6 +153,7 @@ const Home = () => {
         </section>
 
         <Form />
+        {introDone && <RecentEventsPopup />}
       </div>
     </div>
   );

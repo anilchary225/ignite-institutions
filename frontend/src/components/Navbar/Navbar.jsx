@@ -203,6 +203,7 @@ const previewByHref = {
     title: "Founder",
     description: "A quick view of the vision, leadership, and origin story behind Ignite.",
     image: "/assets/images/Ramesh sir/VIJ06233.webp",
+    imagePosition: "center top",
     secondaryImage: "/assets/images/events/Vybhava/DSC01917.webp",
   },
   "/about/personality-development": {
@@ -818,6 +819,7 @@ export default function Navbar() {
                     <img
                       src={previewData.image}
                       alt={previewData.title}
+                      style={{ objectPosition: previewData.imagePosition ?? "center" }}
                       className="h-56 w-full rounded-[20px] object-cover"
                     />
                   </div>

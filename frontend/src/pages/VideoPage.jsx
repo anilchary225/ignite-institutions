@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { RouteLink } from "../router/BrowserRouter";
 import { ArrowLeft, Play, X } from "lucide-react";
+import { recentVideos } from "../data/recentVideos";
 
 const allVideos = [
+  ...recentVideos,
   { id: "celebrations", title: "Celebrating Together at Ignite", src: "/assets/videos/CELEBRATIONS VID.webm" },
   { id: "community", title: "Ignite Community Outreach Initiatives", src: "/assets/videos/COMMUNITY REACH PROGRAMS BY IGNITE.webm" },
   { id: "mango", title: "Mango Distribution Drive", src: "/assets/videos/DVR sirMangoDistribution.webm" },
@@ -83,14 +85,14 @@ function VideoCard({ video, onOpen }) {
       className="group overflow-hidden rounded-2xl bg-neutral-900 text-left shadow-sm ring-1 ring-neutral-800 transition hover:-translate-y-1 hover:shadow-lg"
     >
       <div className="relative aspect-video">
-        <video
+        {video.poster ? <img src={video.poster} alt="" loading="lazy" decoding="async" width="640" height="360" className="h-full w-full object-cover" /> : <video
           src={`${encodeURI(video.src)}#t=0.001`}
           className="h-full w-full object-cover"
           muted
           loop
           playsInline
           preload="metadata"
-        />
+        />}
         <div className="absolute inset-0 bg-linear-to-t from-black/75 via-black/15 to-transparent" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="grid h-12 w-12 place-items-center rounded-full bg-white/20 text-white backdrop-blur-md transition group-hover:scale-110">

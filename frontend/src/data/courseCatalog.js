@@ -1,4 +1,4 @@
-export const CONTACT_PHONE = "+919876543210";
+export const CONTACT_PHONE = "+917036511111";
 
 export const COURSE_CATALOG = [
   {
@@ -102,4 +102,5 @@ export const COURSE_CATALOG = [
   },
 ];
 
-export const getCourse = (courseId) => COURSE_CATALOG.find((course) => course.id === courseId);
+const courseAliases = { mpc: "mpc-iit", bipc: "bipc-neet", "mpc-jee": "mpc-iit" };
+export const getCourse = (courseId) => COURSE_CATALOG.find((course) => course.id === (courseAliases[courseId] ?? courseId));

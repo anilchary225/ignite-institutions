@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Home, Key, Heart } from "lucide-react";
 
 import Hero from "./AboutPage/Hero";
+import { messVideo } from "../../data/recentVideos";
 import { fadeUp, defaultViewport } from "../../animations/variants";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -294,6 +295,27 @@ export default function CampusHostelPage() {
         text="Nutritious vegetarian and non-vegetarian food is served in spacious dining areas where students build friendships and community."
         imageSrc="/assets/images/events/DINNING/MNR09521.webp"
       />
+
+      <section aria-labelledby="mess-video-heading" className="mx-auto max-w-6xl px-6 py-14 sm:py-16 lg:py-20">
+        <div className="mb-8 max-w-2xl">
+          <p className="text-xs font-medium uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">Campus & Hostel Life</p>
+          <h2 id="mess-video-heading" className="mt-3 text-3xl font-semibold text-neutral-900 dark:text-white sm:text-4xl">Dining & Mess Facilities</h2>
+          <p className="mt-4 text-base leading-8 text-neutral-600 dark:text-neutral-300">Take a look inside IGNITE's dining and mess facilities.</p>
+        </div>
+        <video
+          controls
+          playsInline
+          preload="none"
+          poster={messVideo.poster}
+          aria-labelledby="mess-video-heading"
+          width="1920"
+          height="1080"
+          className="aspect-video w-full rounded-2xl bg-black shadow-sm"
+        >
+          <source src={messVideo.src} type="video/webm" />
+          Your browser does not support embedded video. <a href={messVideo.src}>Watch the dining and mess facilities video</a>.
+        </video>
+      </section>
 
       <CenteredStatement
         heading="Safety, compassion and peace of mind"

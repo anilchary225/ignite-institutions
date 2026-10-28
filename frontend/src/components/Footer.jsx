@@ -154,7 +154,7 @@ export default function Footer() {
             <div className="space-y-3">
               <div className="flex items-start gap-3">
                 <MapPin className="mt-0.5 shrink-0 text-orange-500" size={16} />
-                <a href="" className="text-[11px] text-neutral-400 leading-snug hover:text-white transition-colors">Pillar No : A-708, NH -9, Plot No : 14, Sri Sai Nagar Colony, opp. Metro Station Jntu College, beside JNTU, Kukatpally, Hyderabad, Telangana 500085</a>
+                <a href="/contact" className="text-[11px] text-neutral-400 leading-snug hover:text-white transition-colors">Pillar No : A-708, NH -9, Plot No : 14, Sri Sai Nagar Colony, opp. Metro Station Jntu College, beside JNTU, Kukatpally, Hyderabad, Telangana 500085</a>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="shrink-0 text-green-500" size={16} />

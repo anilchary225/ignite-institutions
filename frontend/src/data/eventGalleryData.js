@@ -983,8 +983,54 @@ const numberedPhotos = (folder, prefix, count) =>
     (_, index) => `${eventBase}/${folder}/${prefix}_${index + 1}.webp`,
   );
 
+const paddedPhotos = (folder, prefix, count) =>
+  Array.from({ length: count }, (_, index) =>
+    `${eventBase}/${folder}/${prefix}_${String(index + 1).padStart(2, "0")}.webp`,
+  );
+
 // Newest uploads are kept first so they are surfaced first across every gallery view.
 const newestAlbums = [
+  {
+    id: "sports-fest-2026",
+    folder: "sports_2026",
+    title: "Sports Fest 2026",
+    description: "Sports, teamwork and celebrations from IGNITE's Sports Fest 2026.",
+    paragraph: "Explore kabaddi, volleyball, chess, team celebrations and prize-giving moments from Sports Fest 2026.",
+    hero: "/assets/images/sports_2026/sports_2026_46.webp",
+    photos: Array.from({ length: 98 }, (_, index) =>
+      `/assets/images/sports_2026/sports_2026_${String(index + 1).padStart(2, "0")}.webp`,
+    ),
+  },
+  {
+    id: "sankalpa-2026",
+    folder: "sankalpa_2026",
+    title: "Sankalpa 2026",
+    description: "Explore the latest photographs from Sankalpa 2026 at Ignite.",
+    paragraph: "Browse the Sankalpa 2026 photo collection and moments captured during the event.",
+    hero: `${eventBase}/sankalpa_2026/sankalpa_2026_01.webp`,
+    photos: paddedPhotos("sankalpa_2026", "sankalpa_2026", 74),
+  },
+  {
+    id: "bathikamma-2026",
+    folder: "bathikamma_2026",
+    title: "Bathikamma 2026",
+    description: "Browse photographs from the Bathikamma 2026 celebration at Ignite.",
+    paragraph: "Explore the newly added Bathikamma 2026 photographs in this event gallery.",
+    hero: `${eventBase}/bathikamma_2026/bathikamma_2026_01.webp`,
+    photos: paddedPhotos("bathikamma_2026", "bathikamma_2026", 37),
+  },
+  {
+    id: "investiture-ceremony",
+    folder: "investiture-ceremony_webp",
+    title: "Investiture Ceremony",
+    description: "Celebrating student leadership and responsibility, with newly added ceremony photographs.",
+    paragraph: "Explore the latest investiture ceremony photographs alongside the earlier student leadership collection.",
+    hero: `${eventBase}/investiture-ceremony_webp/investiture-ceremony_01.webp`,
+    photos: [
+      ...paddedPhotos("investiture-ceremony_webp", "investiture-ceremony", 17),
+      ...numberedPhotos("Investiture Ceremony", "investiture_ceremony", 14),
+    ],
+  },
   {
     id: "teachers-day",
     folder: "Teachers Day",
@@ -1020,15 +1066,6 @@ const newestAlbums = [
     paragraph: "Students brought the spirit of Krishna Ashtami to life through traditional dress, performances, and joyful celebrations.",
     hero: `${eventBase}/KRISHNA ASTAMI/krishnastamai_1.webp`,
     photos: numberedPhotos("KRISHNA ASTAMI", "krishnastamai", 13),
-  },
-  {
-    id: "investiture-ceremony",
-    folder: "Investiture Ceremony",
-    title: "Investiture Ceremony",
-    description: "Celebrating student leadership and responsibility.",
-    paragraph: "The investiture ceremony honoured student leaders as they stepped into their roles with confidence and commitment.",
-    hero: `${eventBase}/Investiture Ceremony/investiture_ceremony_1.webp`,
-    photos: numberedPhotos("Investiture Ceremony", "investiture_ceremony", 14),
   },
   {
     id: "independence-day",
@@ -4035,10 +4072,10 @@ export const EVENT_PAGE_CONTENT = {
 ]
 };
 
-const newestFeaturedCards = newestAlbums.map((album) => ({
+const newestFeaturedCards = [...newestAlbums, folderAlbums.find((album) => album.id === "cricket-outdoor-sports")].map((album) => ({
   id: album.id,
   title: album.title,
-  count: `${album.photos.length} images`,
+  count: `${album.photos.length} images${album.id === "cricket-outdoor-sports" ? " · 7 videos" : ""}`,
   image: album.hero,
   description: album.description,
 }));
@@ -4115,7 +4152,13 @@ export const optimizedEventImage = (src) => {
 
 const withOptimizedImages = (album) => ({
   ...album,
-  hero: optimizedEventImage(album.hero),
+  videoClips: album.id === "cricket-outdoor-sports"
+    ? Array.from({ length: 7 }, (_, index) => ({
+        title: `Cricket highlights ${index + 1}`,
+        src: `/assets/videos/cricket videos_compressed/cricket_${String(index + 1).padStart(2, "0")}.webm`,
+      }))
+    : [],
+  hero: optimizedEventImage(album.hero || album.photos[0]),
   photos: album.photos.map(optimizedEventImage),
 });
 
@@ -4154,7 +4197,7 @@ export const EVENT_ALBUMS = [...newestAlbums, ...folderAlbums].map((album) =>
       ? { ...album, hero: newestGaneshPhotos[0], photos: [...newestGaneshPhotos, ...album.photos] }
     : album,
 ).map(withOptimizedImages);
-export const EVENT_FEATURED_CARDS = [...newestFeaturedCards, ...featuredCards].map((card) =>
+export const EVENT_FEATURED_CARDS = [...newestFeaturedCards, ...featuredCards.filter((card) => card.id !== "cricket-outdoor-sports")].map((card) =>
   card.id === "bonalu"
     ? { ...card, image: newestBonaluPhotos[0], count: `${newestBonaluPhotos.length + 7} images` }
     : card.id === "ganesh-festival"

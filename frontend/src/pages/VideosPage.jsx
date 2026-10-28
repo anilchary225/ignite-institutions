@@ -22,6 +22,7 @@ import {
   Zap,
 } from "lucide-react";
 import { RouteLink } from "../router/BrowserRouter";
+import { recentVideoGroups } from "../data/recentVideos";
 import {
   fadeUp,
   fadeIn,
@@ -156,6 +157,7 @@ const statsData = [
 ];
 
 const categoryVideos = {
+  ...recentVideoGroups,
   Celebrations: [
     {
       id: "celebrations-1",
@@ -782,14 +784,15 @@ function CategoryVideoCard({ video, onPlay }) {
       variants={cardReveal}
       whileHover={{ y: -6, transition: { duration: 0.25 } }}
       type="button"
+      aria-label={`Play ${video.title || "video"}`}
       onClick={() => onPlay(video)}
       className="group block text-left w-full overflow-hidden rounded-2xl bg-white ring-1 ring-neutral-100 shadow-sm transition hover:shadow-lg focus:outline-none dark:bg-neutral-900 dark:ring-neutral-800"
     >
       <div className="relative aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-800">
-        <HoverVideo
+        {video.poster ? <img src={video.poster} alt="" loading="lazy" decoding="async" width="640" height="360" className="h-full w-full object-cover" /> : <HoverVideo
           src={video.thumb}
           className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-        />
+        />}
         <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/15 to-transparent" />
         <div className="absolute inset-0 flex items-center justify-center opacity-0 transition group-hover:opacity-100">
           <div className="grid h-12 w-12 place-items-center rounded-full bg-orange-600 shadow-lg shadow-orange-900/50">
