@@ -6,3 +6,7 @@ dist/
 .env.*
 !.env.example
 
+# Keep source recordings locally; publish their compressed WebM versions.
+frontend/public/assets/videos/classrooms/*.MP4
+frontend/public/assets/videos/yoga_drone_videos/*.MOV
+

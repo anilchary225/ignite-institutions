@@ -4182,7 +4182,11 @@ const withOptimizedImages = (album) => ({
         ...clip,
         title: `Cricket highlights ${index + 1}`,
       }))
-    : [],
+    : album.id === "yoga"
+      ? recentVideoGroups.Yoga
+      : album.id === "classrooms"
+        ? recentVideoGroups.Classrooms
+        : [],
   hero: optimizedEventImage(album.hero || album.photos[0]),
   photos: album.photos.map(optimizedEventImage),
 });
